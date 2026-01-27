@@ -3,10 +3,10 @@
 ## 👥 Miembros del Equipo
 | Nombre y Apellidos | Correo URJC | Usuario GitHub |
 |:--- |:--- |:--- |
-| Omar Ba Diallo | oa.ba.2024@alumnos.urjc.es | [User1] |
+| Omar Ba Diallo | oa.ba.2024@alumnos.urjc.es | MalcomJrr |
 | Daniel Fernández Tomé | d.fernandezt.2024@alumnos.urjc.es | [User2] |
-| Ángel Menéndez Leyenda | a.menendez.2024@alumnos.urjc.es | [User3] |
-| Gonzalo Roig López | [email4]@alumnos.urjc.es | [User4] |
+| Ángel Menéndez Leyenda | a.menendez.2024@alumnos.urjc.es | angelmnndez |
+| Gonzalo Roig López | g.roig.2024@alumnos.urjc.es | [User4] |
 
 ---
 
