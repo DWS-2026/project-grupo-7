@@ -13,44 +13,42 @@
 ## 🎭 **Preparación: Definición del Proyecto**
 
 ### **Descripción del Tema**
-[Escribe aquí una descripción breve y concisa de qué trata tu aplicación, el sector al que pertenece y qué valor aporta al usuario].
-XXX se va a tratar de una aplicación que ayuda a comprar y vender productos de segunda mano. Esto beneficia
+Esta aplicación web consiste en una plataforma de formación online orientada al ámbito de la ciberseguridad diseñada para gestionar cursos académicos. El sistema permite a los profesores publicar contenido educativo y a los alumnos matricularse para acceder a dicho material. A su vez, permite al usuario acceder a recursos educativos (como imágenes y vídeos de apoyo) y el progreso del alumno.
 
 ### **Entidades**
 Indicar las entidades principales que gestionará la aplicación y las relaciones entre ellas:
 
 1. **Usuario**: Representa a las personas que interactúan con la web (Alumnos y Profesores/Administradores).
-2. **Curso**: Representa la asignatura o taller que se imparte (ej: "Introducción a Java").
-3. **Lección**: Unidad de contenido dentro de un curso (ej: "Tema 1: Variables"). Aquí es donde se alojarán los materiales.
+2. **Curso**: Representa el curso que se imparte (ej: "Curso de redes").
+3. **Recuros académicos**: Unidad de contenido dentro de un curso (ej: "Tema 1: Variables"). Aquí es donde se alojarán los materiales.
 4. **Matrícula**: Representa la inscripción de un alumno en un curso específico.
 
 **Relaciones entre entidades:**
 - Usuario - Matrícula: Un usuario (alumno) puede tener múltiples matrículas (1:N)
 - Curso - Matrícula: Un pedido puede contener múltiples productos y un producto puede estar en múltiples pedidos (N:M)
-- [Ej: Producto - Categoría: Un producto pertenece a una categoría (N:1)]
-- [Descripción de otras relaciones relevantes]
+- Curso - Lección: Un curso se compone de múltiples lecciones, pero una lección pertenece a un único curso (1:N).
+- Usuario - Curso: Un usuario (profesor) puede crear/ser dueño de múltiples cursos (1:N).
 
 ### **Permisos de los Usuarios**
-Describir los permisos de cada tipo de usuario e indicar de qué entidades es dueño:
+La aplicación distingue tres roles con permisos diferenciados sobre los datos:
 
 * **Usuario Anónimo**: 
-  - Permisos: [Ej: Visualización de catálogo, búsqueda de productos, registro]
+  - Permisos: Visualización del catálogo público de cursos, búsqueda de cursos por nombre o categoría, acceso a la página de login y registro.
   - No es dueño de ninguna entidad
 
 * **Usuario Registrado**: 
-  - Permisos: [Ej: Gestión de perfil, realizar pedidos, crear valoraciones]
-  - Es dueño de: [Ej: Sus propios Pedidos, su Perfil de Usuario, sus Valoraciones]
+  - Permisos: Todo lo del anónimo más: capacidad para matricularse en cursos, acceso al contenido detallado (lecciones) solo de los cursos donde esté matriculado, edición de su propio perfil.
+  - Es dueño de: Su Perfil de Usuario (puede editar sus datos y foto) y sus Matrículas (puede cancelar su propia matrícula).
 
 * **Administrador**: 
-  - Permisos: [Ej: Gestión completa de productos (CRUD), visualización de estadísticas, moderación de contenido]
-  - Es dueño de: [Ej: Productos, Categorías, puede gestionar todos los Pedidos y Usuarios]
+  - Permisos: Gestión completa de la plataforma. Puede crear nuevos cursos, añadir lecciones a los cursos, eliminar usuarios y visualizar todas las matrículas.
+  - Es dueño de: Todos los Cursos y Lecciones creados en la plataforma.
 
 ### **Imágenes**
-Indicar qué entidades tendrán asociadas una o varias imágenes:
+Se cumple el requisito de subida de imágenes en las siguientes entidades:
 
-- **[Entidad con imágenes 1]**: [Ej: Usuario - Una imagen de avatar por usuario]
-- **[Entidad con imágenes 2]**: [Ej: Producto - Múltiples imágenes por producto (galería)]
-- **[Entidad con imágenes 3]**: [Ej: Categoría - Una imagen representativa por categoría]
+- Usuario: Cada usuario podrá subir una imagen de avatar o perfil.
+- Curso: Cada curso tendrá una imagen de portada representativa que se mostrará en el catálogo.
 
 ---
 
