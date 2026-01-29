@@ -4,9 +4,9 @@
 | Nombre y Apellidos | Correo URJC | Usuario GitHub |
 |:--- |:--- |:--- |
 | Omar Ba Diallo | oa.ba.2024@alumnos.urjc.es | MalcomJrr |
-| Daniel Fernández Tomé | d.fernandezt.2024@alumnos.urjc.es | [User2] |
+| Daniel Fernández Tomé | d.fernandezt.2024@alumnos.urjc.es | danicroko |
 | Ángel Menéndez Leyenda | a.menendez.2024@alumnos.urjc.es | angelmnndez |
-| Gonzalo Roig López | g.roig.2024@alumnos.urjc.es | [User4] |
+| Gonzalo Roig López | g.roig.2024@alumnos.urjc.es | groig-0 |
 
 ---
 
@@ -14,18 +14,19 @@
 
 ### **Descripción del Tema**
 [Escribe aquí una descripción breve y concisa de qué trata tu aplicación, el sector al que pertenece y qué valor aporta al usuario].
+XXX se va a tratar de una aplicación que ayuda a comprar y vender productos de segunda mano. Esto beneficia
 
 ### **Entidades**
 Indicar las entidades principales que gestionará la aplicación y las relaciones entre ellas:
 
-1. **[Entidad 1]**: [Ej: Usuario]
-2. **[Entidad 2]**: [Ej: Producto]
-3. **[Entidad 3]**: [Ej: Pedido]
-4. **[Entidad 4]**: [Ej: Categoría]
+1. **Usuario**: Representa a las personas que interactúan con la web (Alumnos y Profesores/Administradores).
+2. **Curso**: Representa la asignatura o taller que se imparte (ej: "Introducción a Java").
+3. **Lección**: Unidad de contenido dentro de un curso (ej: "Tema 1: Variables"). Aquí es donde se alojarán los materiales.
+4. **Matrícula**: Representa la inscripción de un alumno en un curso específico.
 
 **Relaciones entre entidades:**
-- [Ej: Usuario - Pedido: Un usuario puede tener múltiples pedidos (1:N)]
-- [Ej: Pedido - Producto: Un pedido puede contener múltiples productos y un producto puede estar en múltiples pedidos (N:M)]
+- Usuario - Matrícula: Un usuario (alumno) puede tener múltiples matrículas (1:N)
+- Curso - Matrícula: Un pedido puede contener múltiples productos y un producto puede estar en múltiples pedidos (N:M)
 - [Ej: Producto - Categoría: Un producto pertenece a una categoría (N:1)]
 - [Descripción de otras relaciones relevantes]
 
@@ -77,7 +78,7 @@ Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicac
 
 ### **Participación de Miembros en la Práctica 1**
 
-#### **Alumno 1 - [Nombre Completo]**
+#### **Alumno 1 - Omar Ba Diallo**
 
 [Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
 
@@ -91,7 +92,7 @@ Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicac
 
 ---
 
-#### **Alumno 2 - [Nombre Completo]**
+#### **Alumno 2 - Daniel Fernández Tomé**
 
 [Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
 
@@ -105,7 +106,7 @@ Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicac
 
 ---
 
-#### **Alumno 3 - [Nombre Completo]**
+#### **Alumno 3 - Ángel Menéndez Leyenda**
 
 [Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
 
@@ -119,7 +120,7 @@ Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicac
 
 ---
 
-#### **Alumno 4 - [Nombre Completo]**
+#### **Alumno 4 - Gonzalo Roig López**
 
 [Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
 
