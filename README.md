@@ -24,8 +24,8 @@ Indicar las entidades principales que gestionará la aplicación y las relacione
 4. Matrícula: Representa la inscripción de un alumno en un curso específico.
 
 **Relaciones entre entidades:**
-- Usuario - Matrícula: Un usuario (alumno) puede tener múltiples matrículas (1:N)
-- Curso - Matrícula: Un pedido puede contener múltiples productos y un producto puede estar en múltiples pedidos (N:M)
+- Usuario - Matrícula: Un usuario (alumno) puede tener múltiples matrículas (1:N).
+- Curso - Matrícula: Un curso puede tener múltiples matrículas asociadas a distintos alumnos (1:N).
 - Curso - Lección: Un curso se compone de múltiples lecciones, pero una lección pertenece a un único curso (1:N).
 - Usuario - Curso: Un usuario (profesor) puede crear/ser dueño de múltiples cursos (1:N).
 
