@@ -18,10 +18,10 @@ Esta aplicación web consiste en una plataforma de formación online orientada a
 ### **Entidades**
 Indicar las entidades principales que gestionará la aplicación y las relaciones entre ellas:
 
-1. **Usuario**: Representa a las personas que interactúan con la web (Alumnos y Profesores/Administradores).
-2. **Curso**: Representa el curso que se imparte (ej: "Curso de redes").
-3. **Recuros académicos**: Unidad de contenido dentro de un curso (ej: "Tema 1: Variables"). Aquí es donde se alojarán los materiales.
-4. **Matrícula**: Representa la inscripción de un alumno en un curso específico.
+1. Usuario: Representa a las personas que interactúan con la web (Alumnos y Profesores/Administradores).
+2. Curso: Representa el curso que se imparte (ej: "Curso de redes").
+3. Recuros académicos: Unidad de contenido dentro de un curso (ej: "Tema 1: Variables"). Aquí es donde se alojarán los materiales.
+4. Matrícula: Representa la inscripción de un alumno en un curso específico.
 
 **Relaciones entre entidades:**
 - Usuario - Matrícula: Un usuario (alumno) puede tener múltiples matrículas (1:N)
