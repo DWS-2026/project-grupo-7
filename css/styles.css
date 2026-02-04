@@ -58,32 +58,15 @@ footer {
     border-bottom: 1px solid rgba(111, 66, 193, 0.5);
 }
 
-/* Color morado personalizado (ajusta el código hex si es otro tono) */
-.text-purple { color: #6f42c1; }
-.btn-outline-purple {
-    color: #6f42c1;
-    border-color: #6f42c1;
-}
-.btn-outline-purple:hover {
-    background-color: #6f42c1;
-    color: white;
-}
-
 .card-hover {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     border: none;
 }
 .card-hover:hover {
-    transform: translateY(-5px); /* Sube 5 píxeles */
-    box-shadow: 0 10px 20px rgba(0,0,0,0.15) !important; /* Sombra más fuerte */
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15) !important;
 }
 
-/* Un fondo morado muy clarito para romper el blanco */
-.bg-purple-light {
-    background-color: #f3f0ff; /* Casi blanco, con un toque lila */
-}
-
-/* Título de sección más moderno */
 .section-title {
     position: relative;
     display: inline-block;
@@ -91,13 +74,12 @@ footer {
     margin-bottom: 1rem;
 }
 
-/* La línea decorativa debajo del título */
 .section-title::after {
     content: '';
     display: block;
     width: 50%;
     height: 4px;
-    background: #6f42c1; /* Tu morado de marca */
+    background: #6f42c1;
     margin: 10px auto 0;
     border-radius: 2px;
 }
