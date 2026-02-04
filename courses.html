@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Available Courses - RayoKross Academy</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class ="min-vh-100">
+        <nav class="navbar navbar-light bg-white shadow-sm navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="bi bi-shield-lock-fill text-purple"></i> RayoKross Academy
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav ms-auto d-grid gap-2 d-lg-flex">
+                    <a class="btn btn-outline-purple me-lg-2" href="login.html">Log In</a>
+                    <a class="btn btn-purple" href="register.html">Register</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+    <header class="course-banner text-center py-5 border-bottom">
+        <div class="container py-4">
+            <h1 class="display-4 fw-bold text-white">Available courses</h1>
+            <p class="lead text-white">The technical training you need to master digital security.</p>
+        </div>
+    </header>
+
+    <main class="py-5">
+        <div class="container">
+            
+            <div class="d-flex justify-content-center gap-2 mb-5 flex-wrap gap-2 mb-5 w-100 px-2">
+                <button class="btn btn-purple rounded-pill px-4">All</button>
+                <button class="btn btn-outline-purple rounded-pill px-4">Network</button>
+                <button class="btn btn-outline-purple rounded-pill px-4">Offensive</button>
+                <button class="btn btn-outline-purple rounded-pill px-4">Defensive</button>
+            </div>
+
+            <div class="row g-4" id="catalogo">
+                
+                <div class="col-md-4">
+                    <article class="card h-100 shadow-sm card-hover p-3">
+                        <div class="card-body">
+                            <span class="badge bg-primary-subtle text-primary-emphasis mb-3 rounded-pill">Foundations</span>
+                            <h5 class="card-title fw-bold">Introduction to secure networks</h5>
+                            <p class="card-text text-muted small">Learn the fundamentals of TCP/IP and infrastructure security.</p>
+                        </div>
+                        <div class="card-footer bg-transparent border-0 d-flex justify-content-between align-items-center">
+                            <span class="fw-bold text-success">Free</span>
+                            <a href="curseDescription.html" class="btn btn-outline-dark btn-sm px-3 rounded-pill">Details</a>
+                        </div>
+                    </article>
+                </div> 
+
+                <div class="col-md-4">
+                    <article class="card h-100 shadow-sm card-hover p-3">
+                        <div class="card-body">
+                            <span class="badge bg-danger-subtle text-danger-emphasis mb-3 rounded-pill">Offensive</span>
+                            <h5 class="card-title fw-bold">Ethical hacking for beginners</h5>
+                            <p class="card-text text-muted small">Discover the techniques used by attackers to improve your defensive systems.</p>
+                        </div>
+                        <div class="card-footer bg-transparent border-0 d-flex justify-content-between align-items-center">
+                            <span class="fw-bold text-purple">99.99€</span>
+                            <a href="curseDescription.html" class="btn btn-outline-dark btn-sm px-3 rounded-pill">Details</a>
+                        </div>
+                    </article>
+                </div> 
+
+                <div class="col-md-4">
+                    <article class="card h-100 shadow-sm card-hover p-3">
+                        <div class="card-body">
+                            <span class="badge bg-success-subtle text-success-emphasis mb-3 rounded-pill">Defensive</span>
+                            <h5 class="card-title fw-bold">Digital forensic</h5>
+                            <p class="card-text text-muted small">Methodologies for collecting digital evidence after security incidents.</p>
+                        </div>
+                        <div class="card-footer bg-transparent border-0 d-flex justify-content-between align-items-center">
+                            <span class="fw-bold text-purple">49.99€</span>
+                            <a href="curseDescription.html" class="btn btn-outline-dark btn-sm px-3 rounded-pill">Details</a>
+                        </div>
+                    </article>
+                </div>
+            
+                <div class="col-md-4">
+                    <article class="card h-100 shadow-sm card-hover p-3">
+                        <div class="card-body">
+                            <span class="badge bg-danger-subtle text-danger-emphasis mb-3 rounded-pill">Offensive</span>
+                            <h5 class="card-title fw-bold">Advanced Web Security</h5>
+                            <p class="card-text text-muted small">Master the OWASP Top 10 vulnerabilities and how to exploit them safely.</p>
+                        </div>
+                        <div class="card-footer bg-transparent border-0 d-flex justify-content-between align-items-center">
+                            <span class="fw-bold text-purple">59.99€</span>
+                            <a href="curseDescription.html" class="btn btn-outline-dark btn-sm px-3 rounded-pill">Details</a>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-md-4">
+                    <article class="card h-100 shadow-sm card-hover p-3">
+                        <div class="card-body">
+                            <span class="badge bg-success-subtle text-success-emphasis mb-3 rounded-pill">Defensive</span>
+                            <h5 class="card-title fw-bold">Cloud Infrastructure Defense</h5>
+                            <p class="card-text text-muted small">Learn to secure AWS and Azure environments against modern threats.</p>
+                        </div>
+                        <div class="card-footer bg-transparent border-0 d-flex justify-content-between align-items-center">
+                            <span class="fw-bold text-purple">79.99€</span>
+                            <a href="curseDescription.html" class="btn btn-outline-dark btn-sm px-3 rounded-pill">Details</a>
+                        </div>
+                     </article>
+                </div>
+                <div class="col-md-4">
+                    <article class="card h-100 shadow-sm card-hover p-3">
+                        <div class="card-body">
+                            <span class="badge bg-warning-subtle text-warning-emphasis mb-3 rounded-pill">Analysis</span>
+                            <h5 class="card-title fw-bold">Malware Reverse Engineering</h5>
+                            <p class="card-text text-muted small">Dissect malicious software to understand its behavior and origin.</p>
+                        </div>
+                        <div class="card-footer bg-transparent border-0 d-flex justify-content-between align-items-center">
+                            <span class="fw-bold text-purple">89.99€</span>
+                            <a href="curseDescription.html" class="btn btn-outline-dark btn-sm px-3 rounded-pill">Details</a>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-md-4">
+                    <article class="card h-100 shadow-sm card-hover p-3">
+                        <div class="card-body">
+                            <span class="badge bg-secondary-subtle text-secondary-emphasis mb-3 rounded-pill">Social Eng</span>
+                            <h5 class="card-title fw-bold">Phishing & Human Hacking</h5>
+                            <p class="card-text text-muted small">Understand the psychology behind attacks to train better employees.</p>
+                        </div>
+                        <div class="card-footer bg-transparent border-0 d-flex justify-content-between align-items-center">
+                            <span class="fw-bold text-purple">39.99€</span>
+                            <a href="curseDescription.html" class="btn btn-outline-dark btn-sm px-3 rounded-pill">Details</a>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-md-4">
+                    <article class="card h-100 shadow-sm card-hover p-3">
+                        <div class="card-body">
+                            <span class="badge bg-primary-subtle text-primary-emphasis mb-3 rounded-pill">Foundations</span>
+                            <h5 class="card-title fw-bold">Applied Cryptography</h5>
+                            <p class="card-text text-muted small">Implementation of encryption standards for secure communications.</p>
+                        </div>
+                        <div class="card-footer bg-transparent border-0 d-flex justify-content-between align-items-center">
+                            <span class="fw-bold text-success">Free</span>
+                            <a href="curseDescription.html" class="btn btn-outline-dark btn-sm px-3 rounded-pill">Details</a>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-md-4">
+                    <article class="card h-100 shadow-sm card-hover p-3">
+                        <div class="card-body">
+                            <span class="badge bg-success-subtle text-success-emphasis mb-3 rounded-pill">Defensive</span>
+                            <h5 class="card-title fw-bold">Blue Team Operations</h5>
+                            <p class="card-text text-muted small">Real-time monitoring and incident response strategies for SOCs.</p>
+                        </div>
+                        <div class="card-footer bg-transparent border-0 d-flex justify-content-between align-items-center">
+                            <span class="fw-bold text-purple">65.00€</span>
+                            <a href="curseDescription.html" class="btn btn-outline-dark btn-sm px-3 rounded-pill">Details</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+        </div> 
+    </main>
+
+    <footer class="text-light py-4 mt-auto">
+        <div class="container text-center">
+            <p class="mb-1">&copy; 2026 RayoKross Academy. All rights reserved.</p>
+            <p class="small text-white-50">Secure Web Development Project - URJC</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

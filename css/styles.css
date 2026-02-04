@@ -141,3 +141,46 @@ footer {
     border: none;
     border-radius: 12px;
 }
+
+body {
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #212529;
+}
+.navbar-brand {
+    color: #000 !important;
+}
+
+.card {
+    border: none;
+    border-radius: 12px;
+    background-color: #ffffff;
+}
+
+
+.form-label {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #495057;
+}
+
+.form-control:focus {
+    border-color: #b38df0;
+    box-shadow: 0 0 0 0.25rem rgba(102, 16, 242, 0.25);
+}
+
+.badge {
+    padding: 0.5em 1em;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.course-banner {
+    background-image: linear-gradient(rgba(102, 16, 242, 0.7), rgba(102, 16, 242, 0.7)), 
+                      url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b');
+    background-size: cover;
+    background-position: center;
+    min-height: 120px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
