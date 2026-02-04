@@ -73,17 +73,6 @@ footer {
     border-bottom: 1px solid rgba(111, 66, 193, 0.5);
 }
 
-/* Color morado personalizado (ajusta el código hex si es otro tono) */
-.text-purple { color: #6f42c1; }
-.btn-outline-purple {
-    color: #6f42c1;
-    border-color: #6f42c1;
-}
-.btn-outline-purple:hover {
-    background-color: #6f42c1;
-    color: white;
-}
-
 /* Efecto de elevación al pasar el ratón */
 .card-hover {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -116,4 +105,21 @@ footer {
     background: #6f42c1; /* Tu morado de marca */
     margin: 10px auto 0;
     border-radius: 2px;
+}
+
+.course-hero {
+    background: linear-gradient(135deg, #1a1a1a 0%, #4c1d95 100%); 
+    color: white;
+    padding: 3rem 0;
+}
+
+.hero-details {
+    font-size: 0.9rem;
+    color: #e0e0e0;
+}
+
+.badge-warning {
+    background-color: #ffc107;
+    color: #000;
+    font-weight: bold;
 }
