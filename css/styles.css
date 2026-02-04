@@ -100,3 +100,44 @@ footer {
     color: #000;
     font-weight: bold;
 }
+
+.sidebar {
+    background-color: #ffffff;
+    min-height: calc(100vh - 72px);
+    border-right: 1px solid #dee2e6;
+}
+
+.sidebar-nav a {
+    color: #333;
+    text-decoration: none;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    transition: all 0.2s;
+    border-left: 4px solid transparent;
+}
+
+.sidebar-nav a i {
+    color: #6610f2;
+    font-size: 1.2rem;
+}
+
+.sidebar-nav a:hover {
+    background-color: #f3f0ff;
+    color: #6610f2;
+    border-left: 4px solid #6610f2;
+}
+
+.img-avatar {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border: 5px solid #ffffff;
+    border-radius: 50%;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.card {
+    border: none;
+    border-radius: 12px;
+}
