@@ -1,0 +1,119 @@
+.navbar-brand{
+    font-size: 1.5em;
+    font-weight:bold;
+}
+.navbar{
+    padding: 1rem 0;
+}
+.text-purple{
+    color: #6610f2;
+}
+
+.btn-outline-purple {
+    color: #6610f2;
+    border-color: #6610f2;
+}
+
+.btn-outline-purple:hover {
+    background-color: #6610f2;
+    color: white;
+}
+
+.btn-purple {
+    background-color: #6610f2;
+    border-color: #6610f2;
+    color: white;
+}
+
+.btn-purple:hover {
+    background-color: #520dc2;
+    border-color: #520dc2;
+    color: #e0e0e0;
+}
+
+footer {
+    background-color: #212529;
+}
+
+.bg-purple {
+    background-color: #520dc2;
+}
+
+/* css/styles.css */
+
+/* Estilo para la cabecera principal (Hero) */
+.hero-section {
+    /* Imagen de fondo con la capa oscura encima */
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b');
+    
+    /* Configuración para que la imagen cubra todo y esté centrada */
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    
+    /* Opcional: Para asegurar que el texto sea blanco siempre en esta sección */
+    color: white; 
+}
+
+.hero-overlay-purple {
+    /* 1. EL GRADIENTE: */
+    /* Usamos un morado oscuro (casi negro) arriba y un morado vibrante abajo */
+    /* Esto hace que el texto blanco se lea perfecto */
+    background: linear-gradient(to bottom, rgba(15, 10, 30, 0.9), rgba(102, 16, 242, 0.7)), 
+                url('https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5');
+    
+    /* 2. AJUSTES DE IMAGEN: */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    
+    /* 3. BORDE INFERIOR (Opcional pero queda pro): */
+    /* Crea una línea fina brillante abajo para separar del contenido */
+    border-bottom: 1px solid rgba(111, 66, 193, 0.5);
+}
+
+/* Color morado personalizado (ajusta el código hex si es otro tono) */
+.text-purple { color: #6f42c1; }
+.btn-outline-purple {
+    color: #6f42c1;
+    border-color: #6f42c1;
+}
+.btn-outline-purple:hover {
+    background-color: #6f42c1;
+    color: white;
+}
+
+/* Efecto de elevación al pasar el ratón */
+.card-hover {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: none; /* Quitamos el borde gris feo */
+}
+.card-hover:hover {
+    transform: translateY(-5px); /* Sube 5 píxeles */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15) !important; /* Sombra más fuerte */
+}
+
+/* Un fondo morado muy clarito para romper el blanco */
+.bg-purple-light {
+    background-color: #f3f0ff; /* Casi blanco, con un toque lila */
+}
+
+/* Título de sección más moderno */
+.section-title {
+    position: relative;
+    display: inline-block;
+    color: #2c2c2c;
+    margin-bottom: 1rem;
+}
+
+/* La línea decorativa debajo del título */
+.section-title::after {
+    content: '';
+    display: block;
+    width: 50%;
+    height: 4px;
+    background: #6f42c1; /* Tu morado de marca */
+    margin: 10px auto 0;
+    border-radius: 2px;
+}
