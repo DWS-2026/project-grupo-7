@@ -78,7 +78,7 @@ Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicac
 > Página de inicio de sesión que permite a usuarios previamente registrados autenticarse.
 
 #### **3. Página Register / Registrarse**
-![Página Principal](images/index.png)
+![Página Principal](images/register.png)
 
 > Página de registro que permite a nuevos usuarios crearse un usuario.
 
