@@ -61,18 +61,56 @@ Se cumple el requisito de subida de imágenes en las siguientes entidades:
 ### **Diagrama de Navegación**
 Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicación:
 
-![Diagrama de Navegación](images/navigation-diagram.png)
+![Diagrama de Navegación](images/Diagrama_web.png)
 
-> [Descripción opcional del flujo de navegación: Ej: "El usuario puede acceder desde la página principal a todas las secciones mediante el menú de navegación. Los usuarios anónimos solo tienen acceso a las páginas públicas, mientras que los registrados pueden acceder a su perfil y panel de usuario."]
+> Flujo de Navegación
+
+Acceso Público: El usuario llega a la Home, explora el Catálogo o consulta el Detalle de los 3 cursos destacados.
+
+Autenticación: Mediante Login/Registro, el sistema identifica al usuario.
+
+Zona Privada: El flujo redirige al Perfil (gestión del alumno), desde donde se accede al Aula para ver lecciones.
+
+Gestión (Admin): Desde el perfil, los usuarios autorizados saltan al Dashboard de Admin para gestionar cursos y usuarios.
+
+Esquema: Home → Login → Perfil → Admin.
 
 ### **Capturas de Pantalla y Descripción de Páginas**
 
 #### **1. Página Principal / Home**
-![Página Principal](images/home-page.png)
+![Página Principal](images/index.png)
 
-> [Descripción breve: Ej: "Página de inicio que muestra los productos destacados, categorías principales y un banner promocional. Incluye barra de navegación y acceso a registro/login para usuarios no autenticados."]
+> Página de inicio que muestra los productos destacados. Incluye barra de navegación y acceso a registro/login para usuarios no autenticados.
 
-#### **AQUÍ AÑADIR EL RESTO DE PÁGINAS**
+#### **2. Página Login / Iniciar sesión**
+![Página Principal](images/login.png)
+
+> Página de inicio de sesión que permite a usuarios previamente registrados autenticarse.
+
+#### **3. Página Register / Registrarse**
+![Página Principal](images/register.png)
+
+> Página de registro que permite a nuevos usuarios crearse un usuario.
+
+#### **4. Página Cursos / Catálogo**
+![Página Principal](images/catalogo.png)
+
+> Página que muestra todos los cursos disponibles para cursar.
+
+#### **5. Página Detalle curso**
+![Página Principal](images/detalle.png)
+
+> Página que muestra las características del curso como duración, contenido. Además de la opción para poder comprar el curso
+
+#### **6. Página Profile / Perfil**
+![Página Principal](images/perfil.png)
+
+> Página que muestra el perfil de un usuario autenticado que permite ver los datos, los cursos en los que está matriculado pudiendo desmatricularse, cambiar la foto de perfil, acceder al panel de administración (en caso de ser Administrador) y cerrar sesión
+
+#### **7. Página Admin / Administrador**
+![Página Principal](images/admin.png)
+
+> Página única para administradores que permite la creación de nuevos cursos y administrarlos.
 
 ### **Participación de Miembros en la Práctica 1**
 
@@ -82,10 +120,10 @@ Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicac
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
+|1| [Página principal creada](URL_commit_1)  | [Archivo1](index.html)   |
+|2| [Página de login creada](URL_commit_2)  | [Archivo2](login.html)   |
+|3| [Página de register creada](URL_commit_3)  | [Archivo3](register.html)   |
+|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](#)   |
 |5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
 
 ---
@@ -96,7 +134,7 @@ Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicac
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
+|1| ([Descripcion del curso creada](https://github.com/DWS-2026/dws-2026-project-base/commit/93db7dcec9628f109bb27726831706979c3db893)) | [courseDescription.html]   |
 |2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
 |3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
 |4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
@@ -106,11 +144,11 @@ Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicac
 
 #### **Alumno 3 - Ángel Menéndez Leyenda**
 
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
+Maquetación de Perfil, Admin y estilos CSS
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
+|1| ([URL_commit_1](https://github.com/DWS-2026/dws-2026-project-base/commit/563fabc9533ad550eed6473b74855a34ed29a1b0))  | [admin_dashboard.html][css/styles.css][perfil.html]|
 |2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
 |3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
 |4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
@@ -124,7 +162,7 @@ Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicac
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
+|1| [Catálogo de cursos creado](https://github.com/DWS-2026/dws-2026-project-base/commit/00dc2b86925732d96ea741494bc25bb1e774efe8))  | [courses.html] [css/styles.css])   |
 |2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
 |3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
 |4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
