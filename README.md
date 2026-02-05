@@ -163,7 +163,7 @@ Maquetación de Perfil, Admin y estilos CSS
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
 |1| [Catálogo de cursos creado](https://github.com/DWS-2026/dws-2026-project-base/commit/00dc2b86925732d96ea741494bc25bb1e774efe8))  | [courses.html] [css/styles.css])   |
-|2| [Catálogo de cursos arreglado](https://github.com/DWS-2026/dws-2026-project-base/commit/0b80d2078a1d40dfa027302b02028d59aad1d5cd)  | [Archivo2](URL_archivo_2)   |
+|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
 |3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
 |4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
 |5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
