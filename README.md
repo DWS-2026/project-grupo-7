@@ -100,7 +100,7 @@ Esquema: Home → Login → Perfil → Admin.
 #### **5. Página Detalle curso**
 ![Página Detalle](images/detalle.png)
 
-> Página que muestra las características del curso como duración, contenido. Además de la opción para poder comprar el curso
+> Página que muestra las características del curso como duración, contenido. Además de la opción para poder comprar el curso.
 
 #### **6. Página Profile / Perfil**
 ![Página Perfil](images/perfil.png)
