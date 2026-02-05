@@ -134,11 +134,11 @@ Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicac
 
 #### **Alumno 3 - Ángel Menéndez Leyenda**
 
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
+Maquetación de Perfil, Admin y estilos CSS
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
-|1| Maquetación de Perfil, Admin y estilos CSS ([URL_commit_1](https://github.com/DWS-2026/dws-2026-project-base/commit/563fabc9533ad550eed6473b74855a34ed29a1b0))  | [admin_dashboard.html][css/styles.css][perfil.html]|
+|1| ([URL_commit_1](https://github.com/DWS-2026/dws-2026-project-base/commit/563fabc9533ad550eed6473b74855a34ed29a1b0))  | [admin_dashboard.html][css/styles.css][perfil.html]|
 |2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
 |3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
 |4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
