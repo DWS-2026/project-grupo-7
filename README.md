@@ -63,7 +63,7 @@ Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicac
 
 ![Diagrama de Navegación](images/Diagrama_web.png)
 
-> lujo de Navegación
+> Flujo de Navegación
 
 Acceso Público: El usuario llega a la Home, explora el Catálogo o consulta el Detalle de los 3 cursos destacados.
 
