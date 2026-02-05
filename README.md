@@ -55,7 +55,7 @@ Se cumple el requisito de subida de imágenes en las siguientes entidades:
 ## 🛠 **Práctica 1: Maquetación de páginas con HTML y CSS**
 
 ### **Vídeo de Demostración**
-📹 **[Enlace al vídeo en YouTube](https://www.youtube.com/watch?v=x91MPoITQ3I)**
+📹 **[Enlace al vídeo en YouTube](https://youtu.be/TElnSkhVhX0?si=KmA5UGnNUH2__1oZ)**
 > Vídeo mostrando las principales funcionalidades de la aplicación web.
 
 ### **Diagrama de Navegación**
@@ -83,32 +83,32 @@ Esquema: Home → Login → Perfil → Admin.
 > Página de inicio que muestra los productos destacados. Incluye barra de navegación y acceso a registro/login para usuarios no autenticados.
 
 #### **2. Página Login / Iniciar sesión**
-![Página Principal](images/login.png)
+![Página Login](images/login.png)
 
 > Página de inicio de sesión que permite a usuarios previamente registrados autenticarse.
 
 #### **3. Página Register / Registrarse**
-![Página Principal](images/register.png)
+![Página Register](images/register.png)
 
 > Página de registro que permite a nuevos usuarios crearse un usuario.
 
 #### **4. Página Cursos / Catálogo**
-![Página Principal](images/catalogo.png)
+![Página Cursos](images/catalogo.png)
 
 > Página que muestra todos los cursos disponibles para cursar.
 
 #### **5. Página Detalle curso**
-![Página Principal](images/detalle.png)
+![Página Detalle](images/detalle.png)
 
 > Página que muestra las características del curso como duración, contenido. Además de la opción para poder comprar el curso
 
 #### **6. Página Profile / Perfil**
-![Página Principal](images/perfil.png)
+![Página Perfil](images/perfil.png)
 
 > Página que muestra el perfil de un usuario autenticado que permite ver los datos, los cursos en los que está matriculado pudiendo desmatricularse, cambiar la foto de perfil, acceder al panel de administración (en caso de ser Administrador) y cerrar sesión
 
 #### **7. Página Admin / Administrador**
-![Página Principal](images/admin.png)
+![Página Admin](images/admin.png)
 
 > Página única para administradores que permite la creación de nuevos cursos y administrarlos.
 
@@ -116,13 +116,13 @@ Esquema: Home → Login → Perfil → Admin.
 
 #### **Alumno 1 - Omar Ba Diallo**
 
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
+Realización y diseño de la página principal, la página de registro y la página de inicio de sesión
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
-|1| [Página principal creada](URL_commit_1)  | [Archivo1](index.html)   |
-|2| [Página de login creada](URL_commit_2)  | [Archivo2](login.html)   |
-|3| [Página de register creada](URL_commit_3)  | [Archivo3](register.html)   |
+|1| [Creación de la página principal, login y registro](https://github.com/DWS-2026/dws-2026-project-base/commit/41b1ca27f74afa8e673aa28f5e37fcc67480eed5)  | [Archivo1](index.html)   |
+|2| [Actualización para la navegación de los botones](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
+|3| [Página de register creada](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
 |4| [Descripción commit 4](URL_commit_4)  | [Archivo4](#)   |
 |5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
 
@@ -130,7 +130,7 @@ Esquema: Home → Login → Perfil → Admin.
 
 #### **Alumno 2 - Daniel Fernández Tomé**
 
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
+Creación de la página de descripción de los cursos y diseño de la barra de navegación de la web
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
@@ -158,7 +158,7 @@ Maquetación de Perfil, Admin y estilos CSS
 
 #### **Alumno 4 - Gonzalo Roig López**
 
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
+Creación y diseño de la página que contiene todos los cursos disponibles
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
