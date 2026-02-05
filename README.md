@@ -63,7 +63,17 @@ Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicac
 
 ![Diagrama de Navegación](images/Diagrama_web.png)
 
-> [Descripción opcional del flujo de navegación: Ej: "El usuario puede acceder desde la página principal a todas las secciones mediante el menú de navegación. Los usuarios anónimos solo tienen acceso a las páginas públicas, mientras que los registrados pueden acceder a su perfil y panel de usuario."]
+> lujo de Navegación
+
+Acceso Público: El usuario llega a la Home, explora el Catálogo o consulta el Detalle de los 3 cursos destacados.
+
+Autenticación: Mediante Login/Registro, el sistema identifica al usuario.
+
+Zona Privada: El flujo redirige al Perfil (gestión del alumno), desde donde se accede al Aula para ver lecciones.
+
+Gestión (Admin): Desde el perfil, los usuarios autorizados saltan al Dashboard de Admin para gestionar cursos y usuarios.
+
+Esquema: Home → Login → Perfil → Admin.
 
 ### **Capturas de Pantalla y Descripción de Páginas**
 
