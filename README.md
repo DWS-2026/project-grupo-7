@@ -55,13 +55,13 @@ Se cumple el requisito de subida de imágenes en las siguientes entidades:
 ## 🛠 **Práctica 1: Maquetación de páginas con HTML y CSS**
 
 ### **Vídeo de Demostración**
-📹 **[Enlace al vídeo en YouTube](https://youtu.be/TElnSkhVhX0?si=KmA5UGnNUH2__1oZ)**
+📹 **[Enlace al vídeo en YouTube](https://youtu.be/eTdlfR7YGfs)**
 > Vídeo mostrando las principales funcionalidades de la aplicación web.
 
 ### **Diagrama de Navegación**
 Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicación:
 
-![Diagrama de Navegación](images/Diagrama_web.png)
+![Diagrama de Navegación](images/Diagrama_webv2.png)
 
 > Flujo de Navegación
 
@@ -93,12 +93,12 @@ Esquema: Home → Login → Perfil → Admin.
 > Página de registro que permite a nuevos usuarios crearse un usuario.
 
 #### **4. Página Cursos / Catálogo**
-![Página Cursos](images/catalogo.png)
+![Página Cursos](images/catalogov2.png)
 
 > Página que muestra todos los cursos disponibles para cursar.
 
 #### **5. Página Detalle curso**
-![Página Detalle](images/detalle.png)
+![Página Detalle](images/detallev2.png)
 
 > Página que muestra las características del curso como duración, contenido. Además de la opción para poder comprar el curso.
 
@@ -108,7 +108,7 @@ Esquema: Home → Login → Perfil → Admin.
 > Página que muestra el perfil de un usuario autenticado que permite ver los datos, los cursos en los que está matriculado pudiendo desmatricularse, cambiar la foto de perfil, acceder al panel de administración (en caso de ser Administrador) y cerrar sesión
 
 #### **7. Página Admin / Administrador**
-![Página Admin](images/admin.png)
+![Página Admin](images/adminv2.jpeg)
 
 > Página única para administradores que permite la creación de nuevos cursos y administrarlos.
 
