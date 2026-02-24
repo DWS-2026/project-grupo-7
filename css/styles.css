@@ -184,3 +184,12 @@ body {
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
+.hover-purple-dark {
+    display: inline-block;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.nav-link:hover .hover-purple-dark {
+    color: #520dc2 !important;
+    transform: scale(1.2);
+}
