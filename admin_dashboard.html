@@ -5,91 +5,109 @@
     <title>Admin Dashboard - RayoKross Academy</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        :root { --purple: #6f42c1; --purple-light: #f3e5f5; }
+        .text-purple { color: var(--purple); }
+        .btn-purple { background-color: var(--purple); color: white; }
+        .btn-purple:hover { background-color: #59359a; color: white; }
+        .btn-outline-purple { border-color: var(--purple); color: var(--purple); }
+        .btn-outline-purple:hover { background-color: var(--purple); color: white; }
+        .bg-purple-light { background-color: var(--purple-light); }
+        .border-purple { border-color: var(--purple) !important; }
+        body { background-color: #f8f9fa; }
+    </style>
 </head>
 <body class="d-flex flex-column min-vh-100">
 
     <nav class="navbar navbar-light bg-white shadow-sm navbar-expand-lg">
-        <div class="container-fluid px-4">
+        <div class="container">
             <a class="navbar-brand" href="index.html">
                 <i class="bi bi-shield-lock-fill text-purple"></i> RayoKross Academy
             </a>
-            <div class="ms-auto">
-                <a class="btn btn-outline-purple btn-sm" href="index.html">Logout</a>
+            <div class="navbar-nav ms-auto">
+                <a class="btn btn-purple" href="index.html">Logout</a>
             </div>
         </div>
     </nav>
 
-    <div class="container-fluid">
-        <div class="row">
-            <nav class="col-md-3 col-lg-2 px-0 sidebar bg-light border-end min-vh-100">
-                <div class="sidebar-nav p-3 d-flex flex-column gap-2">
-                    <a href="#" class="text-decoration-none text-dark p-2 rounded bg-purple-light fw-bold"><i class="bi bi-layers-fill me-3 text-purple"></i><span>Courses</span></a>
-                    <a href="#" class="text-decoration-none text-dark p-2 rounded hover-bg-light"><i class="bi bi-people-fill me-3"></i><span>Users</span></a>
-                    <a href="#" class="text-decoration-none text-dark p-2 rounded hover-bg-light"><i class="bi bi-plus-square-dotted me-3"></i><span>Add Content</span></a>
-                </div>
-            </nav>
-
-            <main class="col-md-9 col-lg-10 px-4 py-4">
-                <h3 class="fw-bold mb-4">Course Management</h3>
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-11">
                 
-                <div class="card p-4 shadow-sm border-start border-4  border-purple mb-5">
-                    <h4 class="mb-4 fw-bold">Create New Course</h4>
+                <div class="card p-4 shadow-sm border-0 border-start border-4 border-purple mb-5">
+                    <h5 class="mb-4 fw-bold text-dark">Create New Course</h5>
                     <form>
                         <div class="row g-3">
-                            <div class="col-md-8">
-                                <label class="form-label">Course Title</label>
-                                <input type="text" class="form-control" placeholder="e.g. Master in Cybersecurity">
+                            <div class="col-md-7">
+                                <label class="form-label small fw-bold">Course Title</label>
+                                <input type="text" class="form-control bg-light" placeholder="e.g. Master in Cybersecurity">
                             </div>
-                            <div class="col-md-4">
-                                <label class="form-label">Level</label>
-                                <select class="form-select">
+                            <div class="col-md-3">
+                                <label class="form-label small fw-bold">Level</label>
+                                <select class="form-select bg-light">
                                     <option>Beginner</option>
+                                    <option>Intermediate</option>
                                     <option>Advanced</option>
                                 </select>
                             </div>
-                            <div class="col-md-4">
-                                <label class="form-label">Price (€)</label>
-                                <input type="number" step="0.01" class="form-control" placeholder="49.99">
+                            <div class="col-md-2">
+                                <label class="form-label small fw-bold">Price (€)</label>
+                                <input type="number" step="0.01" class="form-control bg-light" placeholder="49.99">
                             </div>
                             <div class="col-12">
-                                <label class="form-label">Description</label>
-                                <textarea class="form-control" rows="3"></textarea>
+                                <label class="form-label small fw-bold">Description</label>
+                                <textarea class="form-control bg-light" rows="2" placeholder="Brief course summary..."></textarea>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-purple px-5 mt-4">Create Course</button>
+                        <div class="mt-4">
+                            <button type="submit" class="btn btn-purple px-5">Publish Course</button>
+                        </div>
                     </form>
                 </div>
 
-                <div class="card p-4 shadow-sm border-start border-start border-4 border-purple mb-5">
-                    <h4 class="mb-4 fw-bold">Course Inventory</h4>
+                <div class="card shadow-sm border-0">
+                    <div class="card-header bg-white py-3 border-0">
+                        <h5 class="mb-0 fw-bold">Course Inventory</h5>
+                    </div>
                     <div class="table-responsive">
-                        <table class="table table-hover align-middle">
+                        <table class="table table-hover align-middle mb-0">
                             <thead class="table-light">
                                 <tr>
-                                    <th>Course Title</th>
+                                    <th class="ps-4">Course Info</th>
                                     <th>Level</th>
                                     <th>Price</th>
-                                    <th class="text-end">Actions</th>
+                                    <th class="text-end pe-4">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><strong>Ethical Hacking for Beginners</strong></td>
+                                    <td class="ps-4">
+                                        <div class="fw-bold text-dark">Ethical Hacking for Beginners</div>
+                                        <div class="text-muted small"><i class="bi bi-people me-1"></i> 12 Students enrolled</div>
+                                    </td>
                                     <td><span class="badge bg-danger-subtle text-danger-emphasis">Offensive</span></td>
                                     <td>99.99€</td>
-                                    <td class="text-end">
-                                        <button class="btn btn-sm btn-outline-primary me-2"><i class="bi bi-pencil"></i></button>
-                                        <button class="btn btn-sm btn-outline-danger" title="Delete Course"><i class="bi bi-trash"></i></button>
+                                    <td class="text-end pe-4">
+                                        <button class="btn btn-sm btn-purple me-1" data-bs-toggle="modal" data-bs-target="#courseStudentsModal">
+                                            <i class="bi bi-people-fill"></i> Students
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-primary me-1"><i class="bi bi-pencil"></i></button>
+                                        <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td><strong>Introduction to secure networks</strong></td>
+                                    <td class="ps-4">
+                                        <div class="fw-bold text-dark">Introduction to Secure Networks</div>
+                                        <div class="text-muted small"><i class="bi bi-people me-1"></i> 45 Students enrolled</div>
+                                    </td>
                                     <td><span class="badge bg-primary-subtle text-primary-emphasis">Foundations</span></td>
                                     <td>Free</td>
-                                    <td class="text-end">
-                                        <button class="btn btn-sm btn-outline-primary me-2"><i class="bi bi-pencil"></i></button>
-                                        <button class="btn btn-sm btn-outline-danger" title="Delete Course"><i class="bi bi-trash"></i></button>
+                                    <td class="text-end pe-4">
+                                        <button class="btn btn-sm btn-purple me-1" data-bs-toggle="modal" data-bs-target="#courseStudentsModal">
+                                            <i class="bi bi-people-fill"></i> Students
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-primary me-1"><i class="bi bi-pencil"></i></button>
+                                        <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -97,50 +115,55 @@
                     </div>
                 </div>
 
-                <div class="card p-4 shadow-sm border-start border-purple border-4 mb-5">
-                    <h4 class="mb-4 fw-bold">User Management</h4>
+            </div>
+        </div>
+    </main>
+
+    <div class="modal fade" id="courseStudentsModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg">
+                <div class="modal-header bg-light border-0">
+                    <h5 class="modal-title fw-bold">Student Management</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <div class="mb-4">
+                        <label class="form-label small fw-bold">Add new student by Email</label>
+                        <div class="d-flex gap-2">
+                            <input type="email" class="form-control" placeholder="student@urjc.es">
+                            <button class="btn btn-purple text-nowrap">Enroll Student</button>
+                        </div>
+                    </div>
+                    
+                    <h6 class="fw-bold mb-3">Current Students in this Course</h6>
                     <div class="table-responsive">
-                        <table class="table table-hover align-middle">
-                            <thead class="table-light">
+                        <table class="table table-sm align-middle">
+                            <thead class="text-muted small">
                                 <tr>
-                                    <th>User</th>
-                                    <th>Email</th>
-                                    <th>Role</th>
-                                    <th class="text-end">Actions</th>
+                                    <th>NAME</th>
+                                    <th>EMAIL</th>
+                                    <th class="text-end">ACTION</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                            <i class="bi bi-person-circle fs-4 me-2 text-purple"></i>
-                                            <span class="fw-bold">Student Name</span>
-                                        </div>
-                                    </td>
-                                    <td>student.alumno@urjc.es</td>
-                                    <td><span class="badge bg-light text-dark border">Student</span></td>
+                                    <td class="fw-bold">Juan Pérez</td>
+                                    <td>juan.perez@urjc.es</td>
                                     <td class="text-end">
-                                        <a href="perfil.html" class="btn btn-sm btn-outline-purple me-2">
-                                            <i class="bi bi-eye"></i> View
-                                        </a>
-                                        <button class="btn btn-sm btn-outline-danger" title="Delete User">
-                                            <i class="bi bi-trash"></i>
-                                        </button>
+                                        <button class="btn btn-sm btn-link text-danger p-0">Unenroll</button>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
-
-            </main>
+            </div>
         </div>
     </div>
 
     <footer class="text-light py-4 mt-auto" style="background-color: #212529;">
         <div class="container text-center">
-            <p class="mb-1">&copy; 2026 RayoKross Academy. All rights reserved.</p>
-            <p class="small text-white-50">Secure Web Development Project - URJC</p>
+            <p class="mb-1">&copy; 2026 RayoKross Academy. URJC Project.</p>
         </div>
     </footer>
 
