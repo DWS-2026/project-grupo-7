@@ -1,0 +1,18 @@
+{{> header}}
+
+<main class="container d-flex flex-column justify-content-center align-items-center flex-grow-1 py-5 text-center">
+    <i class="bi bi-shield-x text-warning" style="font-size: 6rem;"></i>
+    
+    <h1 class="display-1 fw-bold text-dark mb-0 mt-3">Error {{status}}</h1>
+    <h2 class="h3 text-muted mb-4">{{error}}</h2>
+    
+    <div class="alert alert-secondary mb-4" style="max-width: 600px;">
+        <strong>System details:</strong> {{message}}
+    </div>
+    
+    <a href="/" class="btn btn-purple btn-lg px-5 rounded-pill shadow-sm">
+        <i class="bi bi-shield-lock me-2"></i>Return to Safe Zone
+    </a>
+</main>
+
+{{> footer}}
