@@ -1,162 +1,166 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Admin Dashboard - RayoKross Academy</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="/css/styles.css">
-</head>
-<body class="d-flex flex-column min-vh-100">
+{{> header}}
 
-    <nav class="navbar navbar-light bg-white shadow-sm navbar-expand-lg">
-        <div class="container">
-            <a class="navbar-brand" href="index.html">
-                <i class="bi bi-shield-lock-fill text-purple"></i> RayoKross Academy
-            </a>
-            <div class="navbar-nav ms-auto">
-                <a class="btn btn-purple" href="index.html">Logout</a>
-            </div>
-        </div>
-    </nav>
-
-    <main class="container py-5">
-        <div class="row justify-content-center">
-            <div class="col-lg-11">
+<main class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-11">
+            
+            <div class="card p-4 shadow-sm border-0 border-start border-4 border-purple mb-5">
+                <h5 class="mb-4 fw-bold text-dark">Create New Course</h5>
                 
-                <div class="card p-4 shadow-sm border-0 border-start border-4 border-purple mb-5">
-                    <h5 class="mb-4 fw-bold text-dark">Create New Course</h5>
-                    <form>
-                        <div class="row g-3">
-                            <div class="col-md-7">
-                                <label class="form-label small fw-bold">Course Title</label>
-                                <input type="text" class="form-control bg-light" placeholder="e.g. Master in Cybersecurity">
-                            </div>
-                            <div class="col-md-3">
-                                <label class="form-label small fw-bold">Level</label>
-                                <select class="form-select bg-light">
-                                    <option>Beginner</option>
-                                    <option>Intermediate</option>
-                                    <option>Advanced</option>
-                                </select>
-                            </div>
-                            <div class="col-md-2">
-                                <label class="form-label small fw-bold">Price (€)</label>
-                                <input type="number" step="0.01" class="form-control bg-light" placeholder="49.99">
-                            </div>
-                            <div class="col-12">
-                                <label class="form-label small fw-bold">Description</label>
-                                <textarea class="form-control bg-light" rows="2" placeholder="Brief course summary..."></textarea>
-                            </div>
+                <form action="/admin/courses/new" method="POST">
+                    <input type="hidden" name="_csrf" value="{{token}}"/>
+                    
+                    <div class="row g-3">
+                        <div class="col-md-7">
+                            <label for="title" class="form-label small fw-bold">Course Title</label>
+                            <input type="text" id="title" name="title" class="form-control bg-light" placeholder="e.g. Master in Cybersecurity" required>
                         </div>
-                        <div class="mt-4">
-                            <button type="submit" class="btn btn-purple px-5">Publish Course</button>
+                        
+                        <div class="col-md-3">
+                            <label for="level" class="form-label small fw-bold">Level</label>
+                            <select id="level" name="level" class="form-select bg-light">
+                                <option value="Beginner">Beginner</option>
+                                <option value="Intermediate">Intermediate</option>
+                                <option value="Advanced">Advanced</option>
+                            </select>
                         </div>
-                    </form>
-                </div>
-
-                <div class="card shadow-sm border-0">
-                    <div class="card-header bg-white py-3 border-0">
-                        <h5 class="mb-0 fw-bold">Course Inventory</h5>
-                    </div>
-                    <div class="table-responsive">
-                        <table class="table table-hover align-middle mb-0">
-                            <thead class="table-light">
-                                <tr>
-                                    <th class="ps-4">Course Info</th>
-                                    <th>Level</th>
-                                    <th>Price</th>
-                                    <th class="text-end pe-4">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="ps-4">
-                                        <div class="fw-bold text-dark">Ethical Hacking for Beginners</div>
-                                        <div class="text-muted small"><i class="bi bi-people me-1"></i> 12 Students enrolled</div>
-                                    </td>
-                                    <td><span class="badge bg-danger-subtle text-danger-emphasis">Offensive</span></td>
-                                    <td>99.99€</td>
-                                    <td class="text-end pe-4">
-                                        <button class="btn btn-sm btn-purple me-1" data-bs-toggle="modal" data-bs-target="#courseStudentsModal">
-                                            <i class="bi bi-people-fill"></i> Students
-                                        </button>
-                                        <button class="btn btn-sm btn-outline-primary me-1"><i class="bi bi-pencil"></i></button>
-                                        <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="ps-4">
-                                        <div class="fw-bold text-dark">Introduction to Secure Networks</div>
-                                        <div class="text-muted small"><i class="bi bi-people me-1"></i> 45 Students enrolled</div>
-                                    </td>
-                                    <td><span class="badge bg-primary-subtle text-primary-emphasis">Foundations</span></td>
-                                    <td>Free</td>
-                                    <td class="text-end pe-4">
-                                        <button class="btn btn-sm btn-purple me-1" data-bs-toggle="modal" data-bs-target="#courseStudentsModal">
-                                            <i class="bi bi-people-fill"></i> Students
-                                        </button>
-                                        <button class="btn btn-sm btn-outline-primary me-1"><i class="bi bi-pencil"></i></button>
-                                        <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </main>
-
-    <div class="modal fade" id="courseStudentsModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content border-0 shadow-lg">
-                <div class="modal-header bg-light border-0">
-                    <h5 class="modal-title fw-bold">Student Management</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body p-4">
-                    <div class="mb-4">
-                        <label class="form-label small fw-bold">Add new student by Email</label>
-                        <div class="d-flex gap-2">
-                            <input type="email" class="form-control" placeholder="student@urjc.es">
-                            <button class="btn btn-purple text-nowrap">Enroll Student</button>
+                        
+                        <div class="col-md-2">
+                            <label for="price" class="form-label small fw-bold">Price (€)</label>
+                            <input type="number" id="price" name="price" step="0.01" min="0" class="form-control bg-light" placeholder="49.99" required>
+                        </div>
+                        
+                        <div class="col-12">
+                            <label for="description" class="form-label small fw-bold">Description</label>
+                            <textarea id="description" name="description" class="form-control bg-light" rows="2" placeholder="Brief course summary..." required></textarea>
                         </div>
                     </div>
                     
-                    <h6 class="fw-bold mb-3">Current Students in this Course</h6>
-                    <div class="table-responsive">
-                        <table class="table table-sm align-middle">
-                            <thead class="text-muted small">
-                                <tr>
-                                    <th>NAME</th>
-                                    <th>EMAIL</th>
-                                    <th class="text-end">ACTION</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="fw-bold">Juan Pérez</td>
-                                    <td>juan.perez@urjc.es</td>
-                                    <td class="text-end">
-                                        <button class="btn btn-sm btn-link text-danger p-0">Unenroll</button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div class="mt-4">
+                        <button type="submit" class="btn btn-purple px-5">Publish Course</button>
                     </div>
+                </form>
+            </div>
+
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-white py-3 border-0">
+                    <h5 class="mb-0 fw-bold">Course Inventory</h5>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th class="ps-4">Course Info</th>
+                                <th>Level</th>
+                                <th>Price</th>
+                                <th class="text-end pe-4">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#courses}}
+                            <tr>
+                                <td class="ps-4">
+                                    <div class="fw-bold text-dark">{{title}}</div>
+                                    <div class="text-muted small">
+                                        <i class="bi bi-people me-1"></i> {{studentCount}} Students enrolled
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="badge {{levelBadgeClass}}">{{level}}</span>
+                                </td>
+                                <td>{{#isFree}}Free{{/isFree}}{{^isFree}}{{price}}€{{/isFree}}</td>
+                                <td class="text-end pe-4">
+                                    
+                                    <button class="btn btn-sm btn-purple me-1" data-bs-toggle="modal" data-bs-target="#courseStudentsModal{{id}}">
+                                        <i class="bi bi-people-fill"></i> Students
+                                    </button>
+                                    
+                                    <a href="/admin/courses/{{id}}/edit" class="btn btn-sm btn-outline-primary me-1">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                    
+                                    <form action="/admin/courses/{{id}}/delete" method="POST" class="d-inline">
+                                        <input type="hidden" name="_csrf" value="{{token}}"/>
+                                        <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Are you sure you want to delete this course?');">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </form>
+                                    
+                                </td>
+                            </tr>
+                            
+                            <div class="modal fade" id="courseStudentsModal{{id}}" tabindex="-1" aria-hidden="true">
+                                <div class="modal-dialog modal-lg modal-dialog-centered">
+                                    <div class="modal-content border-0 shadow-lg">
+                                        <div class="modal-header bg-light border-0">
+                                            <h5 class="modal-title fw-bold">Student Management - {{title}}</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                        </div>
+                                        <div class="modal-body p-4">
+                                            
+                                            <div class="mb-4">
+                                                <form action="/admin/courses/{{id}}/enroll" method="POST">
+                                                    <input type="hidden" name="_csrf" value="{{token}}"/>
+                                                    <label class="form-label small fw-bold">Add new student by Email</label>
+                                                    <div class="d-flex gap-2">
+                                                        <input type="email" name="studentEmail" class="form-control" placeholder="student@urjc.es" required>
+                                                        <button type="submit" class="btn btn-purple text-nowrap">Enroll Student</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            
+                                            <h6 class="fw-bold mb-3">Current Students in this Course</h6>
+                                            <div class="table-responsive">
+                                                <table class="table table-sm align-middle">
+                                                    <thead class="text-muted small">
+                                                        <tr>
+                                                            <th>NAME</th>
+                                                            <th>EMAIL</th>
+                                                            <th class="text-end">ACTION</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {{#enrolledStudents}}
+                                                        <tr>
+                                                            <td class="fw-bold">{{firstName}} {{lastName}}</td>
+                                                            <td>{{email}}</td>
+                                                            <td class="text-end">
+                                                                <form action="/admin/courses/{{id}}/unenroll/{{studentId}}" method="POST" class="d-inline">
+                                                                    <input type="hidden" name="_csrf" value="{{token}}"/>
+                                                                    <button type="submit" class="btn btn-sm btn-link text-danger p-0 text-decoration-none">Unenroll</button>
+                                                                </form>
+                                                            </td>
+                                                        </tr>
+                                                        {{/enrolledStudents}}
+                                                        {{^enrolledStudents}}
+                                                        <tr>
+                                                            <td colspan="3" class="text-center text-muted py-3">No students enrolled yet.</td>
+                                                        </tr>
+                                                        {{/enrolledStudents}}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {{/courses}}
+                            
+                            {{^courses}}
+                            <tr>
+                                <td colspan="4" class="text-center py-4 text-muted">
+                                    No courses found in the inventory.
+                                </td>
+                            </tr>
+                            {{/courses}}
+                            
+                        </tbody>
+                    </table>
                 </div>
             </div>
+
         </div>
     </div>
+</main>
 
-    <footer class="text-light py-4 mt-auto" style="background-color: #212529;">
-        <div class="container text-center">
-            <p class="mb-1">&copy; 2026 RayoKross Academy. URJC Project.</p>
-        </div>
-    </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+{{> footer}}
