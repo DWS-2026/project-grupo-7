@@ -1,0 +1,130 @@
+{{> header}}
+
+<main class="container py-5 flex-grow-1">
+    
+    <div class="d-flex align-items-center mb-4">
+        <a href="/admin" class="btn btn-outline-secondary me-3"><i class="bi bi-arrow-left"></i> Back to Dashboard</a>
+        <h2 class="fw-bold mb-0">Edit Course: {{course.title}}</h2>
+    </div>
+
+    <div class="row g-4">
+        
+        <div class="col-lg-5">
+            <div class="card shadow-sm border-0 border-top border-4 border-purple h-100">
+                <div class="card-header bg-white border-0 pt-4 pb-0">
+                    <h5 class="fw-bold"><i class="bi bi-pencil-square text-purple me-2"></i>Course Details</h5>
+                </div>
+                <div class="card-body p-4">
+                    
+                    <form action="/admin/courses/{{course.id}}/edit" method="POST">
+                        <input type="hidden" name="_csrf" value="{{token}}"/>
+                        
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold text-muted">Course Title</label>
+                            <input type="text" name="title" class="form-control bg-light" value="{{course.title}}" required>
+                        </div>
+                        
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label small fw-bold text-muted">Level</label>
+                                <select name="level" class="form-select bg-light">
+                                    <option value="Beginner" {{#isBeginner}}selected{{/isBeginner}}>Beginner</option>
+                                    <option value="Intermediate" {{#isIntermediate}}selected{{/isIntermediate}}>Intermediate</option>
+                                    <option value="Advanced" {{#isAdvanced}}selected{{/isAdvanced}}>Advanced</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label small fw-bold text-muted">Price (€)</label>
+                                <input type="number" step="0.01" name="price" class="form-control bg-light" value="{{course.price}}" required>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="form-label small fw-bold text-muted">Description</label>
+                            <textarea name="description" class="form-control bg-light" rows="4" required>{{course.description}}</textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-purple w-100">Save Changes</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-7">
+            <div class="card shadow-sm border-0 h-100">
+                <div class="card-header bg-white border-bottom pt-4 pb-3 d-flex justify-content-between align-items-center">
+                    <h5 class="fw-bold mb-0"><i class="bi bi-journal-text text-purple me-2"></i>Syllabus & Lessons</h5>
+                </div>
+                
+                <div class="card-body p-4 bg-light">
+                    
+                    <div class="card border-0 shadow-sm mb-4">
+                        <div class="card-body">
+                            <h6 class="fw-bold mb-3">Add New Lesson</h6>
+                            
+                            <form action="/admin/courses/{{course.id}}/lessons/new" method="POST">
+                                <input type="hidden" name="_csrf" value="{{token}}"/>
+                                
+                                <div class="row g-2 mb-2">
+                                    <div class="col-md-8">
+                                        <input type="text" name="title" class="form-control form-control-sm {{#errorLessonTitle}}is-invalid{{/errorLessonTitle}}" placeholder="Lesson Title (min. 5 chars)" value="{{lesson.title}}" required>
+                                        {{#errorLessonTitle}}
+                                            <div class="invalid-feedback">{{errorLessonTitle}}</div>
+                                        {{/errorLessonTitle}}
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="number" name="durationInMinutes" class="form-control form-control-sm {{#errorLessonDuration}}is-invalid{{/errorLessonDuration}}" placeholder="Duration (mins)" value="{{lesson.durationInMinutes}}" required>
+                                        {{#errorLessonDuration}}
+                                            <div class="invalid-feedback">{{errorLessonDuration}}</div>
+                                        {{/errorLessonDuration}}
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <textarea name="content" class="form-control form-control-sm {{#errorLessonContent}}is-invalid{{/errorLessonContent}}" rows="2" placeholder="Lesson Content / Summary" required>{{lesson.content}}</textarea>
+                                    {{#errorLessonContent}}
+                                        <div class="invalid-feedback">{{errorLessonContent}}</div>
+                                    {{/errorLessonContent}}
+                                </div>
+                                
+                                <div class="text-end">
+                                    <button type="submit" class="btn btn-sm btn-dark"><i class="bi bi-plus-circle me-1"></i> Add Lesson</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <h6 class="fw-bold mb-3 text-muted">Current Lessons</h6>
+                    <div class="list-group">
+                        {{#course.lessons}}
+                        <div class="list-group-item d-flex justify-content-between align-items-center py-3 border-0 shadow-sm mb-2 rounded">
+                            <div>
+                                <h6 class="mb-1 fw-bold">{{title}}</h6>
+                                <small class="text-muted"><i class="bi bi-clock me-1"></i> {{durationInMinutes}} mins</small>
+                            </div>
+                            
+                            <form action="/admin/courses/{{course.id}}/lessons/{{id}}/delete" method="POST" class="m-0">
+                                <input type="hidden" name="_csrf" value="{{token}}"/>
+                                <button type="submit" class="btn btn-sm btn-outline-danger border-0" title="Delete Lesson" onclick="return confirm('Delete this lesson?');">
+                                    <i class="bi bi-trash fs-5"></i>
+                                </button>
+                            </form>
+                        </div>
+                        {{/course.lessons}}
+                        
+                        {{^course.lessons}}
+                        <div class="text-center py-4 text-muted">
+                            <i class="bi bi-inbox fs-2 mb-2 d-block"></i>
+                            <p class="small">No lessons added yet. Start building your syllabus!</p>
+                        </div>
+                        {{/course.lessons}}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</main>
+
+{{> footer}}
