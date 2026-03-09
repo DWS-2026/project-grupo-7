@@ -32,11 +32,23 @@ public class AuthController {
             Model model) {
 
         if (bindingResult.hasErrors()) {
+            if (bindingResult.hasFieldErrors("firstName")) {
+                model.addAttribute("errorFirstName", bindingResult.getFieldError("firstName").getDefaultMessage());
+            }
+            if (bindingResult.hasFieldErrors("lastName")) {
+                model.addAttribute("errorLastName", bindingResult.getFieldError("lastName").getDefaultMessage());
+            }
+            if (bindingResult.hasFieldErrors("email")) {
+                model.addAttribute("errorEmail", bindingResult.getFieldError("email").getDefaultMessage());
+            }
+            if (bindingResult.hasFieldErrors("password")) {
+                model.addAttribute("errorPassword", bindingResult.getFieldError("password").getDefaultMessage());
+            }
             return "register";
         }
 
         if (userService.existEmail(user.getEmail())) {
-            model.addAttribute("emailError", "This email is already registered.");
+            model.addAttribute("errorEmail", "This email is already registered.");
             return "register";
         }
 
