@@ -3,9 +3,9 @@ package com.rayokross.academy.controllers;
 import com.rayokross.academy.models.Course;
 import com.rayokross.academy.models.Enrollment;
 import com.rayokross.academy.models.User;
-import com.rayokross.academy.repositories.CourseRepository;
-import com.rayokross.academy.repositories.EnrollmentRepository;
-import com.rayokross.academy.repositories.UserRepository;
+import com.rayokross.academy.services.CourseService;
+import com.rayokross.academy.services.EnrollmentService;
+import com.rayokross.academy.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,13 +19,13 @@ import java.util.Optional;
 public class EnrollmentController {
 
     @Autowired
-    private EnrollmentRepository enrollmentRepository;
+    private EnrollmentService enrollmentService;
 
     @Autowired
-    private CourseRepository courseRepository;
+    private CourseService courseService;
 
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
 
     @PostMapping("/cart/buy-now/{courseId}")
     public String buyCourse(@PathVariable Long courseId, Principal principal, Model model) {
@@ -35,20 +35,19 @@ public class EnrollmentController {
         }
 
         String email = principal.getName();
-        User currentUser = userRepository.findByEmail(email).orElseThrow();
+        
+        User currentUser = userService.findByEmail(email).orElseThrow();
+        Course course = courseService.findById(courseId).orElseThrow();
 
-        Course course = courseRepository.findById(courseId).orElseThrow();
-
-        //¿Ya lo ha comprado antes?
-        Optional<Enrollment> existingEnrollment = enrollmentRepository.findByUserAndCourse(currentUser, course);
+        Optional<Enrollment> existingEnrollment = enrollmentService.findByUserAndCourse(currentUser, course);
         
         if (existingEnrollment.isPresent()) {
             return "redirect:/profile?error=already_enrolled";
         }
 
-
         Enrollment newEnrollment = new Enrollment(currentUser, course);
-        enrollmentRepository.save(newEnrollment);
+        
+        enrollmentService.save(newEnrollment);
 
         return "redirect:/profile?success=course_purchased";
     }
