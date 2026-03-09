@@ -2,8 +2,8 @@ package com.rayokross.academy.controllers;
 
 import com.rayokross.academy.models.Course;
 import com.rayokross.academy.models.Lesson;
-import com.rayokross.academy.repositories.CourseRepository;
-import com.rayokross.academy.repositories.LessonRepository;
+import com.rayokross.academy.services.CourseService;
+import com.rayokross.academy.services.LessonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,15 +15,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class LessonController {
     
     @Autowired
-    private LessonRepository lessonRepository;
+    private LessonService lessonService;
 
     @Autowired
-    private CourseRepository courseRepository;
+    private CourseService courseService;
 
-    // 1. Corregida la barra inicial (/)
     @GetMapping("/admin/courses/{courseId}/lessons/new")
     public String showNewLessonForm(@PathVariable Long courseId, Model model) {
-        Course course = courseRepository.findById(courseId).orElseThrow();
+        
+        Course course = courseService.findById(courseId).orElseThrow();
         
         model.addAttribute("course", course);
         model.addAttribute("lesson", new Lesson());
@@ -31,14 +31,14 @@ public class LessonController {
         return "edit_course";
     }
     
-    // 2. Limpieza de parámetros: Fuera BindingResult y Model
     @PostMapping("/admin/courses/{courseId}/lessons/new")
     public String addLesson(@PathVariable Long courseId, Lesson lesson) {
 
-        Course course = courseRepository.findById(courseId).orElseThrow();
+        Course course = courseService.findById(courseId).orElseThrow();
 
         lesson.setCourse(course);
-        lessonRepository.save(lesson);
+        
+        lessonService.save(lesson);
 
         return "redirect:/admin/courses/" + courseId + "/edit";
     }
