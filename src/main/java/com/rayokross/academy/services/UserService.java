@@ -43,10 +43,6 @@ public class UserService {
     }
 
     public boolean existEmail(String email) {
-        if (userRepository.findByEmail(email).isPresent()) {
-            return true;
-        } else {
-            return false;
-        }
+        return userRepository.findByEmail(email).isPresent();
     }
 }
