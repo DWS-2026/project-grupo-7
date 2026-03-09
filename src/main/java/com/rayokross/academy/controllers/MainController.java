@@ -66,5 +66,4 @@ public class MainController {
             return ResponseEntity.notFound().build();
         }
     }
-
 }
