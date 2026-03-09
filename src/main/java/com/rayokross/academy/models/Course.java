@@ -4,7 +4,6 @@ import java.sql.Blob;
 import java.util.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Locale;
 
 import org.hibernate.annotations.CreationTimestamp;
 import jakarta.persistence.*;
@@ -31,15 +30,18 @@ public class Course {
     private double rating;
     private int reviewCount;
     private String creatorName;
-    private int hoursVideo;
-    private int articlesCount;
-    private int resourcesCount;
 
     @CreationTimestamp
     private LocalDate updateDate;
 
     @ElementCollection
     private List<String> learningObjectives = new ArrayList<>();
+
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Lesson> lessons = new ArrayList<>();
+
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Enrollment> enrollments = new ArrayList<>();
 
     public Course() {
     }
@@ -50,7 +52,6 @@ public class Course {
         this.level = level;
         this.price = price;
         this.creatorName = creatorName;
-        this.hoursVideo = hoursVideo;
     }
 
     public boolean isFree() {
@@ -148,27 +149,60 @@ public class Course {
     }
 
     public int getHoursVideo() {
-        return hoursVideo;
-    }
+        if (this.lessons == null || this.lessons.isEmpty()) {
+            return 0;
+        }
 
-    public void setHoursVideo(int hoursVideo) {
-        this.hoursVideo = hoursVideo;
+        int totalMinutes = 0;
+        for (Lesson lesson : this.lessons) {
+            totalMinutes = totalMinutes + lesson.getDurationInMinutes();
+        }
+
+        return totalMinutes / 60;
     }
 
     public int getArticlesCount() {
-        return articlesCount;
-    }
+        if (this.lessons == null || this.lessons.isEmpty()) {
+            return 0;
+        }
 
-    public void setArticlesCount(int articlesCount) {
-        this.articlesCount = articlesCount;
+        int count = 0;
+        for (Lesson lesson : this.lessons) {
+            if (lesson.getContent() != null && !lesson.getContent().trim().isEmpty()) {
+                count++;
+            }
+        }
+        return count;
     }
 
     public int getResourcesCount() {
-        return resourcesCount;
+        if (this.lessons == null || this.lessons.isEmpty()) {
+            return 0;
+        }
+
+        int count = 0;
+        for (Lesson lesson : this.lessons) {
+            if (lesson.getVideoUrl() != null && !lesson.getVideoUrl().trim().isEmpty()) {
+                count++;
+            }
+        }
+        return count;
     }
 
-    public void setResourcesCount(int resourcesCount) {
-        this.resourcesCount = resourcesCount;
+    public List<Lesson> getLessons() {
+        return lessons;
+    }
+
+    public void setLessons(List<Lesson> lessons) {
+        this.lessons = lessons;
+    }
+
+    public List<Enrollment> getEnrollments() {
+        return enrollments;
+    }
+
+    public void setEnrollments(List<Enrollment> enrollments) {
+        this.enrollments = enrollments;
     }
 
     public LocalDate getUpdateDate() {
@@ -183,7 +217,6 @@ public class Course {
         if (this.updateDate == null) {
             return "Unknown";
         }
-        // Forces English locale so it prints "Mar 2026" instead of Spanish "mar. 2026"
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM yyyy", Locale.ENGLISH);
         return this.updateDate.format(formatter);
     }

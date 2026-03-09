@@ -17,6 +17,7 @@ public class Lesson {
 
     private int durationInMinutes;
 
+    @ManyToOne
     private Course course;
 
     public Lesson() {

@@ -1,6 +1,7 @@
 package com.rayokross.academy.models;
 
 import java.sql.Blob;
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.*;
@@ -35,6 +36,9 @@ public class User {
 
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> roles;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Enrollment> enrollments = new ArrayList<>();
 
     public User() {
     }
@@ -113,5 +117,13 @@ public class User {
         } else {
             return false;
         }
+    }
+
+    public List<Enrollment> getEnrollments() {
+        return enrollments;
+    }
+
+    public void setEnrollments(List<Enrollment> enrollments) {
+        this.enrollments = enrollments;
     }
 }
