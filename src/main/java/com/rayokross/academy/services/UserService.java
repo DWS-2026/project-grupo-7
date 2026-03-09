@@ -2,6 +2,7 @@ package com.rayokross.academy.services;
 
 import java.io.IOException;
 import java.util.Optional;
+import java.util.List;
 
 import javax.sql.rowset.serial.SerialBlob;
 
@@ -44,5 +45,9 @@ public class UserService {
 
     public boolean existEmail(String email) {
         return userRepository.findByEmail(email).isPresent();
+    }
+
+    public List<User> findAll() {
+        return userRepository.findAll();
     }
 }
