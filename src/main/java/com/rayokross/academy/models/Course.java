@@ -2,6 +2,11 @@ package com.rayokross.academy.models;
 
 import java.sql.Blob;
 import java.util.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
+
+import org.hibernate.annotations.CreationTimestamp;
 import jakarta.persistence.*;
 
 @Entity
@@ -23,19 +28,15 @@ public class Course {
     @Lob
     private Blob image;
 
-    private double rating = 0.0;
+    private double rating;
+    private int reviewCount;
+    private String creatorName;
+    private int hoursVideo;
+    private int articlesCount;
+    private int resourcesCount;
 
-    private int reviewCount = 0;
-
-    private String creatorName = "RayoKross Team";
-
-    private int hoursVideo = 0;
-
-    private int articlesCount = 0;
-
-    private int resourcesCount = 0;
-
-    private String formattedUpdateDate = "Mar 2026";
+    @CreationTimestamp
+    private LocalDate updateDate;
 
     @ElementCollection
     private List<String> learningObjectives = new ArrayList<>();
@@ -71,7 +72,7 @@ public class Course {
     }
 
     public String getBadgeClass() {
-        return getLevelBadgeClass(); // Reutilizamos la lógica que ya teníamos
+        return getLevelBadgeClass();
     }
 
     public Long getId() {
@@ -170,12 +171,21 @@ public class Course {
         this.resourcesCount = resourcesCount;
     }
 
-    public String getFormattedUpdateDate() {
-        return formattedUpdateDate;
+    public LocalDate getUpdateDate() {
+        return updateDate;
     }
 
-    public void setFormattedUpdateDate(String formattedUpdateDate) {
-        this.formattedUpdateDate = formattedUpdateDate;
+    public void setUpdateDate(LocalDate updateDate) {
+        this.updateDate = updateDate;
+    }
+
+    public String getFormattedUpdateDate() {
+        if (this.updateDate == null) {
+            return "Unknown";
+        }
+        // Forces English locale so it prints "Mar 2026" instead of Spanish "mar. 2026"
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM yyyy", Locale.ENGLISH);
+        return this.updateDate.format(formatter);
     }
 
     public List<String> getLearningObjectives() {
