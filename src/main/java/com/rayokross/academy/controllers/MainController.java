@@ -26,44 +26,27 @@ public class MainController {
 
     @GetMapping("/")
     public String showIndex(Model model) {
-        // Los datos reales
         model.addAttribute("popularCourses", courseService.findAll());
-
-        // Las variables que pide el header para no explotar
         model.addAttribute("pageTitle", "Home");
-        model.addAttribute("cartCount", 0);
-        model.addAttribute("logged", false);
-
         return "index";
     }
 
     @GetMapping("/courses")
     public String showCatalog(Model model) {
-
-        model.addAttribute("course", courseService.findAll());
+        model.addAttribute("courses", courseService.findAll());
+        model.addAttribute("pageTitle", "Course Catalog");
         return "courses";
-
     }
 
     @GetMapping("/course/{id}/image")
     public ResponseEntity<Object> downloadImage(@PathVariable long id) throws SQLException {
         Optional<Course> op = courseService.findById(id);
-
         if (op.isPresent() && op.get().getImage() != null) {
             Blob image = op.get().getImage();
             Resource imageFile = new InputStreamResource(image.getBinaryStream());
-
-            // Detección del tipo de archivo según los apuntes de la URJC
-            MediaType mediaType = MediaTypeFactory
-                    .getMediaType(imageFile)
-                    .orElse(MediaType.IMAGE_JPEG);
-
-            return ResponseEntity
-                    .ok()
-                    .contentType(mediaType)
-                    .body(imageFile);
-        } else {
-            return ResponseEntity.notFound().build();
+            MediaType mediaType = MediaTypeFactory.getMediaType(imageFile).orElse(MediaType.IMAGE_JPEG);
+            return ResponseEntity.ok().contentType(mediaType).body(imageFile);
         }
+        return ResponseEntity.notFound().build();
     }
 }
