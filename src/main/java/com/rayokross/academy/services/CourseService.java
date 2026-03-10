@@ -45,5 +45,8 @@ public class CourseService {
         }
         this.save(course);
     }
+    public List<Course> findByLevel(String level) {
+        return repository.findByLevel(level);
+    }
 
 }

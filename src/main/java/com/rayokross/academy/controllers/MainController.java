@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.rayokross.academy.models.Course;
 import com.rayokross.academy.services.CourseService;
@@ -31,9 +32,24 @@ public class MainController {
         return "index";
     }
 
+    // --- MÉTODO CORREGIDO ---
     @GetMapping("/courses")
-    public String showCatalog(Model model) {
-        model.addAttribute("courses", courseService.findAll());
+    public String showCatalog(@RequestParam(required = false) String level, Model model) {
+        
+        if (level != null && !level.isEmpty()) {
+            // Buscamos solo los cursos de esa categoría
+            model.addAttribute("courses", courseService.findByLevel(level));
+            
+            // Activamos las variables para que Mustache pinte el botón de color
+            model.addAttribute("currentLevel", level);
+            if ("Foundations".equalsIgnoreCase(level)) model.addAttribute("isFoundations", true);
+            if ("Offensive".equalsIgnoreCase(level)) model.addAttribute("isOffensive", true);
+            if ("Defensive".equalsIgnoreCase(level)) model.addAttribute("isDefensive", true);
+        } else {
+            // Si no hay filtro, mostramos todo el catálogo
+            model.addAttribute("courses", courseService.findAll());
+        }
+        
         model.addAttribute("pageTitle", "Course Catalog");
         return "courses";
     }

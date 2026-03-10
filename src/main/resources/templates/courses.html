@@ -11,10 +11,10 @@
     <div class="container">
 
         <div class="d-flex justify-content-center flex-wrap gap-2 mb-5 w-100 px-2">
-            <a href="/courses" class="btn btn{{^currentLevel}}-purple{{/currentLevel}}{{#currentLevel}}-outline-purple{{/currentLevel}} rounded-pill px-4">All</a>
-            <a href="/courses?level=Foundations" class="btn btn-outline-purple rounded-pill px-4">Foundations</a>
-            <a href="/courses?level=Offensive" class="btn btn-outline-purple rounded-pill px-4">Offensive</a>
-            <a href="/courses?level=Defensive" class="btn btn-outline-purple rounded-pill px-4">Defensive</a>
+            <a href="/courses" class="btn {{^currentLevel}}btn-purple{{/currentLevel}}{{#currentLevel}}btn-outline-purple{{/currentLevel}} rounded-pill px-4">All</a>
+            <a href="/courses?level=Foundations" class="btn {{#isFoundations}}btn-purple{{/isFoundations}}{{^isFoundations}}btn-outline-purple{{/isFoundations}} rounded-pill px-4">Foundations</a>
+            <a href="/courses?level=Offensive" class="btn {{#isOffensive}}btn-purple{{/isOffensive}}{{^isOffensive}}btn-outline-purple{{/isOffensive}} rounded-pill px-4">Offensive</a>
+            <a href="/courses?level=Defensive" class="btn {{#isDefensive}}btn-purple{{/isDefensive}}{{^isDefensive}}btn-outline-purple{{/isDefensive}} rounded-pill px-4">Defensive</a>
         </div>
 
         <div class="row g-4" id="catalogo">
