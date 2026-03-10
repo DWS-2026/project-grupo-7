@@ -27,7 +27,7 @@
                         <div class="row g-2 mb-3">
                             <div class="col-md">
                                 <div class="form-floating">
-                                    <input type="text" name="firstName" class="form-control {{#errorFirstName}}is-invalid{{/errorFirstName}}" id="floatingName" placeholder="John" value="{{user.firstName}}" required>
+                                    <input type="text" name="firstName" class="form-control {{#errorFirstName}}is-invalid{{/errorFirstName}}" id="floatingName" placeholder="John" {{#user.firstName}}value="{{user.firstName}}"{{/user.firstName}} required>
                                     <label for="floatingName">First Name</label>
                                     {{#errorFirstName}}
                                         <div class="invalid-feedback">{{errorFirstName}}</div>
@@ -36,7 +36,7 @@
                             </div>
                             <div class="col-md">
                                 <div class="form-floating">
-                                    <input type="text" name="lastName" class="form-control {{#errorLastName}}is-invalid{{/errorLastName}}" id="floatingLast" placeholder="Doe" value="{{user.lastName}}" required>
+                                    <input type="text" name="lastName" class="form-control {{#errorLastName}}is-invalid{{/errorLastName}}" id="floatingLast" placeholder="Doe" {{#user.lastName}}value="{{user.lastName}}"{{/user.lastName}} required>
                                     <label for="floatingLast">Last Name</label>
                                     {{#errorLastName}}
                                         <div class="invalid-feedback">{{errorLastName}}</div>
@@ -46,7 +46,7 @@
                         </div>
 
                         <div class="form-floating mb-3">
-                            <input type="email" name="email" class="form-control {{#errorEmail}}is-invalid{{/errorEmail}}" id="floatingEmail" placeholder="name@example.com" value="{{user.email}}" required>
+                            <input type="email" name="email" class="form-control {{#errorEmail}}is-invalid{{/errorEmail}}" id="floatingEmail" placeholder="name@example.com" {{#user.email}}value="{{user.email}}"{{/user.email}} required>
                             <label for="floatingEmail">Email address</label>
                             {{#errorEmail}}
                                 <div class="invalid-feedback">{{errorEmail}}</div>
