@@ -21,26 +21,25 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http.authorizeHttpRequests(authorize -> authorize
-                .requestMatchers("/", "/courses", "/courses/*", "/login", "/register", "/error").permitAll()
+                // Añadido /course/** para que carguen las imágenes
+                .requestMatchers("/", "/courses", "/courses/**", "/course/**", "/login", "/register", "/error")
+                .permitAll()
                 .requestMatchers("/css/**", "/js/**", "/images/**", "/assets/**").permitAll()
                 .requestMatchers("/profile", "/cart", "/checkout", "/lessons/**").hasAnyRole("USER", "ADMIN")
                 .requestMatchers("/admin/**").hasRole("ADMIN")
-                .anyRequest().authenticated()
-        );
+                .anyRequest().authenticated());
 
         http.formLogin(formLogin -> formLogin
                 .loginPage("/login")
                 .loginProcessingUrl("/login")
                 .defaultSuccessUrl("/", true)
                 .failureUrl("/login?error")
-                .permitAll()
-        );
+                .permitAll());
 
         http.logout(logout -> logout
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/")
-                .permitAll()
-        );
+                .permitAll());
 
         return http.build();
     }
