@@ -42,4 +42,13 @@ public class CartController {
         
         return "redirect:/cart";
     }
+
+    @PostMapping("/cart/remove")
+    public String removeFromCart(@RequestParam Long courseId) {
+        // Llamamos al servicio para que borre el curso de la sesión
+        cartService.removeCourse(courseId);
+        
+        // Redirigimos de vuelta a la vista del carrito para que se actualice la pantalla
+        return "redirect:/cart";
+    }
 }
