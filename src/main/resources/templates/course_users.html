@@ -1,0 +1,68 @@
+{{> header}}
+
+<div class="course-banner d-flex align-items-center justify-content-center text-white text-center mb-5">
+    <div>
+        <h1 class="font-weight-bold">{{course.title}}</h1>
+        <p class="lead">Student Management</p>
+    </div>
+</div>
+
+<main class="container mb-5">
+    
+    <div class="mb-4">
+        <a href="/admin" class="btn btn-outline-purple">
+            ← Back to Admin Dashboard
+        </a>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-body p-4">
+            
+            <h2 class="section-title h4 mb-4">
+                Enrolled Students 
+                <span class="badge bg-purple ms-2">{{enrolledUsers.size}}</span>
+            </h2>
+            
+            <div class="table-responsive">
+                <table class="table align-middle table-hover">
+                    <thead class="text-purple">
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th class="text-end">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#enrolledUsers}}
+                        <tr>
+                            <td><span class="badge bg-light text-dark border border-purple">{{id}}</span></td>
+                            <td class="font-weight-bold">{{name}}</td>
+                            <td>{{email}}</td>
+                            <td class="text-end">
+                                <form action="/admin/courses/{{course.id}}/users/{{id}}/remove" method="post" class="d-inline">
+                                    <input type="hidden" name="_csrf" value="{{token}}"/>
+                                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to remove {{name}} from this course?');">
+                                        Remove
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        {{/enrolledUsers}}
+                        
+                        {{^enrolledUsers}}
+                        <tr>
+                            <td colspan="4" class="text-center py-5 text-muted">
+                                <span class="text-purple fs-4 d-block mb-2">🎓</span>
+                                There are no students enrolled in this course yet.
+                            </td>
+                        </tr>
+                        {{/enrolledUsers}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+
+{{> footer}}
