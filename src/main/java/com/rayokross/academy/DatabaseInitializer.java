@@ -28,13 +28,16 @@ public class DatabaseInitializer {
 
         @PostConstruct
         public void init() {
-                if (courseService.findAll().isEmpty()) {
+                if (userRepository.findAll().isEmpty()) {
                         // Usuarios
                         userRepository.save(new User("Admin", "Master", "admin@rayokross.com",
                                         passwordEncoder.encode("adminpass1234"), "USER", "ADMIN"));
                         userRepository.save(new User("Student", "Demo", "student@rayokross.com",
                                         passwordEncoder.encode("student1234"), "USER"));
+                        log.info("Database initialized with default users.");
+                }
 
+                if (courseService.findAll().isEmpty()) {
                         // Curso 1 - Con Lecciones
                         Course c1 = new Course("Ethical Hacking Pro", "Master penetration testing techniques.",
                                         "Offensive",
