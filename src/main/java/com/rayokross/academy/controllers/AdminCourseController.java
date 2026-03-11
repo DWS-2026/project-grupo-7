@@ -2,6 +2,7 @@ package com.rayokross.academy.controllers;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +17,7 @@ import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.rayokross.academy.models.Course;
+import com.rayokross.academy.models.User;
 import com.rayokross.academy.services.CourseService;
 import com.rayokross.academy.services.UserService;
 
@@ -68,7 +70,12 @@ public class AdminCourseController {
         Course course = courseService.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Course not found"));
 
+        List<User> enrolledUsers = course.getEnrollments().stream()
+                .map(enrollment -> enrollment.getUser())
+                .collect(Collectors.toList());
+
         model.addAttribute("course", course);
+        model.addAttribute("enrolledUsers", enrolledUsers);
 
         return "course_users";
     }
