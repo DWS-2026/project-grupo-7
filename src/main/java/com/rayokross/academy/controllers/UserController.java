@@ -44,7 +44,7 @@ public class UserController {
             model.addAttribute("enrollments", user.getEnrollments()); 
 
             model.addAttribute("pageTitle", "My Profile");
-            return "perfil";
+            return "profile";
         }
         return "redirect:/login";
     }
