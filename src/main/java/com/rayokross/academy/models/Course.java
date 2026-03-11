@@ -76,6 +76,13 @@ public class Course {
         return getLevelBadgeClass();
     }
 
+    public int getStudentCount() {
+        if (this.enrollments == null) {
+            return 0;
+        }
+        return this.enrollments.size();
+    }
+
     public Long getId() {
         return id;
     }
