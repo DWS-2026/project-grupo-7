@@ -84,43 +84,4 @@ public class AdminCourseController {
 
         return "course_users";
     }
-
-    @GetMapping("/admin/courses/{id}/edit")
-    public String showEditForm(@PathVariable Long id, Model model) {
-        Optional<Course> course = courseService.findById(id);
-
-        if (course.isPresent()) {
-            model.addAttribute("course", course.get());
-
-            model.addAttribute("lesson", new Lesson());
-
-            return "edit_course";
-        } else {
-            return "redirect:/admin?error=notfound";
-        }
-    }
-
-    @PostMapping("/admin/courses/{id}/edit")
-    public String processEditCourse(@PathVariable Long id, Course updatedCourse,
-            @RequestParam("imageFile") MultipartFile imageFile) {
-
-        Course existingCourse = courseService.findById(id).orElseThrow();
-
-        existingCourse.setTitle(updatedCourse.getTitle());
-        existingCourse.setDescription(updatedCourse.getDescription());
-        existingCourse.setPrice(updatedCourse.getPrice());
-        existingCourse.setLevel(updatedCourse.getLevel());
-
-        try {
-            if (!imageFile.isEmpty()) {
-                Blob imageBlob = new SerialBlob(imageFile.getBytes());
-                existingCourse.setImage(imageBlob);
-            }
-        } catch (Exception e) {
-        }
-
-        courseService.save(existingCourse);
-
-        return "redirect:/admin";
-    }
 }
