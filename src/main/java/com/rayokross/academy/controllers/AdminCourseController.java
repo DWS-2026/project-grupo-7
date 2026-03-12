@@ -1,8 +1,11 @@
 package com.rayokross.academy.controllers;
 
+import java.sql.Blob;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import javax.sql.rowset.serial.SerialBlob;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,8 +18,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import java.util.Optional;
 
 import com.rayokross.academy.models.Course;
+import com.rayokross.academy.models.Lesson;
 import com.rayokross.academy.models.User;
 import com.rayokross.academy.services.CourseService;
 import com.rayokross.academy.services.UserService;
@@ -85,5 +90,44 @@ public class AdminCourseController {
         courseService.delete(id);
         return "redirect:/admin";
 
+    }
+
+    @GetMapping("/admin/courses/{id}/edit")
+    public String showEditForm(@PathVariable Long id, Model model) {
+        Optional<Course> course = courseService.findById(id);
+
+        if (course.isPresent()) {
+            model.addAttribute("course", course.get());
+
+            model.addAttribute("lesson", new Lesson());
+
+            return "edit_course";
+        } else {
+            return "redirect:/admin?error=notfound";
+        }
+    }
+
+    @PostMapping("/admin/courses/{id}/edit")
+    public String processEditCourse(@PathVariable Long id, Course updatedCourse,
+            @RequestParam("imageFile") MultipartFile imageFile) {
+
+        Course existingCourse = courseService.findById(id).orElseThrow();
+
+        existingCourse.setTitle(updatedCourse.getTitle());
+        existingCourse.setDescription(updatedCourse.getDescription());
+        existingCourse.setPrice(updatedCourse.getPrice());
+        existingCourse.setLevel(updatedCourse.getLevel());
+
+        try {
+            if (!imageFile.isEmpty()) {
+                Blob imageBlob = new SerialBlob(imageFile.getBytes());
+                existingCourse.setImage(imageBlob);
+            }
+        } catch (Exception e) {
+        }
+
+        courseService.save(existingCourse);
+
+        return "redirect:/admin";
     }
 }
