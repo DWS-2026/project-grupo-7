@@ -25,9 +25,13 @@ import com.rayokross.academy.models.Lesson;
 import com.rayokross.academy.models.User;
 import com.rayokross.academy.services.CourseService;
 import com.rayokross.academy.services.UserService;
+import com.rayokross.academy.services.LessonService;
 
 @Controller
 public class AdminCourseController {
+
+    @Autowired
+    private LessonService lessonService;
 
     @Autowired
     private CourseService courseService;
@@ -129,5 +133,12 @@ public class AdminCourseController {
         courseService.save(existingCourse);
 
         return "redirect:/admin";
+    }
+
+    @PostMapping("/admin/courses/{courseId}/lessons/{id}/delete")
+    public String deleteLesson(@PathVariable Long courseId, @PathVariable Long id, Model model) {
+        lessonService.deleteById(id);
+
+        return "redirect:/admin/courses/" + courseId + "/edit";
     }
 }
