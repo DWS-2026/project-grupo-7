@@ -1,4 +1,4 @@
-{{> header}}
+{{> partials/header}}
 
 <main class="container py-5 flex-grow-1">
     
@@ -16,7 +16,7 @@
                 </div>
                 <div class="card-body p-4">
                     
-                    <form action="/admin/courses/{{course.id}}/edit" method="POST">
+                    <form action="/admin/courses/{{course.id}}/edit" method="POST" enctype="multipart/form-data">
                         <input type="hidden" name="_csrf" value="{{token}}"/>
                         
                         <div class="mb-3">
@@ -127,4 +127,4 @@
     </div>
 </main>
 
-{{> footer}}
+{{> partials/footer}}

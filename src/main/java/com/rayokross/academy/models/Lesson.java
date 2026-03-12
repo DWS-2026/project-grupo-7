@@ -21,6 +21,9 @@ public class Lesson {
     private Course course;
 
     public Lesson() {
+        this.title = "";
+        this.content = "";
+        this.videoUrl = "";
     }
 
     public Lesson(String title, String content, String videoUrl, int durationInMinutes, Course course) {
@@ -32,7 +35,7 @@ public class Lesson {
     }
 
     public Long getId() {
-        return id; 
+        return id;
     }
 
     public void setId(Long id) {
@@ -66,6 +69,7 @@ public class Lesson {
     public int getDurationInMinutes() {
         return durationInMinutes;
     }
+
     public void setDurationInMinutes(int durationInMinutes) {
         this.durationInMinutes = durationInMinutes;
     }
