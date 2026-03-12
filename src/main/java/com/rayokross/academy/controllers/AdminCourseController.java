@@ -79,4 +79,11 @@ public class AdminCourseController {
 
         return "course_users";
     }
+
+    @PostMapping("/admin/courses/delete/{id}")
+    public String deleteCourse(@PathVariable Long id, Model model) {
+        courseService.delete(id);
+        return "redirect:/admin";
+
+    }
 }
