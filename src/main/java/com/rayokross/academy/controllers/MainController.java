@@ -37,11 +37,10 @@ public class MainController {
 
     @GetMapping("/courses")
     public String showCatalog(
-            @RequestParam(required = false) String level, 
-            @RequestParam(defaultValue = "0") int page, 
+            @RequestParam(required = false) String level,
+            @RequestParam(defaultValue = "0") int page,
             Model model) {
 
-        
         int pageSize = 6;
         Pageable pageable = PageRequest.of(page, pageSize);
         Page<Course> coursePage;
@@ -50,13 +49,16 @@ public class MainController {
             coursePage = courseService.findByLevel(level, pageable);
 
             model.addAttribute("currentLevel", level);
-            if ("Foundations".equalsIgnoreCase(level))
+            if ("Foundations".equalsIgnoreCase(level)) {
                 model.addAttribute("isFoundations", true);
-            if ("Offensive".equalsIgnoreCase(level))
+            }
+            if ("Offensive".equalsIgnoreCase(level)) {
                 model.addAttribute("isOffensive", true);
-            if ("Defensive".equalsIgnoreCase(level))
+            }
+            if ("Defensive".equalsIgnoreCase(level)) {
                 model.addAttribute("isDefensive", true);
-                
+            }
+
             // Guardamos el filtro para no perderlo al cambiar de página
             model.addAttribute("filterLevel", "&level=" + level);
         } else {
