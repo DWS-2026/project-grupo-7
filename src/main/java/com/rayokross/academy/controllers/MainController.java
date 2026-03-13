@@ -30,7 +30,8 @@ public class MainController {
 
     @GetMapping("/")
     public String showIndex(Model model) {
-        model.addAttribute("popularCourses", courseService.findAll());
+        Pageable topThree = PageRequest.of(0, 3);
+        model.addAttribute("popularCourses", courseService.findAll(topThree).getContent());
         model.addAttribute("pageTitle", "Home");
         return "index";
     }
