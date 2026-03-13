@@ -32,24 +32,26 @@ public class MainController {
         return "index";
     }
 
-    // --- MÉTODO CORREGIDO ---
     @GetMapping("/courses")
     public String showCatalog(@RequestParam(required = false) String level, Model model) {
-        
+
         if (level != null && !level.isEmpty()) {
             // Buscamos solo los cursos de esa categoría
             model.addAttribute("courses", courseService.findByLevel(level));
-            
+
             // Activamos las variables para que Mustache pinte el botón de color
             model.addAttribute("currentLevel", level);
-            if ("Foundations".equalsIgnoreCase(level)) model.addAttribute("isFoundations", true);
-            if ("Offensive".equalsIgnoreCase(level)) model.addAttribute("isOffensive", true);
-            if ("Defensive".equalsIgnoreCase(level)) model.addAttribute("isDefensive", true);
+            if ("Foundations".equalsIgnoreCase(level))
+                model.addAttribute("isFoundations", true);
+            if ("Offensive".equalsIgnoreCase(level))
+                model.addAttribute("isOffensive", true);
+            if ("Defensive".equalsIgnoreCase(level))
+                model.addAttribute("isDefensive", true);
         } else {
             // Si no hay filtro, mostramos todo el catálogo
             model.addAttribute("courses", courseService.findAll());
         }
-        
+
         model.addAttribute("pageTitle", "Course Catalog");
         return "courses";
     }
