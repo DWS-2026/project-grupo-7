@@ -41,7 +41,7 @@ public class UserController {
             model.addAttribute("user", user);
 
             model.addAttribute("isAdmin", user.getRoles().contains("ADMIN"));
-            model.addAttribute("enrollments", user.getEnrollments()); 
+            model.addAttribute("enrollments", user.getEnrollments());
 
             model.addAttribute("pageTitle", "My Profile");
             return "profile";
@@ -69,7 +69,7 @@ public class UserController {
 
     @GetMapping("/user/{id}/image")
     public ResponseEntity<Object> downloadImage(@PathVariable long id) throws Exception {
-        Optional<User> user = userService.findById(id); 
+        Optional<User> user = userService.findById(id);
 
         if (user.isPresent() && user.get().getProfilePhoto() != null) {
             Blob image = user.get().getProfilePhoto();
@@ -98,5 +98,27 @@ public class UserController {
             userService.save(user);
         }
         return "redirect:/profile?profileSuccess=true";
+    }
+
+    @PostMapping("/profile/courses/{courseId}/cancel")
+    public String cancelEnrollment(@PathVariable Long courseId, Principal principal) {
+        if (principal == null) {
+            return "redirect:/login";
+        }
+
+        Optional<User> userOpt = userService.findByEmail(principal.getName());
+
+        if (userOpt.isPresent()) {
+            User user = userOpt.get();
+
+            boolean isRemoved = user.getEnrollments()
+                    .removeIf(enrollment -> enrollment.getCourse().getId().equals(courseId));
+
+            if (isRemoved) {
+                userService.save(user);
+            }
+        }
+
+        return "redirect:/profile";
     }
 }
