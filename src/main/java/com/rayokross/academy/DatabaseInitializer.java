@@ -70,15 +70,15 @@ public class DatabaseInitializer {
             c4.setReviewCount(85);
             courseService.save(c4);
 
-            Course c5 = new Course("Advanced Malware Analysis", "Reverse engineering and dynamic analysis of modern malware.", "Offensive", 150.00, "DarkCoder", 50);
+            Course c5 = new Course("Incident Response & Forensics", "Handle breaches and perform digital forensics on Windows systems.", "Defensive", 110.00, "SecOps Lead", 40);
             c5.setRating(4.6);
             courseService.save(c5);
 
-            Course c6 = new Course("Wireless Network Hacking", "Crack WPA2/WPA3 and audit enterprise Wi-Fi networks.", "Offensive", 75.50, "RayoKross Team", 20);
+            Course c6 = new Course("Cloud Security Architecture", "Secure AWS and Azure environments from external threats.", "Defensive", 140.00, "CloudNinja", 60);
             c6.setRating(4.7);
             courseService.save(c6);
 
-            Course c7 = new Course("Incident Response & Forensics", "Handle breaches and perform digital forensics on Windows systems.", "Defensive", 110.00, "SecOps Lead", 40);
+            Course c7 = new Course("Advanced Malware Analysis", "Reverse engineering and dynamic analysis of modern malware.", "Offensive", 150.00, "DarkCoder", 50);
             c7.setRating(4.9);
             courseService.save(c7);
 
@@ -86,7 +86,7 @@ public class DatabaseInitializer {
             c8.setRating(4.5);
             courseService.save(c8);
 
-            Course c9 = new Course("Cloud Security Architecture", "Secure AWS and Azure environments from external threats.", "Defensive", 140.00, "CloudNinja", 60);
+            Course c9 = new Course("Wireless Network Hacking", "Crack WPA2/WPA3 and audit enterprise Wi-Fi networks.", "Offensive", 75.50, "RayoKross Team", 20);
             c9.setRating(4.8);
             courseService.save(c9);
 

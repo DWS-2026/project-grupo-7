@@ -59,18 +59,15 @@ public class MainController {
                 model.addAttribute("isDefensive", true);
             }
 
-            // Guardamos el filtro para no perderlo al cambiar de página
             model.addAttribute("filterLevel", "&level=" + level);
         } else {
-            // Si no hay filtro, mostramos todo el catálogo paginado
+            
             coursePage = courseService.findAll(pageable);
-            model.addAttribute("filterLevel", ""); // Vacío si no hay filtro
+            model.addAttribute("filterLevel", "");
         }
 
-        // 2. Extraemos el contenido de la página y lo pasamos al modelo original
         model.addAttribute("courses", coursePage.getContent());
 
-        // 3. Añadimos las variables de control para los botones de Mustache
         model.addAttribute("currentPage", page);
         model.addAttribute("hasNext", coursePage.hasNext());
         model.addAttribute("hasPrev", coursePage.hasPrevious());
