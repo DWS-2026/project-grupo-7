@@ -2,15 +2,21 @@ package com.rayokross.academy.controllers;
 
 import java.security.Principal;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+import com.rayokross.academy.services.CartService;
+
 import jakarta.servlet.http.HttpServletRequest;
 
 @ControllerAdvice
 public class GlobalModelAttributes {
+
+    @Autowired
+    private CartService cartService;
 
     @ModelAttribute
     public void addGlobalAttributes(Model model, HttpServletRequest request, Principal principal) {
@@ -32,5 +38,13 @@ public class GlobalModelAttributes {
         if (!model.containsAttribute("cartCount")) {
             model.addAttribute("cartCount", 0);
         }
+
+        int cartCount = 0;
+        if (cartService.getCart() != null) {
+            cartCount = cartService.getCart().size();
+        }
+
+        model.addAttribute("cartCount", cartCount);
+        model.addAttribute("hasCartItems", cartCount > 0);
     }
 }
