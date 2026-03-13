@@ -1,6 +1,8 @@
 package com.rayokross.academy.models;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 import jakarta.persistence.*;
 
@@ -70,5 +72,13 @@ public class Enrollment {
 
     public void setCompleted(boolean completed) {
         this.completed = completed;
+    }
+
+    public String getFormattedEnrollmentDate() {
+        if (this.enrollmentDate == null) {
+            return "Unknown";
+        }
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd, yyyy", Locale.ENGLISH);
+        return this.enrollmentDate.format(formatter);
     }
 }
