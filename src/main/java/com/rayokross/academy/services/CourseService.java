@@ -39,19 +39,21 @@ public class CourseService {
         repository.save(course);
     }
 
-    public void delete(long id) {
-        repository.deleteById(id);
-    }
-
     public void save(Course course, MultipartFile imageFile) throws IOException {
         if (!imageFile.isEmpty()) {
             try {
+                // Convierte el archivo web en un formato SQL entendible por la BD
                 course.setImage(new SerialBlob(imageFile.getBytes()));
             } catch (Exception e) {
                 throw new IOException("Failed to create image blob", e);
             }
         }
+        // Llama al save normal para guardar el curso con la imagen ya incrustada
         this.save(course);
+    }
+
+    public void delete(long id) {
+        repository.deleteById(id);
     }
 
     // 3. Mantenemos el original por si lo usáis en otra parte

@@ -26,7 +26,22 @@ public class DatabaseInitializer {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @PostConstruct
+    
+    private void setCourseImage(Course course, String imageName) {
+        try {
+            org.springframework.core.io.Resource resource = new org.springframework.core.io.ClassPathResource("static/images/" + imageName);
+            if (resource.exists()) {
+                java.io.InputStream is = resource.getInputStream();
+                course.setImage(new javax.sql.rowset.serial.SerialBlob(is.readAllBytes()));
+            } else {
+                log.warn("No se pudo encontrar la imagen: " + imageName + ". Revisando en static/images/");
+            }
+        } catch (Exception e) {
+            log.error("Error al cargar la imagen", e);
+        }
+    }
+
+        @PostConstruct
     public void init() {
         if (userRepository.findAll().isEmpty()) {
             // Usuarios
@@ -38,18 +53,19 @@ public class DatabaseInitializer {
         }
 
         if (courseService.findAll().isEmpty()) {
-            // Curso 1 - Con Lecciones
             Course c1 = new Course("Ethical Hacking Pro", "Master penetration testing techniques.",
                     "Offensive",
                     129.99, "RayoKross Team", 45);
             c1.setRating(4.9);
-            c1.setReviewCount(150); // Para que no salga (0 ratings)
+            c1.setReviewCount(150);
 
-            // Añadimos lecciones reales
+
             c1.getLessons().add(
                     new Lesson("Introduction to Hacking", "Content...", "https://v.com/1", 10, c1));
             c1.getLessons().add(
                     new Lesson("Setting up Kali Linux", "Content...", "https://v.com/2", 20, c1));
+
+                    setCourseImage(c1,"ethical_hacking.png");
 
             courseService.save(c1);
 
@@ -57,12 +73,14 @@ public class DatabaseInitializer {
             Course c2 = new Course("Network Defense", "Learn to defend networks.", "Defensive", 89.00,
                     "RayoKross Team", 30);
             c2.setRating(4.7);
+            setCourseImage(c2,"Introduction_To_Secure_Networks.png");
             courseService.save(c2);
 
             // Curso 3
             Course c3 = new Course("Cybersecurity Basics", "The start of your career.", "Foundations", 0.00,
                     "URJC", 10);
             c3.setRating(4.5);
+            setCourseImage(c3,"forensics.png");
             courseService.save(c3);
 
             Course c4 = new Course("Web App Penetration Testing", "Learn to exploit vulnerabilities like SQLi, XSS and CSRF.", "Offensive", 95.00, "RayoKross Team", 35);
