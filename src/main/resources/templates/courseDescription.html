@@ -113,7 +113,7 @@
             </button>
           </form>
 
-          <form action="/checkout/buy-now" method="POST" class="mb-3">
+          <form action="/courses/{{course.id}}/buy" method="POST" class="mb-3">
             <input type="hidden" name="_csrf" value="{{token}}" />
             <input type="hidden" name="courseId" value="{{course.id}}" />
             
