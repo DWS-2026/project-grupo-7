@@ -43,6 +43,12 @@
                             <label class="form-label small fw-bold text-muted">Description</label>
                             <textarea name="description" class="form-control bg-light" rows="4" required>{{course.description}}</textarea>
                         </div>
+
+                        <div class="mb-4">
+                            <label class="form-label small fw-bold text-muted">Update Course Image (Optional)</label>
+                            <input type="file" name="imageFile" class="form-control bg-light" accept="image/*">
+                            <small class="text-muted">Leave blank to keep the current image.</small>
+                        </div>
                         
                         <button type="submit" class="btn btn-purple w-100">Save Changes</button>
                     </form>
