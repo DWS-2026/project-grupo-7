@@ -7,6 +7,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.http.MediaTypeFactory;
 import org.springframework.http.ResponseEntity;
@@ -33,13 +36,19 @@ public class MainController {
     }
 
     @GetMapping("/courses")
-    public String showCatalog(@RequestParam(required = false) String level, Model model) {
+    public String showCatalog(
+            @RequestParam(required = false) String level, 
+            @RequestParam(defaultValue = "0") int page, 
+            Model model) {
+
+        
+        int pageSize = 6;
+        Pageable pageable = PageRequest.of(page, pageSize);
+        Page<Course> coursePage;
 
         if (level != null && !level.isEmpty()) {
-            // Buscamos solo los cursos de esa categoría
-            model.addAttribute("courses", courseService.findByLevel(level));
+            coursePage = courseService.findByLevel(level, pageable);
 
-            // Activamos las variables para que Mustache pinte el botón de color
             model.addAttribute("currentLevel", level);
             if ("Foundations".equalsIgnoreCase(level))
                 model.addAttribute("isFoundations", true);
@@ -47,10 +56,24 @@ public class MainController {
                 model.addAttribute("isOffensive", true);
             if ("Defensive".equalsIgnoreCase(level))
                 model.addAttribute("isDefensive", true);
+                
+            // Guardamos el filtro para no perderlo al cambiar de página
+            model.addAttribute("filterLevel", "&level=" + level);
         } else {
-            // Si no hay filtro, mostramos todo el catálogo
-            model.addAttribute("courses", courseService.findAll());
+            // Si no hay filtro, mostramos todo el catálogo paginado
+            coursePage = courseService.findAll(pageable);
+            model.addAttribute("filterLevel", ""); // Vacío si no hay filtro
         }
+
+        // 2. Extraemos el contenido de la página y lo pasamos al modelo original
+        model.addAttribute("courses", coursePage.getContent());
+
+        // 3. Añadimos las variables de control para los botones de Mustache
+        model.addAttribute("currentPage", page);
+        model.addAttribute("hasNext", coursePage.hasNext());
+        model.addAttribute("hasPrev", coursePage.hasPrevious());
+        model.addAttribute("nextPage", page + 1);
+        model.addAttribute("prevPage", page - 1);
 
         model.addAttribute("pageTitle", "Course Catalog");
         return "courses";
