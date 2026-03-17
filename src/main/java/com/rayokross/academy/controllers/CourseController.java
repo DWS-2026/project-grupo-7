@@ -60,7 +60,7 @@ public class CourseController {
     }
 
     @GetMapping("/courses/{id}")
-    public String showCourseDetails(@PathVariable String id, Model model) {
+    public String showCourseDetails(@PathVariable String id, Model model, Principal principal) {
         System.out.println("DEBUG: Recibida petición para el curso con ID: " + id);
 
         try {
@@ -71,7 +71,28 @@ public class CourseController {
                 Course course = courseOpt.get();
                 model.addAttribute("course", course);
                 model.addAttribute("pageTitle", course.getTitle());
-                model.addAttribute("isEnrolled", false);
+
+                boolean isEnrolled = false;
+                boolean isAdmin = false;
+
+                if (principal != null) {
+                    Optional<User> userOpt = userService.findByEmail(principal.getName());
+                    if (userOpt.isPresent()) {
+                        User user = userOpt.get();
+
+                        isAdmin = user.getRoles().contains("ADMIN") || user.getRoles().contains("ROLE_ADMIN");
+
+                        isEnrolled = user.getEnrollments().stream()
+                                .anyMatch(e -> e.getCourse().getId().equals(course.getId()));
+                    }
+                }
+
+                boolean canPurchase = !isAdmin && !isEnrolled;
+
+                model.addAttribute("isEnrolled", isEnrolled);
+                model.addAttribute("isAdmin", isAdmin);
+                model.addAttribute("canPurchase", canPurchase);
+
                 return "courseDescription";
             } else {
                 System.out.println("DEBUG: El curso con ID " + id + " no existe en la BD.");
