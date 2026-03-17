@@ -1,0 +1,140 @@
+{{> partials/header}}
+
+<header class="bg-white text-center py-4 border-bottom shadow-sm" style="border-bottom: 4px solid #6f42c1 !important;">
+    <div class="container py-2">
+        <p class="text-secondary mb-1 small fw-bold text-uppercase" style="letter-spacing: 1px;">
+            <i class="bi bi-journal-bookmark-fill text-purple me-1"></i> Learning Path
+        </p>
+        <h2 class="fw-bold mb-0 text-purple">{{course.title}}</h2>
+    </div>
+</header>
+
+<main class="container py-5 mb-5 flex-grow-1">
+    <div class="row g-4 justify-content-center">
+        
+        <div class="col-lg-8">
+            <div class="card shadow-sm border-0 mb-4 overflow-hidden rounded-3">
+                
+                {{#hasLessons}}
+                    {{#currentLesson}}
+                        {{#hasVideo}}
+                        <div class="ratio ratio-16x9 bg-black">
+                            <iframe src="{{videoUrl}}" allowfullscreen class="border-0"></iframe>
+                        </div>
+                        {{/hasVideo}}
+
+                        <div class="card-body p-4 p-md-5 bg-white">
+                            <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+                                <h3 class="fw-bold text-dark mb-0">{{title}}</h3>
+                                <span class="badge bg-light text-purple border border-purple rounded-pill px-3 py-2">
+                                    <i class="bi bi-clock-history me-1"></i> {{durationInMinutes}} min
+                                </span>
+                            </div>
+                            
+                            <hr class="text-muted mb-4 opacity-25">
+                            
+                            <div class="text-secondary" style="line-height: 1.7;">
+                                {{{content}}}
+                            </div>
+                        </div>
+                    {{/currentLesson}}
+                {{/hasLessons}}
+                
+                {{^hasLessons}}
+                    <div class="card-body p-5 text-center bg-light">
+                        <i class="bi bi-tools text-purple mb-3 d-block" style="font-size: 4rem;"></i>
+                        <h4 class="text-dark fw-bold">Content in preparation</h4>
+                        <p class="text-secondary mb-0">The instructor is still working on the lessons for this course. Please check back later!</p>
+                    </div>
+                {{/hasLessons}}
+                
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            
+            <div class="card shadow-sm border-0 mb-4">
+                <div class="card-body p-4">
+                    <h5 class="fw-bold text-dark mb-3">
+                        <!-- ¡Copa en color morado! -->
+                        <i class="bi bi-trophy-fill text-purple me-2"></i> Your Progress
+                    </h5>
+                    
+                    <div class="d-flex align-items-center justify-content-between bg-light p-3 rounded mb-3 border border-light">
+                        <span class="text-muted fw-bold small text-uppercase">Status</span>
+                        {{#isCompleted}}
+                            <span class="badge bg-success rounded-pill px-3 py-2 shadow-sm">
+                                <i class="bi bi-check-circle-fill me-1"></i> Completed
+                            </span>
+                        {{/isCompleted}}
+                        {{^isCompleted}}
+                            <span class="badge bg-warning text-dark rounded-pill px-3 py-2 shadow-sm">
+                                <i class="bi bi-play-circle-fill me-1"></i> In Progress
+                            </span>
+                        {{/isCompleted}}
+                    </div>
+
+                    {{^isCompleted}}
+                    <form action="/learn/course/{{course.id}}/complete" method="POST" class="m-0 d-grid">
+                        <input type="hidden" name="_csrf" value="{{token}}"/>
+                        <button type="submit" class="btn btn-success rounded-pill shadow-sm fw-bold">
+                            <i class="bi bi-check2-all me-1"></i> Mark as Completed
+                        </button>
+                    </form>
+                    {{/isCompleted}}
+
+                    {{#isCompleted}}
+                    <form action="/learn/course/{{course.id}}/uncomplete" method="POST" class="m-0 d-grid">
+                        <input type="hidden" name="_csrf" value="{{token}}"/>
+                        <button type="submit" class="btn btn-outline-secondary rounded-pill shadow-sm fw-bold">
+                            <i class="bi bi-arrow-counterclockwise me-1"></i> Unmark as Completed
+                        </button>
+                    </form>
+                    {{/isCompleted}}
+
+                </div>
+            </div>
+
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-white py-3 border-0 d-flex justify-content-between align-items-center pb-0">
+                    <h5 class="mb-0 fw-bold text-dark">
+                        <i class="bi bi-collection-play-fill text-purple me-2"></i> Syllabus
+                    </h5>
+                </div>
+                
+                <div class="card-body p-3">
+                    <div class="d-flex flex-column gap-2">
+                        {{#displayLessons}}
+                        <a href="/learn/course/{{course.id}}?lessonId={{id}}" 
+                           class="text-decoration-none p-3 rounded-3 d-flex justify-content-between align-items-center transition-all {{#isActive}}bg-purple text-white shadow-sm{{/isActive}} {{^isActive}}bg-light text-dark card-hover border{{/isActive}}">
+                            
+                            <div class="d-flex align-items-center text-truncate pe-3">
+                                {{#isActive}}
+                                    <i class="bi bi-play-circle-fill fs-5 me-3"></i>
+                                {{/isActive}}
+                                {{^isActive}}
+                                    <i class="bi bi-play-circle text-muted fs-5 me-3"></i>
+                                {{/isActive}}
+                                <span class="fw-bold text-truncate">{{title}}</span>
+                            </div>
+                            
+                            <span class="small fw-bold {{#isActive}}text-white-50{{/isActive}}{{^isActive}}text-muted{{/isActive}}">
+                                {{durationInMinutes}}m
+                            </span>
+                        </a>
+                        {{/displayLessons}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-4">
+                <a href="/profile" class="btn btn-outline-secondary rounded-pill shadow-sm w-100 py-2 fw-bold">
+                    <i class="bi bi-arrow-left me-2"></i> Back to My Courses
+                </a>
+            </div>
+
+        </div>
+    </div>
+</main>
+
+{{> partials/footer}}
