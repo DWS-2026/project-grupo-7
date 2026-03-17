@@ -150,7 +150,6 @@ public class Course {
     }
 
     public String getCreatorName() {
-        // Si no tiene creador asignado, mostramos algo por defecto
         if (this.creatorName == null || this.creatorName.trim().isEmpty()) {
             return "RayoKross Academy";
         }
