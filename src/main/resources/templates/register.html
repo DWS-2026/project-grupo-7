@@ -21,79 +21,71 @@
                     </div>
                     {{/globalError}}
 
-                    {{#loginError}}
-                    <div class="alert alert-danger text-center small mb-4" role="alert">
-                        <i class="bi bi-exclamation-triangle-fill me-2"></i>{{loginError}}
-                    </div>
-                    {{/loginError}}
+                    <form action="/register" method="POST">
+                        <input type="hidden" name="_csrf" value="{{token}}" />
 
-                    <form action="/login" method="POST">
-
-                        <form action="/register" method="POST">
-                            <input type="hidden" name="_csrf" value="{{token}}" />
-
-                            <div class="row g-2 mb-3">
-                                <div class="col-md">
-                                    <div class="form-floating">
-                                        <input type="text" name="firstName"
-                                            class="form-control {{#errorFirstName}}is-invalid{{/errorFirstName}}"
-                                            id="floatingName" placeholder="John" {{#firstName}}value="{{firstName}}"
-                                            {{/firstName}} required>
-                                        <label for="floatingName">First Name</label>
-                                        {{#errorFirstName}}
-                                        <div class="invalid-feedback">{{errorFirstName}}</div>
-                                        {{/errorFirstName}}
-                                    </div>
-                                </div>
-                                <div class="col-md">
-                                    <div class="form-floating">
-                                        <input type="text" name="lastName"
-                                            class="form-control {{#errorLastName}}is-invalid{{/errorLastName}}"
-                                            id="floatingLast" placeholder="Doe" {{#lastName}}value="{{lastName}}"
-                                            {{/lastName}} required>
-                                        <label for="floatingLast">Last Name</label>
-                                        {{#errorLastName}}
-                                        <div class="invalid-feedback">{{errorLastName}}</div>
-                                        {{/errorLastName}}
-                                    </div>
+                        <div class="row g-2 mb-3">
+                            <div class="col-md">
+                                <div class="form-floating">
+                                    <input type="text" name="firstName"
+                                        class="form-control {{#errorFirstName}}is-invalid{{/errorFirstName}}"
+                                        id="floatingName" placeholder="John" {{#firstName}}value="{{firstName}}"
+                                        {{/firstName}} required>
+                                    <label for="floatingName">First Name</label>
+                                    {{#errorFirstName}}
+                                    <div class="invalid-feedback">{{errorFirstName}}</div>
+                                    {{/errorFirstName}}
                                 </div>
                             </div>
-
-                            <div class="form-floating mb-3">
-                                <input type="email" name="email"
-                                    class="form-control {{#errorEmail}}is-invalid{{/errorEmail}}" id="floatingEmail"
-                                    placeholder="name@example.com" {{#email}}value="{{email}}" {{/email}} required>
-                                <label for="floatingEmail">Email address</label>
-                                {{#errorEmail}}
-                                <div class="invalid-feedback">{{errorEmail}}</div>
-                                {{/errorEmail}}
+                            <div class="col-md">
+                                <div class="form-floating">
+                                    <input type="text" name="lastName"
+                                        class="form-control {{#errorLastName}}is-invalid{{/errorLastName}}"
+                                        id="floatingLast" placeholder="Doe" {{#lastName}}value="{{lastName}}"
+                                        {{/lastName}} required>
+                                    <label for="floatingLast">Last Name</label>
+                                    {{#errorLastName}}
+                                    <div class="invalid-feedback">{{errorLastName}}</div>
+                                    {{/errorLastName}}
+                                </div>
                             </div>
+                        </div>
 
-                            <div class="form-floating mb-3">
-                                <input type="password" name="password"
-                                    class="form-control {{#errorPassword}}is-invalid{{/errorPassword}}"
-                                    id="floatingPass" placeholder="Password" required minlength="8">
-                                <label for="floatingPass">Password</label>
-                                {{#errorPassword}}
-                                <div class="invalid-feedback">{{errorPassword}}</div>
-                                {{/errorPassword}}
-                            </div>
+                        <div class="form-floating mb-3">
+                            <input type="email" name="email"
+                                class="form-control {{#errorEmail}}is-invalid{{/errorEmail}}" id="floatingEmail"
+                                placeholder="name@example.com" {{#email}}value="{{email}}" {{/email}} required>
+                            <label for="floatingEmail">Email address</label>
+                            {{#errorEmail}}
+                            <div class="invalid-feedback">{{errorEmail}}</div>
+                            {{/errorEmail}}
+                        </div>
 
-                            <div class="form-check mb-4">
-                                <input class="form-check-input {{#errorTerms}}is-invalid{{/errorTerms}}" type="checkbox"
-                                    name="terms" id="terms" required>
-                                <label class="form-check-label small text-muted" for="terms">
-                                    I agree to the <a href="#" class="text-purple text-decoration-none">Terms &
-                                        Conditions</a>
-                                </label>
-                                {{#errorTerms}}
-                                <div class="invalid-feedback">{{errorTerms}}</div>
-                                {{/errorTerms}}
-                            </div>
+                        <div class="form-floating mb-3">
+                            <input type="password" name="password"
+                                class="form-control {{#errorPassword}}is-invalid{{/errorPassword}}"
+                                id="floatingPass" placeholder="Password" required minlength="8">
+                            <label for="floatingPass">Password</label>
+                            {{#errorPassword}}
+                            <div class="invalid-feedback">{{errorPassword}}</div>
+                            {{/errorPassword}}
+                        </div>
 
-                            <button type="submit"
-                                class="btn btn-purple w-100 py-2 fs-5 rounded-3 mb-3 text-center d-block">Register</button>
-                        </form>
+                        <div class="form-check mb-4">
+                            <input class="form-check-input {{#errorTerms}}is-invalid{{/errorTerms}}" type="checkbox"
+                                name="terms" id="terms" required>
+                            <label class="form-check-label small text-muted" for="terms">
+                                I agree to the <a href="#" class="text-purple text-decoration-none">Terms &
+                                    Conditions</a>
+                            </label>
+                            {{#errorTerms}}
+                            <div class="invalid-feedback">{{errorTerms}}</div>
+                            {{/errorTerms}}
+                        </div>
+
+                        <button type="submit"
+                            class="btn btn-purple w-100 py-2 fs-5 rounded-3 mb-3 text-center d-block">Register</button>
+                    </form>
                 </div>
             </div>
 

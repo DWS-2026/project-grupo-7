@@ -3,6 +3,7 @@ package com.rayokross.academy.controllers;
 import java.sql.Blob;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.sql.rowset.serial.SerialBlob;
@@ -18,14 +19,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import java.util.Optional;
 
 import com.rayokross.academy.models.Course;
 import com.rayokross.academy.models.Lesson;
 import com.rayokross.academy.models.User;
 import com.rayokross.academy.services.CourseService;
-import com.rayokross.academy.services.UserService;
 import com.rayokross.academy.services.LessonService;
+import com.rayokross.academy.services.UserService;
 
 @Controller
 public class AdminCourseController {
