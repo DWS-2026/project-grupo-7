@@ -53,6 +53,22 @@
 
         </div>
 
+        <div class="d-flex justify-content-center mt-5 mb-2">
+            
+            {{#hasPrev}}
+                <a href="/courses?page={{prevPage}}{{filterLevel}}" class="btn btn-outline-purple mx-2 rounded-pill px-4">
+                    &laquo; Anterior
+                </a>
+            {{/hasPrev}}
+
+            {{#hasNext}}
+                <a href="/courses?page={{nextPage}}{{filterLevel}}" class="btn btn-outline-purple mx-2 rounded-pill px-4">
+                    Siguiente &raquo;
+                </a>
+            {{/hasNext}}
+            
+        </div>
+
     </div>
 </main>
 

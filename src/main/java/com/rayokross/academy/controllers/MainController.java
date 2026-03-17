@@ -7,6 +7,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.http.MediaTypeFactory;
 import org.springframework.http.ResponseEntity;
@@ -27,30 +30,50 @@ public class MainController {
 
     @GetMapping("/")
     public String showIndex(Model model) {
-        model.addAttribute("popularCourses", courseService.findAll());
+        Pageable topThree = PageRequest.of(0, 3);
+        model.addAttribute("popularCourses", courseService.findAll(topThree).getContent());
         model.addAttribute("pageTitle", "Home");
         return "index";
     }
 
     @GetMapping("/courses")
-    public String showCatalog(@RequestParam(required = false) String level, Model model) {
+    public String showCatalog(
+            @RequestParam(required = false) String level,
+            @RequestParam(defaultValue = "0") int page,
+            Model model) {
+
+        int pageSize = 6;
+        Pageable pageable = PageRequest.of(page, pageSize);
+        Page<Course> coursePage;
 
         if (level != null && !level.isEmpty()) {
-            // Buscamos solo los cursos de esa categoría
-            model.addAttribute("courses", courseService.findByLevel(level));
+            coursePage = courseService.findByLevel(level, pageable);
 
-            // Activamos las variables para que Mustache pinte el botón de color
             model.addAttribute("currentLevel", level);
-            if ("Foundations".equalsIgnoreCase(level))
+            if ("Foundations".equalsIgnoreCase(level)) {
                 model.addAttribute("isFoundations", true);
-            if ("Offensive".equalsIgnoreCase(level))
+            }
+            if ("Offensive".equalsIgnoreCase(level)) {
                 model.addAttribute("isOffensive", true);
-            if ("Defensive".equalsIgnoreCase(level))
+            }
+            if ("Defensive".equalsIgnoreCase(level)) {
                 model.addAttribute("isDefensive", true);
+            }
+
+            model.addAttribute("filterLevel", "&level=" + level);
         } else {
-            // Si no hay filtro, mostramos todo el catálogo
-            model.addAttribute("courses", courseService.findAll());
+            
+            coursePage = courseService.findAll(pageable);
+            model.addAttribute("filterLevel", "");
         }
+
+        model.addAttribute("courses", coursePage.getContent());
+
+        model.addAttribute("currentPage", page);
+        model.addAttribute("hasNext", coursePage.hasNext());
+        model.addAttribute("hasPrev", coursePage.hasPrevious());
+        model.addAttribute("nextPage", page + 1);
+        model.addAttribute("prevPage", page - 1);
 
         model.addAttribute("pageTitle", "Course Catalog");
         return "courses";
