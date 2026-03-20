@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.rayokross.academy.models.Course;
 import com.rayokross.academy.models.Enrollment;
@@ -29,6 +31,8 @@ import com.rayokross.academy.services.UserService;
 @RequestMapping("/learn")
 public class CoursePlayerController {
 
+    private static final Logger log = LoggerFactory.getLogger(CoursePlayerController.class);
+
     @Autowired
     private CourseService courseService;
 
@@ -41,7 +45,7 @@ public class CoursePlayerController {
     @Autowired
     private UserService userService;
 
-    // VISTA DEL REPRODUCTOR
+    // COURSE PLAYER VIEW
     @GetMapping("/course/{courseId}")
     public String viewCourse(@PathVariable Long courseId,
             @RequestParam(required = false) Long lessonId,
@@ -110,7 +114,7 @@ public class CoursePlayerController {
         return "course-player";
     }
 
-    // ACCIÓN PARA MARCAR COMO COMPLETADO
+    // ACTION TO MARK COURSE AS COMPLETED
     @PostMapping("/course/{courseId}/complete")
     public String completeCourse(@PathVariable Long courseId, Principal principal) {
         if (principal == null)
@@ -129,12 +133,13 @@ public class CoursePlayerController {
             Enrollment enrollment = enrollmentOpt.get();
             enrollment.setCompleted(true);
             enrollmentService.save(enrollment);
+            log.info("User '{}' marked course ID {} as COMPLETED.", currentUser.getEmail(), courseId);
         }
 
         return "redirect:/learn/course/" + courseId;
     }
 
-    // ACCIÓN PARA DESMARCAR COMO COMPLETADO
+    // ACTION TO UNMARK COURSE AS COMPLETED
     @PostMapping("/course/{courseId}/uncomplete")
     public String uncompleteCourse(@PathVariable Long courseId, Principal principal) {
         if (principal == null)
@@ -153,6 +158,7 @@ public class CoursePlayerController {
             Enrollment enrollment = enrollmentOpt.get();
             enrollment.setCompleted(false);
             enrollmentService.save(enrollment);
+            log.info("User '{}' unmarked course ID {} as COMPLETED.", currentUser.getEmail(), courseId);
         }
 
         return "redirect:/learn/course/" + courseId;

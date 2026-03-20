@@ -40,8 +40,12 @@ public class GlobalModelAttributes {
         }
 
         int cartCount = 0;
-        if (cartService.getCart() != null) {
-            cartCount = cartService.getCart().size();
+        try {
+            if (cartService.getCart() != null) {
+                cartCount = cartService.getCart().size();
+            }
+        } catch (Exception e) {
+            cartCount = 0;
         }
 
         model.addAttribute("cartCount", cartCount);

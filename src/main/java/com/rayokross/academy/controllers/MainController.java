@@ -18,12 +18,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.rayokross.academy.models.Course;
 import com.rayokross.academy.services.CourseService;
 
 @Controller
 public class MainController {
+
+    private static final Logger log = LoggerFactory.getLogger(MainController.class);
 
     @Autowired
     private CourseService courseService;
@@ -62,7 +66,7 @@ public class MainController {
 
             model.addAttribute("filterLevel", "&level=" + level);
         } else {
-            
+
             coursePage = courseService.findAll(pageable);
             model.addAttribute("filterLevel", "");
         }
@@ -80,13 +84,18 @@ public class MainController {
     }
 
     @GetMapping("/course/{id}/image")
-    public ResponseEntity<Object> downloadImage(@PathVariable long id) throws SQLException {
+    public ResponseEntity<Object> downloadImage(@PathVariable long id) {
         Optional<Course> op = courseService.findById(id);
         if (op.isPresent() && op.get().getImage() != null) {
-            Blob image = op.get().getImage();
-            Resource imageFile = new InputStreamResource(image.getBinaryStream());
-            MediaType mediaType = MediaTypeFactory.getMediaType(imageFile).orElse(MediaType.IMAGE_JPEG);
-            return ResponseEntity.ok().contentType(mediaType).body(imageFile);
+            try {
+                Blob image = op.get().getImage();
+                Resource imageFile = new InputStreamResource(image.getBinaryStream());
+                MediaType mediaType = MediaTypeFactory.getMediaType(imageFile).orElse(MediaType.IMAGE_JPEG);
+                return ResponseEntity.ok().contentType(mediaType).body(imageFile);
+            } catch (SQLException e) {
+                log.error("Failed to load image for course ID {}: {}", id, e.getMessage(), e);
+                return ResponseEntity.internalServerError().build();
+            }
         }
         return ResponseEntity.notFound().build();
     }
