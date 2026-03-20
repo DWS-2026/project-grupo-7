@@ -24,6 +24,7 @@ import com.rayokross.academy.models.Course;
 import com.rayokross.academy.models.Lesson;
 import com.rayokross.academy.models.User;
 import com.rayokross.academy.services.CourseService;
+import com.rayokross.academy.services.EnrollmentService;
 import com.rayokross.academy.services.LessonService;
 import com.rayokross.academy.services.UserService;
 
@@ -38,6 +39,9 @@ public class AdminCourseController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private EnrollmentService enrollmentService;
 
     private static final List<String> ALLOWED_IMAGE_TYPES = Arrays.asList("image/jpeg", "image/png", "image/gif");
 
@@ -140,5 +144,16 @@ public class AdminCourseController {
         lessonService.deleteById(id);
 
         return "redirect:/admin/courses/" + courseId + "/edit";
+    }
+
+    @PostMapping("/admin/courses/{courseId}/users/{userId}/remove")
+    public String removeUserFromCourse(@PathVariable Long courseId, @PathVariable Long userId) {
+        
+        Course course = courseService.findById(courseId).orElseThrow();
+        User user = userService.findById(userId).orElseThrow();
+        
+        enrollmentService.removeEnrollment(user, course);
+        
+        return "redirect:/admin/courses/" + courseId + "/users";
     }
 }
