@@ -90,8 +90,7 @@ public class CourseController {
                 User user = userOpt.get();
                 Course course = courseOpt.get();
 
-                boolean alreadyEnrolled = user.getEnrollments().stream()
-                        .anyMatch(e -> e.getCourse().getId().equals(course.getId()));
+                boolean alreadyEnrolled = user.getEnrollments().stream().anyMatch(e -> e.getCourse().getId().equals(course.getId()));
 
                 if (!alreadyEnrolled) {
                     Enrollment newEnrollment = new Enrollment(user, course);
@@ -127,6 +126,7 @@ public class CourseController {
                     if (userOpt.isPresent()) {
                         User user = userOpt.get();
                         isAdmin = user.getRoles().contains("ADMIN") || user.getRoles().contains("ROLE_ADMIN");
+
                         isEnrolled = user.getEnrollments().stream()
                                 .anyMatch(e -> e.getCourse().getId().equals(course.getId()));
                     }
