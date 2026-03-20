@@ -22,4 +22,11 @@ public class EnrollmentService {
     public void save(Enrollment enrollment) {
         enrollmentRepository.save(enrollment);
     }
+
+    public void removeEnrollment(User user, Course course) {
+        Optional<Enrollment> enrollment = enrollmentRepository.findByUserAndCourse(user, course);
+        if (enrollment.isPresent()) {
+            enrollmentRepository.delete(enrollment.get());
+        }
+    }
 }
