@@ -43,13 +43,13 @@
                                     <span class="badge bg-light text-secondary border border-secondary">#{{id}}</span>
                                 </td>
                                 <td>
-                                    <div class="fw-bold text-dark">{{name}}</div>
+                                    <div class="fw-bold text-dark">{{firstName}}</div>
                                 </td>
                                 <td class="text-muted">{{email}}</td>
                                 <td class="text-end pe-4">
                                     <form action="/admin/courses/{{course.id}}/users/{{id}}/remove" method="post" class="d-inline">
                                         <input type="hidden" name="_csrf" value="{{token}}"/>
-                                        <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Are you sure you want to remove {{name}} from this course?');">
+                                        <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Are you sure you want to remove {{firstName}} from this course?');">
                                             <i class="bi bi-person-x-fill me-1"></i> Remove
                                         </button>
                                     </form>
