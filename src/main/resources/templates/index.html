@@ -16,19 +16,26 @@
         </div>
 
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-            
+
             {{#popularCourses}}
             <div class="col">
                 <div class="card h-100 shadow-sm card-hover">
-                    
-                    <img src="/course/{{id}}/image" class="card-img-top" alt="{{title}}" style="height: 200px; object-fit: cover;">
-                    
+
+                    {{#hasImage}}
+                    <img src="/courses/{{id}}/image" class="card-img-top" alt="{{title}}"
+                        style="height: 200px; object-fit: cover;">
+                    {{/hasImage}}
+                    {{^hasImage}}
+                    <img src="/images/default-course.png" class="card-img-top" alt="Course Placeholder"
+                        style="height: 200px; object-fit: cover; background-color: #f8f9fa;">
+                    {{/hasImage}}
+
                     <div class="card-body">
                         <div class="badge {{badgeClass}} mb-2">{{level}}</div>
                         <h5 class="card-title">{{title}}</h5>
                         <p class="card-text">{{description}}</p>
                     </div>
-                    
+
                     <div class="card-footer bg-white d-flex justify-content-between align-items-center">
                         <div class="d-flex align-items-center gap-2">
                             <div class="border rounded px-2 py-1 d-flex align-items-center gap-1">
