@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.rayokross.academy.models.Course;
 import com.rayokross.academy.models.Enrollment;
@@ -19,6 +21,8 @@ import com.rayokross.academy.models.User;
 
 @Controller
 public class CartController {
+
+    private static final Logger log = LoggerFactory.getLogger(CartController.class);
 
     @Autowired
     private CartService cartService;
@@ -32,6 +36,7 @@ public class CartController {
     @PostMapping("/cart/checkout")
     public String checkout(Principal principal) {
         if (principal == null) {
+            log.warn("Checkout failed: User not authenticated.");
             return "redirect:/login";
         }
 
@@ -47,9 +52,7 @@ public class CartController {
         }
 
         for (Course course : cartCourses) {
-            boolean alreadyEnrolled = user.getEnrollments().stream()
-                    .anyMatch(e -> e.getCourse().getId().equals(course.getId()));
-
+            boolean alreadyEnrolled = user.getEnrollments().stream().anyMatch(e -> e.getCourse().getId().equals(course.getId()));
             if (!alreadyEnrolled) {
                 Enrollment newEnrollment = new Enrollment(user, course);
                 user.getEnrollments().add(newEnrollment);
@@ -57,8 +60,8 @@ public class CartController {
         }
 
         userService.save(user);
-
         cartService.clearCart();
+        log.info("Checkout successful for user '{}'.", user.getEmail());
 
         return "redirect:/profile";
     }
@@ -75,21 +78,17 @@ public class CartController {
     @PostMapping("/cart/add")
     public String addToCart(@RequestParam Long courseId) {
         Optional<Course> courseOpt = courseService.findById(courseId);
-
         if (courseOpt.isPresent()) {
             cartService.addCourse(courseOpt.get());
+            log.info("Course ID {} added to cart.", courseId);
         }
-
         return "redirect:/cart";
     }
 
     @PostMapping("/cart/remove")
     public String removeFromCart(@RequestParam Long courseId) {
-        // Llamamos al servicio para que borre el curso de la sesión
         cartService.removeCourse(courseId);
-
-        // Redirigimos de vuelta a la vista del carrito para que se actualice la
-        // pantalla
+        log.info("Course ID {} removed from cart.", courseId);
         return "redirect:/cart";
     }
 }

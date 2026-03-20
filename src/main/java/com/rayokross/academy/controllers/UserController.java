@@ -19,12 +19,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.rayokross.academy.models.User;
 import com.rayokross.academy.services.UserService;
 
 @Controller
 public class UserController {
+
+    private static final Logger log = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     private UserService userService;
@@ -50,52 +54,72 @@ public class UserController {
     }
 
     @PostMapping("/profile/upload-photo")
-    public String uploadPhoto(@RequestParam MultipartFile photo, Principal principal) throws Exception {
-        if (principal == null)
+    public String uploadPhoto(@RequestParam MultipartFile photo, Principal principal) {
+        if (principal == null) {
+            log.warn("Photo upload failed: User not authenticated.");
             return "redirect:/login";
+        }
 
         Optional<User> userOpt = userService.findByEmail(principal.getName());
         if (userOpt.isPresent() && !photo.isEmpty()) {
             User user = userOpt.get();
 
-            byte[] bytes = photo.getBytes();
-            Blob blob = new SerialBlob(bytes);
+            try {
+                byte[] bytes = photo.getBytes();
+                Blob blob = new SerialBlob(bytes);
 
-            user.setProfilePhoto(blob);
-            userService.save(user);
+                user.setProfilePhoto(blob);
+                userService.save(user);
+
+                log.info("User '{}' successfully updated their profile photo.", user.getEmail());
+            } catch (Exception e) {
+                log.error("Failed to process profile photo for user '{}': {}", user.getEmail(), e.getMessage(), e);
+            }
+        } else if (photo.isEmpty()) {
+            log.debug("User '{}' attempted to upload an empty photo.", principal.getName());
         }
+        
         return "redirect:/profile";
     }
 
     @GetMapping("/user/{id}/image")
-    public ResponseEntity<Object> downloadImage(@PathVariable long id) throws Exception {
+    public ResponseEntity<Object> downloadImage(@PathVariable long id) {
         Optional<User> user = userService.findById(id);
 
         if (user.isPresent() && user.get().getProfilePhoto() != null) {
-            Blob image = user.get().getProfilePhoto();
-            Resource file = new InputStreamResource(image.getBinaryStream());
+            try {
+                Blob image = user.get().getProfilePhoto();
+                Resource file = new InputStreamResource(image.getBinaryStream());
 
-            MediaType mediaType = MediaTypeFactory.getMediaType(file).orElse(MediaType.IMAGE_JPEG);
+                MediaType mediaType = MediaTypeFactory.getMediaType(file).orElse(MediaType.IMAGE_JPEG);
 
-            return ResponseEntity.ok().contentType(mediaType).body(file);
+                return ResponseEntity.ok().contentType(mediaType).body(file);
+            } catch (Exception e) {
+                log.error("Failed to load profile photo for user ID {}: {}", id, e.getMessage(), e);
+                return ResponseEntity.internalServerError().build();
+            }
         }
         return ResponseEntity.notFound().build();
     }
 
     @PostMapping("/profile/edit")
     public String editProfile(@RequestParam String fullName, Principal principal) {
-        if (principal == null)
+        if (principal == null) {
+            log.warn("Profile edit attempt failed: User not authenticated.");
             return "redirect:/login";
+        }
 
         Optional<User> userOpt = userService.findByEmail(principal.getName());
         if (userOpt.isPresent()) {
             User user = userOpt.get();
             String[] names = fullName.split(" ", 2);
             user.setFirstName(names[0]);
-            if (names.length > 1)
+            if (names.length > 1) {
                 user.setLastName(names[1]);
+            }
 
             userService.save(user);
+            log.info("User '{}' updated their profile name.", user.getEmail());
         }
         return "redirect:/profile?profileSuccess=true";
     }
@@ -103,6 +127,7 @@ public class UserController {
     @PostMapping("/profile/courses/{courseId}/cancel")
     public String cancelEnrollment(@PathVariable Long courseId, Principal principal) {
         if (principal == null) {
+            log.warn("Enrollment cancellation attempt failed: User not authenticated.");
             return "redirect:/login";
         }
 
@@ -111,11 +136,11 @@ public class UserController {
         if (userOpt.isPresent()) {
             User user = userOpt.get();
 
-            boolean isRemoved = user.getEnrollments()
-                    .removeIf(enrollment -> enrollment.getCourse().getId().equals(courseId));
+            boolean isRemoved = user.getEnrollments().removeIf(enrollment -> enrollment.getCourse().getId().equals(courseId));
 
             if (isRemoved) {
                 userService.save(user);
+                log.info("User '{}' cancelled enrollment for course ID {}.", user.getEmail(), courseId);
             }
         }
 
