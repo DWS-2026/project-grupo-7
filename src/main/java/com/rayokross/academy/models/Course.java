@@ -57,7 +57,7 @@ public class Course {
     public Course() {
     }
 
-    public Course(String title, String description, String level, double price, String creatorName) {
+    public Course(String title, String description, String level, double price, String creatorName, int hoursVideo) {
         this.title = title;
         this.description = description;
         this.level = level;
