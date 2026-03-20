@@ -107,6 +107,7 @@ public class DatabaseInitializer {
                                         "RayoKross Team",
                                         35);
                         c4.setRating(4.8);
+                        setCourseImage(c4, "penetrationTesting.png");
                         c4.setReviewCount(85);
                         courseService.save(c4);
 
@@ -115,12 +116,14 @@ public class DatabaseInitializer {
                                         "Defensive", 110.00,
                                         "SecOps Lead", 40);
                         c5.setRating(4.6);
+                        setCourseImage(c5, "incidentResponse.png");
                         courseService.save(c5);
 
                         Course c6 = new Course("Cloud Security Architecture",
                                         "Secure AWS and Azure environments from external threats.", "Defensive", 140.00,
                                         "CloudNinja", 60);
                         c6.setRating(4.7);
+                        setCourseImage(c6, "cloudSecurity.png");
                         courseService.save(c6);
 
                         Course c7 = new Course("Advanced Malware Analysis",
