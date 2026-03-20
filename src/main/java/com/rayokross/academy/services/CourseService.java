@@ -11,12 +11,16 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.rayokross.academy.models.Course;
 import com.rayokross.academy.repositories.CourseRepository;
 
 @Service
 public class CourseService {
+
+    private static final Logger log = LoggerFactory.getLogger(CourseService.class);
 
     @Autowired
     private CourseRepository repository;
@@ -35,13 +39,16 @@ public class CourseService {
 
     public void save(Course course) {
         repository.save(course);
+        log.info("Course saved successfully. ID: {}", course.getId());
     }
 
     public void save(Course course, MultipartFile imageFile) throws IOException {
         if (!imageFile.isEmpty()) {
             try {
                 course.setImage(new SerialBlob(imageFile.getBytes()));
+                log.debug("Image created for course ID: {}", course.getId());
             } catch (Exception e) {
+                log.error("Failed to create image for course ID {}: {}", course.getId(), e.getMessage(), e);
                 throw new IOException("Failed to create image blob", e);
             }
         }
@@ -50,6 +57,7 @@ public class CourseService {
 
     public void delete(long id) {
         repository.deleteById(id);
+        log.info("Course with ID {} deleted.", id);
     }
 
     public List<Course> findByLevel(String level) {
