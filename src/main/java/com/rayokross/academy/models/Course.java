@@ -9,7 +9,16 @@ import java.util.Locale;
 
 import org.hibernate.annotations.CreationTimestamp;
 
-import jakarta.persistence.*;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
+import jakarta.persistence.OneToMany;
+
 @Entity
 public class Course {
 
@@ -48,7 +57,7 @@ public class Course {
     public Course() {
     }
 
-    public Course(String title, String description, String level, double price, String creatorName, int hoursVideo) {
+    public Course(String title, String description, String level, double price, String creatorName) {
         this.title = title;
         this.description = description;
         this.level = level;
