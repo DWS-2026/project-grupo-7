@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.rayokross.academy.models.Course;
 import com.rayokross.academy.models.Lesson;
@@ -30,6 +32,8 @@ import com.rayokross.academy.services.UserService;
 
 @Controller
 public class AdminCourseController {
+
+    private static final Logger log = LoggerFactory.getLogger(AdminCourseController.class);
 
     @Autowired
     private LessonService lessonService;
@@ -57,23 +61,26 @@ public class AdminCourseController {
             RedirectAttributes redirectAttributes) throws Exception {
 
         if (imageFile.isEmpty()) {
-            redirectAttributes.addFlashAttribute("error", "Error: Debes subir una imagen para el curso.");
+            log.warn("Admin failed to create course: No image provided.");
+            redirectAttributes.addFlashAttribute("error", "Error: You have to upload a photo for the course.");
             return "redirect:/admin";
         }
 
         String contentType = imageFile.getContentType();
         if (contentType == null || !ALLOWED_IMAGE_TYPES.contains(contentType)) {
-            redirectAttributes.addFlashAttribute("error",
-                    "Error de seguridad: Solo se permiten archivos JPEG, PNG o GIF.");
+            log.warn("Admin failed to create course: Invalid image format ({}).", contentType);
+            redirectAttributes.addFlashAttribute("error", "Security error: JPEG, PNG or GIF required.");
             return "redirect:/admin";
         }
 
         if (imageFile.getSize() > 5 * 1024 * 1024) {
-            redirectAttributes.addFlashAttribute("error", "Error: La imagen no puede superar los 5MB.");
+            log.warn("Admin failed to create course: Image size exceeds 5MB limit.");
+            redirectAttributes.addFlashAttribute("error", "Error: Image size can´t exceed 5MB.");
             return "redirect:/admin";
         }
 
         courseService.save(course, imageFile);
+        log.info("Admin successfully created a new course: '{}'", course.getTitle());
 
         return "redirect:/admin";
     }
@@ -96,6 +103,7 @@ public class AdminCourseController {
     @PostMapping("/admin/courses/delete/{id}")
     public String deleteCourse(@PathVariable Long id, Model model) {
         courseService.delete(id);
+        log.info("Admin deleted course with ID: {}", id);
         return "redirect:/admin";
 
     }
@@ -130,11 +138,13 @@ public class AdminCourseController {
             if (!imageFile.isEmpty()) {
                 Blob imageBlob = new SerialBlob(imageFile.getBytes());
                 existingCourse.setImage(imageBlob);
+                log.debug("Image updated for course ID: {}", id);
             }
         } catch (Exception e) {
         }
 
         courseService.save(existingCourse);
+        log.info("Admin successfully updated course ID: {}", id);
 
         return "redirect:/admin";
     }
@@ -142,7 +152,7 @@ public class AdminCourseController {
     @PostMapping("/admin/courses/{courseId}/lessons/{id}/delete")
     public String deleteLesson(@PathVariable Long courseId, @PathVariable Long id, Model model) {
         lessonService.deleteById(id);
-
+        log.info("Admin deleted lesson ID {} from course ID {}", id, courseId);
         return "redirect:/admin/courses/" + courseId + "/edit";
     }
 
