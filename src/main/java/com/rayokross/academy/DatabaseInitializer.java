@@ -133,18 +133,21 @@ public class DatabaseInitializer {
                     150.00, "DarkCoder",
                     50);
             c7.setRating(4.9);
+            setCourseImage(c7,"Advanced_malware_Analysis.png");
             courseService.save(c7);
 
             Course c8 = new Course("SIEM Operations with Splunk",
                     "Detect anomalies and build security dashboards.",
                     "Defensive", 85.00, "URJC", 25);
             c8.setRating(4.5);
+            setCourseImage(c8,"Siem_Operations.png");
             courseService.save(c8);
 
             Course c9 = new Course("Wireless Network Hacking",
                     "Crack WPA2/WPA3 and audit enterprise Wi-Fi networks.",
                     "Offensive", 75.50, "RayoKross Team", 20);
             c9.setRating(4.8);
+            setCourseImage(c9, "Wireless_Network_hacking.png");
             courseService.save(c9);
 
             log.info("Database initialized with courses and lessons.");
