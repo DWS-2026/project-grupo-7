@@ -71,18 +71,6 @@
                             {{/errorPassword}}
                         </div>
 
-                        <div class="form-check mb-4">
-                            <input class="form-check-input {{#errorTerms}}is-invalid{{/errorTerms}}" type="checkbox"
-                                name="terms" id="terms" required>
-                            <label class="form-check-label small text-muted" for="terms">
-                                I agree to the <a href="#" class="text-purple text-decoration-none">Terms &
-                                    Conditions</a>
-                            </label>
-                            {{#errorTerms}}
-                            <div class="invalid-feedback">{{errorTerms}}</div>
-                            {{/errorTerms}}
-                        </div>
-
                         <button type="submit"
                             class="btn btn-purple w-100 py-2 fs-5 rounded-3 mb-3 text-center d-block">Register</button>
                     </form>
