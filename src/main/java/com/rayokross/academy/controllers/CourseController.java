@@ -18,7 +18,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.rayokross.academy.models.Course;
@@ -71,47 +70,6 @@ public class CourseController {
         model.addAttribute("pageTitle", "Course Catalog");
 
         return "courses";
-    }
-
-    @PostMapping("/courses/{id}/buy")
-    public String buyCourseNow(@PathVariable String id, Principal principal) {
-
-        if (principal == null) {
-            log.warn("Direct buy attempt failed: User not authenticated.");
-            return "redirect:/login";
-        }
-
-        try {
-            Long courseId = Long.parseLong(id);
-            Optional<User> userOpt = userService.findByEmail(principal.getName());
-            Optional<Course> courseOpt = courseService.findById(courseId);
-
-            if (userOpt.isPresent() && courseOpt.isPresent()) {
-                User user = userOpt.get();
-                Course course = courseOpt.get();
-
-                boolean alreadyEnrolled = false;
-
-                for (Enrollment e : user.getEnrollments()) {
-                    if (e.getCourse().getId().equals(course.getId())) {
-                        alreadyEnrolled = true;
-                        break;
-                    }
-                }
-
-                if (!alreadyEnrolled) {
-                    Enrollment newEnrollment = new Enrollment(user, course);
-                    user.getEnrollments().add(newEnrollment);
-                    userService.save(user);
-                    log.info("User '{}' bought course ID {}.", user.getEmail(), courseId);
-                }
-                return "redirect:/profile";
-            }
-        } catch (NumberFormatException e) {
-            return "redirect:/courses";
-        }
-
-        return "redirect:/courses";
     }
 
     @GetMapping("/courses/{id}")
