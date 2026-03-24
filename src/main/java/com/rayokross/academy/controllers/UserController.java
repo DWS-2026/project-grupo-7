@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.MediaTypeFactory;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.util.HtmlUtils;
 
 import com.rayokross.academy.models.User;
@@ -89,7 +91,8 @@ public class UserController {
     }
 
     @GetMapping("/user/{id}/image")
-    public ResponseEntity<Object> downloadImage(@PathVariable long id) {
+    public ResponseEntity<Object> downloadImage(@PathVariable Long id) {
+
         Optional<User> user = userService.findById(id);
 
         if (user.isPresent() && user.get().getProfilePhoto() != null) {
@@ -100,12 +103,18 @@ public class UserController {
                 MediaType mediaType = MediaTypeFactory.getMediaType(file).orElse(MediaType.IMAGE_JPEG);
 
                 return ResponseEntity.ok().contentType(mediaType).body(file);
+
             } catch (Exception e) {
                 log.error("Failed to load profile photo for user ID {}: {}", id, e.getMessage(), e);
-                return ResponseEntity.internalServerError().build();
+
+                throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
+                        "Error interno al procesar la imagen");
             }
         }
-        return ResponseEntity.notFound().build();
+
+        log.warn("Profile photo not found for user ID {}. Triggering 404 error page.", id);
+
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario o imagen no encontrados");
     }
 
     @PostMapping("/profile/edit")
@@ -151,7 +160,8 @@ public class UserController {
         if (userOpt.isPresent()) {
             User user = userOpt.get();
 
-            boolean isRemoved = user.getEnrollments().removeIf(enrollment -> enrollment.getCourse().getId().equals(courseId));
+            boolean isRemoved = user.getEnrollments()
+                    .removeIf(enrollment -> enrollment.getCourse().getId().equals(courseId));
 
             if (isRemoved) {
                 userService.save(user);

@@ -13,12 +13,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.rayokross.academy.models.Course;
 import com.rayokross.academy.models.User;
@@ -114,16 +116,18 @@ public class CourseController {
     }
 
     @GetMapping("/courses/{id}/image")
-    public ResponseEntity<Resource> downloadCourseImage(@PathVariable long id) throws SQLException {
+    public ResponseEntity<Resource> downloadCourseImage(@PathVariable Long id) throws SQLException {
+
         Optional<Course> courseOpt = courseService.findById(id);
 
         if (courseOpt.isPresent() && courseOpt.get().getImage() != null) {
             Resource file = new InputStreamResource(courseOpt.get().getImage().getBinaryStream());
 
             return ResponseEntity.ok()
-                    .header(HttpHeaders.CONTENT_TYPE, "image/jpeg").body(file);
-        } else {
-            return ResponseEntity.notFound().build();
+                    .header(HttpHeaders.CONTENT_TYPE, "image/jpeg")
+                    .body(file);
         }
+
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Imagen del curso no encontrada");
     }
 }
