@@ -72,7 +72,7 @@ public class CourseController {
 
         return "courses";
     }
-    
+
     @PostMapping("/courses/{id}/buy")
     public String buyCourseNow(@PathVariable String id, Principal principal) {
 
@@ -90,7 +90,14 @@ public class CourseController {
                 User user = userOpt.get();
                 Course course = courseOpt.get();
 
-                boolean alreadyEnrolled = user.getEnrollments().stream().anyMatch(e -> e.getCourse().getId().equals(course.getId()));
+                boolean alreadyEnrolled = false;
+
+                for (Enrollment e : user.getEnrollments()) {
+                    if (e.getCourse().getId().equals(course.getId())) {
+                        alreadyEnrolled = true;
+                        break;
+                    }
+                }
 
                 if (!alreadyEnrolled) {
                     Enrollment newEnrollment = new Enrollment(user, course);
@@ -113,40 +120,47 @@ public class CourseController {
             Long courseId = Long.parseLong(id);
             Optional<Course> courseOpt = courseService.findById(courseId);
 
-            if (courseOpt.isPresent()) {
-                Course course = courseOpt.get();
-                model.addAttribute("course", course);
-                model.addAttribute("pageTitle", course.getTitle());
+            if (courseOpt.isEmpty()) {
+                log.warn("Course with ID {} not found in database. Returning 404.", courseId);
+                throw new org.springframework.web.server.ResponseStatusException(
+                        org.springframework.http.HttpStatus.NOT_FOUND,
+                        "Course not found");
+            }
 
-                boolean isEnrolled = false;
-                boolean isAdmin = false;
+            Course course = courseOpt.get();
+            model.addAttribute("course", course);
+            model.addAttribute("pageTitle", course.getTitle());
 
-                if (principal != null) {
-                    Optional<User> userOpt = userService.findByEmail(principal.getName());
-                    if (userOpt.isPresent()) {
-                        User user = userOpt.get();
-                        isAdmin = user.getRoles().contains("ADMIN") || user.getRoles().contains("ROLE_ADMIN");
+            boolean isEnrolled = false;
+            boolean isAdmin = false;
 
-                        isEnrolled = user.getEnrollments().stream()
-                                .anyMatch(e -> e.getCourse().getId().equals(course.getId()));
+            if (principal != null) {
+                Optional<User> userOpt = userService.findByEmail(principal.getName());
+                if (userOpt.isPresent()) {
+                    User user = userOpt.get();
+                    isAdmin = user.getRoles().contains("ADMIN");
+
+                    for (Enrollment e : user.getEnrollments()) {
+                        if (e.getCourse().getId().equals(course.getId())) {
+                            isEnrolled = true;
+                            break;
+                        }
                     }
                 }
-
-                boolean canPurchase = !isAdmin && !isEnrolled;
-
-                model.addAttribute("isEnrolled", isEnrolled);
-                model.addAttribute("isAdmin", isAdmin);
-                model.addAttribute("canPurchase", canPurchase);
-
-                return "courseDescription";
-            } else {
-                log.warn("Course with ID {} not found in database. Returning 404.", courseId);
             }
+
+            boolean canPurchase = !isAdmin && !isEnrolled;
+
+            model.addAttribute("isEnrolled", isEnrolled);
+            model.addAttribute("isAdmin", isAdmin);
+            model.addAttribute("canPurchase", canPurchase);
+
+            return "courseDescription";
+
         } catch (NumberFormatException e) {
             log.warn("Invalid course ID format: '{}'. Redirecting to courses list.", id);
             return "redirect:/courses";
         }
-        return "404";
     }
 
     @GetMapping("/courses/{id}/image")
