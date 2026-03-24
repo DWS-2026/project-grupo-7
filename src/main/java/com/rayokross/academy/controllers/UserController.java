@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.util.HtmlUtils;
 
 import com.rayokross.academy.models.User;
 import com.rayokross.academy.services.UserService;
@@ -35,9 +36,10 @@ public class UserController {
 
     @GetMapping("/profile")
     public String showProfile(@RequestParam(required = false) Boolean profileSuccess, Model model,
-     Principal principal) {
-        if (principal == null)
+            Principal principal) {
+        if (principal == null) {
             return "redirect:/login";
+        }
 
         Optional<User> userOptional = userService.findByEmail(principal.getName());
 
@@ -47,7 +49,7 @@ public class UserController {
 
             model.addAttribute("isAdmin", user.getRoles().contains("ADMIN"));
             model.addAttribute("enrollments", user.getEnrollments());
-            if(profileSuccess != null && profileSuccess){
+            if (profileSuccess != null && profileSuccess) {
                 model.addAttribute("profileSuccess", true);
             }
 
@@ -82,7 +84,7 @@ public class UserController {
         } else if (photo.isEmpty()) {
             log.debug("User '{}' attempted to upload an empty photo.", principal.getName());
         }
-        
+
         return "redirect:/profile";
     }
 
@@ -113,13 +115,22 @@ public class UserController {
             return "redirect:/login";
         }
 
+        if (fullName == null || fullName.trim().isEmpty() || fullName.length() > 100) {
+            log.warn("Invalid name submitted by user: {}", principal.getName());
+            return "redirect:/profile?error=invalid_name";
+        }
+
+        String safeFullName = HtmlUtils.htmlEscape(fullName.trim());
+
         Optional<User> userOpt = userService.findByEmail(principal.getName());
         if (userOpt.isPresent()) {
             User user = userOpt.get();
-            String[] names = fullName.split(" ", 2);
+            String[] names = safeFullName.split(" ", 2);
             user.setFirstName(names[0]);
             if (names.length > 1) {
                 user.setLastName(names[1]);
+            } else {
+                user.setLastName("");
             }
 
             userService.save(user);
