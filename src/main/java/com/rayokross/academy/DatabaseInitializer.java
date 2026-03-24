@@ -125,7 +125,7 @@ public class DatabaseInitializer {
                     "Secure AWS and Azure environments from external threats.", "Defensive", 140.00,
                     "CloudNinja", 60);
             c6.setRating(4.7);
-            setCourseImage(c6, "cloudSecurity.png");
+            setCourseImage(c6, "Cloud_Security_Architecture.png");
             courseService.save(c6);
 
             Course c7 = new Course("Advanced Malware Analysis",
