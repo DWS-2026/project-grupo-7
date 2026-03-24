@@ -18,16 +18,13 @@ public class CustomErrorController implements ErrorController {
 
     @RequestMapping("/error")
     public String handleError(HttpServletRequest request, Model model) {
-        // Obtenemos el código de estado del error desde la petición
         Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
 
-        // Título por defecto para la pestaña del navegador
         model.addAttribute("pageTitle", "Ups, algo salió mal");
 
         if (status != null) {
             Integer statusCode = Integer.valueOf(status.toString());
 
-            // Logueamos la URI que causó el problema para depuración
             Object requestUri = request.getAttribute(RequestDispatcher.ERROR_REQUEST_URI);
 
             if (statusCode == HttpStatus.NOT_FOUND.value()) {
@@ -46,7 +43,6 @@ public class CustomErrorController implements ErrorController {
             }
         }
 
-        // Si es otro tipo de error, mostramos una vista genérica
         model.addAttribute("errorMessage", "Ha ocurrido un error inesperado.");
         return "error/generic";
     }
