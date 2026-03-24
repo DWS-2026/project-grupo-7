@@ -21,9 +21,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.rayokross.academy.models.Course;
-import com.rayokross.academy.models.Enrollment;
 import com.rayokross.academy.models.User;
 import com.rayokross.academy.services.CourseService;
+import com.rayokross.academy.services.EnrollmentService;
 import com.rayokross.academy.services.UserService;
 
 @Controller
@@ -36,6 +36,9 @@ public class CourseController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private EnrollmentService enrollmentService;
 
     @GetMapping("/courses")
     public String showCatalog(
@@ -73,52 +76,41 @@ public class CourseController {
     }
 
     @GetMapping("/courses/{id}")
-    public String showCourseDetails(@PathVariable String id, Model model, Principal principal) {
-        try {
-            Long courseId = Long.parseLong(id);
-            Optional<Course> courseOpt = courseService.findById(courseId);
+    public String showCourseDetails(@PathVariable Long id, Model model, Principal principal) {
 
-            if (courseOpt.isEmpty()) {
-                log.warn("Course with ID {} not found in database. Returning 404.", courseId);
-                throw new org.springframework.web.server.ResponseStatusException(
-                        org.springframework.http.HttpStatus.NOT_FOUND,
-                        "Course not found");
-            }
+        Optional<Course> courseOpt = courseService.findById(id);
 
-            Course course = courseOpt.get();
-            model.addAttribute("course", course);
-            model.addAttribute("pageTitle", course.getTitle());
-
-            boolean isEnrolled = false;
-            boolean isAdmin = false;
-
-            if (principal != null) {
-                Optional<User> userOpt = userService.findByEmail(principal.getName());
-                if (userOpt.isPresent()) {
-                    User user = userOpt.get();
-                    isAdmin = user.getRoles().contains("ADMIN");
-
-                    for (Enrollment e : user.getEnrollments()) {
-                        if (e.getCourse().getId().equals(course.getId())) {
-                            isEnrolled = true;
-                            break;
-                        }
-                    }
-                }
-            }
-
-            boolean canPurchase = !isAdmin && !isEnrolled;
-
-            model.addAttribute("isEnrolled", isEnrolled);
-            model.addAttribute("isAdmin", isAdmin);
-            model.addAttribute("canPurchase", canPurchase);
-
-            return "courseDescription";
-
-        } catch (NumberFormatException e) {
-            log.warn("Invalid course ID format: '{}'. Redirecting to courses list.", id);
-            return "redirect:/courses";
+        if (courseOpt.isEmpty()) {
+            log.warn("Course with ID {} not found in database. Returning 404.", id);
+            throw new org.springframework.web.server.ResponseStatusException(
+                    org.springframework.http.HttpStatus.NOT_FOUND,
+                    "Course not found");
         }
+
+        Course course = courseOpt.get();
+        model.addAttribute("course", course);
+        model.addAttribute("pageTitle", course.getTitle());
+
+        boolean isEnrolled = false;
+        boolean isAdmin = false;
+
+        if (principal != null) {
+            Optional<User> userOpt = userService.findByEmail(principal.getName());
+            if (userOpt.isPresent()) {
+                User user = userOpt.get();
+                isAdmin = user.getRoles().contains("ADMIN");
+
+                isEnrolled = enrollmentService.findByUserAndCourse(user, course).isPresent();
+            }
+        }
+
+        boolean canPurchase = !isAdmin && !isEnrolled;
+
+        model.addAttribute("isEnrolled", isEnrolled);
+        model.addAttribute("isAdmin", isAdmin);
+        model.addAttribute("canPurchase", canPurchase);
+
+        return "courseDescription";
     }
 
     @GetMapping("/courses/{id}/image")

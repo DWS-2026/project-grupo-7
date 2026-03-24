@@ -40,6 +40,13 @@ public class CustomErrorController implements ErrorController {
                 log.warn("Error 403: Acceso denegado - URI: {}", requestUri);
                 model.addAttribute("errorMessage", "No tienes permisos suficientes para acceder a esta sección.");
                 return "error/403";
+
+            } else if (statusCode == HttpStatus.BAD_REQUEST.value()) {
+                log.warn("Error 400: Petición incorrecta o URL mal formada - URI: {}", requestUri);
+                model.addAttribute("errorMessage",
+                        "La dirección que has introducido no es válida o tiene un formato incorrecto.");
+                // Puedes crear un 400.html o reutilizar tu 404.html si prefieres
+                return "error/400";
             }
         }
 
