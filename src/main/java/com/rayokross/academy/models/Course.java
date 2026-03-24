@@ -249,4 +249,8 @@ public class Course {
     public void setLearningObjectives(List<String> learningObjectives) {
         this.learningObjectives = learningObjectives;
     }
+
+    public boolean getHasImage() {
+        return this.image != null;
+    }
 }
