@@ -6,6 +6,8 @@ import java.util.Optional;
 
 import javax.sql.rowset.serial.SerialBlob;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
@@ -19,8 +21,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.rayokross.academy.models.User;
 import com.rayokross.academy.services.UserService;
@@ -34,7 +34,8 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("/profile")
-    public String showProfile(Model model, Principal principal) {
+    public String showProfile(@RequestParam(required = false) Boolean profileSuccess, Model model,
+     Principal principal) {
         if (principal == null)
             return "redirect:/login";
 
@@ -46,6 +47,9 @@ public class UserController {
 
             model.addAttribute("isAdmin", user.getRoles().contains("ADMIN"));
             model.addAttribute("enrollments", user.getEnrollments());
+            if(profileSuccess != null && profileSuccess){
+                model.addAttribute("profileSuccess", true);
+            }
 
             model.addAttribute("pageTitle", "My Profile");
             return "profile";
