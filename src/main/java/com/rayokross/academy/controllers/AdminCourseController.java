@@ -1,10 +1,10 @@
 package com.rayokross.academy.controllers;
 
 import java.sql.Blob;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import javax.sql.rowset.serial.SerialBlob;
 
@@ -23,20 +23,17 @@ import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.rayokross.academy.models.Course;
+import com.rayokross.academy.models.Enrollment;
 import com.rayokross.academy.models.Lesson;
 import com.rayokross.academy.models.User;
 import com.rayokross.academy.services.CourseService;
 import com.rayokross.academy.services.EnrollmentService;
-import com.rayokross.academy.services.LessonService;
 import com.rayokross.academy.services.UserService;
 
 @Controller
 public class AdminCourseController {
 
     private static final Logger log = LoggerFactory.getLogger(AdminCourseController.class);
-
-    @Autowired
-    private LessonService lessonService;
 
     @Autowired
     private CourseService courseService;
@@ -62,20 +59,20 @@ public class AdminCourseController {
 
         if (imageFile.isEmpty()) {
             log.warn("Admin failed to create course: No image provided.");
-            redirectAttributes.addFlashAttribute("error", "Error: You have to upload a photo for the course.");
+            redirectAttributes.addFlashAttribute("errorImage", "Error: You have to upload a photo for the course.");
             return "redirect:/admin";
         }
 
         String contentType = imageFile.getContentType();
         if (contentType == null || !ALLOWED_IMAGE_TYPES.contains(contentType)) {
             log.warn("Admin failed to create course: Invalid image format ({}).", contentType);
-            redirectAttributes.addFlashAttribute("error", "Security error: JPEG, PNG or GIF required.");
+            redirectAttributes.addFlashAttribute("errorImage", "Security error: JPEG, PNG or GIF required.");
             return "redirect:/admin";
         }
 
         if (imageFile.getSize() > 5 * 1024 * 1024) {
             log.warn("Admin failed to create course: Image size exceeds 5MB limit.");
-            redirectAttributes.addFlashAttribute("error", "Error: Image size can´t exceed 5MB.");
+            redirectAttributes.addFlashAttribute("errorImage", "Error: Image size can´t exceed 5MB.");
             return "redirect:/admin";
         }
 
@@ -90,9 +87,11 @@ public class AdminCourseController {
         Course course = courseService.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Course not found"));
 
-        List<User> enrolledUsers = course.getEnrollments().stream()
-                .map(enrollment -> enrollment.getUser())
-                .collect(Collectors.toList());
+        List<User> enrolledUsers = new ArrayList<>();
+
+        for (Enrollment e : course.getEnrollments()) {
+            enrolledUsers.add(e.getUser());
+        }
 
         model.addAttribute("course", course);
         model.addAttribute("enrolledUsers", enrolledUsers);
