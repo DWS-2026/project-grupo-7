@@ -8,6 +8,8 @@ import java.util.stream.Collectors;
 
 import javax.sql.rowset.serial.SerialBlob;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -19,8 +21,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.rayokross.academy.models.Course;
 import com.rayokross.academy.models.Lesson;
@@ -149,21 +149,14 @@ public class AdminCourseController {
         return "redirect:/admin";
     }
 
-    @PostMapping("/admin/courses/{courseId}/lessons/{id}/delete")
-    public String deleteLesson(@PathVariable Long courseId, @PathVariable Long id, Model model) {
-        lessonService.deleteById(id);
-        log.info("Admin deleted lesson ID {} from course ID {}", id, courseId);
-        return "redirect:/admin/courses/" + courseId + "/edit";
-    }
-
     @PostMapping("/admin/courses/{courseId}/users/{userId}/remove")
     public String removeUserFromCourse(@PathVariable Long courseId, @PathVariable Long userId) {
-        
+
         Course course = courseService.findById(courseId).orElseThrow();
         User user = userService.findById(userId).orElseThrow();
-        
+
         enrollmentService.removeEnrollment(user, course);
-        
+
         return "redirect:/admin/courses/" + courseId + "/users";
     }
 }
