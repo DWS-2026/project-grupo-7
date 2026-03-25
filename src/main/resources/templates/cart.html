@@ -9,7 +9,7 @@
             {{#cartCourses}}
             <div class="row py-3 border-bottom align-items-start">
                 <div class="col-md-3 col-4">
-                    <img src="/course/{{id}}/image" class="img-fluid rounded border shadow-sm" alt="{{title}}">
+                    <img src="/courses/{{id}}/image" class="img-fluid rounded border shadow-sm" alt="{{title}}">
                 </div>
                 <div class="col-md-6 col-5">
                     <h6 class="fw-bold mb-1">{{title}}</h6>
@@ -69,14 +69,6 @@
                         <p class="text-center small text-muted mb-0">You won't be charged yet</p>
                     </div>
                 </article>               
-
-                <div class="input-group mb-3">
-                    <form action="/cart/apply-coupon" method="POST" class="d-flex w-100">
-                        <input type="hidden" name="_csrf" value="{{token}}"/>
-                        <input type="text" name="couponCode" class="form-control border-dark form-control-sm rounded-start" placeholder="Enter Coupon">
-                        <button class="btn btn-outline-dark fw-bold btn-sm rounded-end" type="submit">Apply</button>
-                    </form>
-                </div>
                 
             </div>
         </div>

@@ -13,18 +13,20 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.rayokross.academy.models.Course;
-import com.rayokross.academy.models.Enrollment;
 import com.rayokross.academy.models.User;
+import com.rayokross.academy.services.CartService;
 import com.rayokross.academy.services.CourseService;
+import com.rayokross.academy.services.EnrollmentService;
 import com.rayokross.academy.services.UserService;
 
 @Controller
@@ -37,6 +39,12 @@ public class CourseController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private EnrollmentService enrollmentService;
+
+    @Autowired
+    private CartService cartService;
 
     @GetMapping("/courses")
     public String showCatalog(
@@ -72,94 +80,64 @@ public class CourseController {
 
         return "courses";
     }
-    
-    @PostMapping("/courses/{id}/buy")
-    public String buyCourseNow(@PathVariable String id, Principal principal) {
-
-        if (principal == null) {
-            log.warn("Direct buy attempt failed: User not authenticated.");
-            return "redirect:/login";
-        }
-
-        try {
-            Long courseId = Long.parseLong(id);
-            Optional<User> userOpt = userService.findByEmail(principal.getName());
-            Optional<Course> courseOpt = courseService.findById(courseId);
-
-            if (userOpt.isPresent() && courseOpt.isPresent()) {
-                User user = userOpt.get();
-                Course course = courseOpt.get();
-
-                boolean alreadyEnrolled = user.getEnrollments().stream().anyMatch(e -> e.getCourse().getId().equals(course.getId()));
-
-                if (!alreadyEnrolled) {
-                    Enrollment newEnrollment = new Enrollment(user, course);
-                    user.getEnrollments().add(newEnrollment);
-                    userService.save(user);
-                    log.info("User '{}' bought course ID {}.", user.getEmail(), courseId);
-                }
-                return "redirect:/profile";
-            }
-        } catch (NumberFormatException e) {
-            return "redirect:/courses";
-        }
-
-        return "redirect:/courses";
-    }
 
     @GetMapping("/courses/{id}")
-    public String showCourseDetails(@PathVariable String id, Model model, Principal principal) {
-        try {
-            Long courseId = Long.parseLong(id);
-            Optional<Course> courseOpt = courseService.findById(courseId);
+    public String showCourseDetails(@PathVariable Long id, Model model, Principal principal) {
 
-            if (courseOpt.isPresent()) {
-                Course course = courseOpt.get();
-                model.addAttribute("course", course);
-                model.addAttribute("pageTitle", course.getTitle());
+        Optional<Course> courseOpt = courseService.findById(id);
 
-                boolean isEnrolled = false;
-                boolean isAdmin = false;
-
-                if (principal != null) {
-                    Optional<User> userOpt = userService.findByEmail(principal.getName());
-                    if (userOpt.isPresent()) {
-                        User user = userOpt.get();
-                        isAdmin = user.getRoles().contains("ADMIN") || user.getRoles().contains("ROLE_ADMIN");
-
-                        isEnrolled = user.getEnrollments().stream()
-                                .anyMatch(e -> e.getCourse().getId().equals(course.getId()));
-                    }
-                }
-
-                boolean canPurchase = !isAdmin && !isEnrolled;
-
-                model.addAttribute("isEnrolled", isEnrolled);
-                model.addAttribute("isAdmin", isAdmin);
-                model.addAttribute("canPurchase", canPurchase);
-
-                return "courseDescription";
-            } else {
-                log.warn("Course with ID {} not found in database. Returning 404.", courseId);
-            }
-        } catch (NumberFormatException e) {
-            log.warn("Invalid course ID format: '{}'. Redirecting to courses list.", id);
-            return "redirect:/courses";
+        if (courseOpt.isEmpty()) {
+            log.warn("Course with ID {} not found in database. Returning 404.", id);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Course not found");
         }
-        return "404";
+
+        Course course = courseOpt.get();
+        model.addAttribute("course", course);
+        model.addAttribute("pageTitle", course.getTitle());
+
+        boolean isEnrolled = false;
+        boolean isAdmin = false;
+        boolean isInCart = false;
+
+        if (principal != null) {
+            Optional<User> userOpt = userService.findByEmail(principal.getName());
+            if (userOpt.isPresent()) {
+                User user = userOpt.get();
+                isAdmin = user.getRoles().contains("ADMIN");
+                isEnrolled = enrollmentService.findByUserAndCourse(user, course).isPresent();
+            }
+        }
+
+        for (Course c : cartService.getCart()) {
+            if (c.getId().equals(course.getId())) {
+                isInCart = true;
+                break;
+            }
+        }
+
+        boolean canPurchase = !isAdmin && !isEnrolled && !isInCart;
+
+        model.addAttribute("isEnrolled", isEnrolled);
+        model.addAttribute("isAdmin", isAdmin);
+        model.addAttribute("isInCart", isInCart);
+        model.addAttribute("canPurchase", canPurchase);
+
+        return "courseDescription";
     }
 
     @GetMapping("/courses/{id}/image")
-    public ResponseEntity<Resource> downloadCourseImage(@PathVariable long id) throws SQLException {
+    public ResponseEntity<Resource> downloadCourseImage(@PathVariable Long id) throws SQLException {
+
         Optional<Course> courseOpt = courseService.findById(id);
 
         if (courseOpt.isPresent() && courseOpt.get().getImage() != null) {
             Resource file = new InputStreamResource(courseOpt.get().getImage().getBinaryStream());
 
             return ResponseEntity.ok()
-                    .header(HttpHeaders.CONTENT_TYPE, "image/jpeg").body(file);
-        } else {
-            return ResponseEntity.notFound().build();
+                    .header(HttpHeaders.CONTENT_TYPE, "image/jpeg")
+                    .body(file);
         }
+
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Imagen del curso no encontrada");
     }
 }
