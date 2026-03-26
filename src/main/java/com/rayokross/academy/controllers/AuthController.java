@@ -57,7 +57,6 @@ public class AuthController {
             @RequestParam String lastName,
             @RequestParam String email,
             @RequestParam String password,
-            @RequestParam(required = false) String terms,
             Model model) {
 
         boolean hasErrors = false;
@@ -84,11 +83,6 @@ public class AuthController {
 
         if (password.length() < 8) {
             model.addAttribute("errorPassword", "The password must contain 8 characters.");
-            hasErrors = true;
-        }
-
-        if (terms == null) {
-            model.addAttribute("errorTerms", "You must accept the terms and conditions.");
             hasErrors = true;
         }
 
