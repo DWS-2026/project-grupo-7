@@ -1,65 +1,86 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{pageTitle}} - RayoKross Academy</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="/css/styles.css"> </head>
-<body class="d-flex flex-column min-vh-100 bg-light">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body class="d-flex flex-column min-vh-100 bg-light">
+    <nav
+      class="navbar navbar-light bg-white shadow-sm navbar-expand-lg sticky-top"
+    >
+      <div class="container">
+        <a class="navbar-brand" href="/">
+          <i class="bi bi-shield-lock-fill text-purple"></i> RayoKross Academy
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-    <nav class="navbar navbar-light bg-white shadow-sm navbar-expand-lg sticky-top">
-        <div class="container">
-            <a class="navbar-brand" href="/">
-                <i class="bi bi-shield-lock-fill text-purple"></i> RayoKross Academy
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav text-center text-lg-start mb-2 mb-lg-0">
+            <a class="nav-link fw-bold" href="/courses">Catalogue</a>
+          </div>
+
+          <div
+            class="navbar-nav ms-auto d-grid gap-2 d-lg-flex align-items-center"
+          >
+            {{^admin}}
+            <a
+              href="/cart"
+              class="nav-link me-lg-3 text-center"
+              aria-label="Ver carrito"
+            >
+              <span class="position-relative d-inline-block">
+                <i class="bi bi-cart3 fs-5 text-purple"></i>
+                {{#cartCount}}
+                <span
+                  class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                  style="font-size: 0.6rem"
+                >
+                  {{cartCount}}
+                </span>
+                {{/cartCount}}
+              </span>
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav text-center text-lg-start mb-2 mb-lg-0">
-                    <a class="nav-link fw-bold" href="/courses">Catalogue</a>
-                </div>
-                
-                <div class="navbar-nav ms-auto d-grid gap-2 d-lg-flex align-items-center">
-                    
-                    <a href="/cart" class="nav-link me-lg-3 text-center" aria-label="Ver carrito">
-                        <span class="position-relative d-inline-block">
-                            <i class="bi bi-cart3 fs-5 text-purple"></i>
-                            {{#cartCount}}
-                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.6rem;">
-                                {{cartCount}}
-                            </span>
-                            {{/cartCount}}
-                        </span>
-                    </a>
+            {{/admin}} {{^logged}}
+            <a class="btn btn-outline-purple me-lg-2" href="/login">Log In</a>
+            <a class="btn btn-purple" href="/register">Register</a>
+            {{/logged}} {{#logged}} {{#admin}}
+            <a class="btn btn-outline-dark me-lg-2" href="/admin">
+              <i class="bi bi-gear-fill me-1"></i>Admin
+            </a>
+            {{/admin}}
 
-                    {{^logged}}
-                    <a class="btn btn-outline-purple me-lg-2" href="/login">Log In</a>
-                    <a class="btn btn-purple" href="/register">Register</a>
-                    {{/logged}}
+            <a class="btn btn-outline-purple me-lg-2" href="/profile">
+              <i class="bi bi-person-circle me-1"></i>Profile
+            </a>
 
-                    {{#logged}}
-                        {{#admin}}
-                        <a class="btn btn-outline-dark me-lg-2" href="/admin">
-                            <i class="bi bi-gear-fill me-1"></i>Admin
-                        </a>
-                        {{/admin}}
-                        
-                        <a class="btn btn-outline-purple me-lg-2" href="/profile">
-                            <i class="bi bi-person-circle me-1"></i>Profile
-                        </a>
-                        
-                        <form action="/logout" method="post" class="m-0 d-grid">
-                            <input type="hidden" name="_csrf" value="{{token}}"/>
-                            <button type="submit" class="btn btn-purple">Logout</button>
-                        </form>
-                    {{/logged}}
-                    
-                </div>
-            </div>
+            <form action="/logout" method="post" class="m-0 d-grid">
+              <input type="hidden" name="_csrf" value="{{token}}" />
+              <button type="submit" class="btn btn-purple">Logout</button>
+            </form>
+            {{/logged}}
+          </div>
         </div>
+      </div>
     </nav>
+  </body>
+</html>
