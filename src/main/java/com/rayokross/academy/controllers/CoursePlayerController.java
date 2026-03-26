@@ -7,16 +7,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.rayokross.academy.models.Course;
 import com.rayokross.academy.models.Enrollment;
@@ -28,7 +27,6 @@ import com.rayokross.academy.services.LessonService;
 import com.rayokross.academy.services.UserService;
 
 @Controller
-@RequestMapping("/learn")
 public class CoursePlayerController {
 
     private static final Logger log = LoggerFactory.getLogger(CoursePlayerController.class);
@@ -45,8 +43,7 @@ public class CoursePlayerController {
     @Autowired
     private UserService userService;
 
-    // COURSE PLAYER VIEW
-    @GetMapping("/course/{courseId}")
+    @GetMapping("/learn/course/{courseId}")
     public String viewCourse(@PathVariable Long courseId,
             @RequestParam(required = false) Long lessonId,
             Model model,
@@ -114,8 +111,7 @@ public class CoursePlayerController {
         return "course-player";
     }
 
-    // ACTION TO MARK COURSE AS COMPLETED
-    @PostMapping("/course/{courseId}/complete")
+    @PostMapping("/learn/course/{courseId}/complete")
     public String completeCourse(@PathVariable Long courseId, Principal principal) {
         if (principal == null)
             return "redirect:/login";
@@ -139,8 +135,7 @@ public class CoursePlayerController {
         return "redirect:/learn/course/" + courseId;
     }
 
-    // ACTION TO UNMARK COURSE AS COMPLETED
-    @PostMapping("/course/{courseId}/uncomplete")
+    @PostMapping("/learn/course/{courseId}/uncomplete")
     public String uncompleteCourse(@PathVariable Long courseId, Principal principal) {
         if (principal == null)
             return "redirect:/login";

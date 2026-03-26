@@ -2,21 +2,18 @@ package com.rayokross.academy.controllers;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.rayokross.academy.models.User;
 import com.rayokross.academy.services.UserService;
-
-import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 public class AuthController {
@@ -32,16 +29,9 @@ public class AuthController {
     @GetMapping("/login")
     public String showLoginForm(Model model,
             @RequestParam(required = false) String error,
-            @RequestParam(required = false) String logout,
-            HttpServletRequest request) {
+            @RequestParam(required = false) String logout) {
 
         model.addAttribute("pageTitle", "Login");
-        model.addAttribute("logged", false);
-
-        CsrfToken csrfToken = (CsrfToken) request.getAttribute(CsrfToken.class.getName());
-        if (csrfToken != null) {
-            model.addAttribute("token", csrfToken.getToken());
-        }
 
         if (error != null) {
             model.addAttribute("error", true);
@@ -86,8 +76,7 @@ public class AuthController {
         if (!email.matches(emailRegex)) {
             model.addAttribute("errorEmail", "Please, introduce a valid email.");
             hasErrors = true;
-        }
-        else if (userService.existEmail(email)) {
+        } else if (userService.existEmail(email)) {
             model.addAttribute("errorEmail", "This email is already registered.");
             log.warn("Registration attempt failed: Email '{}' is already registered.", email);
             hasErrors = true;
