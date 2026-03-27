@@ -12,12 +12,15 @@ import com.rayokross.academy.services.CourseService;
 @Controller
 public class MainController {
 
+    private static final int POPULAR_COURSES_LIMIT = 3;
+
     @Autowired
     private CourseService courseService;
 
     @GetMapping("/")
     public String showIndex(Model model) {
-        Pageable topThree = PageRequest.of(0, 3);
+
+        Pageable topThree = PageRequest.of(0, POPULAR_COURSES_LIMIT);
         model.addAttribute("popularCourses", courseService.findAll(topThree).getContent());
         model.addAttribute("pageTitle", "Home");
         return "index";

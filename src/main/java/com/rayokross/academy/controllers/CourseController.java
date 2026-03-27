@@ -50,20 +50,18 @@ public class CourseController {
     public String showCatalog(
             @RequestParam(required = false) String level,
             @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "6") int size,
             Model model) {
 
-        int pageSize = 6;
-        Pageable pageable = PageRequest.of(page, pageSize);
+        Pageable pageable = PageRequest.of(page, size);
         Page<Course> coursePage;
 
         if (level != null && !level.isEmpty()) {
             coursePage = courseService.findByLevel(level, pageable);
             model.addAttribute("currentLevel", level);
-
             model.addAttribute("isFoundations", "Foundations".equalsIgnoreCase(level));
             model.addAttribute("isOffensive", "Offensive".equalsIgnoreCase(level));
             model.addAttribute("isDefensive", "Defensive".equalsIgnoreCase(level));
-
             model.addAttribute("filterLevel", "&level=" + level);
         } else {
             coursePage = courseService.findAll(pageable);

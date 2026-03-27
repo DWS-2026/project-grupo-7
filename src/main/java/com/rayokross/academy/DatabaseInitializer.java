@@ -6,6 +6,7 @@ import javax.sql.rowset.serial.SerialBlob;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
@@ -34,6 +35,12 @@ public class DatabaseInitializer {
         @Autowired
         private EnrollmentService enrollmentService;
 
+        @Value("${admin.default.password:adminpass1234}")
+        private String adminPassword;
+
+        @Value("${student.default.password:student1234}")
+        private String studentPassword;
+
         private void setCourseImage(Course course, String imageName) {
                 try {
                         Resource resource = new ClassPathResource("static/images/" + imageName);
@@ -57,10 +64,12 @@ public class DatabaseInitializer {
 
                 if (userService.findAll().isEmpty()) {
 
-                        admin = new User("Admin", "Master", "admin@rayokross.com", "adminpass1234", "USER", "ADMIN");
+                        // Sustituimos "adminpass1234" por la variable adminPassword
+                        admin = new User("Admin", "Master", "admin@rayokross.com", adminPassword, "USER", "ADMIN");
                         userService.save(admin);
 
-                        student = new User("Student", "Demo", "student@rayokross.com", "student1234", "USER");
+                        // Sustituimos "student1234" por la variable studentPassword
+                        student = new User("Student", "Demo", "student@rayokross.com", studentPassword, "USER");
                         userService.save(student);
 
                         log.info("Database initialized with default users.");
