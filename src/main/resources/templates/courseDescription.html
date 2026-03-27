@@ -7,13 +7,6 @@
 
     <div class="d-flex flex-wrap align-items-center gap-4 hero-details">
       <div class="d-flex align-items-center">
-        <span class="badge text-bg-warning me-2 fs-6">
-          {{course.rating}} <i class="bi bi-star-fill"></i>
-        </span>
-        <span>({{course.reviewCount}} ratings)</span>
-      </div>
-
-      <div class="d-flex align-items-center">
         <i class="bi bi-person-circle me-2"></i> Created by
         <span class="text-white fw-bold ms-1">{{course.creatorName}}</span>
       </div>
@@ -56,40 +49,21 @@
       <div class="accordion mb-5" id="courseContentAccordion">
         <div class="accordion-item">
           <h2 class="accordion-header">
-            <button
-              class="accordion-button"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#module1"
-              aria-expanded="true"
-              aria-controls="module1"
-            >
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#module1"
+              aria-expanded="true" aria-controls="module1">
               <strong>Course Syllabus</strong>
             </button>
           </h2>
-          <div
-            id="module1"
-            class="accordion-collapse collapse show"
-            data-bs-parent="#courseContentAccordion"
-          >
+          <div id="module1" class="accordion-collapse collapse show" data-bs-parent="#courseContentAccordion">
             <div class="accordion-body p-0">
               <ul class="list-group list-group-flush">
                 {{#course.lessons}}
-                <li
-                  class="list-group-item d-flex justify-content-between align-items-center px-4 py-3"
-                >
+                <li class="list-group-item d-flex justify-content-between align-items-center px-4 py-3">
                   <div>
-                    {{#videoUrl}}<i
-                      class="bi bi-play-circle me-3 text-purple fs-5"
-                    ></i
-                    >{{/videoUrl}} {{^videoUrl}}<i
-                      class="bi bi-file-text me-3 text-purple fs-5"
-                    ></i
-                    >{{/videoUrl}} {{title}}
+                    {{#videoUrl}}<i class="bi bi-play-circle me-3 text-purple fs-5"></i>{{/videoUrl}} {{^videoUrl}}<i
+                      class="bi bi-file-text me-3 text-purple fs-5"></i>{{/videoUrl}} {{title}}
                   </div>
-                  <span class="text-muted small"
-                    >{{durationInMinutes}} mins</span
-                  >
+                  <span class="text-muted small">{{durationInMinutes}} mins</span>
                 </li>
                 {{/course.lessons}} {{^course.lessons}}
                 <li class="list-group-item text-center p-4 text-muted">
@@ -104,15 +78,8 @@
     </div>
 
     <div class="col-lg-4">
-      <div
-        class="card shadow border-0 sticky-top"
-        style="top: 100px; z-index: 1000"
-      >
-        <img
-          src="/courses/{{course.id}}/image"
-          class="card-img-top"
-          alt="{{course.title}}"
-        />
+      <div class="card shadow border-0 sticky-top" style="top: 100px; z-index: 1000">
+        <img src="/courses/{{course.id}}/image" class="card-img-top" alt="{{course.title}}" />
 
         <div class="card-body p-4">
           <div class="d-flex align-items-center mb-4 mt-2">
@@ -128,10 +95,7 @@
             <input type="hidden" name="_csrf" value="{{token}}" />
             <input type="hidden" name="courseId" value="{{course.id}}" />
 
-            <button
-              type="submit"
-              class="btn btn-outline-purple w-100 btn-lg fw-bold"
-            >
+            <button type="submit" class="btn btn-outline-purple w-100 btn-lg fw-bold">
               <i class="bi bi-cart me-2"></i>Add to cart
             </button>
           </form>
@@ -159,20 +123,14 @@
             </a>
           </div>
           {{/isInCart}} {{#isEnrolled}}
-          <a
-            href="/learn/course/{{course.id}}"
-            class="btn btn-success w-100 btn-lg mb-3 fw-bold"
-          >
+          <a href="/learn/course/{{course.id}}" class="btn btn-success w-100 btn-lg mb-3 fw-bold">
             <i class="bi bi-play-fill me-2"></i>Go to Course
           </a>
           <p class="text-center text-success small mb-4 fw-bold">
             <i class="bi bi-check-circle"></i> You are already enrolled
           </p>
           {{/isEnrolled}} {{#isAdmin}}
-          <div
-            class="alert alert-warning text-center fw-bold mb-4"
-            role="alert"
-          >
+          <div class="alert alert-warning text-center fw-bold mb-4" role="alert">
             <i class="bi bi-shield-lock me-2"></i> Administrators cannot
             purchase courses.
           </div>

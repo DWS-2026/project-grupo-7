@@ -38,8 +38,6 @@ public class Course {
     @Lob
     private Blob image;
 
-    private double rating;
-    private int reviewCount;
     private String creatorName;
 
     @CreationTimestamp
@@ -70,17 +68,13 @@ public class Course {
     }
 
     public String getLevelBadgeClass() {
-
         if ("Foundations".equalsIgnoreCase(level) || "Beginner".equalsIgnoreCase(level)) {
             return "text-bg-success";
         }
-
         if ("Defensive".equalsIgnoreCase(level) || "Intermediate".equalsIgnoreCase(level)) {
             return "text-bg-warning";
         }
-
         return "text-bg-danger";
-
     }
 
     public String getBadgeClass() {
@@ -140,22 +134,6 @@ public class Course {
 
     public void setImage(Blob image) {
         this.image = image;
-    }
-
-    public double getRating() {
-        return rating;
-    }
-
-    public void setRating(double rating) {
-        this.rating = rating;
-    }
-
-    public int getReviewCount() {
-        return reviewCount;
-    }
-
-    public void setReviewCount(int reviewCount) {
-        this.reviewCount = reviewCount;
     }
 
     public String getCreatorName() {
