@@ -37,8 +37,12 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("/profile")
-    public String showProfile(@RequestParam(required = false) Boolean profileSuccess, Model model,
+    public String showProfile(
+            @RequestParam(required = false) Boolean profileSuccess, 
+            @RequestParam(required = false) String error, // Añadido para capturar errores
+            Model model,
             Principal principal) {
+            
         if (principal == null) {
             return "redirect:/login";
         }
@@ -51,8 +55,15 @@ public class UserController {
 
             model.addAttribute("isAdmin", user.getRoles().contains("ADMIN"));
             model.addAttribute("enrollments", user.getEnrollments());
+            
+            // Gestión de alertas de éxito y error
             if (profileSuccess != null && profileSuccess) {
                 model.addAttribute("profileSuccess", true);
+            }
+            if ("last_name_required".equals(error)) {
+                model.addAttribute("lastNameError", true);
+            } else if ("invalid_name".equals(error)) {
+                model.addAttribute("invalidNameError", true);
             }
 
             model.addAttribute("pageTitle", "My Profile");
@@ -130,17 +141,21 @@ public class UserController {
         }
 
         String safeFullName = HtmlUtils.htmlEscape(fullName.trim());
+        String[] names = safeFullName.split(" ", 2);
+
+        // NUEVO: Comprobamos que existan al menos dos palabras (nombre y apellido)
+        if (names.length < 2 || names[1].trim().isEmpty()) {
+            log.warn("User {} tried to save without a last name.", principal.getName());
+            return "redirect:/profile?error=last_name_required";
+        }
 
         Optional<User> userOpt = userService.findByEmail(principal.getName());
         if (userOpt.isPresent()) {
             User user = userOpt.get();
-            String[] names = safeFullName.split(" ", 2);
+            
+            // Asignamos directamente porque ya sabemos que hay al menos 2 palabras
             user.setFirstName(names[0]);
-            if (names.length > 1) {
-                user.setLastName(names[1]);
-            } else {
-                user.setLastName("");
-            }
+            user.setLastName(names[1]);
 
             userService.save(user);
             log.info("User '{}' updated their profile name.", user.getEmail());

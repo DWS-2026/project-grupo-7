@@ -29,6 +29,18 @@
                 {{#profileSuccess}}
                 <div class="alert alert-success small py-2"><i class="bi bi-check-circle me-1"></i> Profile updated</div>
                 {{/profileSuccess}}
+
+                {{#lastNameError}}
+                <div class="alert alert-danger small py-2 fw-bold">
+                    <i class="bi bi-exclamation-triangle-fill me-1"></i> A last name is required!
+                </div>
+                {{/lastNameError}}
+
+                {{#invalidNameError}}
+                <div class="alert alert-danger small py-2 fw-bold">
+                    <i class="bi bi-exclamation-triangle-fill me-1"></i> The name provided is invalid.
+                </div>
+                {{/invalidNameError}}
                 
                 <form action="/profile/edit" method="POST">
                     <input type="hidden" name="_csrf" value="{{token}}"/>
@@ -89,4 +101,4 @@
     </div>
 </main>
 
-{{> partials/footer}}
+{{> partials/header}}
