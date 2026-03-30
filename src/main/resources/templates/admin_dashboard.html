@@ -20,7 +20,8 @@
                         <div class="col-md-7">
                             <label for="title" class="form-label small fw-bold">Course Title</label>
                             <input type="text" id="title" name="title" class="form-control bg-light"
-                                placeholder="e.g. Master in Cybersecurity" value="{{#title}}{{title}}{{/title}}" required />
+                                placeholder="e.g. Master in Cybersecurity" value="{{#title}}{{title}}{{/title}}"
+                                required />
                         </div>
 
                         <div class="col-md-3">
@@ -35,27 +36,28 @@
                         <div class="col-md-2">
                             <label for="price" class="form-label small fw-bold">Price (€)</label>
                             <input type="number" id="price" name="price" step="0.01" min="0" max="1000"
-                                class="form-control bg-light {{#errorPrice}}is-invalid{{/errorPrice}}" 
+                                class="form-control bg-light {{#errorPrice}}is-invalid{{/errorPrice}}"
                                 placeholder="49.99" value="{{#price}}{{price}}{{/price}}" required />
                             {{#errorPrice}}
-                                <div class="invalid-feedback">{{errorPrice}}</div>
+                            <div class="invalid-feedback">{{errorPrice}}</div>
                             {{/errorPrice}}
                         </div>
 
                         <div class="col-12">
                             <label for="description" class="form-label small fw-bold">Description</label>
                             <textarea id="description" name="description" class="form-control bg-light" rows="2"
-                                placeholder="Brief course summary..." required>{{#description}}{{description}}{{/description}}</textarea>
+                                placeholder="Brief course summary..."
+                                required>{{#description}}{{description}}{{/description}}</textarea>
                         </div>
 
                         <div class="col-12">
                             <label for="imageFile" class="form-label small fw-bold text-purple">Course Image <i
                                     class="bi bi-image"></i></label>
                             <input type="file" id="imageFile" name="imageFile"
-                                class="form-control border-purple bg-light {{#errorImage}}is-invalid{{/errorImage}}" 
+                                class="form-control border-purple bg-light {{#errorImage}}is-invalid{{/errorImage}}"
                                 accept="image/*" required />
                             {{#errorImage}}
-                                <div class="invalid-feedback">{{errorImage}}</div>
+                            <div class="invalid-feedback">{{errorImage}}</div>
                             {{/errorImage}}
                         </div>
                     </div>
@@ -69,8 +71,11 @@
             </div>
 
             <div class="card shadow-sm border-0">
-                <div class="card-header bg-white py-3 border-0">
+                <div class="card-header bg-white py-3 border-0 d-flex justify-content-between align-items-center">
                     <h5 class="mb-0 fw-bold">Course Inventory</h5>
+                    <a href="/admin/users" class="btn btn-outline-dark">
+                        <i class="bi bi-people-fill me-2"></i> Manage All Users
+                    </a>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-hover align-middle mb-0">
