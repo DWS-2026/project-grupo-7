@@ -64,11 +64,9 @@ public class DatabaseInitializer {
 
                 if (userService.findAll().isEmpty()) {
 
-                        // Sustituimos "adminpass1234" por la variable adminPassword
                         admin = new User("Admin", "Master", "admin@rayokross.com", adminPassword, "USER", "ADMIN");
                         userService.save(admin);
 
-                        // Sustituimos "student1234" por la variable studentPassword
                         student = new User("Student", "Demo", "student@rayokross.com", studentPassword, "USER");
                         userService.save(student);
 
