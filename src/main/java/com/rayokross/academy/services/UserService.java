@@ -71,4 +71,9 @@ public class UserService {
     public List<User> findAll() {
         return userRepository.findAll();
     }
+
+    public void deleteById(Long id) {
+        userRepository.deleteById(id);
+        log.info("User with ID {} deleted by admin.", id);
+    }
 }
