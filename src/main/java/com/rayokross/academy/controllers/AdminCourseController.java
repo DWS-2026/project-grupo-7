@@ -112,7 +112,14 @@ public class AdminCourseController {
         Optional<Course> course = courseService.findById(id);
 
         if (course.isPresent()) {
-            model.addAttribute("course", course.get());
+            Course courseObj = course.get();
+            model.addAttribute("course", courseObj);
+
+            if (courseObj.getLevel() != null) {
+                model.addAttribute("isBeginner", courseObj.getLevel().equals("Beginner"));
+                model.addAttribute("isIntermediate", courseObj.getLevel().equals("Intermediate"));
+                model.addAttribute("isAdvanced", courseObj.getLevel().equals("Advanced"));
+            }
 
             model.addAttribute("lesson", new Lesson());
 
