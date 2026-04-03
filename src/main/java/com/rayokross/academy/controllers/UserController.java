@@ -38,7 +38,7 @@ public class UserController {
     @GetMapping("/profile")
     public String showProfile(
             @RequestParam(required = false) Boolean profileSuccess,
-            @RequestParam(required = false) String error, // Añadido para capturar errores
+            @RequestParam(required = false) String error,
             Model model,
             Principal principal) {
 
@@ -55,7 +55,6 @@ public class UserController {
             model.addAttribute("isAdmin", user.getRoles().contains("ADMIN"));
             model.addAttribute("enrollments", user.getEnrollments());
 
-            // Gestión de alertas de éxito y error
             if (profileSuccess != null && profileSuccess) {
                 model.addAttribute("profileSuccess", true);
             }
