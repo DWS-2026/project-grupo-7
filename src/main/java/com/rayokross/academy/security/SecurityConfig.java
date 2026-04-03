@@ -24,7 +24,8 @@ public class SecurityConfig {
                 .requestMatchers("/", "/courses", "/courses/**", "/course/**", "/login", "/register", "/error")
                 .permitAll()
                 .requestMatchers("/css/**", "/js/**", "/images/**", "/assets/**").permitAll()
-                .requestMatchers("/profile", "/cart", "/checkout", "/lessons/**").hasAnyRole("USER", "ADMIN")
+                .requestMatchers("/profile").hasAnyRole("USER", "ADMIN")
+                .requestMatchers("/cart", "checkout", "lessons/**").hasRole("USER")
                 .requestMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated());
 

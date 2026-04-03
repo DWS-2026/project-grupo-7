@@ -97,7 +97,7 @@ public class CoursePlayerController {
 
         model.addAttribute("user", currentUser);
         model.addAttribute("logged", true);
-        model.addAttribute("admin", "ADMIN".equals(currentUser.getRoles()));
+        model.addAttribute("admin", currentUser.getRoles().contains("ADMIN"));
 
         if (currentLesson != null) {
             model.addAttribute("currentLesson", currentLesson);

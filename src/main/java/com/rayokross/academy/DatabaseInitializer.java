@@ -1,6 +1,7 @@
 package com.rayokross.academy;
 
 import java.io.InputStream;
+
 import javax.sql.rowset.serial.SerialBlob;
 
 import org.slf4j.Logger;
@@ -64,7 +65,7 @@ public class DatabaseInitializer {
 
                 if (userService.findAll().isEmpty()) {
 
-                        admin = new User("Admin", "Master", "admin@rayokross.com", adminPassword, "USER", "ADMIN");
+                        admin = new User("Admin", "Master", "admin@rayokross.com", adminPassword, "ADMIN");
                         userService.save(admin);
 
                         student = new User("Student", "Demo", "student@rayokross.com", studentPassword, "USER");
