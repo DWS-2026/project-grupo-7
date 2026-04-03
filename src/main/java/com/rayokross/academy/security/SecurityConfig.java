@@ -21,7 +21,6 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http.authorizeHttpRequests(authorize -> authorize
-                // Añadido /course/** para que carguen las imágenes
                 .requestMatchers("/", "/courses", "/courses/**", "/course/**", "/login", "/register", "/error")
                 .permitAll()
                 .requestMatchers("/css/**", "/js/**", "/images/**", "/assets/**").permitAll()
