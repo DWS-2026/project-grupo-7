@@ -25,7 +25,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.rayokross.academy.models.Course;
 import com.rayokross.academy.models.User;
+import com.rayokross.academy.services.CourseService;
+import com.rayokross.academy.services.EnrollmentService;
 import com.rayokross.academy.services.UserService;
 
 @Controller
@@ -37,6 +40,12 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private CourseService courseService;
+
+    @Autowired
+    private EnrollmentService enrollmentService;
 
     @GetMapping("/profile")
     public String showProfile(
@@ -189,17 +198,17 @@ public class UserController {
         }
 
         Optional<User> userOpt = userService.findByEmail(principal.getName());
+        Optional<Course> courseOpt = courseService.findById(courseId);
 
-        if (userOpt.isPresent()) {
+        if (userOpt.isPresent() && courseOpt.isPresent()) {
             User user = userOpt.get();
+            Course course = courseOpt.get();
 
-            boolean isRemoved = user.getEnrollments()
-                    .removeIf(enrollment -> enrollment.getCourse().getId().equals(courseId));
+            enrollmentService.removeEnrollment(user, course);
 
-            if (isRemoved) {
-                userService.save(user);
-                log.info("User '{}' cancelled enrollment for course ID {}.", user.getEmail(), courseId);
-            }
+            log.info("User '{}' cancelled enrollment for course ID {}.", user.getEmail(), courseId);
+        } else {
+            log.warn("Enrollment cancellation failed for course ID {}.", courseId);
         }
 
         return "redirect:/profile";
