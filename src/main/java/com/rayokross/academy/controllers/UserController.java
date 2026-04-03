@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
-import org.springframework.web.util.HtmlUtils;
 
 import com.rayokross.academy.models.User;
 import com.rayokross.academy.services.UserService;
@@ -38,11 +37,11 @@ public class UserController {
 
     @GetMapping("/profile")
     public String showProfile(
-            @RequestParam(required = false) Boolean profileSuccess, 
+            @RequestParam(required = false) Boolean profileSuccess,
             @RequestParam(required = false) String error, // Añadido para capturar errores
             Model model,
             Principal principal) {
-            
+
         if (principal == null) {
             return "redirect:/login";
         }
@@ -55,7 +54,7 @@ public class UserController {
 
             model.addAttribute("isAdmin", user.getRoles().contains("ADMIN"));
             model.addAttribute("enrollments", user.getEnrollments());
-            
+
             // Gestión de alertas de éxito y error
             if (profileSuccess != null && profileSuccess) {
                 model.addAttribute("profileSuccess", true);
@@ -135,15 +134,26 @@ public class UserController {
             return "redirect:/login";
         }
 
-        if (fullName == null || fullName.trim().isEmpty() || fullName.length() > 100) {
+        String cleanFullName;
+
+        if (fullName != null) {
+            cleanFullName = fullName.trim();
+        } else {
+            cleanFullName = "";
+        }
+
+        if (cleanFullName.isEmpty() || cleanFullName.length() > 100) {
             log.warn("Invalid name submitted by user: {}", principal.getName());
             return "redirect:/profile?error=invalid_name";
         }
 
-        String safeFullName = HtmlUtils.htmlEscape(fullName.trim());
-        String[] names = safeFullName.split(" ", 2);
+        if (cleanFullName.contains("<") || cleanFullName.contains(">")) {
+            log.warn("HTML characters detected in name by user: {}", principal.getName());
+            return "redirect:/profile?error=invalid_name";
+        }
 
-        // NUEVO: Comprobamos que existan al menos dos palabras (nombre y apellido)
+        String[] names = cleanFullName.split(" ", 2);
+
         if (names.length < 2 || names[1].trim().isEmpty()) {
             log.warn("User {} tried to save without a last name.", principal.getName());
             return "redirect:/profile?error=last_name_required";
@@ -152,14 +162,14 @@ public class UserController {
         Optional<User> userOpt = userService.findByEmail(principal.getName());
         if (userOpt.isPresent()) {
             User user = userOpt.get();
-            
-            // Asignamos directamente porque ya sabemos que hay al menos 2 palabras
+
             user.setFirstName(names[0]);
-            user.setLastName(names[1]);
+            user.setLastName(names[1].trim());
 
             userService.save(user);
             log.info("User '{}' updated their profile name.", user.getEmail());
         }
+
         return "redirect:/profile?profileSuccess=true";
     }
 
