@@ -2,6 +2,7 @@ package com.rayokross.academy.controllers;
 
 import java.security.Principal;
 import java.sql.Blob;
+import java.util.List;
 import java.util.Optional;
 
 import javax.sql.rowset.serial.SerialBlob;
@@ -31,6 +32,8 @@ import com.rayokross.academy.services.UserService;
 public class UserController {
 
     private static final Logger log = LoggerFactory.getLogger(UserController.class);
+    private static final List<String> ALLOWED_IMAGE_TYPES = List.of("image/jpeg", "image/png", "image/gif",
+            "image/avif", "image/webp");
 
     @Autowired
     private UserService userService;
@@ -80,6 +83,12 @@ public class UserController {
         Optional<User> userOpt = userService.findByEmail(principal.getName());
         if (userOpt.isPresent() && !photo.isEmpty()) {
             User user = userOpt.get();
+
+            String contentType = photo.getContentType();
+            if (contentType == null || !ALLOWED_IMAGE_TYPES.contains(contentType)) {
+                log.warn("User '{}' attempted to upload invalid file type: {}", principal.getName(), contentType);
+                return "redirect:/profile?error=invalid_format";
+            }
 
             try {
                 byte[] bytes = photo.getBytes();
