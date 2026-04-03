@@ -76,6 +76,13 @@ public class AdminCourseController {
             return "redirect:/admin";
         }
 
+        if (course.getPrice() < 0) {
+
+            log.warn("Admin failed to create course: Price of the course can't be negative.");
+            return "redirect:/admin";
+
+        }
+
         courseService.save(course, imageFile);
         log.info("Admin successfully created a new course: '{}'", course.getTitle());
 
@@ -131,7 +138,7 @@ public class AdminCourseController {
 
     @PostMapping("/admin/courses/{id}/edit")
     public String processEditCourse(@PathVariable Long id, Course updatedCourse,
-            @RequestParam("imageFile") MultipartFile imageFile) {
+            @RequestParam("imageFile") MultipartFile imageFile, Model model) {
 
         Course existingCourse = courseService.findById(id).orElseThrow();
 
@@ -147,6 +154,16 @@ public class AdminCourseController {
                 log.debug("Image updated for course ID: {}", id);
             }
         } catch (Exception e) {
+        }
+
+        if (existingCourse.getPrice() < 0) {
+
+            model.addAttribute("course", existingCourse);
+            model.addAttribute("lesson", new Lesson());
+            model.addAttribute("negativePrice", true);
+            log.warn("Admin failed to create course: Price of the course can't be negative.");
+            return "edit_course";
+
         }
 
         courseService.save(existingCourse);
