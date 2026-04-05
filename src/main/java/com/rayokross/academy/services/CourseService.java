@@ -6,13 +6,13 @@ import java.util.Optional;
 
 import javax.sql.rowset.serial.SerialBlob;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.rayokross.academy.models.Course;
 import com.rayokross.academy.repositories.CourseRepository;

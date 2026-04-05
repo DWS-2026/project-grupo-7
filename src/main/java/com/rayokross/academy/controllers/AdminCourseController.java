@@ -123,11 +123,10 @@ public class AdminCourseController {
             model.addAttribute("course", courseObj);
 
             if (courseObj.getLevel() != null) {
-                model.addAttribute("isBeginner", courseObj.getLevel().equals("Beginner"));
-                model.addAttribute("isIntermediate", courseObj.getLevel().equals("Intermediate"));
-                model.addAttribute("isAdvanced", courseObj.getLevel().equals("Advanced"));
+                model.addAttribute("isFoundations", courseObj.getLevel().equalsIgnoreCase("Foundations"));
+                model.addAttribute("isDefensive", courseObj.getLevel().equalsIgnoreCase("Defensive"));
+                model.addAttribute("isOffensive", courseObj.getLevel().equalsIgnoreCase("Offensive"));
             }
-
             model.addAttribute("lesson", new Lesson());
 
             return "edit_course";
