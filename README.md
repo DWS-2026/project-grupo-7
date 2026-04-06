@@ -173,7 +173,7 @@ Creación y diseño de la página que contiene todos los cursos disponibles
 ## 🛠 **Práctica 2: Web con HTML generado en servidor**
 
 ### **Vídeo de Demostración**
-📹 **[Enlace al vídeo en YouTube](https://www.youtube.com/watch?v=x91MPoITQ3I)**
+📹 **[Enlace al vídeo en YouTube](https://youtu.be/MU4uhTDj5s0)**
 > Vídeo mostrando las principales funcionalidades de la aplicación web.
 
 ### **Navegación y Capturas de Pantalla**
@@ -185,15 +185,20 @@ Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicac
 
 > Flujo de Navegación
 
-Acceso Público: El usuario llega a la Home, explora el Catálogo o consulta el Detalle de los 3 cursos destacados.
+PUBLICO:
+Home → Catálogo → Detalle Curso
+Home → Login 
+Home → Registro
+Catálogo → Login
 
-Autenticación: Mediante Login/Registro, el sistema identifica al usuario.
+AUTENTICADO (Alumno):
+Login → Home → Perfil 
+Home → Mis Cursos → Curso
 
-Zona Privada: El flujo redirige al Perfil (gestión del alumno), desde donde se accede al Aula para ver lecciones.
-
-Gestión (Admin): Desde el perfil, los usuarios autorizados saltan al Dashboard de Admin para gestionar cursos y usuarios.
-
-Esquema: Home → Login → Perfil → Admin.
+ADMIN:
+Home → Dashboard Admin
+Dashboard → Gestión Cursos → Crear/Editar/Matrículas
+Dashboard → Gestión Usuarios → Detalles/Editar
 #### **Capturas de Pantalla Actualizadas**
 
 #### **1. Página Principal / Home (Visitante)**
@@ -268,12 +273,13 @@ Esquema: Home → Login → Perfil → Admin.
 
 1. **Clonar el repositorio**
    ```bash
-   git clone https://github.com/[usuario]/[nombre-repositorio].git
-   cd [nombre-repositorio]
+   git clone https://github.com/DWS-2026/project-grupo-7.git
+   cd project-grupo-7
    ```
 
-2. **AQUÍ INDICAR LO SIGUIENTES PASOS**
-
+2. **Crear Schema en MySQL**
+    Crear Schema con nombre "posts"
+3.  **Lanzar app desde VS Code**
 #### **Credenciales de prueba**
 - **Usuario Admin**: usuario: `admin@rayokross.com`, contraseña: `adminpass1234`
 - **Usuario Registrado**: usuario: `student@rayokross.com`, contraseña: `student1234`
@@ -284,35 +290,35 @@ Diagrama mostrando las entidades, sus campos y relaciones:
 
 ![Diagrama Entidad-Relación](images/DiagramaER.png)
 
-> [Descripción opcional: Ej: "El diagrama muestra las 4 entidades principales: Usuario, Producto, Pedido y Categoría, con sus respectivos atributos y relaciones 1:N y N:M."]
-
 ### **Diagrama de Clases y Templates**
 
 Diagrama de clases de la aplicación con diferenciación por colores o secciones:
 
 ![Diagrama de Clases](images/DiagramaClases.jpeg)
 
-> [Descripción opcional del diagrama y relaciones principales]
-
 ### **Participación de Miembros en la Práctica 2**
 
-#### **Alumno 1 - [Nombre Completo]**
+#### **Alumno 1 - Omar Ba Diallo**
 
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
+Diseño e implementación de las entidades como Enrollment.java y Lesson.java, configurando sus atributos.
+
+Implementación de CartService con alcance de sesión para gestionar la lógica de selección de cursos, cálculo dinámico de precios y vaciado tras la compra.
+
+Creación de un controlador de excepciones (CustomErrorController) para capturar y manejar errores HTTP (400, 403, 404, 500) devolviendo las correspondientes vistas.
+
+Servicios y Controladores: Creación de LessonService, EnrollmentService y la lógica de sus respectivos controladores.
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
+|1| [Implementación de la Entidad Enrollment (Matriculación)](https://github.com/DWS-2026/project-grupo-7/commit/c86e075bd523827162ca7a06064d8dae0bd51505)  | [Enrollment.java](https://github.com/DWS-2026/project-grupo-7/blob/main/src/main/java/com/rayokross/academy/models/Enrollment.java)   |
+|2| [Creación de plantillas para manejo de Errores HTTP personalizados](https://github.com/DWS-2026/project-grupo-7/commit/25b17b6492d24e5fcf25254b3d79bb885f01ef9c)  | [/error](https://github.com/DWS-2026/project-grupo-7/tree/main/src/main/resources/templates/error)   |
+|3| [Desarrollo de la lógica del carrito de la compra](https://github.com/DWS-2026/project-grupo-7/commit/cac74c740e2b4782d1bda0ec2769908760faeb16)  | [CartController.java](https://github.com/DWS-2026/project-grupo-7/blob/main/src/main/java/com/rayokross/academy/controllers/CartController.java)   |
+|4| [Creación de la Entidad Lesson](https://github.com/DWS-2026/project-grupo-7/commit/0e7e1a240c8cbbc2d423b50605fe568f934bb1bc)  | [Lesson.java](https://github.com/DWS-2026/project-grupo-7/blob/main/src/main/java/com/rayokross/academy/models/Lesson.java)   |
+|5| [Implementación de la capa de Servicio para Lecciones](https://github.com/DWS-2026/project-grupo-7/commit/340d3d909bb5f24c5a74bc111dc610a8ec7c5774)  | [LessonService.java](https://github.com/DWS-2026/project-grupo-7/blob/main/src/main/java/com/rayokross/academy/services/LessonService.java)   |
 
 ---
 
-#### **Alumno 2 - [Daniel Fernandez Tome]**
-
-Descripción de las tareas y responsabilidades principales del alumno en el proyecto:
+#### **Alumno 2 - Daniel Fernandez Tome**
 
 Creación de controladores: UserController, CourseController, AdminUserController, AuthController, MainController.
 
@@ -334,7 +340,7 @@ Gestión de inscripciones: Funcionalidades de añadir y eliminar usuarios de los
 
 ---
 
-#### **Alumno 3 - [Angel Menendez Leyenda]**
+#### **Alumno 3 - Angel Menendez Leyenda**
 
 Entidades y Lógica de Negocio: Diseño de entidades (Course, User, Enrollment, Cart), controladores y servicios para la gestión de catálogo, matrículas y flujo del carrito.
 
@@ -356,9 +362,7 @@ Configuración del Sistema: Administración de application.properties, inicializ
 
 ---
 
-#### **Alumno 4 - [Gonzalo Roig López]**
-
-Descripción de las tareas y responsabilidades principales del alumno en el proyecto:
+#### **Alumno 4 - Gonzalo Roig López**
 
 Creación de imágenes para los cursos en course_description, el index y el catálogo de cursos, además de una paginación ene el catálogo de cursos. Validación de las imágenes añadidas.
 
