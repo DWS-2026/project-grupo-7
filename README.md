@@ -162,7 +162,7 @@ Creación y diseño de la página que contiene todos los cursos disponibles
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
-|1| [Catálogo de cursos creado](https://github.com/DWS-2026/dws-2026-project-base/commit/00dc2b86925732d96ea741494bc25bb1e774efe8))  | [courses.html] [css/styles.css])   |
+|1| ([Catálogo de cursos creado](https://github.com/DWS-2026/dws-2026-project-base/commit/00dc2b86925732d96ea741494bc25bb1e774efe8))  | [courses.html] [css/styles.css]   |
 |2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
 |3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
 |4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
@@ -290,7 +290,7 @@ Diagrama mostrando las entidades, sus campos y relaciones:
 
 Diagrama de clases de la aplicación con diferenciación por colores o secciones:
 
-![Diagrama de Clases](images/classes-diagram.png)
+![Diagrama de Clases](images/DiagramaClases.jpeg)
 
 > [Descripción opcional del diagrama y relaciones principales]
 
@@ -368,15 +368,13 @@ Encargado de añadir y configurar Spring Security, crando SecurityConfig.java y 
 
 Validación de campos en login, register y en el panel de administrador.
 
-
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
-|1| [Add pagination in courses and add images]([URL_commit_1](https://github.com/DWS-2026/dws-2026-project-base/commit/32972f763f64af82b2daa9ac33010f4a68e2d690))  | [CourseController] (src/main/java/com/rayokross/academy/controllers/CourseController.java
-|2| [fix validation and deny negative prices and files in image of course in admin dashboard]([URL_commit_2](https://github.com/DWS-2026/dws-2026-project-base/commit/79b3359e2af7dc7505131bc571f7419f6770d57d))  | [AdminCourseController]  | (src/main/java/com/rayokross/academy/controllers/AdminCourseController.java
-|3| [CartController and CartService]([URL_commit_3](https://github.com/DWS-2026/dws-2026-project-base/commit/4c90b54fa73f67b8cdbedc22253bd5fe07493a02))  | [CartController, CartService]| (src/main/java/com/rayokross/academy/controllers/CartController.java
-|4| [Add manual validation for registration and login error handling](https://github.com/DWS-2026/dws-2026-project-base/commit/5ac274dd7b87aa0e9ddf092d6a20e46a6bf69ad4))  | [AuthController]   | (src/main/java/com/rayokross/academy/controllers/AuthController.java)
-|5| [SecurityConfig added]((https://github.com/DWS-2026/dws-2026-project-base/commit/e8fddb7824cc1b96a298234b39a6995e0987d613))  | [SecurityConfig]   |
-(src/main/java/com/rayokross/academy/security/SecurityConfig.java)
+|1| [Add pagination in courses and add images](https://github.com/DWS-2026/project-grupo-7/commit/d8c39a2a6f5ed00a5643f6325d71444f74af0c53) | [CourseController.java](CourseController.java) |
+|2| [fix validation and deny negative prices and files in image of course in admin dashboard](https://github.com/DWS-2026/project-grupo-7/commit/79b3359e2af7dc7505131bc571f7419f6770d57d) | [AdminCourseController.java](AdminCourseController.java) |
+|3| [CartController and CartService](https://github.com/DWS-2026/project-grupo-7/commit/4c90b54fa73f67b8cdbedc22253bd5fe07493a02) | [CartController.java](CartController.java) |  [CartService.java](CartService.java) |
+|4| [Add manual validation for registration and login error handling](https://github.com/DWS-2026/project-grupo-7/commit/5ac274dd7b87aa0e9ddf092d6a20e46a6bf69ad4) | [AuthController.java](AuthController.java) |
+|5| [SecurityConfig added](https://github.com/DWS-2026/project-grupo-7/commit/e8fddb7824cc1b96a298234b39a6995e0987d613) | [SecurityConfig.java](SecurityConfig.java) |
 
 ---
 
