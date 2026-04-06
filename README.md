@@ -264,17 +264,25 @@ Gestión de inscripciones: Funcionalidades de añadir y eliminar usuarios de los
 
 ---
 
-#### **Alumno 3 - [Nombre Completo]**
+#### **Alumno 3 - [Angel Menendez Leyenda]**
 
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
+Entidades y Lógica de Negocio: Diseño de entidades (Course, User, Enrollment, Cart), controladores y servicios para la gestión de catálogo, matrículas y flujo del carrito.
+
+Seguridad y Control de Acceso: Configuración de SecurityConfig con protección CSRF y gestión de permisos basada en roles (Admin/User).
+
+Frontend Dinámico: Implementación de vistas con Mustache y partials reutilizables para el panel de administración, perfiles y reproductor de cursos.
+
+Gestión de Errores y Validaciones: Creación de un controlador global de excepciones (CustomErrorController) y lógica de validación para precios y subida de archivos.
+
+Configuración del Sistema: Administración de application.properties, inicialización automatizada de la base de datos y gestión del keystore.
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
+|1| [CoursePlayerController and course-player.html](https://github.com/DWS-2026/project-grupo-7/commit/9c7a7692a8e9a1acb4e812c5c26c84740e5cab80) | [CoursePlayerController.java](CoursePlayerController.java) |
+|2| [CartController added](https://github.com/DWS-2026/project-grupo-7/commit/7a710e2cfd4e927c2d9da6f99f28b2b011b8812c) | [CartController.java](CartController.java) |
+|3| [inclusión AdminCourseController, modificacion en el CourseService](https://github.com/DWS-2026/project-grupo-7/commit/8769a92065c943c5ac7c598b4532c1485b2a1ba2) | [AdminCourseController.java](AdminCourseController.java) |
+|4| [User Service Class and User Repository Class](https://github.com/DWS-2026/project-grupo-7/commit/b385353441c1042067b4eed9ec9989d22f1b4ae2) | [UserService.java](UserService.java) |
+|5| [403.html and CustomErrorController](https://github.com/DWS-2026/project-grupo-7/commit/d827d4efa953153b101b5c9e054ef74308a056d5) | [CustomErrorController.java](CustomErrorController.java) |
 
 ---
 
