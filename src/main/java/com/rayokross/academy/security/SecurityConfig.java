@@ -25,7 +25,7 @@ public class SecurityConfig {
                 .permitAll()
                 .requestMatchers("/css/**", "/js/**", "/images/**", "/assets/**").permitAll()
                 .requestMatchers("/profile").hasAnyRole("USER", "ADMIN")
-                .requestMatchers("/cart", "checkout", "lessons/**").hasRole("USER")
+                .requestMatchers("/cart/**", "checkout", "lessons/**").hasRole("USER")
                 .requestMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated());
 
