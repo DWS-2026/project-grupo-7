@@ -184,7 +184,65 @@ Solo si ha cambiado.
 
 #### **Capturas de Pantalla Actualizadas**
 
-Solo si han cambiado.
+#### **1. Página Principal / Home (Visitante)**
+![Página Principal](images/index.png)
+> Página de inicio genérica para usuarios no autenticados. Muestra los cursos destacados y ofrece acceso rápido a las páginas de registro e inicio de sesión desde la barra de navegación.
+
+#### **2. Página Principal / Home (Usuario Logueado)**
+![Página Principal Usuario](images/MainUser.png)
+> Vista de la misma página de inicio, pero adaptada para un usuario estándar que ha iniciado sesión. La barra de navegación se actualiza para mostrar el acceso a su perfil y al carrito de compras.
+
+#### **3. Página Principal / Home (Administrador)**
+![Página Principal Admin](images/MainAdmin.png)
+> Vista de la página de inicio cuando el usuario autenticado tiene el rol de Administrador. Incluye las opciones de navegación necesarias para acceder directamente al panel de gestión (dashboard).
+
+#### **4. Página Login / Iniciar sesión**
+![Página Login](images/Login.png)
+> Página de inicio de sesión que permite a usuarios previamente registrados autenticarse en la plataforma.
+
+#### **5. Página Register / Registrarse**
+![Página Register](images/Register.png)
+> Página de registro que permite a nuevos usuarios crearse una cuenta proporcionando sus datos personales.
+
+#### **6. Página Detalle del Curso**
+![Página Detalle Curso](images/CourseDetails.png)
+> Página que muestra las características específicas de un curso (descripción, temario, precio) y ofrece la opción de añadirlo al carrito de compras.
+
+#### **7. Página Contenido del Curso (Reproductor)**
+![Página Contenido Curso](images/CourseContent.png)
+> Interfaz del reproductor donde el alumno, una vez matriculado, puede visualizar las lecciones en vídeo y el contenido del curso.
+
+#### **8. Página Carrito de Compras**
+![Página Carrito](images/Cart.png)
+> Vista del carrito donde el usuario puede revisar los cursos que ha seleccionado, ver el precio total y proceder al pago/checkout.
+
+#### **9. Página Profile / Perfil de Usuario**
+![Perfil de Usuario](images/UserProfile.png)
+> Panel personal del usuario estándar donde puede editar su información, cambiar su avatar y visualizar o cancelar los cursos en los que está actualmente matriculado.
+
+#### **10. Página Profile / Perfil de Administrador**
+![Perfil de Administrador](images/AdminProfile.png)
+> Perfil adaptado para el administrador, mostrando sus datos personales junto con los accesos directos necesarios para gestionar la academia.
+
+#### **11. Panel de Control / Dashboard (Admin)**
+![Dashboard Admin](images/AdminDashboard.png)
+> Panel principal de administración que centraliza el acceso a la gestión integral de la plataforma (usuarios, cursos y matrículas).
+
+#### **12. Gestión de Usuarios (Admin)**
+![Gestión de Usuarios](images/UserManagement.png)
+> Vista de administración que despliega una lista completa de todos los alumnos registrados en la base de datos de la plataforma.
+
+#### **13. Edición de Usuario (Admin)**
+![Edición de Usuario](images/User%20edited%20by%20admin.png)
+> Formulario específico del panel de administración que permite al administrador modificar los datos de un alumno en concreto.
+
+#### **14. Gestión de Matrículas (Admin)**
+![Gestión de Matrículas](images/EnrollmentManagement.png)
+> Panel de administración diseñado para revisar, añadir o eliminar las matriculaciones de los alumnos en los distintos cursos disponibles.
+
+#### **15. Edición de Curso (Admin)**
+![Edición de Curso](images/EditCourse.png)
+> Herramienta del panel de control que permite al administrador modificar la información, precio y temario de un curso existente en el catálogo.
 
 ### **Instrucciones de Ejecución**
 
@@ -257,8 +315,8 @@ Gestión de inscripciones: Funcionalidades de añadir y eliminar usuarios de los
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
 |1| [Rating deleted](https://github.com/DWS-2026/dws-2026-project-base/commit/a60e2d8ca595241d938b560bad972fd79b7c87ce)  | [DataBaseInitializer](‎src/main/java/com/rayokross/academy/DatabaseInitializer.java‎)   |
-|2| [AdminUserController added]([URL_commit_2](https://github.com/DWS-2026/dws-2026-project-base/commit/7bcc81ce54cd72dde51bea096bd5ad27413d9325))  | [AdminUserController](src/main/java/com/rayokross/academy/controllers/AdminUserController.java)   |
-|3| [AuthController created]([[URL_commit_3](https://github.com/DWS-2026/dws-2026-project-base/commit/ef4db4151a7505beddc336b7bcb49046e49b4bbf)  | [AuthController](src/main/java/com/rayokross/academy/controllers/AuthController.java)   |
+|2| [AdminUserController added](https://github.com/DWS-2026/dws-2026-project-base/commit/7bcc81ce54cd72dde51bea096bd5ad27413d9325))  | [AdminUserController](src/main/java/com/rayokross/academy/controllers/AdminUserController.java)   |
+|3| [AuthController created](https://github.com/DWS-2026/dws-2026-project-base/commit/ef4db4151a7505beddc336b7bcb49046e49b4bbf)  | [AuthController](src/main/java/com/rayokross/academy/controllers/AuthController.java)   |
 |4| [relations added and getters and setters modified in course.java](https://github.com/DWS-2026/dws-2026-project-base/commit/5f175d5e3a3732aba45d0931e6ffdfd71294decb)  | [Course.java](‎src/main/java/com/rayokross/academy/models/Course.java)   |
 |5| [UserController created](https://github.com/DWS-2026/dws-2026-project-base/commit/5dba9c02f20c24875c71f127cc671307930fd6b4)  | [UserController](src/main/java/com/rayokross/academy/controllers/UserController.java)   |
 
