@@ -240,17 +240,27 @@ Diagrama de clases de la aplicación con diferenciación por colores o secciones
 
 ---
 
-#### **Alumno 2 - [Nombre Completo]**
+#### **Alumno 2 - [Daniel Fernandez Tome]**
 
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
+Descripción de las tareas y responsabilidades principales del alumno en el proyecto:
+
+Creación de controladores: UserController, CourseController, AdminUserController, AuthController, MainController.
+
+Gestión de base de datos y modelos: Configuración de relaciones en entidades como Course.java, gestión de validaciones en User.java, y migración de la base de datos a MySQL.
+
+Servicios: Implementación de métodos de búsqueda y borrado en UserService y formateo de fechas en Enrollment.java.
+
+Seguridad: Creación del AuthController, gestión de contraseñas en app.properties, restricciones entre admins y users, modificación de vista del perfil de usuario desde el admin.
+
+Gestión de inscripciones: Funcionalidades de añadir y eliminar usuarios de los cursos.
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
+|1| [Rating deleted](https://github.com/DWS-2026/dws-2026-project-base/commit/a60e2d8ca595241d938b560bad972fd79b7c87ce)  | [DataBaseInitializer](‎src/main/java/com/rayokross/academy/DatabaseInitializer.java‎)   |
+|2| [AdminUserController added]([URL_commit_2](https://github.com/DWS-2026/dws-2026-project-base/commit/7bcc81ce54cd72dde51bea096bd5ad27413d9325))  | [AdminUserController](src/main/java/com/rayokross/academy/controllers/AdminUserController.java)   |
+|3| [AuthController created]([[URL_commit_3](https://github.com/DWS-2026/dws-2026-project-base/commit/ef4db4151a7505beddc336b7bcb49046e49b4bbf)  | [AuthController](src/main/java/com/rayokross/academy/controllers/AuthController.java)   |
+|4| [relations added and getters and setters modified in course.java](https://github.com/DWS-2026/dws-2026-project-base/commit/5f175d5e3a3732aba45d0931e6ffdfd71294decb)  | [Course.java](‎src/main/java/com/rayokross/academy/models/Course.java)   |
+|5| [UserController created](https://github.com/DWS-2026/dws-2026-project-base/commit/5dba9c02f20c24875c71f127cc671307930fd6b4)  | [UserController](src/main/java/com/rayokross/academy/controllers/UserController.java)   |
 
 ---
 
