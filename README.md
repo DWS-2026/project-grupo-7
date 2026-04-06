@@ -296,17 +296,23 @@ Diagrama de clases de la aplicación con diferenciación por colores o secciones
 
 ### **Participación de Miembros en la Práctica 2**
 
-#### **Alumno 1 - [Nombre Completo]**
+#### **Alumno 1 - Omar Ba Diallo**
 
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
+Diseño e implementación de las entidades como Enrollment.java y Lesson.java, configurando sus atributos.
+
+Implementación de CartService con alcance de sesión para gestionar la lógica de selección de cursos, cálculo dinámico de precios y vaciado tras la compra.
+
+Creación de un controlador de excepciones (CustomErrorController) para capturar y manejar errores HTTP (400, 403, 404, 500) devolviendo las correspondientes vistas.
+
+Servicios y Controladores: Creación de LessonService, EnrollmentService y la lógica de sus respectivos controladores.
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
+|1| [Implementación de la Entidad Enrollment (Matriculación)](https://github.com/DWS-2026/project-grupo-7/commit/c86e075bd523827162ca7a06064d8dae0bd51505)  | [Enrollment.java](https://github.com/DWS-2026/project-grupo-7/blob/main/src/main/java/com/rayokross/academy/models/Enrollment.java)   |
+|2| [Creación de plantillas para manejo de Errores HTTP personalizados](https://github.com/DWS-2026/project-grupo-7/commit/25b17b6492d24e5fcf25254b3d79bb885f01ef9c)  | [/error](https://github.com/DWS-2026/project-grupo-7/tree/main/src/main/resources/templates/error)   |
+|3| [Desarrollo de la lógica del carrito de la compra](https://github.com/DWS-2026/project-grupo-7/commit/cac74c740e2b4782d1bda0ec2769908760faeb16)  | [CartController.java](https://github.com/DWS-2026/project-grupo-7/blob/main/src/main/java/com/rayokross/academy/controllers/CartController.java)   |
+|4| [Creación de la Entidad Lesson](https://github.com/DWS-2026/project-grupo-7/commit/0e7e1a240c8cbbc2d423b50605fe568f934bb1bc)  | [Lesson.java](https://github.com/DWS-2026/project-grupo-7/blob/main/src/main/java/com/rayokross/academy/models/Lesson.java)   |
+|5| [Implementación de la capa de Servicio para Lecciones](https://github.com/DWS-2026/project-grupo-7/commit/340d3d909bb5f24c5a74bc111dc610a8ec7c5774)  | [LessonService.java](https://github.com/DWS-2026/project-grupo-7/blob/main/src/main/java/com/rayokross/academy/services/LessonService.java)   |
 
 ---
 
