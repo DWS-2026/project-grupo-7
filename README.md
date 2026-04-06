@@ -278,17 +278,27 @@ Gestión de inscripciones: Funcionalidades de añadir y eliminar usuarios de los
 
 ---
 
-#### **Alumno 4 - [Nombre Completo]**
+#### **Alumno 4 - [Gonzalo Roig López]**
 
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
+Descripción de las tareas y responsabilidades principales del alumno en el proyecto:
+
+Creación de imágenes para los cursos en course_description, el index y el catálogo de cursos, además de una paginación ene el catálogo de cursos. Validación de las imágenes añadidas.
+
+Creación del sistema del carrito creando CartController, CartService y cart.html y demás correcciones en este sistema.
+
+Encargado de añadir y configurar Spring Security, crando SecurityConfig.java y RepositoryUserDetailsService, cifrado de contraseñas implementando BCrypt tanto en UserService como en DataBaseInitializer, prevención a ataques XSS y creación de keystore y configuración en application.properties para admitir conexiones https.
+
+Validación de campos en login, register y en el panel de administrador.
+
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
+|1| [Add pagination in courses and add images]([URL_commit_1](https://github.com/DWS-2026/dws-2026-project-base/commit/32972f763f64af82b2daa9ac33010f4a68e2d690))  | [CourseController] (src/main/java/com/rayokross/academy/controllers/CourseController.java
+|2| [fix validation and deny negative prices and files in image of course in admin dashboard]([URL_commit_2](https://github.com/DWS-2026/dws-2026-project-base/commit/79b3359e2af7dc7505131bc571f7419f6770d57d))  | [AdminCourseController]  | (src/main/java/com/rayokross/academy/controllers/AdminCourseController.java
+|3| [CartController and CartService]([URL_commit_3](https://github.com/DWS-2026/dws-2026-project-base/commit/4c90b54fa73f67b8cdbedc22253bd5fe07493a02))  | [CartController, CartService]| (src/main/java/com/rayokross/academy/controllers/CartController.java
+|4| [Add manual validation for registration and login error handling](https://github.com/DWS-2026/dws-2026-project-base/commit/5ac274dd7b87aa0e9ddf092d6a20e46a6bf69ad4))  | [AuthController]   | (src/main/java/com/rayokross/academy/controllers/AuthController.java)
+|5| [SecurityConfig added]((https://github.com/DWS-2026/dws-2026-project-base/commit/e8fddb7824cc1b96a298234b39a6995e0987d613))  | [SecurityConfig]   |
+(src/main/java/com/rayokross/academy/security/SecurityConfig.java)
 
 ---
 
