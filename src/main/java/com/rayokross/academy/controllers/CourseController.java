@@ -136,6 +136,6 @@ public class CourseController {
                     .body(file);
         }
 
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Imagen del curso no encontrada");
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Course image not found");
     }
 }

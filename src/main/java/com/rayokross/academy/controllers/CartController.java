@@ -79,7 +79,7 @@ public class CartController {
     public String viewCart(Model model) {
         model.addAttribute("cartCourses", cartService.getCart());
         model.addAttribute("totalPrice", cartService.getTotalPrice());
-        model.addAttribute("isEmpty", cartService.getCart().isEmpty());
+        model.addAttribute("isEmpty", cartService.getCart() == null || cartService.getCart().isEmpty());
         model.addAttribute("pageTitle", "My Cart");
         return "cart";
     }
