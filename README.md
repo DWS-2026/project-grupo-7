@@ -185,15 +185,20 @@ Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicac
 
 > Flujo de Navegación
 
-Acceso Público: El usuario llega a la Home, explora el Catálogo o consulta el Detalle de los 3 cursos destacados.
+PUBLICO:
+Home → Catálogo → Detalle Curso
+Home → Login 
+Home → Registro
+Catálogo → Login
 
-Autenticación: Mediante Login/Registro, el sistema identifica al usuario.
+AUTENTICADO (Alumno):
+Login → Home → Perfil 
+Home → Mis Cursos → Curso
 
-Zona Privada: El flujo redirige al Perfil (gestión del alumno), desde donde se accede al Aula para ver lecciones.
-
-Gestión (Admin): Desde el perfil, los usuarios autorizados saltan al Dashboard de Admin para gestionar cursos y usuarios.
-
-Esquema: Home → Login → Perfil → Admin.
+ADMIN:
+Home → Dashboard Admin
+Dashboard → Gestión Cursos → Crear/Editar/Matrículas
+Dashboard → Gestión Usuarios → Detalles/Editar
 #### **Capturas de Pantalla Actualizadas**
 
 #### **1. Página Principal / Home (Visitante)**
@@ -268,12 +273,13 @@ Esquema: Home → Login → Perfil → Admin.
 
 1. **Clonar el repositorio**
    ```bash
-   git clone https://github.com/[usuario]/[nombre-repositorio].git
-   cd [nombre-repositorio]
+   git clone https://github.com/DWS-2026/project-grupo-7.git
+   cd project-grupo-7
    ```
 
-2. **AQUÍ INDICAR LO SIGUIENTES PASOS**
-
+2. **Crear Schema en MySQL**
+    Crear Schema con nombre "posts"
+3.  **Lanzar app desde VS Code**
 #### **Credenciales de prueba**
 - **Usuario Admin**: usuario: `admin@rayokross.com`, contraseña: `adminpass1234`
 - **Usuario Registrado**: usuario: `student@rayokross.com`, contraseña: `student1234`
@@ -284,15 +290,11 @@ Diagrama mostrando las entidades, sus campos y relaciones:
 
 ![Diagrama Entidad-Relación](images/DiagramaER.png)
 
-> [Descripción opcional: Ej: "El diagrama muestra las 4 entidades principales: Usuario, Producto, Pedido y Categoría, con sus respectivos atributos y relaciones 1:N y N:M."]
-
 ### **Diagrama de Clases y Templates**
 
 Diagrama de clases de la aplicación con diferenciación por colores o secciones:
 
 ![Diagrama de Clases](images/DiagramaClases.jpeg)
-
-> [Descripción opcional del diagrama y relaciones principales]
 
 ### **Participación de Miembros en la Práctica 2**
 
@@ -316,9 +318,7 @@ Servicios y Controladores: Creación de LessonService, EnrollmentService y la l�
 
 ---
 
-#### **Alumno 2 - [Daniel Fernandez Tome]**
-
-Descripción de las tareas y responsabilidades principales del alumno en el proyecto:
+#### **Alumno 2 - Daniel Fernandez Tome**
 
 Creación de controladores: UserController, CourseController, AdminUserController, AuthController, MainController.
 
@@ -340,7 +340,7 @@ Gestión de inscripciones: Funcionalidades de añadir y eliminar usuarios de los
 
 ---
 
-#### **Alumno 3 - [Angel Menendez Leyenda]**
+#### **Alumno 3 - Angel Menendez Leyenda**
 
 Entidades y Lógica de Negocio: Diseño de entidades (Course, User, Enrollment, Cart), controladores y servicios para la gestión de catálogo, matrículas y flujo del carrito.
 
@@ -362,9 +362,7 @@ Configuración del Sistema: Administración de application.properties, inicializ
 
 ---
 
-#### **Alumno 4 - [Gonzalo Roig López]**
-
-Descripción de las tareas y responsabilidades principales del alumno en el proyecto:
+#### **Alumno 4 - Gonzalo Roig López**
 
 Creación de imágenes para los cursos en course_description, el index y el catálogo de cursos, además de una paginación ene el catálogo de cursos. Validación de las imágenes añadidas.
 
