@@ -36,10 +36,10 @@ public class DatabaseInitializer {
         @Autowired
         private EnrollmentService enrollmentService;
 
-        @Value("${admin.default.password:adminpass1234}")
+        @Value("${admin.default.password}")
         private String adminPassword;
 
-        @Value("${student.default.password:student1234}")
+        @Value("${student.default.password}")
         private String studentPassword;
 
         private void setCourseImage(Course course, String imageName) {
