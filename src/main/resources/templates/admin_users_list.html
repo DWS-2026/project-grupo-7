@@ -41,13 +41,6 @@
                                         <i class="bi bi-pencil"></i> Edit Profile
                                     </a>
 
-                                    <form action="/admin/users/{{id}}/delete" method="POST" class="d-inline">
-                                        <input type="hidden" name="_csrf" value="{{token}}" />
-                                        <button type="submit" class="btn btn-sm btn-outline-danger"
-                                            onclick="return confirm('Are you sure you want to delete user {{email}}?');">
-                                            <i class="bi bi-trash"></i>
-                                        </button>
-                                    </form>
                                 </td>
                             </tr>
                             {{/allUsers}}
