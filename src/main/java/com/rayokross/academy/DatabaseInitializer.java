@@ -49,11 +49,11 @@ public class DatabaseInitializer {
                                 InputStream is = resource.getInputStream();
                                 course.setImage(new SerialBlob(is.readAllBytes()));
                         } else {
-                                log.warn("No se pudo encontrar la imagen: " + imageName
-                                                + ". Revisando en static/images/");
+                                log.warn("Could not find the image: " + imageName
+                                                + ". Checking in static/images/");
                         }
                 } catch (Exception e) {
-                        log.error("Error al cargar la imagen", e);
+                        log.error("Error loading the image", e);
                 }
         }
 

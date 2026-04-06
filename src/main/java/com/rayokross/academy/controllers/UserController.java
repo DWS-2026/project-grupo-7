@@ -135,13 +135,13 @@ public class UserController {
                 log.error("Failed to load profile photo for user ID {}: {}", id, e.getMessage(), e);
 
                 throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
-                        "Error interno al procesar la imagen");
+                        "Internal error while processing the image");
             }
         }
 
         log.warn("Profile photo not found for user ID {}. Triggering 404 error page.", id);
 
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario o imagen no encontrados");
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User or image not found");
     }
 
     @PostMapping("/profile/edit")
