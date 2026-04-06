@@ -162,7 +162,7 @@ Creación y diseño de la página que contiene todos los cursos disponibles
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
-|1| [Catálogo de cursos creado](https://github.com/DWS-2026/dws-2026-project-base/commit/00dc2b86925732d96ea741494bc25bb1e774efe8))  | [courses.html] [css/styles.css])   |
+|1| ([Catálogo de cursos creado](https://github.com/DWS-2026/dws-2026-project-base/commit/00dc2b86925732d96ea741494bc25bb1e774efe8))  | [courses.html] [css/styles.css]   |
 |2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
 |3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
 |4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
@@ -173,18 +173,93 @@ Creación y diseño de la página que contiene todos los cursos disponibles
 ## 🛠 **Práctica 2: Web con HTML generado en servidor**
 
 ### **Vídeo de Demostración**
-📹 **[Enlace al vídeo en YouTube](https://www.youtube.com/watch?v=x91MPoITQ3I)**
+📹 **[Enlace al vídeo en YouTube](https://youtu.be/MU4uhTDj5s0)**
 > Vídeo mostrando las principales funcionalidades de la aplicación web.
 
 ### **Navegación y Capturas de Pantalla**
 
 #### **Diagrama de Navegación**
+Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicación:
 
-Solo si ha cambiado.
+![Diagrama de Navegación](images/Diagrama2.png)
 
+> Flujo de Navegación
+
+PUBLICO:
+Home → Catálogo → Detalle Curso
+Home → Login 
+Home → Registro
+Catálogo → Login
+
+AUTENTICADO (Alumno):
+Login → Home → Perfil 
+Home → Mis Cursos → Curso
+
+ADMIN:
+Home → Dashboard Admin
+Dashboard → Gestión Cursos → Crear/Editar/Matrículas
+Dashboard → Gestión Usuarios → Detalles/Editar
 #### **Capturas de Pantalla Actualizadas**
 
-Solo si han cambiado.
+#### **1. Página Principal / Home (Visitante)**
+![Página Principal](images/index.png)
+> Página de inicio genérica para usuarios no autenticados. Muestra los cursos destacados y ofrece acceso rápido a las páginas de registro e inicio de sesión desde la barra de navegación.
+
+#### **2. Página Principal / Home (Usuario Logueado)**
+![Página Principal Usuario](images/MainUser.png)
+> Vista de la misma página de inicio, pero adaptada para un usuario estándar que ha iniciado sesión. La barra de navegación se actualiza para mostrar el acceso a su perfil y al carrito de compras.
+
+#### **3. Página Principal / Home (Administrador)**
+![Página Principal Admin](images/MainAdmin.png)
+> Vista de la página de inicio cuando el usuario autenticado tiene el rol de Administrador. Incluye las opciones de navegación necesarias para acceder directamente al panel de gestión (dashboard).
+
+#### **4. Página Login / Iniciar sesión**
+![Página Login](images/Login.png)
+> Página de inicio de sesión que permite a usuarios previamente registrados autenticarse en la plataforma.
+
+#### **5. Página Register / Registrarse**
+![Página Register](images/Register.png)
+> Página de registro que permite a nuevos usuarios crearse una cuenta proporcionando sus datos personales.
+
+#### **6. Página Detalle del Curso**
+![Página Detalle Curso](images/CourseDetails.png)
+> Página que muestra las características específicas de un curso (descripción, temario, precio) y ofrece la opción de añadirlo al carrito de compras.
+
+#### **7. Página Contenido del Curso (Reproductor)**
+![Página Contenido Curso](images/CourseContent.png)
+> Interfaz del reproductor donde el alumno, una vez matriculado, puede visualizar las lecciones en vídeo y el contenido del curso.
+
+#### **8. Página Carrito de Compras**
+![Página Carrito](images/Cart.png)
+> Vista del carrito donde el usuario puede revisar los cursos que ha seleccionado, ver el precio total y proceder al pago/checkout.
+
+#### **9. Página Profile / Perfil de Usuario**
+![Perfil de Usuario](images/UserProfile.png)
+> Panel personal del usuario estándar donde puede editar su información, cambiar su avatar y visualizar o cancelar los cursos en los que está actualmente matriculado.
+
+#### **10. Página Profile / Perfil de Administrador**
+![Perfil de Administrador](images/AdminProfile.png)
+> Perfil adaptado para el administrador, mostrando sus datos personales junto con los accesos directos necesarios para gestionar la academia.
+
+#### **11. Panel de Control / Dashboard (Admin)**
+![Dashboard Admin](images/AdminDashboard.png)
+> Panel principal de administración que centraliza el acceso a la gestión integral de la plataforma (usuarios, cursos y matrículas).
+
+#### **12. Gestión de Usuarios (Admin)**
+![Gestión de Usuarios](images/UserManagement.png)
+> Vista de administración que despliega una lista completa de todos los alumnos registrados en la base de datos de la plataforma.
+
+#### **13. Edición de Usuario (Admin)**
+![Edición de Usuario](images/User%20edited%20by%20admin.png)
+> Formulario específico del panel de administración que permite al administrador modificar los datos de un alumno en concreto.
+
+#### **14. Gestión de Matrículas (Admin)**
+![Gestión de Matrículas](images/EnrollmentManagement.png)
+> Panel de administración diseñado para revisar, añadir o eliminar las matriculaciones de los alumnos en los distintos cursos disponibles.
+
+#### **15. Edición de Curso (Admin)**
+![Edición de Curso](images/EditCourse.png)
+> Herramienta del panel de control que permite al administrador modificar la información, precio y temario de un curso existente en el catálogo.
 
 ### **Instrucciones de Ejecución**
 
@@ -198,51 +273,52 @@ Solo si han cambiado.
 
 1. **Clonar el repositorio**
    ```bash
-   git clone https://github.com/[usuario]/[nombre-repositorio].git
-   cd [nombre-repositorio]
+   git clone https://github.com/DWS-2026/project-grupo-7.git
+   cd project-grupo-7
    ```
 
-2. **AQUÍ INDICAR LO SIGUIENTES PASOS**
-
+2. **Crear Schema en MySQL**
+    Crear Schema con nombre "posts"
+3.  **Lanzar app desde VS Code**
 #### **Credenciales de prueba**
-- **Usuario Admin**: usuario: `admin`, contraseña: `admin`
-- **Usuario Registrado**: usuario: `user`, contraseña: `user`
+- **Usuario Admin**: usuario: `admin@rayokross.com`, contraseña: `adminpass1234`
+- **Usuario Registrado**: usuario: `student@rayokross.com`, contraseña: `student1234`
 
 ### **Diagrama de Entidades de Base de Datos**
 
 Diagrama mostrando las entidades, sus campos y relaciones:
 
-![Diagrama Entidad-Relación](images/database-diagram.png)
-
-> [Descripción opcional: Ej: "El diagrama muestra las 4 entidades principales: Usuario, Producto, Pedido y Categoría, con sus respectivos atributos y relaciones 1:N y N:M."]
+![Diagrama Entidad-Relación](images/DiagramaER.png)
 
 ### **Diagrama de Clases y Templates**
 
 Diagrama de clases de la aplicación con diferenciación por colores o secciones:
 
-![Diagrama de Clases](images/classes-diagram.png)
-
-> [Descripción opcional del diagrama y relaciones principales]
+![Diagrama de Clases](images/DiagramaClases.jpeg)
 
 ### **Participación de Miembros en la Práctica 2**
 
-#### **Alumno 1 - [Nombre Completo]**
+#### **Alumno 1 - Omar Ba Diallo**
 
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
+Diseño e implementación de las entidades como Enrollment.java y Lesson.java, configurando sus atributos.
+
+Implementación de CartService con alcance de sesión para gestionar la lógica de selección de cursos, cálculo dinámico de precios y vaciado tras la compra.
+
+Creación de un controlador de excepciones (CustomErrorController) para capturar y manejar errores HTTP (400, 403, 404, 500) devolviendo las correspondientes vistas.
+
+Servicios y Controladores: Creación de LessonService, EnrollmentService y la lógica de sus respectivos controladores.
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
+|1| [Implementación de la Entidad Enrollment (Matriculación)](https://github.com/DWS-2026/project-grupo-7/commit/c86e075bd523827162ca7a06064d8dae0bd51505)  | [Enrollment.java](https://github.com/DWS-2026/project-grupo-7/blob/main/src/main/java/com/rayokross/academy/models/Enrollment.java)   |
+|2| [Creación de plantillas para manejo de Errores HTTP personalizados](https://github.com/DWS-2026/project-grupo-7/commit/25b17b6492d24e5fcf25254b3d79bb885f01ef9c)  | [/error](https://github.com/DWS-2026/project-grupo-7/tree/main/src/main/resources/templates/error)   |
+|3| [Desarrollo de la lógica del carrito de la compra](https://github.com/DWS-2026/project-grupo-7/commit/cac74c740e2b4782d1bda0ec2769908760faeb16)  | [CartController.java](https://github.com/DWS-2026/project-grupo-7/blob/main/src/main/java/com/rayokross/academy/controllers/CartController.java)   |
+|4| [Creación de la Entidad Lesson](https://github.com/DWS-2026/project-grupo-7/commit/0e7e1a240c8cbbc2d423b50605fe568f934bb1bc)  | [Lesson.java](https://github.com/DWS-2026/project-grupo-7/blob/main/src/main/java/com/rayokross/academy/models/Lesson.java)   |
+|5| [Implementación de la capa de Servicio para Lecciones](https://github.com/DWS-2026/project-grupo-7/commit/340d3d909bb5f24c5a74bc111dc610a8ec7c5774)  | [LessonService.java](https://github.com/DWS-2026/project-grupo-7/blob/main/src/main/java/com/rayokross/academy/services/LessonService.java)   |
 
 ---
 
-#### **Alumno 2 - [Daniel Fernandez Tome]**
-
-Descripción de las tareas y responsabilidades principales del alumno en el proyecto:
+#### **Alumno 2 - Daniel Fernandez Tome**
 
 Creación de controladores: UserController, CourseController, AdminUserController, AuthController, MainController.
 
@@ -257,14 +333,14 @@ Gestión de inscripciones: Funcionalidades de añadir y eliminar usuarios de los
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
 |1| [Rating deleted](https://github.com/DWS-2026/dws-2026-project-base/commit/a60e2d8ca595241d938b560bad972fd79b7c87ce)  | [DataBaseInitializer](‎src/main/java/com/rayokross/academy/DatabaseInitializer.java‎)   |
-|2| [AdminUserController added]([URL_commit_2](https://github.com/DWS-2026/dws-2026-project-base/commit/7bcc81ce54cd72dde51bea096bd5ad27413d9325))  | [AdminUserController](src/main/java/com/rayokross/academy/controllers/AdminUserController.java)   |
-|3| [AuthController created]([[URL_commit_3](https://github.com/DWS-2026/dws-2026-project-base/commit/ef4db4151a7505beddc336b7bcb49046e49b4bbf)  | [AuthController](src/main/java/com/rayokross/academy/controllers/AuthController.java)   |
+|2| [AdminUserController added](https://github.com/DWS-2026/dws-2026-project-base/commit/7bcc81ce54cd72dde51bea096bd5ad27413d9325))  | [AdminUserController](src/main/java/com/rayokross/academy/controllers/AdminUserController.java)   |
+|3| [AuthController created](https://github.com/DWS-2026/dws-2026-project-base/commit/ef4db4151a7505beddc336b7bcb49046e49b4bbf)  | [AuthController](src/main/java/com/rayokross/academy/controllers/AuthController.java)   |
 |4| [relations added and getters and setters modified in course.java](https://github.com/DWS-2026/dws-2026-project-base/commit/5f175d5e3a3732aba45d0931e6ffdfd71294decb)  | [Course.java](‎src/main/java/com/rayokross/academy/models/Course.java)   |
 |5| [UserController created](https://github.com/DWS-2026/dws-2026-project-base/commit/5dba9c02f20c24875c71f127cc671307930fd6b4)  | [UserController](src/main/java/com/rayokross/academy/controllers/UserController.java)   |
 
 ---
 
-#### **Alumno 3 - [Angel Menendez Leyenda]**
+#### **Alumno 3 - Angel Menendez Leyenda**
 
 Entidades y Lógica de Negocio: Diseño de entidades (Course, User, Enrollment, Cart), controladores y servicios para la gestión de catálogo, matrículas y flujo del carrito.
 
@@ -286,9 +362,7 @@ Configuración del Sistema: Administración de application.properties, inicializ
 
 ---
 
-#### **Alumno 4 - [Gonzalo Roig López]**
-
-Descripción de las tareas y responsabilidades principales del alumno en el proyecto:
+#### **Alumno 4 - Gonzalo Roig López**
 
 Creación de imágenes para los cursos en course_description, el index y el catálogo de cursos, además de una paginación ene el catálogo de cursos. Validación de las imágenes añadidas.
 
@@ -298,15 +372,13 @@ Encargado de añadir y configurar Spring Security, crando SecurityConfig.java y 
 
 Validación de campos en login, register y en el panel de administrador.
 
-
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
-|1| [Add pagination in courses and add images]([URL_commit_1](https://github.com/DWS-2026/dws-2026-project-base/commit/32972f763f64af82b2daa9ac33010f4a68e2d690))  | [CourseController] (src/main/java/com/rayokross/academy/controllers/CourseController.java
-|2| [fix validation and deny negative prices and files in image of course in admin dashboard]([URL_commit_2](https://github.com/DWS-2026/dws-2026-project-base/commit/79b3359e2af7dc7505131bc571f7419f6770d57d))  | [AdminCourseController]  | (src/main/java/com/rayokross/academy/controllers/AdminCourseController.java
-|3| [CartController and CartService]([URL_commit_3](https://github.com/DWS-2026/dws-2026-project-base/commit/4c90b54fa73f67b8cdbedc22253bd5fe07493a02))  | [CartController, CartService]| (src/main/java/com/rayokross/academy/controllers/CartController.java
-|4| [Add manual validation for registration and login error handling](https://github.com/DWS-2026/dws-2026-project-base/commit/5ac274dd7b87aa0e9ddf092d6a20e46a6bf69ad4))  | [AuthController]   | (src/main/java/com/rayokross/academy/controllers/AuthController.java)
-|5| [SecurityConfig added]((https://github.com/DWS-2026/dws-2026-project-base/commit/e8fddb7824cc1b96a298234b39a6995e0987d613))  | [SecurityConfig]   |
-(src/main/java/com/rayokross/academy/security/SecurityConfig.java)
+|1| [Add pagination in courses and add images](https://github.com/DWS-2026/project-grupo-7/commit/d8c39a2a6f5ed00a5643f6325d71444f74af0c53) | [CourseController.java](CourseController.java) |
+|2| [fix validation and deny negative prices and files in image of course in admin dashboard](https://github.com/DWS-2026/project-grupo-7/commit/79b3359e2af7dc7505131bc571f7419f6770d57d) | [AdminCourseController.java](AdminCourseController.java) |
+|3| [CartController and CartService](https://github.com/DWS-2026/project-grupo-7/commit/4c90b54fa73f67b8cdbedc22253bd5fe07493a02) | [CartController.java](CartController.java) |  [CartService.java](CartService.java) |
+|4| [Add manual validation for registration and login error handling](https://github.com/DWS-2026/project-grupo-7/commit/5ac274dd7b87aa0e9ddf092d6a20e46a6bf69ad4) | [AuthController.java](AuthController.java) |
+|5| [SecurityConfig added](https://github.com/DWS-2026/project-grupo-7/commit/e8fddb7824cc1b96a298234b39a6995e0987d613) | [SecurityConfig.java](SecurityConfig.java) |
 
 ---
 
