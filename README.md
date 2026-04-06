@@ -179,9 +179,21 @@ Creación y diseño de la página que contiene todos los cursos disponibles
 ### **Navegación y Capturas de Pantalla**
 
 #### **Diagrama de Navegación**
+Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicación:
 
-Solo si ha cambiado.
+![Diagrama de Navegación](images/Diagrama2.png)
 
+> Flujo de Navegación
+
+Acceso Público: El usuario llega a la Home, explora el Catálogo o consulta el Detalle de los 3 cursos destacados.
+
+Autenticación: Mediante Login/Registro, el sistema identifica al usuario.
+
+Zona Privada: El flujo redirige al Perfil (gestión del alumno), desde donde se accede al Aula para ver lecciones.
+
+Gestión (Admin): Desde el perfil, los usuarios autorizados saltan al Dashboard de Admin para gestionar cursos y usuarios.
+
+Esquema: Home → Login → Perfil → Admin.
 #### **Capturas de Pantalla Actualizadas**
 
 #### **1. Página Principal / Home (Visitante)**
@@ -263,14 +275,14 @@ Solo si ha cambiado.
 2. **AQUÍ INDICAR LO SIGUIENTES PASOS**
 
 #### **Credenciales de prueba**
-- **Usuario Admin**: usuario: `admin`, contraseña: `admin`
-- **Usuario Registrado**: usuario: `user`, contraseña: `user`
+- **Usuario Admin**: usuario: `admin@rayokross.com`, contraseña: `adminpass1234`
+- **Usuario Registrado**: usuario: `student@rayokross.com`, contraseña: `student1234`
 
 ### **Diagrama de Entidades de Base de Datos**
 
 Diagrama mostrando las entidades, sus campos y relaciones:
 
-![Diagrama Entidad-Relación](images/database-diagram.png)
+![Diagrama Entidad-Relación](images/DiagramaER.png)
 
 > [Descripción opcional: Ej: "El diagrama muestra las 4 entidades principales: Usuario, Producto, Pedido y Categoría, con sus respectivos atributos y relaciones 1:N y N:M."]
 
