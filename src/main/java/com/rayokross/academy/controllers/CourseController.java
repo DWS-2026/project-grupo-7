@@ -4,8 +4,6 @@ import java.security.Principal;
 import java.sql.SQLException;
 import java.util.Optional;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
@@ -31,8 +29,6 @@ import com.rayokross.academy.services.UserService;
 
 @Controller
 public class CourseController {
-
-    private static final Logger log = LoggerFactory.getLogger(CourseController.class);
 
     @Autowired
     private CourseService courseService;

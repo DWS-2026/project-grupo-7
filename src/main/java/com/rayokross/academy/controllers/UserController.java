@@ -1,7 +1,9 @@
 package com.rayokross.academy.controllers;
 
+import java.io.IOException;
 import java.security.Principal;
 import java.sql.Blob;
+import java.sql.SQLException;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -79,7 +81,7 @@ public class UserController {
             return "redirect:/profile";
         } catch (IllegalArgumentException e) {
             return "redirect:/profile?error=" + e.getMessage(); // devuelve "invalid_format"
-        } catch (Exception e) {
+        } catch (IOException e) {
             log.error("Error uploading photo", e);
             return "redirect:/profile?error=internal_error";
         }
@@ -108,7 +110,7 @@ public class UserController {
                 Resource file = new InputStreamResource(image.getBinaryStream());
                 MediaType mediaType = MediaTypeFactory.getMediaType(file).orElse(MediaType.IMAGE_JPEG);
                 return ResponseEntity.ok().contentType(mediaType).body(file);
-            } catch (Exception e) {
+            } catch (SQLException e) {
                 log.error("Failed to load profile photo for user ID {}: {}", id, e.getMessage(), e);
                 throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Internal error");
             }

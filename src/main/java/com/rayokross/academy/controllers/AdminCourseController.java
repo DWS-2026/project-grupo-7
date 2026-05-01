@@ -47,11 +47,14 @@ public class AdminCourseController {
     }
 
     @PostMapping("/admin/courses/new")
-    public String createCourse(Course course, @RequestParam("imageFile") MultipartFile imageFile,
+    public String createCourse(
+            Course course,
+            @RequestParam("imageFile") MultipartFile imageFile,
+            @RequestParam("syllabusFile") MultipartFile syllabusFile, // Nuevo parámetro
             RedirectAttributes redirectAttributes) {
 
         try {
-            // El servicio ahora valida la imagen y el precio[cite: 1, 4]
+            // Pasamos ambos archivos al servicio
             courseService.createCourse(course, imageFile);
             return "redirect:/admin";
         } catch (IllegalArgumentException e) {
@@ -59,8 +62,8 @@ public class AdminCourseController {
             redirectAttributes.addFlashAttribute("errorImage", e.getMessage());
             return "redirect:/admin";
         } catch (IOException e) {
-            log.error("IO Error saving image for course", e);
-            redirectAttributes.addFlashAttribute("errorImage", "Internal error saving image.");
+            log.error("IO Error saving files for course", e);
+            redirectAttributes.addFlashAttribute("errorImage", "Internal error saving files.");
             return "redirect:/admin";
         }
     }
@@ -107,11 +110,15 @@ public class AdminCourseController {
     }
 
     @PostMapping("/admin/courses/{id}/edit")
-    public String processEditCourse(@PathVariable Long id, Course updatedCourse,
-            @RequestParam("imageFile") MultipartFile imageFile, Model model) {
+    public String processEditCourse(
+            @PathVariable Long id,
+            Course updatedCourse,
+            @RequestParam("imageFile") MultipartFile imageFile,
+            @RequestParam("syllabusFile") MultipartFile syllabusFile, // Nuevo parámetro
+            Model model) {
 
         try {
-            // El servicio valida todo y actualiza la entidad existente[cite: 1, 4]
+            // El servicio actualiza la entidad con la imagen y el nuevo temario
             courseService.updateCourse(id, updatedCourse, imageFile);
             return "redirect:/admin";
         } catch (IllegalArgumentException e) {

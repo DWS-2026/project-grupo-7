@@ -4,6 +4,7 @@ import java.security.Principal;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.web.csrf.CsrfToken;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -12,7 +13,7 @@ import com.rayokross.academy.services.CartService;
 
 import jakarta.servlet.http.HttpServletRequest;
 
-@ControllerAdvice
+@ControllerAdvice(annotations = Controller.class)
 public class GlobalModelAttributes {
 
     @Autowired

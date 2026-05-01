@@ -7,8 +7,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,8 +26,6 @@ import com.rayokross.academy.services.UserService;
 
 @Controller
 public class CoursePlayerController {
-
-    private static final Logger log = LoggerFactory.getLogger(CoursePlayerController.class);
 
     @Autowired
     private CourseService courseService;
