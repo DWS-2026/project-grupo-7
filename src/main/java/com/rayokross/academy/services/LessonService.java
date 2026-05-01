@@ -2,11 +2,12 @@ package com.rayokross.academy.services;
 
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import com.rayokross.academy.models.Course;
 import com.rayokross.academy.models.Lesson;
 import com.rayokross.academy.repositories.LessonRepository;
 
@@ -17,6 +18,9 @@ public class LessonService {
 
     @Autowired
     private LessonRepository lessonRepository;
+
+    @Autowired
+    private CourseService courseService;
 
     public void save(Lesson lesson) {
         lessonRepository.save(lesson);
@@ -30,5 +34,19 @@ public class LessonService {
 
     public Optional<Lesson> findById(Long id) {
         return lessonRepository.findById(id);
+    }
+
+    public void addLessonToCourse(Long courseId, Lesson lesson) throws IllegalArgumentException {
+
+        // Buscamos el curso usando el import simple
+        Course course = courseService.findById(courseId)
+                .orElseThrow(() -> new IllegalArgumentException("Course not found"));
+
+        // Enlazamos
+        lesson.setCourse(course);
+
+        // Guardamos
+        lessonRepository.save(lesson);
+        log.info("Lesson '{}' saved to course ID: {}", lesson.getTitle(), courseId);
     }
 }

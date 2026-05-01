@@ -81,44 +81,28 @@ public class CourseController {
 
     @GetMapping("/courses/{id}")
     public String showCourseDetails(@PathVariable Long id, Model model, Principal principal) {
-
-        Optional<Course> courseOpt = courseService.findById(id);
-
-        if (courseOpt.isEmpty()) {
-            log.warn("Course with ID {} not found in database. Returning 404.", id);
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Course not found");
-        }
-
-        Course course = courseOpt.get();
+        Course course = courseService.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Course not found"));
         model.addAttribute("course", course);
         model.addAttribute("pageTitle", course.getTitle());
 
-        boolean isEnrolled = false;
-        boolean isAdmin = false;
-        boolean isInCart = false;
+        boolean isEnrolled = false, isAdmin = false, isInCart = false;
 
         if (principal != null) {
             Optional<User> userOpt = userService.findByEmail(principal.getName());
             if (userOpt.isPresent()) {
-                User user = userOpt.get();
-                isAdmin = user.getRoles().contains("ADMIN");
-                isEnrolled = enrollmentService.findByUserAndCourse(user, course).isPresent();
+                isAdmin = userOpt.get().getRoles().contains("ADMIN");
+                isEnrolled = enrollmentService.findByUserAndCourse(userOpt.get(), course).isPresent();
             }
         }
 
-        for (Course c : cartService.getCart()) {
-            if (c.getId().equals(course.getId())) {
-                isInCart = true;
-                break;
-            }
-        }
-
-        boolean canPurchase = !isAdmin && !isEnrolled && !isInCart;
+        // REFACTOR: Delegamos al CartService la comprobación
+        isInCart = cartService.isCourseInCart(course.getId());
 
         model.addAttribute("isEnrolled", isEnrolled);
         model.addAttribute("isAdmin", isAdmin);
         model.addAttribute("isInCart", isInCart);
-        model.addAttribute("canPurchase", canPurchase);
+        model.addAttribute("canPurchase", !isAdmin && !isEnrolled && !isInCart);
 
         return "courseDescription";
     }

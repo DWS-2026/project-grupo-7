@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.util.HtmlUtils;
 
 import com.rayokross.academy.models.User;
 import com.rayokross.academy.services.UserService;
@@ -44,28 +43,27 @@ public class AdminUserController {
 
     @PostMapping("/admin/users/{id}/edit")
     public String editUser(@PathVariable Long id, @RequestParam String firstName, @RequestParam String lastName) {
-        Optional<User> userOpt = userService.findById(id);
-        if (userOpt.isPresent()) {
-            User user = userOpt.get();
-
-            if (firstName != null && !firstName.trim().isEmpty() && lastName != null && !lastName.trim().isEmpty()) {
-                user.setFirstName(HtmlUtils.htmlEscape(firstName.trim()));
-                user.setLastName(HtmlUtils.htmlEscape(lastName.trim()));
-                userService.save(user);
-                log.info("Admin updated profile for user ID: {}", id);
-            }
+        try {
+            // El servicio ahora valida que no estén vacíos y sanitiza los datos[cite: 1, 4]
+            userService.adminUpdateUserProfile(id, firstName, lastName);
             return "redirect:/admin/users/" + id + "?success=true";
+        } catch (IllegalArgumentException e) {
+            // Si hay campos inválidos
+            return "redirect:/admin/users/" + id + "?error=invalid_data";
+        } catch (Exception e) {
+            return "redirect:/admin";
         }
-        return "redirect:/admin";
     }
 
     @PostMapping("/admin/users/{id}/delete")
     public String deleteUser(@PathVariable Long id) {
-        Optional<User> userOpt = userService.findById(id);
-        if (userOpt.isPresent() && !userOpt.get().getRoles().contains("ADMIN")) {
-            userService.deleteById(id);
-            log.info("Admin deleted user ID: {}", id);
+        try {
+            // El servicio ahora comprueba que no se esté borrando a un ADMIN[cite: 1, 4]
+            userService.deleteUserSafe(id);
+            return "redirect:/admin/users";
+        } catch (IllegalStateException e) {
+            log.warn("Admin attempted to delete another admin or protected user: ID {}", id);
+            return "redirect:/admin/users?error=cannot_delete_admin";
         }
-        return "redirect:/admin/users";
     }
 }

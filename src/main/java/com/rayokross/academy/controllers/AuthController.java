@@ -1,18 +1,14 @@
 package com.rayokross.academy.controllers;
 
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.rayokross.academy.models.User;
 import com.rayokross.academy.services.UserService;
 
 @Controller
@@ -22,9 +18,6 @@ public class AuthController {
 
     @Autowired
     private UserService userService;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
 
     @GetMapping("/login")
     public String showLoginForm(Model model,
@@ -59,51 +52,23 @@ public class AuthController {
             @RequestParam String password,
             Model model) {
 
-        boolean hasErrors = false;
+        try {
+            // Toda la lógica de negocio (regex, encriptación, roles) está ahora aquí[cite:
+            // 1]
+            userService.registerNewUser(firstName, lastName, email, password);
+            return "redirect:/login";
 
-        if (firstName.trim().isEmpty()) {
-            model.addAttribute("errorFirstName", "The name is obligatory.");
-            hasErrors = true;
-        }
+        } catch (IllegalArgumentException e) {
+            log.warn("Registration failed for email '{}': {}", email, e.getMessage());
 
-        if (lastName.trim().isEmpty()) {
-            model.addAttribute("errorLastName", "The last name is obligatory.");
-            hasErrors = true;
-        }
-
-        String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
-        if (!email.matches(emailRegex)) {
-            model.addAttribute("errorEmail", "Please, introduce a valid email.");
-            hasErrors = true;
-        } else if (userService.existEmail(email)) {
-            model.addAttribute("errorEmail", "This email is already registered.");
-            log.warn("Registration attempt failed: Email '{}' is already registered.", email);
-            hasErrors = true;
-        }
-
-        if (password.length() < 8) {
-            model.addAttribute("errorPassword", "The password must contain 8 characters.");
-            hasErrors = true;
-        }
-
-        if (hasErrors) {
-            log.warn("Registration failed for email '{}' due to validation errors.", email);
+            // Si el servicio lanza un error de validación, rellenamos el modelo para la
+            // vista
+            model.addAttribute("errorMessage", e.getMessage());
             model.addAttribute("firstName", firstName);
             model.addAttribute("lastName", lastName);
             model.addAttribute("email", email);
+
             return "register";
         }
-
-        User user = new User();
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
-        user.setEmail(email);
-        user.setRoles(List.of("USER"));
-        user.setPassword(passwordEncoder.encode(password));
-
-        userService.save(user);
-
-        log.info("New user registered successfully with email: '{}'", email);
-        return "redirect:/login";
     }
 }

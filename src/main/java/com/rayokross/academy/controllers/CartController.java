@@ -1,7 +1,6 @@
 package com.rayokross.academy.controllers;
 
 import java.security.Principal;
-import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -14,11 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.rayokross.academy.models.Course;
-import com.rayokross.academy.models.Enrollment;
-import com.rayokross.academy.models.User;
 import com.rayokross.academy.services.CartService;
 import com.rayokross.academy.services.CourseService;
-import com.rayokross.academy.services.UserService;
+import com.rayokross.academy.services.EnrollmentService;
 
 @Controller
 public class CartController {
@@ -32,7 +29,7 @@ public class CartController {
     private CourseService courseService;
 
     @Autowired
-    private UserService userService;
+    private EnrollmentService enrollmentService; // Añadimos este servicio
 
     @PostMapping("/cart/checkout")
     public String checkout(Principal principal) {
@@ -41,38 +38,18 @@ public class CartController {
             return "redirect:/login";
         }
 
-        Optional<User> userOpt = userService.findByEmail(principal.getName());
-        if (userOpt.isEmpty()) {
-            return "redirect:/login";
+        try {
+            // Le pasamos el email y los cursos del carrito al servicio[cite: 1]
+            enrollmentService.checkoutCart(principal.getName(), cartService.getCart());
+
+            // Si no hay excepciones, la compra fue un éxito
+            cartService.clearCart();
+            return "redirect:/profile";
+
+        } catch (IllegalArgumentException e) {
+            log.warn("Checkout error: {}", e.getMessage());
+            return "redirect:/cart?error=checkout_failed";
         }
-        User user = userOpt.get();
-
-        List<Course> cartCourses = cartService.getCart();
-        if (cartCourses.isEmpty()) {
-            return "redirect:/cart";
-        }
-
-        for (Course course : cartCourses) {
-            boolean alreadyEnrolled = false;
-
-            for (Enrollment e : user.getEnrollments()) {
-                if (e.getCourse().getId().equals(course.getId())) {
-                    alreadyEnrolled = true;
-                    break;
-                }
-            }
-
-            if (!alreadyEnrolled) {
-                Enrollment newEnrollment = new Enrollment(user, course);
-                user.getEnrollments().add(newEnrollment);
-            }
-        }
-
-        userService.save(user);
-        cartService.clearCart();
-        log.info("Checkout successful for user '{}'.", user.getEmail());
-
-        return "redirect:/profile";
     }
 
     @GetMapping("/cart")

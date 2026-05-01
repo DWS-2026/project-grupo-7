@@ -75,4 +75,17 @@ public class CartService {
     public int getSize() {
         return cartCourses.size();
     }
+
+    public boolean isCourseInCart(Long courseId) {
+        if (getCart() == null || getCart().isEmpty()) {
+            return false;
+        }
+        // Se ha simplificado la referencia a Course
+        for (Course c : getCart()) {
+            if (c.getId().equals(courseId)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

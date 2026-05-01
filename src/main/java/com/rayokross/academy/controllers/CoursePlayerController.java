@@ -113,49 +113,25 @@ public class CoursePlayerController {
 
     @PostMapping("/learn/course/{courseId}/complete")
     public String completeCourse(@PathVariable Long courseId, Principal principal) {
-        if (principal == null)
-            return "redirect:/login";
-
-        User currentUser = userService.findByEmail(principal.getName()).orElse(null);
-        if (currentUser == null)
-            return "redirect:/login";
-
-        Optional<Course> courseOpt = courseService.findById(courseId);
-        if (courseOpt.isEmpty())
-            return "redirect:/courses";
-
-        Optional<Enrollment> enrollmentOpt = enrollmentService.findByUserAndCourse(currentUser, courseOpt.get());
-        if (enrollmentOpt.isPresent()) {
-            Enrollment enrollment = enrollmentOpt.get();
-            enrollment.setCompleted(true);
-            enrollmentService.save(enrollment);
-            log.info("User '{}' marked course ID {} as COMPLETED.", currentUser.getEmail(), courseId);
+        if (principal != null) {
+            try {
+                // REFACTOR: Usamos el método que creamos en EnrollmentService
+                enrollmentService.setCourseCompletion(principal.getName(), courseId, true);
+            } catch (IllegalArgumentException ignored) {
+            }
         }
-
         return "redirect:/learn/course/" + courseId;
     }
 
     @PostMapping("/learn/course/{courseId}/uncomplete")
     public String uncompleteCourse(@PathVariable Long courseId, Principal principal) {
-        if (principal == null)
-            return "redirect:/login";
-
-        User currentUser = userService.findByEmail(principal.getName()).orElse(null);
-        if (currentUser == null)
-            return "redirect:/login";
-
-        Optional<Course> courseOpt = courseService.findById(courseId);
-        if (courseOpt.isEmpty())
-            return "redirect:/courses";
-
-        Optional<Enrollment> enrollmentOpt = enrollmentService.findByUserAndCourse(currentUser, courseOpt.get());
-        if (enrollmentOpt.isPresent()) {
-            Enrollment enrollment = enrollmentOpt.get();
-            enrollment.setCompleted(false);
-            enrollmentService.save(enrollment);
-            log.info("User '{}' unmarked course ID {} as COMPLETED.", currentUser.getEmail(), courseId);
+        if (principal != null) {
+            try {
+                // REFACTOR: Usamos el mismo método, pero con false
+                enrollmentService.setCourseCompletion(principal.getName(), courseId, false);
+            } catch (IllegalArgumentException ignored) {
+            }
         }
-
         return "redirect:/learn/course/" + courseId;
     }
 }

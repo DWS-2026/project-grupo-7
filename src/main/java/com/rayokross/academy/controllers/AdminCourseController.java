@@ -1,12 +1,8 @@
 package com.rayokross.academy.controllers;
 
-import java.sql.Blob;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
-
-import javax.sql.rowset.serial.SerialBlob;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +19,6 @@ import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.rayokross.academy.models.Course;
-import com.rayokross.academy.models.Enrollment;
 import com.rayokross.academy.models.Lesson;
 import com.rayokross.academy.models.User;
 import com.rayokross.academy.services.CourseService;
@@ -44,8 +39,6 @@ public class AdminCourseController {
     @Autowired
     private EnrollmentService enrollmentService;
 
-    private static final List<String> ALLOWED_IMAGE_TYPES = Arrays.asList("image/jpeg", "image/png", "image/gif");
-
     @GetMapping("/admin")
     public String showAdminDashboard(Model model) {
         model.addAttribute("courses", courseService.findAll());
@@ -55,38 +48,21 @@ public class AdminCourseController {
 
     @PostMapping("/admin/courses/new")
     public String createCourse(Course course, @RequestParam("imageFile") MultipartFile imageFile,
-            RedirectAttributes redirectAttributes) throws Exception {
+            RedirectAttributes redirectAttributes) {
 
-        if (imageFile.isEmpty()) {
-            log.warn("Admin failed to create course: No image provided.");
-            redirectAttributes.addFlashAttribute("errorImage", "Error: You have to upload a photo for the course.");
+        try {
+            // El servicio ahora valida la imagen y el precio[cite: 1, 4]
+            courseService.createCourse(course, imageFile);
+            return "redirect:/admin";
+        } catch (IllegalArgumentException e) {
+            log.warn("Admin failed to create course: {}", e.getMessage());
+            redirectAttributes.addFlashAttribute("errorImage", e.getMessage());
+            return "redirect:/admin";
+        } catch (IOException e) {
+            log.error("IO Error saving image for course", e);
+            redirectAttributes.addFlashAttribute("errorImage", "Internal error saving image.");
             return "redirect:/admin";
         }
-
-        String contentType = imageFile.getContentType();
-        if (contentType == null || !ALLOWED_IMAGE_TYPES.contains(contentType)) {
-            log.warn("Admin failed to create course: Invalid image format ({}).", contentType);
-            redirectAttributes.addFlashAttribute("errorImage", "Security error: JPEG, PNG or GIF required.");
-            return "redirect:/admin";
-        }
-
-        if (imageFile.getSize() > 5 * 1024 * 1024) {
-            log.warn("Admin failed to create course: Image size exceeds 5MB limit.");
-            redirectAttributes.addFlashAttribute("errorImage", "Error: Image size can´t exceed 5MB.");
-            return "redirect:/admin";
-        }
-
-        if (course.getPrice() < 0) {
-
-            log.warn("Admin failed to create course: Price of the course can't be negative.");
-            return "redirect:/admin";
-
-        }
-
-        courseService.save(course, imageFile);
-        log.info("Admin successfully created a new course: '{}'", course.getTitle());
-
-        return "redirect:/admin";
     }
 
     @GetMapping("/admin/courses/{id}/users")
@@ -94,11 +70,8 @@ public class AdminCourseController {
         Course course = courseService.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Course not found"));
 
-        List<User> enrolledUsers = new ArrayList<>();
-
-        for (Enrollment e : course.getEnrollments()) {
-            enrolledUsers.add(e.getUser());
-        }
+        // La extracción de la lista ahora la hace el servicio
+        List<User> enrolledUsers = enrollmentService.getEnrolledUsers(course);
 
         model.addAttribute("course", course);
         model.addAttribute("enrolledUsers", enrolledUsers);
@@ -107,19 +80,17 @@ public class AdminCourseController {
     }
 
     @PostMapping("/admin/courses/delete/{id}")
-    public String deleteCourse(@PathVariable Long id, Model model) {
+    public String deleteCourse(@PathVariable Long id) {
         courseService.delete(id);
-        log.info("Admin deleted course with ID: {}", id);
         return "redirect:/admin";
-
     }
 
     @GetMapping("/admin/courses/{id}/edit")
     public String showEditForm(@PathVariable Long id, Model model) {
-        Optional<Course> course = courseService.findById(id);
+        Optional<Course> courseOpt = courseService.findById(id);
 
-        if (course.isPresent()) {
-            Course courseObj = course.get();
+        if (courseOpt.isPresent()) {
+            Course courseObj = courseOpt.get();
             model.addAttribute("course", courseObj);
 
             if (courseObj.getLevel() != null) {
@@ -139,36 +110,27 @@ public class AdminCourseController {
     public String processEditCourse(@PathVariable Long id, Course updatedCourse,
             @RequestParam("imageFile") MultipartFile imageFile, Model model) {
 
-        Course existingCourse = courseService.findById(id).orElseThrow();
-
-        existingCourse.setTitle(updatedCourse.getTitle());
-        existingCourse.setDescription(updatedCourse.getDescription());
-        existingCourse.setPrice(updatedCourse.getPrice());
-        existingCourse.setLevel(updatedCourse.getLevel());
-
         try {
-            if (!imageFile.isEmpty()) {
-                Blob imageBlob = new SerialBlob(imageFile.getBytes());
-                existingCourse.setImage(imageBlob);
-                log.debug("Image updated for course ID: {}", id);
+            // El servicio valida todo y actualiza la entidad existente[cite: 1, 4]
+            courseService.updateCourse(id, updatedCourse, imageFile);
+            return "redirect:/admin";
+        } catch (IllegalArgumentException e) {
+            log.warn("Admin failed to edit course {}: {}", id, e.getMessage());
+
+            Optional<Course> existingCourse = courseService.findById(id);
+            if (existingCourse.isPresent()) {
+                model.addAttribute("course", existingCourse.get());
+            } else {
+                model.addAttribute("course", updatedCourse);
             }
-        } catch (Exception e) {
-        }
-
-        if (existingCourse.getPrice() < 0) {
-
-            model.addAttribute("course", existingCourse);
             model.addAttribute("lesson", new Lesson());
             model.addAttribute("negativePrice", true);
-            log.warn("Admin failed to create course: Price of the course can't be negative.");
+
             return "edit_course";
-
+        } catch (IOException e) {
+            log.error("IO Error updating image for course ID " + id, e);
+            return "redirect:/admin";
         }
-
-        courseService.save(existingCourse);
-        log.info("Admin successfully updated course ID: {}", id);
-
-        return "redirect:/admin";
     }
 
     @PostMapping("/admin/courses/{courseId}/users/{userId}/remove")
