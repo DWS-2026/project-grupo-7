@@ -36,17 +36,12 @@ public class LessonService {
         return lessonRepository.findById(id);
     }
 
-    public void addLessonToCourse(Long courseId, Lesson lesson) throws IllegalArgumentException {
-
-        // Buscamos el curso usando el import simple
+    public Lesson addLessonToCourse(Long courseId, Lesson lesson) {
         Course course = courseService.findById(courseId)
                 .orElseThrow(() -> new IllegalArgumentException("Course not found"));
 
-        // Enlazamos
         lesson.setCourse(course);
-
-        // Guardamos
-        lessonRepository.save(lesson);
-        log.info("Lesson '{}' saved to course ID: {}", lesson.getTitle(), courseId);
+        return lessonRepository.save(lesson);
     }
+
 }
