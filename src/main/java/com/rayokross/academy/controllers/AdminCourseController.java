@@ -1,4 +1,4 @@
-package com.rayokross.academy.controllers;
+package com.rayokross.academy.controllers.web;
 
 import java.io.IOException;
 import java.util.List;
@@ -55,7 +55,7 @@ public class AdminCourseController {
 
         try {
             // Pasamos ambos archivos al servicio
-            courseService.createCourse(course, imageFile);
+            courseService.createCourse(course, imageFile, syllabusFile);
             return "redirect:/admin";
         } catch (IllegalArgumentException e) {
             log.warn("Admin failed to create course: {}", e.getMessage());
@@ -119,7 +119,7 @@ public class AdminCourseController {
 
         try {
             // El servicio actualiza la entidad con la imagen y el nuevo temario
-            courseService.updateCourse(id, updatedCourse, imageFile);
+            courseService.updateCourse(id, updatedCourse, imageFile, syllabusFile);
             return "redirect:/admin";
         } catch (IllegalArgumentException e) {
             log.warn("Admin failed to edit course {}: {}", id, e.getMessage());
