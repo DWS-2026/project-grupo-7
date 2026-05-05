@@ -46,13 +46,27 @@
                         
                         <div class="mb-4">
                             <label class="form-label small fw-bold text-muted">Description</label>
-                            <textarea name="description" class="form-control bg-light" rows="4" required>{{course.description}}</textarea>
+                            <div id="editor-container" style="height: 250px;" class="bg-light border rounded"></div>
+                            <textarea id="description" name="description" class="d-none" required>{{course.description}}</textarea>
                         </div>
 
                         <div class="mb-4">
                             <label class="form-label small fw-bold text-muted">Update Course Image (Optional)</label>
                             <input type="file" name="imageFile" class="form-control bg-light" accept="image/*">
                             <small class="text-muted">Leave blank to keep the current image.</small>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label small fw-bold text-muted">Update Syllabus (Optional)</label>
+                            <input type="file" name="syllabusFile" class="form-control bg-light" accept=".pdf,.doc,.docx">
+    
+                            {{#course.syllabusFileName}}
+                            <div class="mt-2 small text-success">
+                                <i class="bi bi-check-circle-fill"></i> Current file: <strong>{{course.syllabusFileName}}</strong>
+                            </div>
+                                {{/course.syllabusFileName}}
+    
+                            <small class="text-muted">Leave blank to keep the current syllabus.</small>
                         </div>
                         
                         <button type="submit" class="btn btn-purple w-100">Save Changes</button>
