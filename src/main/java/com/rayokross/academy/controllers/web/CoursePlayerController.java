@@ -1,4 +1,4 @@
-package com.rayokross.academy.controllers;
+package com.rayokross.academy.controllers.web;
 
 import java.security.Principal;
 import java.util.ArrayList;
@@ -111,7 +111,6 @@ public class CoursePlayerController {
     public String completeCourse(@PathVariable Long courseId, Principal principal) {
         if (principal != null) {
             try {
-                // REFACTOR: Usamos el método que creamos en EnrollmentService
                 enrollmentService.setCourseCompletion(principal.getName(), courseId, true);
             } catch (IllegalArgumentException ignored) {
             }
@@ -123,7 +122,6 @@ public class CoursePlayerController {
     public String uncompleteCourse(@PathVariable Long courseId, Principal principal) {
         if (principal != null) {
             try {
-                // REFACTOR: Usamos el mismo método, pero con false
                 enrollmentService.setCourseCompletion(principal.getName(), courseId, false);
             } catch (IllegalArgumentException ignored) {
             }

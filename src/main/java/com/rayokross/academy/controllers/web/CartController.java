@@ -1,4 +1,4 @@
-package com.rayokross.academy.controllers;
+package com.rayokross.academy.controllers.web;
 
 import java.security.Principal;
 import java.util.Optional;
@@ -29,7 +29,7 @@ public class CartController {
     private CourseService courseService;
 
     @Autowired
-    private EnrollmentService enrollmentService; // Añadimos este servicio
+    private EnrollmentService enrollmentService; 
 
     @PostMapping("/cart/checkout")
     public String checkout(Principal principal) {
@@ -39,10 +39,8 @@ public class CartController {
         }
 
         try {
-            // Le pasamos el email y los cursos del carrito al servicio[cite: 1]
             enrollmentService.checkoutCart(principal.getName(), cartService.getCart());
 
-            // Si no hay excepciones, la compra fue un éxito
             cartService.clearCart();
             return "redirect:/profile";
 

@@ -1,4 +1,4 @@
-package com.rayokross.academy.controllers;
+package com.rayokross.academy.controllers.web;
 
 import java.security.Principal;
 import java.sql.SQLException;
@@ -92,7 +92,6 @@ public class CourseController {
             }
         }
 
-        // REFACTOR: Delegamos al CartService la comprobación
         isInCart = cartService.isCourseInCart(course.getId());
 
         model.addAttribute("isEnrolled", isEnrolled);
