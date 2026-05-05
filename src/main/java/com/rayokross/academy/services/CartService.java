@@ -17,7 +17,7 @@ public class CartService {
 
     private static final Logger log = LoggerFactory.getLogger(CartService.class);
 
-    private List<Course> cartCourses = new ArrayList<>();
+    private final List<Course> cartCourses = new ArrayList<>();
 
     public List<Course> getCart() {
         return cartCourses;
