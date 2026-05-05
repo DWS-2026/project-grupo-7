@@ -1,10 +1,46 @@
 <footer class="text-light py-4 mt-auto" style="background-color: #212529;">
-        <div class="container text-center">
-            <p class="mb-1">&copy; 2026 RayoKross Academy. All rights reserved.</p>
-            <p class="small text-white-50">Secure Web Development Project - URJC</p>
-        </div>
-    </footer>
+    <div class="container text-center">
+        <p class="mb-1">&copy; 2026 RayoKross Academy. All rights reserved.</p>
+        <p class="small text-white-50">Secure Web Development Project - URJC</p>
+    </div>
+</footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- 2. Librería JS de Quill (Para el texto enriquecido) -->
+<script src="https://cdn.jsdelivr.net/npm/quill@2.0.0/dist/quill.js"></script>
+
+<!-- 3. Lógica global opcional (Solo se activa si detecta un editor en la página) -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const editorDiv = document.getElementById('editor-container');
+        const textarea = document.getElementById('description');
+
+        if (editorDiv && textarea) {
+            // Inicializar Quill
+            const quill = new Quill('#editor-container', {
+                theme: 'snow',
+                modules: {
+                    toolbar: [
+                        ['bold', 'italic', 'underline'],
+                        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                        ['clean']
+                    ]
+                }
+            });
+
+            // Cargar contenido inicial desde el textarea
+            quill.root.innerHTML = textarea.value;
+
+            // Sincronizar antes de enviar el formulario
+            const form = textarea.closest('form');
+            if (form) {
+                form.addEventListener('submit', function() {
+                    textarea.value = quill.root.innerHTML;
+                });
+            }
+        }
+    });
+</script>
 </body>
 </html>
