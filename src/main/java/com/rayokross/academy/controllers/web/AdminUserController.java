@@ -1,4 +1,4 @@
-package com.rayokross.academy.controllers;
+package com.rayokross.academy.controllers.web;
 
 import java.util.Optional;
 
