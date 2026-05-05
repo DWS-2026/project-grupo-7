@@ -44,10 +44,19 @@
                         </div>
 
                         <div class="col-12">
+                            <label for="syllabusFile" class="form-label small fw-bold text-purple">
+                                Course Syllabus (PDF/Doc) <i class="bi bi-file-earmark-pdf"></i>
+                            </label>
+                            <input type="file" id="syllabusFile" name="syllabusFile" 
+                                class="form-control border-purple bg-light" 
+                                accept=".pdf,.doc,.docx" required />
+                            <small class="text-muted">This file will be stored on the server disk.</small>
+                        </div>
+
+                        <div class="col-12">
                             <label for="description" class="form-label small fw-bold">Description</label>
-                            <textarea id="description" name="description" class="form-control bg-light" rows="2"
-                                placeholder="Brief course summary..."
-                                required>{{#description}}{{description}}{{/description}}</textarea>
+                            <div id="editor-container" style="height: 200px;" class="bg-light border rounded"></div>
+                            <textarea id="description" name="description" class="d-none">{{#description}}{{description}}{{/description}}</textarea>
                         </div>
 
                         <div class="col-12">
