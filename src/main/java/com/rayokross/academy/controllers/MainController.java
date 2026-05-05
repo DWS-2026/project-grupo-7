@@ -1,4 +1,4 @@
-package com.rayokross.academy.controllers;
+package com.rayokross.academy.controllers.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
