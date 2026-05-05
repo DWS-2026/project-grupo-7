@@ -1,6 +1,6 @@
 package com.rayokross.academy.mappers;
 
-import java.util.*;
+import java.util.List;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -12,13 +12,13 @@ import com.rayokross.academy.models.User;
 @Mapper(componentModel = "spring")
 public interface UserMapper {
 
-    UserDTO toDTO(User user); // Convierte de Entidad a DTO para mostrar datos
+    UserDTO toDTO(User user);
 
     List<UserDTO> toDTOs(List<User> users);
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "roles", ignore = true)
-    @Mapping(target = "profilePhoto", ignore = true) // Ignora el Blob de la foto
-    @Mapping(target = "enrollments", ignore = true) // Ignora la lista de matrículas[cite: 1, 4]
-    User toEntity(UserRegistrationDTO dto); // Convierte de DTO a Entidad para el registro
+    @Mapping(target = "profilePhoto", ignore = true)
+    @Mapping(target = "enrollments", ignore = true) 
+    User toEntity(UserRegistrationDTO dto); 
 }

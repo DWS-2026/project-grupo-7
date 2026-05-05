@@ -28,7 +28,7 @@ import com.rayokross.academy.services.EnrollmentService;
 import com.rayokross.academy.services.UserService;
 
 @RestController
-@RequestMapping("/api/v1/users") // Prefijo obligatorio
+@RequestMapping("/api/v1/users")
 public class UserRestController {
 
     @Autowired
@@ -40,9 +40,7 @@ public class UserRestController {
     @Autowired
     private UserMapper userMapper;
 
-    /**
-     * GET /me: Devuelve el perfil del usuario autenticado (Tema 4.4).
-     */
+   
     @GetMapping("/me")
     public ResponseEntity<UserDTO> getMyProfile(Principal principal) {
         if (principal == null) {
@@ -54,9 +52,7 @@ public class UserRestController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    /**
-     * PUT /me: Actualiza los datos del perfil (nombre completo).
-     */
+    
     @PutMapping("/me")
     public ResponseEntity<UserDTO> updateMyProfile(@RequestParam String fullName, Principal principal) {
         if (principal == null)
@@ -71,9 +67,7 @@ public class UserRestController {
         }
     }
 
-    /**
-     * POST /me/media: Sube la foto de perfil (Tema 4.6 - Caso 2).[cite: 1, 4]
-     */
+    
     @PostMapping("/me/media")
     public ResponseEntity<Object> uploadPhoto(@RequestParam MultipartFile photo, Principal principal)
             throws IOException, SQLException {
@@ -85,9 +79,6 @@ public class UserRestController {
         return ResponseEntity.noContent().build(); // 204 No Content
     }
 
-    /**
-     * GET /{id}/media: Descarga la foto de cualquier usuario (Tema 4.6).
-     */
     @GetMapping("/{id}/media")
     public ResponseEntity<Resource> downloadImage(@PathVariable Long id) throws SQLException {
         User user = userService.findById(id)
@@ -96,15 +87,13 @@ public class UserRestController {
         if (user.getProfilePhoto() != null) {
             Resource file = new InputStreamResource(user.getProfilePhoto().getBinaryStream());
             return ResponseEntity.ok()
-                    .contentType(MediaType.IMAGE_JPEG) // O detección dinámica como en tus notas
+                    .contentType(MediaType.IMAGE_JPEG)
                     .body(file);
         }
         return ResponseEntity.notFound().build();
     }
 
-    /**
-     * DELETE /me/enrollments/{courseId}: Cancela la matrícula (Borrado de recurso).
-     */
+    
     @DeleteMapping("/me/enrollments/{courseId}")
     public ResponseEntity<Void> cancelEnrollment(@PathVariable Long courseId, Principal principal) {
         if (principal == null)

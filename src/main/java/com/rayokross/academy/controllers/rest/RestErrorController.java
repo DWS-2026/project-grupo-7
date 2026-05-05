@@ -6,7 +6,7 @@ import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController; // ¡Vuelve a ser RestController!
+import org.springframework.web.bind.annotation.RestController;
 
 import com.rayokross.academy.dtos.ErrorMessageDTO;
 
@@ -16,8 +16,6 @@ import jakarta.servlet.http.HttpServletRequest;
 @RestController // Solo devolvemos JSON
 public class RestErrorController implements ErrorController {
 
-    // La magia está aquí: produces = "application/json"
-    // Spring solo usará este método si Postman o el front-end piden JSON.
     @RequestMapping(value = "/error", produces = "application/json")
     public ResponseEntity<ErrorMessageDTO> handleApiError(HttpServletRequest request) {
         Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
