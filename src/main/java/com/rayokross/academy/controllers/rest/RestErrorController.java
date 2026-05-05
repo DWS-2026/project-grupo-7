@@ -13,7 +13,7 @@ import com.rayokross.academy.dtos.ErrorMessageDTO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.http.HttpServletRequest;
 
-@RestController // Solo devolvemos JSON
+@RestController
 public class RestErrorController implements ErrorController {
 
     @RequestMapping(value = "/error", produces = "application/json")
