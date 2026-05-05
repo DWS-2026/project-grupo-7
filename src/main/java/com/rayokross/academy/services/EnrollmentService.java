@@ -7,12 +7,16 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.rayokross.academy.models.Course;
 import com.rayokross.academy.models.Enrollment;
 import com.rayokross.academy.models.User;
 import com.rayokross.academy.repositories.EnrollmentRepository;
+
+import jakarta.transaction.Transactional;
 
 @Service
 public class EnrollmentService {
@@ -54,6 +58,10 @@ public class EnrollmentService {
         return enrolledUsers;
     }
 
+    public Optional<Enrollment> findByUserEmailAndCourse(String email, Course course) {
+        return enrollmentRepository.findByUserEmailAndCourse(email, course);
+    }
+
     public void checkoutCart(String userEmail, List<Course> cartCourses) throws IllegalArgumentException {
 
         User user = userService.findByEmail(userEmail)
@@ -64,7 +72,6 @@ public class EnrollmentService {
         }
 
         for (Course course : cartCourses) {
-            // Comprobamos si ya está matriculado
             boolean alreadyEnrolled = false;
             for (Enrollment e : user.getEnrollments()) {
                 if (e.getCourse().getId().equals(course.getId())) {
@@ -79,56 +86,46 @@ public class EnrollmentService {
             }
         }
 
-        // Al guardar el usuario, por la relación en cascada de Hibernate, se guardarán
-        // los enrollments
         userService.save(user);
         log.info("Checkout successful for user '{}'.", user.getEmail());
     }
 
     public void setCourseCompletion(String email, Long courseId, boolean completed) throws IllegalArgumentException {
 
-        // 1. Buscamos el usuario por su email
         User user = userService.findByEmail(email)
                 .orElseThrow(() -> new IllegalArgumentException("User not found"));
 
-        // 2. Buscamos el curso por su ID
         Course course = courseService.findById(courseId)
                 .orElseThrow(() -> new IllegalArgumentException("Course not found"));
 
-        // 3. Buscamos la matrícula exacta que une a ese usuario con ese curso
         Enrollment enrollment = findByUserAndCourse(user, course)
                 .orElseThrow(() -> new IllegalArgumentException("Enrollment not found"));
 
-        // 4. Actualizamos el estado (true si es completar, false si es descompletar)
         enrollment.setCompleted(completed);
 
-        // 5. Guardamos los cambios
         save(enrollment);
 
         log.info("User '{}' marked course ID {} completion as: {}.", email, courseId, completed);
     }
 
-    public void enrollUser(String email, Long courseId) throws IllegalArgumentException, IllegalStateException {
+    public Enrollment enrollUser(String email, Long courseId) throws IllegalArgumentException, IllegalStateException {
 
-        // 1. Buscamos al usuario (si no existe, lanza IllegalArgumentException)
         User user = userService.findByEmail(email)
                 .orElseThrow(() -> new IllegalArgumentException("User not found"));
 
-        // 2. Buscamos el curso (si no existe, lanza IllegalArgumentException)
         Course course = courseService.findById(courseId)
                 .orElseThrow(() -> new IllegalArgumentException("Course not found"));
 
-        // 3. Comprobamos regla de negocio: ¿Ya está matriculado? (si sí, lanza
-        // IllegalStateException)
         if (findByUserAndCourse(user, course).isPresent()) {
             throw new IllegalStateException("already_enrolled");
         }
 
-        // 4. Creamos la matrícula y la guardamos
         Enrollment newEnrollment = new Enrollment(user, course);
         save(newEnrollment);
 
         log.info("User '{}' successfully enrolled in course ID {}.", email, courseId);
+
+        return newEnrollment;
     }
 
     public void cancelUserEnrollment(String email, Long courseId) throws IllegalArgumentException {
@@ -141,4 +138,14 @@ public class EnrollmentService {
         removeEnrollment(user, course);
         log.info("User '{}' cancelled enrollment for course ID {}.", email, courseId);
     }
+
+    @Transactional
+    public void removeEnrollmentByIds(Long userId, Long courseId) {
+        Enrollment enrollment = enrollmentRepository.findByUserIdAndCourseId(userId, courseId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
+                        "No se encontró la matrícula para este usuario y curso"));
+
+        enrollmentRepository.delete(enrollment);
+    }
+
 }
