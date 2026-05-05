@@ -31,8 +31,6 @@ public class CourseService {
 
     private static final List<String> ALLOWED_IMAGE_TYPES = Arrays.asList("image/jpeg", "image/png", "image/gif");
 
-    // Definimos donde se guardarán (se creará una carpeta 'uploads' en la raíz de
-    // tu proyecto)
     private final Path root = Paths.get("uploads");
 
     @Autowired
@@ -85,15 +83,12 @@ public class CourseService {
         validateCourse(course);
         validateImage(imageFile, false);
 
-        // 1. Sanitizar la descripción (Seguridad XSS para triple llaves)
         course.setDescription(sanitize(course.getDescription()));
 
-        // 2. Gestionar la imagen (DB)
         if (imageFile != null && !imageFile.isEmpty()) {
             course.setImage(createBlobFromMultipartFile(imageFile));
         }
 
-        // 3. Gestionar el temario (Disco)
         if (syllabusFile != null && !syllabusFile.isEmpty()) {
             saveSyllabus(course, syllabusFile);
         }
@@ -110,18 +105,15 @@ public class CourseService {
         validateCourse(updatedCourse);
         validateImage(imageFile, false);
 
-        // 1. Actualizar y Sanitizar datos básicos
         existingCourse.setTitle(updatedCourse.getTitle());
         existingCourse.setDescription(sanitize(updatedCourse.getDescription()));
         existingCourse.setPrice(updatedCourse.getPrice());
         existingCourse.setLevel(updatedCourse.getLevel());
 
-        // 2. Actualizar imagen si se sube una nueva
         if (imageFile != null && !imageFile.isEmpty()) {
             existingCourse.setImage(createBlobFromMultipartFile(imageFile));
         }
 
-        // 3. Actualizar temario si se sube uno nuevo
         if (syllabusFile != null && !syllabusFile.isEmpty()) {
             saveSyllabus(existingCourse, syllabusFile);
         }
@@ -131,18 +123,14 @@ public class CourseService {
 
     public void updateCourseImage(Long id, MultipartFile imageFile) throws IOException {
         Course course = repository.findById(id).orElseThrow();
-        // Usamos BlobProxy para convertir el stream del archivo en un Blob de BD
         Blob blob = BlobProxy.generateProxy(imageFile.getInputStream(), imageFile.getSize());
         course.setImage(blob);
         repository.save(course);
     }
 
-    // --- HELPERS PRIVADOS ---
-
     private String sanitize(String html) {
         if (html == null)
             return null;
-        // Permite etiquetas básicas (b, i, p, ul, li) y elimina scripts maliciosos
         return Jsoup.clean(html, Safelist.basic());
     }
 
@@ -178,16 +166,13 @@ public class CourseService {
         if (file.isEmpty())
             return;
 
-        // 1. Crear la carpeta si no existe
         if (!Files.exists(root)) {
             Files.createDirectories(root);
         }
 
-        // 2. REQUISITO: Obtener el nombre original
         String fileName = file.getOriginalFilename();
         course.setSyllabusFileName(fileName);
 
-        // 3. Guardar el fichero en el disco (reemplaza si ya existe uno igual)
         Files.copy(file.getInputStream(), this.root.resolve(fileName), StandardCopyOption.REPLACE_EXISTING);
     }
 }

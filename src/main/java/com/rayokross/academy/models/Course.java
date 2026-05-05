@@ -31,6 +31,8 @@ public class Course {
     @Column(columnDefinition = "TEXT")
     private String description;
 
+    private String syllabusFileName;
+
     private String level;
 
     private double price;
@@ -110,6 +112,14 @@ public class Course {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getSyllabusFileName() {
+        return syllabusFileName;
+    }
+
+    public void setSyllabusFileName(String syllabusFileName) {
+        this.syllabusFileName = syllabusFileName;
     }
 
     public String getLevel() {

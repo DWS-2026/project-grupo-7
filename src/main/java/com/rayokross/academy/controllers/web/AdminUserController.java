@@ -44,11 +44,9 @@ public class AdminUserController {
     @PostMapping("/admin/users/{id}/edit")
     public String editUser(@PathVariable Long id, @RequestParam String firstName, @RequestParam String lastName) {
         try {
-            // El servicio ahora valida que no estén vacíos y sanitiza los datos[cite: 1, 4]
             userService.adminUpdateUserProfile(id, firstName, lastName);
             return "redirect:/admin/users/" + id + "?success=true";
         } catch (IllegalArgumentException e) {
-            // Si hay campos inválidos
             return "redirect:/admin/users/" + id + "?error=invalid_data";
         } catch (Exception e) {
             return "redirect:/admin";
@@ -58,7 +56,6 @@ public class AdminUserController {
     @PostMapping("/admin/users/{id}/delete")
     public String deleteUser(@PathVariable Long id) {
         try {
-            // El servicio ahora comprueba que no se esté borrando a un ADMIN[cite: 1, 4]
             userService.deleteUserSafe(id);
             return "redirect:/admin/users";
         } catch (IllegalStateException e) {

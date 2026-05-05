@@ -53,16 +53,13 @@ public class AuthController {
             Model model) {
 
         try {
-            // Toda la lógica de negocio (regex, encriptación, roles) está ahora aquí[cite:
-            // 1]
+
             userService.registerNewUser(firstName, lastName, email, password);
             return "redirect:/login";
 
         } catch (IllegalArgumentException e) {
             log.warn("Registration failed for email '{}': {}", email, e.getMessage());
 
-            // Si el servicio lanza un error de validación, rellenamos el modelo para la
-            // vista
             model.addAttribute("errorMessage", e.getMessage());
             model.addAttribute("firstName", firstName);
             model.addAttribute("lastName", lastName);

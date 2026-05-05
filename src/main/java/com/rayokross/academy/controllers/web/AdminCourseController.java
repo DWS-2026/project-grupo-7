@@ -50,11 +50,10 @@ public class AdminCourseController {
     public String createCourse(
             Course course,
             @RequestParam("imageFile") MultipartFile imageFile,
-            @RequestParam("syllabusFile") MultipartFile syllabusFile, // Nuevo parámetro
+            @RequestParam("syllabusFile") MultipartFile syllabusFile,
             RedirectAttributes redirectAttributes) {
 
         try {
-            // Pasamos ambos archivos al servicio
             courseService.createCourse(course, imageFile, syllabusFile);
             return "redirect:/admin";
         } catch (IllegalArgumentException e) {
@@ -73,7 +72,6 @@ public class AdminCourseController {
         Course course = courseService.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Course not found"));
 
-        // La extracción de la lista ahora la hace el servicio
         List<User> enrolledUsers = enrollmentService.getEnrolledUsers(course);
 
         model.addAttribute("course", course);
@@ -114,11 +112,10 @@ public class AdminCourseController {
             @PathVariable Long id,
             Course updatedCourse,
             @RequestParam("imageFile") MultipartFile imageFile,
-            @RequestParam("syllabusFile") MultipartFile syllabusFile, // Nuevo parámetro
+            @RequestParam("syllabusFile") MultipartFile syllabusFile,
             Model model) {
 
         try {
-            // El servicio actualiza la entidad con la imagen y el nuevo temario
             courseService.updateCourse(id, updatedCourse, imageFile, syllabusFile);
             return "redirect:/admin";
         } catch (IllegalArgumentException e) {
