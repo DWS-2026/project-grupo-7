@@ -1,4 +1,4 @@
-package com.rayokross.academy.controllers.web;
+package com.rayokross.academy.controllers;
 
 import java.io.IOException;
 import java.security.Principal;

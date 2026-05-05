@@ -1,4 +1,4 @@
-package com.rayokross.academy.controllers.web;
+package com.rayokross.academy.controllers;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
