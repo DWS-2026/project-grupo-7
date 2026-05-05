@@ -1,14 +1,16 @@
 package com.rayokross.academy.services;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import javax.sql.rowset.serial.SerialBlob;
-
+import org.hibernate.engine.jdbc.BlobProxy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -38,7 +40,7 @@ public class UserService {
         }
 
         if (user.getRoles() == null || user.getRoles().isEmpty()) {
-            user.setRoles(List.of("USER"));
+            user.setRoles(new ArrayList<>(List.of("USER")));
             log.debug("'USER' role assigned to: {}", user.getEmail());
         }
 
@@ -49,9 +51,9 @@ public class UserService {
     public void save(User user, MultipartFile imageFile) throws IOException {
         if (imageFile != null && !imageFile.isEmpty()) {
             try {
-                user.setProfilePhoto(new SerialBlob(imageFile.getBytes()));
+                user.setProfilePhoto(BlobProxy.generateProxy(imageFile.getBytes()));
                 log.debug("Profile photo created successfully for user: {}", user.getEmail());
-            } catch (Exception e) {
+            } catch (IOException e) {
                 log.error("Failed to create profile photo for user {}: {}", user.getEmail(), e.getMessage(), e);
                 throw new IOException("Failed to create profile photo blob", e);
             }
@@ -76,6 +78,10 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    public Page<User> findAll(Pageable pageable) {
+        return userRepository.findAll(pageable);
+    }
+
     public void deleteById(Long id) {
         userRepository.deleteById(id);
         log.info("User with ID {} deleted by admin.", id);
@@ -88,7 +94,6 @@ public class UserService {
 
         User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("User not found"));
 
-        // Usamos el import de HtmlUtils
         user.setFirstName(HtmlUtils.htmlEscape(firstName.trim()));
         user.setLastName(HtmlUtils.htmlEscape(lastName.trim()));
 
@@ -107,7 +112,7 @@ public class UserService {
         log.info("Admin deleted user ID: {}", id);
     }
 
-    public void registerNewUser(String firstName, String lastName, String email, String password)
+    public User registerNewUser(String firstName, String lastName, String email, String password)
             throws IllegalArgumentException {
         if (firstName == null || firstName.trim().isEmpty()) {
             throw new IllegalArgumentException("The name is obligatory.");
@@ -131,11 +136,13 @@ public class UserService {
         user.setFirstName(firstName);
         user.setLastName(lastName);
         user.setEmail(email);
-        user.setRoles(List.of("USER"));
+        user.setRoles(new ArrayList<>(List.of("USER")));
         user.setPassword(passwordEncoder.encode(password));
 
-        userRepository.save(user);
+        User savedUser = userRepository.save(user);
         log.info("New user registered successfully with email: '{}'", email);
+
+        return savedUser;
     }
 
     public void updateUserProfile(String email, String fullName) throws IllegalArgumentException {
@@ -171,11 +178,13 @@ public class UserService {
         User user = userRepository.findByEmail(email).orElseThrow(() -> new IllegalArgumentException("User not found"));
 
         try {
-            user.setProfilePhoto(new SerialBlob(photo.getBytes()));
+            user.setProfilePhoto(BlobProxy.generateProxy(photo.getBytes()));
+
             userRepository.save(user);
             log.info("User '{}' successfully updated their profile photo.", email);
-        } catch (Exception e) {
+        } catch (IOException e) {
             throw new IOException("Failed to process profile photo", e);
         }
     }
+
 }
