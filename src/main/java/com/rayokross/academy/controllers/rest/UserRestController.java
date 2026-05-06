@@ -43,9 +43,11 @@ public class UserRestController {
 
     @GetMapping("/me")
     public ResponseEntity<UserDTO> getMyProfile(Principal principal) {
+        if (principal == null) throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
+
         return userService.findByEmail(principal.getName())
                 .map(user -> ResponseEntity.ok(userMapper.toDTO(user)))
-                .orElse(ResponseEntity.notFound().build());
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
     }
 
     @PutMapping("/me")
@@ -56,26 +58,30 @@ public class UserRestController {
         userService.updateUserProfile(principal.getName(), dto.fullname());
 
         User updatedUser = userService.findByEmail(principal.getName())
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found after update"));
 
         return ResponseEntity.ok(userMapper.toDTO(updatedUser));
     }
 
     @PutMapping("/me/media")
-    public ResponseEntity<?> uploadPhoto(@RequestParam MultipartFile photo, Principal principal)
+    public ResponseEntity<Void> uploadPhoto(@RequestParam MultipartFile photo, Principal principal)
             throws IOException, SQLException {
+
+        if (photo.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Photo file is empty");
+        }
 
         userService.updateProfilePhoto(principal.getName(), photo);
         return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/{id}/media")
-    public ResponseEntity<?> downloadImage(@PathVariable Long id) {
+    public ResponseEntity<Resource> downloadImage(@PathVariable Long id) {
         return userService.findById(id)
                 .map(user -> {
                     try {
                         if (user.getProfilePhoto() == null) {
-                            return ResponseEntity.notFound().build();
+                            return ResponseEntity.notFound().<Resource>build();
                         }
 
                         Resource file = new InputStreamResource(user.getProfilePhoto().getBinaryStream());
@@ -83,14 +89,18 @@ public class UserRestController {
                                 .contentType(MediaType.IMAGE_JPEG)
                                 .body(file);
                     } catch (SQLException e) {
-                        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+                        throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error reading image data");
                     }
-                }).orElse(ResponseEntity.notFound().build());
+                }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
     }
 
     @DeleteMapping("/me/enrollments/{courseId}")
     public ResponseEntity<Void> cancelEnrollment(@PathVariable Long courseId, Principal principal) {
-        enrollmentService.cancelUserEnrollment(principal.getName(), courseId);
-        return ResponseEntity.noContent().build();
+        try {
+            enrollmentService.cancelUserEnrollment(principal.getName(), courseId);
+            return ResponseEntity.noContent().build();
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Enrollment not found or could not be cancelled");
+        }
     }
 }
