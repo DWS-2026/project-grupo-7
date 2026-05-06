@@ -1,13 +1,15 @@
 package com.rayokross.academy.controllers.rest;
 
+import java.net.URI;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.rayokross.academy.dtos.UserDTO;
 import com.rayokross.academy.dtos.UserRegistrationDTO;
@@ -49,7 +51,15 @@ public class AuthRestController {
                     registrationDTO.lastName(),
                     registrationDTO.email(),
                     registrationDTO.password());
-            return ResponseEntity.status(HttpStatus.CREATED).body(userMapper.toDTO(user));
+
+            URI location = ServletUriComponentsBuilder
+                    .fromCurrentContextPath()
+                    .path("/api/v1/users/{id}")
+                    .buildAndExpand(user.getId())
+                    .toUri();
+
+            return ResponseEntity.created(location).body(userMapper.toDTO(user));
+
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().build();
         }

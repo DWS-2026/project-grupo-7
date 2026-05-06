@@ -8,7 +8,15 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
 
@@ -38,11 +46,11 @@ public class AdminCourseRestController {
     @Autowired
     private UserMapper userMapper;
 
-    @PostMapping("/")
+    @PostMapping
     public ResponseEntity<CourseDetailDTO> createCourse(@RequestBody CourseBasicDTO courseDTO) throws IOException {
         Course course = courseMapper.toEntity(courseDTO);
 
-        courseService.createCourse(course, null, null);
+        course = courseService.createCourse(course, null, null);
 
         URI location = fromCurrentRequest().path("/{id}")
                 .buildAndExpand(course.getId()).toUri();
@@ -53,21 +61,20 @@ public class AdminCourseRestController {
     @PutMapping("/{id}")
     public ResponseEntity<CourseDetailDTO> updateCourse(
             @PathVariable Long id,
-            @RequestBody CourseBasicDTO updatedDTO) throws IOException {
+            @RequestBody CourseBasicDTO updatedDTO) {
 
         return courseService.findById(id).map(existingCourse -> {
             try {
-                courseService.updateCourse(id, courseMapper.toEntity(updatedDTO), null, null);
-
-                return ResponseEntity.ok(courseMapper.toDetailDTO(existingCourse));
+                Course updated = courseService.updateCourse(id, courseMapper.toEntity(updatedDTO), null, null);
+                return ResponseEntity.ok(courseMapper.toDetailDTO(updated));
             } catch (IOException e) {
                 throw new RuntimeException("Error updating course", e);
             }
         }).orElse(ResponseEntity.notFound().build());
     }
 
-    @PostMapping("/{id}/media")
-    public ResponseEntity<Object> uploadImage(@PathVariable Long id, @RequestParam MultipartFile imageFile)
+    @PutMapping("/{id}/media")
+    public ResponseEntity<Void> uploadImage(@PathVariable Long id, @RequestParam MultipartFile imageFile)
             throws IOException, SQLException {
 
         if (courseService.findById(id).isPresent()) {
@@ -78,11 +85,12 @@ public class AdminCourseRestController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<CourseBasicDTO> deleteCourse(@PathVariable Long id) {
-        return courseService.findById(id).map(course -> {
+    public ResponseEntity<Void> deleteCourse(@PathVariable Long id) {
+        if (courseService.findById(id).isPresent()) {
             courseService.delete(id);
-            return ResponseEntity.ok(courseMapper.toBasicDTO(course));
-        }).orElse(ResponseEntity.notFound().build());
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.notFound().build();
     }
 
     @GetMapping("/{id}/users")
@@ -92,9 +100,8 @@ public class AdminCourseRestController {
         if (courseOpt.isPresent()) {
             List<User> users = enrollmentService.getEnrolledUsers(courseOpt.get());
             return ResponseEntity.ok(userMapper.toDTOs(users));
-        } else {
-            return ResponseEntity.notFound().build();
         }
+        return ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/{courseId}/users/{userId}")
@@ -107,8 +114,8 @@ public class AdminCourseRestController {
         }
     }
 
-    @PostMapping("/{id}/syllabus")
-    public ResponseEntity<Object> uploadSyllabus(
+    @PutMapping("/{id}/syllabus")
+    public ResponseEntity<Void> uploadSyllabus(
             @PathVariable Long id,
             @RequestParam MultipartFile syllabusFile) throws IOException {
 
@@ -118,7 +125,6 @@ public class AdminCourseRestController {
             Course course = courseOpt.get();
             courseService.saveSyllabus(course, syllabusFile);
             courseService.save(course);
-
             return ResponseEntity.noContent().build();
         }
 

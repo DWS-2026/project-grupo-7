@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.rayokross.academy.models.Course;
@@ -170,9 +171,21 @@ public class CourseService {
             Files.createDirectories(root);
         }
 
-        String fileName = file.getOriginalFilename();
-        course.setSyllabusFileName(fileName);
+        String originalFilename = file.getOriginalFilename();
+        String extension = "";
 
-        Files.copy(file.getInputStream(), this.root.resolve(fileName), StandardCopyOption.REPLACE_EXISTING);
+        if (originalFilename != null && originalFilename.contains(".")) {
+
+            extension = originalFilename.substring(originalFilename.lastIndexOf("."));
+
+            extension = StringUtils.cleanPath(extension);
+        }
+
+        String safeFileName = "course_" + course.getId() + "_syllabus" + extension;
+
+        course.setSyllabusFileName(safeFileName);
+
+        Files.copy(file.getInputStream(), this.root.resolve(safeFileName), StandardCopyOption.REPLACE_EXISTING);
     }
+
 }

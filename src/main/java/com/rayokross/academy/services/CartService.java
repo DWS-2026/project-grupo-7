@@ -25,6 +25,11 @@ public class CartService {
 
     public void addCourse(Course course) {
 
+        if (cartCourses.size() >= 50) {
+            log.warn("Security Alert: Attempted to exceed maximum cart size limit.");
+            throw new IllegalStateException("You cannot add more than 50 courses to your cart.");
+        }
+
         boolean alreadyExists = false;
 
         for (Course c : cartCourses) {
@@ -33,6 +38,7 @@ public class CartService {
                 break;
             }
         }
+
         if (!alreadyExists) {
             cartCourses.add(course);
             log.info("Course ID {} added to the cart.", course.getId());
@@ -80,7 +86,6 @@ public class CartService {
         if (getCart() == null || getCart().isEmpty()) {
             return false;
         }
-        // Se ha simplificado la referencia a Course
         for (Course c : getCart()) {
             if (c.getId().equals(courseId)) {
                 return true;
