@@ -23,7 +23,12 @@ public class RestErrorController implements ErrorController {
         String uriStr = (uri != null) ? uri.toString() : "Unknown URI";
 
         int statusCode = (status != null) ? Integer.parseInt(status.toString()) : 500;
-        HttpStatus httpStatus = HttpStatus.valueOf(statusCode);
+        HttpStatus httpStatus;
+        try {
+            httpStatus = HttpStatus.valueOf(statusCode);
+        } catch (Exception e) {
+            httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
 
         String message = switch (httpStatus) {
             case NOT_FOUND -> "El recurso solicitado no existe.";
