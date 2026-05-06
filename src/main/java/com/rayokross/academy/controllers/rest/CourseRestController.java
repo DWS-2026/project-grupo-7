@@ -75,7 +75,7 @@ public class CourseRestController {
             Resource resource = courseService.loadSyllabusAsResource(course);
 
             if (resource == null) {
-                return ResponseEntity.notFound().build();
+                return ResponseEntity.notFound().<Resource>build();
             }
 
             return ResponseEntity.ok()
