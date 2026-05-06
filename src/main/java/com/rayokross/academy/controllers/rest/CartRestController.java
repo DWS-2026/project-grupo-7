@@ -29,7 +29,7 @@ public class CartRestController {
 
         try {
             cartService.processApiCheckout(checkoutDTO.courseIds(), principal.getName());
-            return ResponseEntity.ok().build();
+            return ResponseEntity.noContent().build();
 
         } catch (IllegalArgumentException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
