@@ -1,11 +1,13 @@
 package com.rayokross.academy.mappers;
 
-import com.rayokross.academy.models.Course;
-import com.rayokross.academy.dtos.CourseBasicDTO;
-import com.rayokross.academy.dtos.CourseDetailDTO;
+import java.util.List;
+
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import java.util.List;
+
+import com.rayokross.academy.dtos.CourseBasicDTO;
+import com.rayokross.academy.dtos.CourseDetailDTO;
+import com.rayokross.academy.models.Course;
 
 @Mapper(componentModel = "spring", uses = { LessonMapper.class })
 public interface CourseMapper {
@@ -24,5 +26,6 @@ public interface CourseMapper {
     @Mapping(target = "updateDate", ignore = true)
     @Mapping(target = "learningObjectives", ignore = true)
     @Mapping(target = "description", ignore = true)
+    @Mapping(target = "syllabusFileName", ignore = true)
     Course toEntity(CourseBasicDTO dto);
 }
