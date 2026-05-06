@@ -1,11 +1,11 @@
 package com.rayokross.academy.controllers.rest;
 
-import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,12 +27,12 @@ public class MainRestController {
     @Autowired
     private CourseMapper courseMapper;
 
-    @GetMapping("/")
-    public Collection<CourseBasicDTO> getPopularCourses() {
+    @GetMapping
+    public ResponseEntity<List<CourseBasicDTO>> getPopularCourses() {
         Pageable topThree = PageRequest.of(0, POPULAR_COURSES_LIMIT);
 
         List<Course> popularCourses = courseService.findAll(topThree).getContent();
 
-        return courseMapper.toBasicDTOs(popularCourses);
+        return ResponseEntity.ok(courseMapper.toBasicDTOs(popularCourses));
     }
 }

@@ -27,13 +27,13 @@ public class LessonRestController {
     @Autowired
     private LessonMapper lessonMapper;
 
-    @PostMapping("/")
+    // REST: Eliminamos la barra final
+    @PostMapping
     public ResponseEntity<LessonDTO> addLesson(
             @PathVariable Long courseId,
             @RequestBody LessonDTO lessonDTO) {
 
         Lesson lesson = lessonMapper.toEntity(lessonDTO);
-
         Lesson savedLesson = lessonService.addLessonToCourse(courseId, lesson);
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
