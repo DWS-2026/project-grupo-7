@@ -39,7 +39,7 @@ public class AuthRestController {
     public ResponseEntity<AuthResponse> login(
             @RequestBody LoginRequest loginRequest,
             HttpServletResponse response) {
-
+                
         return userLoginService.login(response, loginRequest);
     }
 
@@ -77,7 +77,7 @@ public class AuthRestController {
             HttpServletResponse response) {
 
         if (refreshToken == null) {
-            return ResponseEntity.badRequest().body(
+            return ResponseEntity.status(401).body(
                     new AuthResponse(AuthResponse.Status.FAILURE, "No refresh token provided"));
         }
 
