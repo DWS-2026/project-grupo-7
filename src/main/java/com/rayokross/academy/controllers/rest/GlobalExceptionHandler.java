@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.rayokross.academy.dtos.ErrorMessageDTO;
 
@@ -21,6 +22,11 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(IllegalStateException.class)
     public ResponseEntity<ErrorMessageDTO> handleIllegalState(IllegalStateException ex, WebRequest request) {
         return buildErrorResponse(HttpStatus.CONFLICT, ex.getMessage(), request);
+    }
+
+    @ExceptionHandler(ResponseStatusException.class)
+    public ResponseEntity<ErrorMessageDTO> handleResponseStatusException(ResponseStatusException ex, WebRequest request) {
+        return buildErrorResponse((HttpStatus) ex.getStatusCode(), ex.getReason(), request);
     }
 
     @ExceptionHandler(SecurityException.class)
