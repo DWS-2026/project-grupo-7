@@ -145,25 +145,32 @@ public class UserService {
         return savedUser;
     }
 
-    public void updateUserProfile(String email, String fullName) throws IllegalArgumentException {
+    public User updateUserProfile(String email, String fullName) throws IllegalArgumentException {
         if (fullName == null || fullName.trim().isEmpty() || fullName.length() > 100) {
             throw new IllegalArgumentException("invalid_name");
         }
+
         if (fullName.contains("<") || fullName.contains(">")) {
             throw new IllegalArgumentException("invalid_name");
         }
 
-        String[] names = fullName.split(" ", 2);
+        String[] names = fullName.trim().split("\\s+", 2);
+
         if (names.length < 2 || names[1].trim().isEmpty()) {
             throw new IllegalArgumentException("last_name_required");
         }
 
-        User user = userRepository.findByEmail(email).orElseThrow(() -> new IllegalArgumentException("User not found"));
-        user.setFirstName(names[0]);
-        user.setLastName(names[1].trim());
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
 
-        userRepository.save(user);
+        user.setFirstName(HtmlUtils.htmlEscape(names[0]));
+        user.setLastName(HtmlUtils.htmlEscape(names[1].trim()));
+
+        User savedUser = userRepository.save(user);
+
         log.info("User '{}' updated their profile name.", user.getEmail());
+
+        return savedUser;
     }
 
     public void updateProfilePhoto(String email, MultipartFile photo)

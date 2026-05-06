@@ -15,12 +15,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.rayokross.academy.dtos.UserBasicDTO;
 import com.rayokross.academy.dtos.UserDTO;
 import com.rayokross.academy.mappers.UserMapper;
 import com.rayokross.academy.models.User;
@@ -40,7 +42,6 @@ public class UserRestController {
     @Autowired
     private UserMapper userMapper;
 
-   
     @GetMapping("/me")
     public ResponseEntity<UserDTO> getMyProfile(Principal principal) {
         if (principal == null) {
@@ -52,22 +53,28 @@ public class UserRestController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    
     @PutMapping("/me")
-    public ResponseEntity<UserDTO> updateMyProfile(@RequestParam String fullName, Principal principal) {
-        if (principal == null)
+    public ResponseEntity<UserDTO> updateMyProfile(
+            @RequestBody UserBasicDTO dto,
+            Principal principal) {
+
+        if (principal == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
 
         try {
-            userService.updateUserProfile(principal.getName(), fullName);
-            User updatedUser = userService.findByEmail(principal.getName()).orElseThrow();
+            userService.updateUserProfile(principal.getName(), dto.fullname());
+
+            User updatedUser = userService.findByEmail(principal.getName())
+                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+
             return ResponseEntity.ok(userMapper.toDTO(updatedUser));
+
         } catch (IllegalArgumentException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
 
-    
     @PostMapping("/me/media")
     public ResponseEntity<Object> uploadPhoto(@RequestParam MultipartFile photo, Principal principal)
             throws IOException, SQLException {
@@ -76,7 +83,7 @@ public class UserRestController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
 
         userService.updateProfilePhoto(principal.getName(), photo);
-        return ResponseEntity.noContent().build(); // 204 No Content
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/{id}/media")
@@ -93,7 +100,6 @@ public class UserRestController {
         return ResponseEntity.notFound().build();
     }
 
-    
     @DeleteMapping("/me/enrollments/{courseId}")
     public ResponseEntity<Void> cancelEnrollment(@PathVariable Long courseId, Principal principal) {
         if (principal == null)
