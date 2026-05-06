@@ -87,7 +87,52 @@ public class UserService {
         log.info("User with ID {} deleted by admin.", id);
     }
 
-    public void adminUpdateUserProfile(Long id, String firstName, String lastName) throws IllegalArgumentException {
+    public void adminUpdateUserProfile(Long id, String fullname) throws IllegalArgumentException {
+        if (fullname == null || fullname.trim().isEmpty() || fullname.length() > 100) {
+            throw new IllegalArgumentException("El nombre no puede estar vacío o ser demasiado largo");
+        }
+
+        if (fullname.contains("<") || fullname.contains(">")) {
+            throw new IllegalArgumentException("Caracteres no permitidos en el nombre");
+        }
+
+        String[] names = fullname.trim().split("\\s+", 2);
+
+        if (names.length < 2 || names[1].trim().isEmpty()) {
+            throw new IllegalArgumentException("Se requiere nombre y al menos un apellido");
+        }
+
+        User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("User not found"));
+
+        user.setFirstName(HtmlUtils.htmlEscape(names[0]));
+        user.setLastName(HtmlUtils.htmlEscape(names[1].trim()));
+
+        userRepository.save(user);
+        log.info("Admin updated profile for user ID: {}", id);
+    }
+
+    public void updateRestUserProfile(String email, String fullName) throws IllegalArgumentException {
+        if (fullName == null || fullName.trim().isEmpty() || fullName.length() > 100) {
+            throw new IllegalArgumentException("invalid_name");
+        }
+        if (fullName.contains("<") || fullName.contains(">")) {
+            throw new IllegalArgumentException("invalid_name");
+        }
+
+        String[] names = fullName.split(" ", 2);
+        if (names.length < 2 || names[1].trim().isEmpty()) {
+            throw new IllegalArgumentException("last_name_required");
+        }
+
+        User user = userRepository.findByEmail(email).orElseThrow(() -> new IllegalArgumentException("User not found"));
+        user.setFirstName(names[0]);
+        user.setLastName(names[1].trim());
+
+        userRepository.save(user);
+        log.info("User '{}' updated their profile name.", user.getEmail());
+    }
+
+    public void adminWebUpdateUserProfile(Long id, String firstName, String lastName) throws IllegalArgumentException {
         if (firstName == null || firstName.trim().isEmpty() || lastName == null || lastName.trim().isEmpty()) {
             throw new IllegalArgumentException("Names cannot be empty");
         }

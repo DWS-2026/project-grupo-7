@@ -44,7 +44,7 @@ public class AdminUserController {
     @PostMapping("/admin/users/{id}/edit")
     public String editUser(@PathVariable Long id, @RequestParam String firstName, @RequestParam String lastName) {
         try {
-            userService.adminUpdateUserProfile(id, firstName, lastName);
+            userService.adminWebUpdateUserProfile(id, firstName, lastName);
             return "redirect:/admin/users/" + id + "?success=true";
         } catch (IllegalArgumentException e) {
             return "redirect:/admin/users/" + id + "?error=invalid_data";

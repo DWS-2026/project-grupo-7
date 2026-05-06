@@ -1,11 +1,12 @@
 package com.rayokross.academy.services;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
 
@@ -17,6 +18,12 @@ public class CartService {
 
     private static final Logger log = LoggerFactory.getLogger(CartService.class);
 
+    @Autowired
+    private CourseService courseService;
+
+    @Autowired
+    private EnrollmentService enrollmentService;
+
     private final List<Course> cartCourses = new ArrayList<>();
 
     public List<Course> getCart() {
@@ -24,14 +31,12 @@ public class CartService {
     }
 
     public void addCourse(Course course) {
-
         if (cartCourses.size() >= 50) {
-            log.warn("Security Alert: Attempted to exceed maximum cart size limit.");
-            throw new IllegalStateException("You cannot add more than 50 courses to your cart.");
+            log.warn("Security Alert: Intento de superar el límite del carrito en sesión WEB.");
+            throw new IllegalStateException("No puedes añadir más de 50 cursos al carrito.");
         }
 
         boolean alreadyExists = false;
-
         for (Course c : cartCourses) {
             if (c.getId().equals(course.getId())) {
                 alreadyExists = true;
@@ -41,41 +46,24 @@ public class CartService {
 
         if (!alreadyExists) {
             cartCourses.add(course);
-            log.info("Course ID {} added to the cart.", course.getId());
+            log.info("Curso ID {} añadido al carrito de sesión WEB.", course.getId());
         }
     }
 
     public void removeCourse(Long courseId) {
-        boolean removed = false;
-
-        Iterator<Course> iterator = cartCourses.iterator();
-
-        while (iterator.hasNext()) {
-            Course course = iterator.next();
-            if (course.getId().equals(courseId)) {
-                iterator.remove();
-                removed = true;
-                break;
-            }
-        }
+        boolean removed = cartCourses.removeIf(c -> c.getId().equals(courseId));
         if (removed) {
-            log.info("Course ID {} removed from cart.", courseId);
+            log.info("Curso ID {} eliminado del carrito de sesión WEB.", courseId);
         }
     }
 
     public double getTotalPrice() {
-        double total = 0;
-
-        for (Course course : cartCourses) {
-            total += course.getPrice();
-        }
-
-        return total;
+        return cartCourses.stream().mapToDouble(Course::getPrice).sum();
     }
 
     public void clearCart() {
         cartCourses.clear();
-        log.info("Session cart cleared.");
+        log.info("Carrito de sesión WEB vaciado.");
     }
 
     public int getSize() {
@@ -83,14 +71,27 @@ public class CartService {
     }
 
     public boolean isCourseInCart(Long courseId) {
-        if (getCart() == null || getCart().isEmpty()) {
-            return false;
+        return cartCourses.stream().anyMatch(c -> c.getId().equals(courseId));
+    }
+
+    public void processApiCheckout(List<Long> courseIds, String userEmail) {
+
+        if (courseIds == null || courseIds.isEmpty()) {
+            throw new IllegalArgumentException("El carrito enviado está vacío.");
         }
-        for (Course c : getCart()) {
-            if (c.getId().equals(courseId)) {
-                return true;
-            }
+
+        if (courseIds.size() > 50) {
+            log.warn("Security Alert: Intento de compra masiva por API detectado para el usuario: {}", userEmail);
+            throw new IllegalArgumentException("No puedes procesar más de 50 cursos por transacción.");
         }
-        return false;
+
+        List<Course> courses = courseIds.stream()
+                .map(id -> courseService.findById(id)
+                        .orElseThrow(() -> new IllegalArgumentException("El curso con ID " + id + " no existe.")))
+                .collect(Collectors.toList());
+
+        enrollmentService.checkoutCart(userEmail, courses);
+
+        log.info("API Checkout completado con éxito: Usuario {}, Cursos comprados: {}", userEmail, courseIds.size());
     }
 }

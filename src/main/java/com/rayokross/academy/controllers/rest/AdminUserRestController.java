@@ -9,11 +9,12 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.rayokross.academy.dtos.UserBasicDTO;
 import com.rayokross.academy.dtos.UserDTO;
 import com.rayokross.academy.mappers.UserMapper;
 import com.rayokross.academy.models.User;
@@ -45,11 +46,11 @@ public class AdminUserRestController {
     @PutMapping("/{id}")
     public ResponseEntity<UserDTO> editUser(
             @PathVariable Long id,
-            @RequestParam String firstName,
-            @RequestParam String lastName) {
+            @RequestBody UserBasicDTO userBasicDTO) {
 
         try {
-            userService.adminUpdateUserProfile(id, firstName, lastName);
+            userService.adminUpdateUserProfile(id, userBasicDTO.fullname());
+
             User updatedUser = userService.findById(id).orElseThrow();
             return ResponseEntity.ok(userMapper.toDTO(updatedUser));
         } catch (IllegalArgumentException e) {
