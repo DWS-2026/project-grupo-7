@@ -73,7 +73,8 @@ public class AdminCourseRestController {
         }).orElse(ResponseEntity.notFound().build());
     }
 
-    @PutMapping("/{id}/media")
+
+    @PostMapping("/{id}/media")
     public ResponseEntity<Void> uploadImage(@PathVariable Long id, @RequestParam MultipartFile imageFile)
             throws IOException, SQLException {
 
@@ -114,7 +115,8 @@ public class AdminCourseRestController {
         }
     }
 
-    @PutMapping("/{id}/syllabus")
+
+    @PostMapping("/{id}/syllabus")
     public ResponseEntity<Void> uploadSyllabus(
             @PathVariable Long id,
             @RequestParam MultipartFile syllabusFile) throws IOException {
