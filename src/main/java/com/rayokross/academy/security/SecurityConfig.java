@@ -60,13 +60,16 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/api/v1/courses/**").permitAll()
                         .requestMatchers("/api/v1/auth/**").permitAll()
 
+                        .requestMatchers(HttpMethod.GET, "/api/v1/users/*/media").authenticated()
+
+                        .requestMatchers("/api/v1/users/me/**").hasAnyRole("USER", "ADMIN")
+
                         .requestMatchers(HttpMethod.POST, "/api/v1/courses/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT, "/api/v1/courses/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/api/v1/courses/**").hasRole("ADMIN")
-                        .requestMatchers("/api/v1/admin/**").hasRole("ADMIN")
 
-                        .requestMatchers("/api/v1/users/me/**").hasAnyRole("USER", "ADMIN")
                         .requestMatchers("/api/v1/users/**").hasRole("ADMIN")
+                        .requestMatchers("/api/v1/admin/**").hasRole("ADMIN")
 
                         .requestMatchers("/api/v1/cart/**").hasRole("USER")
                         .requestMatchers("/api/v1/enrollments/**").hasRole("USER")

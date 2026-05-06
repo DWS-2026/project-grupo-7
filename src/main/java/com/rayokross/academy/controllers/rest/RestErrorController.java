@@ -27,9 +27,9 @@ public class RestErrorController implements ErrorController {
 
         String message = switch (httpStatus) {
             case NOT_FOUND -> "El recurso solicitado no existe.";
-            case FORBIDDEN -> "No tienes permisos para acceder aquí.";
-            case BAD_REQUEST -> "La petición es incorrecta.";
-            default -> "Ha ocurrido un error interno en el servidor.";
+            case FORBIDDEN -> "Acceso denegado.";
+            case UNAUTHORIZED -> "Debes estar autenticado para realizar esta acción.";
+            default -> "Error interno del servidor.";
         };
 
         ErrorMessageDTO error = new ErrorMessageDTO(statusCode, message, uriStr, LocalDateTime.now());

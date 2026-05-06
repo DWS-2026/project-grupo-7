@@ -13,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,10 +43,6 @@ public class UserRestController {
 
     @GetMapping("/me")
     public ResponseEntity<UserDTO> getMyProfile(Principal principal) {
-        if (principal == null) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        }
-
         return userService.findByEmail(principal.getName())
                 .map(user -> ResponseEntity.ok(userMapper.toDTO(user)))
                 .orElse(ResponseEntity.notFound().build());
@@ -58,58 +53,44 @@ public class UserRestController {
             @RequestBody UserBasicDTO dto,
             Principal principal) {
 
-        if (principal == null) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        }
+        userService.updateUserProfile(principal.getName(), dto.fullname());
 
-        try {
-            userService.updateUserProfile(principal.getName(), dto.fullname());
+        User updatedUser = userService.findByEmail(principal.getName())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
-            User updatedUser = userService.findByEmail(principal.getName())
-                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
-
-            return ResponseEntity.ok(userMapper.toDTO(updatedUser));
-
-        } catch (IllegalArgumentException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
-        }
+        return ResponseEntity.ok(userMapper.toDTO(updatedUser));
     }
 
-    @PostMapping("/me/media")
-    public ResponseEntity<Object> uploadPhoto(@RequestParam MultipartFile photo, Principal principal)
+    @PutMapping("/me/media")
+    public ResponseEntity<?> uploadPhoto(@RequestParam MultipartFile photo, Principal principal)
             throws IOException, SQLException {
-
-        if (principal == null)
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
 
         userService.updateProfilePhoto(principal.getName(), photo);
         return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/{id}/media")
-    public ResponseEntity<Resource> downloadImage(@PathVariable Long id) throws SQLException {
-        User user = userService.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+    public ResponseEntity<?> downloadImage(@PathVariable Long id) {
+        return userService.findById(id)
+                .map(user -> {
+                    try {
+                        if (user.getProfilePhoto() == null) {
+                            return ResponseEntity.notFound().build();
+                        }
 
-        if (user.getProfilePhoto() != null) {
-            Resource file = new InputStreamResource(user.getProfilePhoto().getBinaryStream());
-            return ResponseEntity.ok()
-                    .contentType(MediaType.IMAGE_JPEG)
-                    .body(file);
-        }
-        return ResponseEntity.notFound().build();
+                        Resource file = new InputStreamResource(user.getProfilePhoto().getBinaryStream());
+                        return ResponseEntity.ok()
+                                .contentType(MediaType.IMAGE_JPEG)
+                                .body(file);
+                    } catch (SQLException e) {
+                        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+                    }
+                }).orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/me/enrollments/{courseId}")
     public ResponseEntity<Void> cancelEnrollment(@PathVariable Long courseId, Principal principal) {
-        if (principal == null)
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-
-        try {
-            enrollmentService.cancelUserEnrollment(principal.getName(), courseId);
-            return ResponseEntity.noContent().build();
-        } catch (IllegalArgumentException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
-        }
+        enrollmentService.cancelUserEnrollment(principal.getName(), courseId);
+        return ResponseEntity.noContent().build();
     }
 }
