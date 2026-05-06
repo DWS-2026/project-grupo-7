@@ -35,10 +35,8 @@ public class EnrollmentRestController {
 
         Enrollment enrollment = enrollmentService.enrollUser(principal.getName(), courseId);
 
-        URI location = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/api/v1/courses/{id}/player")
-                .buildAndExpand(courseId)
-                .toUri();
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+                .build().toUri();
 
         return ResponseEntity.created(location).body(enrollmentMapper.toDTO(enrollment));
     }
