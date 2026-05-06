@@ -30,7 +30,8 @@ public class AdminUserRestController {
     @Autowired
     private UserMapper userMapper;
 
-    @GetMapping("/")
+    
+    @GetMapping
     public ResponseEntity<Page<UserDTO>> getAllUsers(Pageable pageable) {
         Page<User> users = userService.findAll(pageable);
         return ResponseEntity.ok(users.map(userMapper::toDTO));
@@ -59,15 +60,15 @@ public class AdminUserRestController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<UserDTO> deleteUser(@PathVariable Long id) {
-        try {
-            User userToDelete = userService.findById(id)
-                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-
-            userService.deleteUserSafe(id);
-            return ResponseEntity.ok(userMapper.toDTO(userToDelete));
-        } catch (IllegalStateException e) {
-            throw new ResponseStatusException(HttpStatus.FORBIDDEN, e.getMessage());
+    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+        if (userService.findById(id).isPresent()) {
+            try {
+                userService.deleteUserSafe(id);
+                return ResponseEntity.noContent().build();
+            } catch (IllegalStateException e) {
+                throw new ResponseStatusException(HttpStatus.FORBIDDEN, e.getMessage());
+            }
         }
+        return ResponseEntity.notFound().build();
     }
 }
