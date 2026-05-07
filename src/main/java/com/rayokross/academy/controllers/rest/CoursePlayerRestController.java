@@ -33,7 +33,7 @@ public class CoursePlayerRestController {
     @Autowired
     private CourseMapper courseMapper;
 
-    @GetMapping("/{courseId}/player")
+    @GetMapping("/{courseId}/lessons")
     public ResponseEntity<CourseProgressDTO> getCoursePlayer(
             @PathVariable Long courseId,
             Principal principal) {
