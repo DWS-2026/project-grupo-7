@@ -58,6 +58,17 @@ public class EnrollmentService {
         return enrolledUsers;
     }
 
+    public List<Enrollment> getMyEnrollments(String username) {
+
+        User user = userService.findByEmail(username)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+
+        List<Enrollment> enrollments = enrollmentRepository.findByUser(user);
+
+        return enrollments;
+
+    }
+
     public Optional<Enrollment> findByUserEmailAndCourse(String email, Course course) {
         return enrollmentRepository.findByUserEmailAndCourse(email, course);
     }
