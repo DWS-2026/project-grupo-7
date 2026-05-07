@@ -17,7 +17,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(NoSuchElementException.class)
     public ResponseEntity<ErrorMessageDTO> handleNoSuchElement(NoSuchElementException ex, WebRequest request) {
-        return buildErrorResponse(HttpStatus.NOT_FOUND, "El recurso solicitado no existe o no se ha encontrado.",
+        return buildErrorResponse(HttpStatus.NOT_FOUND, "The requested resource does not exist or was not found.",
                 request);
     }
 
@@ -39,12 +39,12 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(SecurityException.class)
     public ResponseEntity<ErrorMessageDTO> handleSecurityException(SecurityException ex, WebRequest request) {
-        return buildErrorResponse(HttpStatus.FORBIDDEN, "Acceso denegado: " + ex.getMessage(), request);
+        return buildErrorResponse(HttpStatus.FORBIDDEN, "Access denied: " + ex.getMessage(), request);
     }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorMessageDTO> handleGlobalException(Exception ex, WebRequest request) {
-        return buildErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR, "Ha ocurrido un error inesperado en el servidor",
+        return buildErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR, "An unexpected server error has occurred.",
                 request);
     }
 

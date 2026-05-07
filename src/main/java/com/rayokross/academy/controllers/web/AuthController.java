@@ -30,7 +30,6 @@ public class AuthController {
         if (request.getParameter("error") != null) {
             model.addAttribute("error", true);
 
-            // Extraemos la excepción que provocó el fallo desde la sesión
             HttpSession session = request.getSession(false);
             if (session != null) {
                 AuthenticationException ex = (AuthenticationException) session

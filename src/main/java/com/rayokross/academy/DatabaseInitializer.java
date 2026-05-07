@@ -67,7 +67,6 @@ public class DatabaseInitializer {
                 User student = null;
 
                 if (userService.findAll().isEmpty()) {
-                        // ✅ Hasheamos las contraseñas antes de guardar los usuarios iniciales
                         admin = new User("Admin", "Master", "admin@rayokross.com", passwordEncoder.encode(adminPassword), "ADMIN");
                         userService.save(admin);
 

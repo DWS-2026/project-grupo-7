@@ -22,7 +22,6 @@ public class LessonController {
     @PostMapping("/admin/courses/{courseId}/lessons/new")
     public String addLesson(@PathVariable Long courseId, Lesson lesson) {
         try {
-            // El servicio se encarga de buscar el curso y enlazar la lección
             lessonService.addLessonToCourse(courseId, lesson);
         } catch (IllegalArgumentException e) {
             log.error("Error adding lesson: {}", e.getMessage());
@@ -32,7 +31,6 @@ public class LessonController {
 
     @PostMapping("/admin/courses/{courseId}/lessons/{id}/delete")
     public String deleteLesson(@PathVariable Long courseId, @PathVariable Long id, Model model) {
-        // Este ya estaba perfecto
         lessonService.deleteById(id);
         log.info("Admin deleted lesson ID {} from course ID {}", id, courseId);
         return "redirect:/admin/courses/" + courseId + "/edit";
