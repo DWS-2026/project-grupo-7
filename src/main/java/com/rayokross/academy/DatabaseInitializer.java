@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import com.rayokross.academy.models.Course;
@@ -34,6 +35,9 @@ public class DatabaseInitializer {
 
         @Autowired
         private EnrollmentService enrollmentService;
+
+        @Autowired
+        private PasswordEncoder passwordEncoder;
 
         @Value("${admin.default.password}")
         private String adminPassword;
@@ -63,14 +67,14 @@ public class DatabaseInitializer {
                 User student = null;
 
                 if (userService.findAll().isEmpty()) {
-
-                        admin = new User("Admin", "Master", "admin@rayokross.com", adminPassword, "ADMIN");
+                        // ✅ Hasheamos las contraseñas antes de guardar los usuarios iniciales
+                        admin = new User("Admin", "Master", "admin@rayokross.com", passwordEncoder.encode(adminPassword), "ADMIN");
                         userService.save(admin);
 
-                        student = new User("Student", "Demo", "student@rayokross.com", studentPassword, "USER");
+                        student = new User("Student", "Demo", "student@rayokross.com", passwordEncoder.encode(studentPassword), "USER");
                         userService.save(student);
 
-                        log.info("Database initialized with default users.");
+                        log.info("Database initialized with default users (hashed passwords).");
                 } else {
                         student = userService.findByEmail("student@rayokross.com").orElse(null);
                 }
