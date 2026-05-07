@@ -8,8 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -55,17 +55,21 @@ public class CoursePlayerRestController {
         return ResponseEntity.ok(progress);
     }
 
-    @PatchMapping("/{courseId}/completion")
-    public ResponseEntity<Void> updateCompletionStatus(
+    @PatchMapping("/{courseId}/status")
+    public ResponseEntity<Void> updateEnrollmentStatus(
             @PathVariable Long courseId,
-            @RequestParam boolean status,
+            @RequestBody java.util.Map<String, Boolean> body,
             Principal principal) {
 
         if (principal == null)
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
 
+        Boolean completed = body.get("completed");
+        if (completed == null)
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Field 'completed' is required");
+
         try {
-            enrollmentService.setCourseCompletion(principal.getName(), courseId, status);
+            enrollmentService.setCourseCompletion(principal.getName(), courseId, completed);
             return ResponseEntity.noContent().build();
         } catch (IllegalArgumentException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
