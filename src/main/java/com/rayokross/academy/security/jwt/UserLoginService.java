@@ -12,6 +12,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
+import com.rayokross.academy.services.LoginAttemptService;
+
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 
@@ -23,22 +25,36 @@ public class UserLoginService {
 	private final AuthenticationManager authenticationManager;
 	private final UserDetailsService userDetailsService;
 	private final JwtTokenProvider jwtTokenProvider;
+	private final LoginAttemptService loginAttemptService;
 
 	public UserLoginService(AuthenticationManager authenticationManager, UserDetailsService userDetailsService,
-			JwtTokenProvider jwtTokenProvider) {
+			JwtTokenProvider jwtTokenProvider, LoginAttemptService loginAttemptService) {
 		this.authenticationManager = authenticationManager;
 		this.userDetailsService = userDetailsService;
 		this.jwtTokenProvider = jwtTokenProvider;
+		this.loginAttemptService = loginAttemptService;
 	}
 
 	public ResponseEntity<AuthResponse> login(HttpServletResponse response, LoginRequest loginRequest) {
+		String username = loginRequest.getUsername();
+
+		if (loginAttemptService.isBlocked(username)) {
+			log.error(
+					"A07 SECURITY ALERT: Intento de acceso bloqueado. El usuario '{}' ha superado el límite de intentos.",
+					username);
+			throw new org.springframework.web.server.ResponseStatusException(
+					org.springframework.http.HttpStatus.TOO_MANY_REQUESTS,
+					"Cuenta temporalmente bloqueada por demasiados intentos fallidos.");
+		}
+
 		try {
 			Authentication authentication = authenticationManager.authenticate(
-					new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
+					new UsernamePasswordAuthenticationToken(username, loginRequest.getPassword()));
+
+			loginAttemptService.loginSucceeded(username);
 
 			SecurityContextHolder.getContext().setAuthentication(authentication);
 
-			String username = loginRequest.getUsername();
 			UserDetails user = userDetailsService.loadUserByUsername(username);
 
 			HttpHeaders responseHeaders = new HttpHeaders();
@@ -55,9 +71,12 @@ public class UserLoginService {
 			return ResponseEntity.ok().headers(responseHeaders).body(loginResponse);
 
 		} catch (org.springframework.security.core.AuthenticationException e) {
+
+			loginAttemptService.loginFailed(username);
+
 			log.warn(
 					"A09 SECURITY ALERT: Intento de login fallido para el usuario '{}'. Motivo: Credenciales inválidas.",
-					loginRequest.getUsername());
+					username);
 
 			throw new org.springframework.web.server.ResponseStatusException(
 					org.springframework.http.HttpStatus.UNAUTHORIZED, "Credenciales incorrectas");

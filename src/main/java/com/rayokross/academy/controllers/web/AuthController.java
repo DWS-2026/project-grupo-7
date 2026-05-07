@@ -3,6 +3,8 @@ package com.rayokross.academy.controllers.web;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.web.WebAttributes;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.rayokross.academy.services.UserService;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class AuthController {
@@ -20,20 +25,27 @@ public class AuthController {
     private UserService userService;
 
     @GetMapping("/login")
-    public String showLoginForm(Model model,
-            @RequestParam(required = false) String error,
-            @RequestParam(required = false) String logout) {
+    public String login(HttpServletRequest request, Model model) {
 
-        model.addAttribute("pageTitle", "Login");
-
-        if (error != null) {
+        if (request.getParameter("error") != null) {
             model.addAttribute("error", true);
+
+            // Extraemos la excepción que provocó el fallo desde la sesión
+            HttpSession session = request.getSession(false);
+            if (session != null) {
+                AuthenticationException ex = (AuthenticationException) session
+                        .getAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
+                if (ex != null) {
+                    model.addAttribute("errorMessage", ex.getMessage());
+                }
+            }
         }
 
-        if (logout != null) {
+        if (request.getParameter("logout") != null) {
             model.addAttribute("logout", true);
         }
 
+        model.addAttribute("pageTitle", "Log In");
         return "login";
     }
 
