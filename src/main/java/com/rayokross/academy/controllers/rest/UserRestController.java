@@ -73,9 +73,9 @@ public class UserRestController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/{id}/media")
-    public ResponseEntity<Resource> downloadImage(@PathVariable Long id) {
-        User user = userService.findById(id).orElseThrow();
+    @GetMapping("/me/media")
+    public ResponseEntity<Resource> downloadImage(Principal principal) {
+        User user = userService.findByEmail(principal.getName()).orElseThrow();
 
         try {
             if (user.getProfilePhoto() == null) {
