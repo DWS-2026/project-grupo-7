@@ -32,25 +32,36 @@ public class UserLoginService {
 	}
 
 	public ResponseEntity<AuthResponse> login(HttpServletResponse response, LoginRequest loginRequest) {
+		try {
+			Authentication authentication = authenticationManager.authenticate(
+					new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
 
-		Authentication authentication = authenticationManager.authenticate(
-				new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
+			SecurityContextHolder.getContext().setAuthentication(authentication);
 
-		SecurityContextHolder.getContext().setAuthentication(authentication);
+			String username = loginRequest.getUsername();
+			UserDetails user = userDetailsService.loadUserByUsername(username);
 
-		String username = loginRequest.getUsername();
-		UserDetails user = userDetailsService.loadUserByUsername(username);
+			HttpHeaders responseHeaders = new HttpHeaders();
+			var newAccessToken = jwtTokenProvider.generateAccessToken(user);
+			var newRefreshToken = jwtTokenProvider.generateRefreshToken(user);
 
-		HttpHeaders responseHeaders = new HttpHeaders();
-		var newAccessToken = jwtTokenProvider.generateAccessToken(user);
-		var newRefreshToken = jwtTokenProvider.generateRefreshToken(user);
+			response.addCookie(buildTokenCookie(TokenType.ACCESS, newAccessToken));
+			response.addCookie(buildTokenCookie(TokenType.REFRESH, newRefreshToken));
 
-		response.addCookie(buildTokenCookie(TokenType.ACCESS, newAccessToken));
-		response.addCookie(buildTokenCookie(TokenType.REFRESH, newRefreshToken));
+			log.info("A09 EVENT: Login exitoso para el usuario '{}'", username);
 
-		AuthResponse loginResponse = new AuthResponse(AuthResponse.Status.SUCCESS,
-				"Auth successful. Tokens are created in cookie.");
-		return ResponseEntity.ok().headers(responseHeaders).body(loginResponse);
+			AuthResponse loginResponse = new AuthResponse(AuthResponse.Status.SUCCESS,
+					"Auth successful. Tokens are created in cookie.");
+			return ResponseEntity.ok().headers(responseHeaders).body(loginResponse);
+
+		} catch (org.springframework.security.core.AuthenticationException e) {
+			log.warn(
+					"A09 SECURITY ALERT: Intento de login fallido para el usuario '{}'. Motivo: Credenciales inválidas.",
+					loginRequest.getUsername());
+
+			throw new org.springframework.web.server.ResponseStatusException(
+					org.springframework.http.HttpStatus.UNAUTHORIZED, "Credenciales incorrectas");
+		}
 	}
 
 	public ResponseEntity<AuthResponse> refresh(HttpServletResponse response, String refreshToken) {
@@ -85,6 +96,7 @@ public class UserLoginService {
 		Cookie cookie = new Cookie(type.cookieName, token);
 		cookie.setMaxAge((int) type.duration.getSeconds());
 		cookie.setHttpOnly(true);
+		cookie.setSecure(true);
 		cookie.setPath("/");
 		return cookie;
 	}
