@@ -35,11 +35,6 @@ public class UserService {
     private PasswordEncoder passwordEncoder;
 
     public void save(User user) {
-        if (user.getPassword() != null && !user.getPassword().startsWith("$2a$")) {
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
-            log.debug("Password encoded for user: {}", user.getEmail());
-        }
-
         if (user.getRoles() == null || user.getRoles().isEmpty()) {
             user.setRoles(new ArrayList<>(List.of("USER")));
             log.debug("'USER' role assigned to: {}", user.getEmail());
@@ -90,12 +85,12 @@ public class UserService {
 
     public void adminUpdateUserProfile(Long id, String fullname) throws IllegalArgumentException {
         if (fullname == null || fullname.trim().isEmpty() || fullname.length() > 100) {
-            throw new IllegalArgumentException("El nombre no puede estar vacío o ser demasiado largo");
+            throw new IllegalArgumentException("Name cannot be empty o be too long");
         }
 
         String[] names = fullname.trim().split("\\s+", 2);
         if (names.length < 2 || names[1].trim().isEmpty()) {
-            throw new IllegalArgumentException("Se requiere nombre y al menos un apellido");
+            throw new IllegalArgumentException("Name and lastname is required");
         }
 
         User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("User not found"));
@@ -176,6 +171,7 @@ public class UserService {
         user.setLastName(sanitize(lastName.trim()));
         user.setEmail(email.trim());
         user.setRoles(new ArrayList<>(List.of("USER")));
+        
         user.setPassword(passwordEncoder.encode(password));
 
         User savedUser = userRepository.save(user);
@@ -236,5 +232,4 @@ public class UserService {
 
         return Jsoup.clean(text, Safelist.none());
     }
-
 }
