@@ -90,6 +90,8 @@ public class SecurityConfig {
     public SecurityFilterChain webFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(authorize -> authorize
 
+                .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/v3/api-docs.yaml", "/v3/api-docs").permitAll()
+
                 .requestMatchers("/", "/courses", "/courses/**", "/login", "/register", "/error").permitAll()
                 .requestMatchers("/css/**", "/js/**", "/images/**", "/assets/**").permitAll()
 
