@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.hibernate.engine.jdbc.BlobProxy;
+import org.jsoup.Jsoup;
+import org.jsoup.safety.Safelist;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +16,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.util.HtmlUtils;
 
 import com.rayokross.academy.models.User;
 import com.rayokross.academy.repositories.UserRepository;
@@ -92,20 +93,15 @@ public class UserService {
             throw new IllegalArgumentException("El nombre no puede estar vacío o ser demasiado largo");
         }
 
-        if (fullname.contains("<") || fullname.contains(">")) {
-            throw new IllegalArgumentException("Caracteres no permitidos en el nombre");
-        }
-
         String[] names = fullname.trim().split("\\s+", 2);
-
         if (names.length < 2 || names[1].trim().isEmpty()) {
             throw new IllegalArgumentException("Se requiere nombre y al menos un apellido");
         }
 
         User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("User not found"));
 
-        user.setFirstName(HtmlUtils.htmlEscape(names[0]));
-        user.setLastName(HtmlUtils.htmlEscape(names[1].trim()));
+        user.setFirstName(sanitize(names[0]));
+        user.setLastName(sanitize(names[1].trim()));
 
         userRepository.save(user);
         log.info("Admin updated profile for user ID: {}", id);
@@ -115,18 +111,16 @@ public class UserService {
         if (fullName == null || fullName.trim().isEmpty() || fullName.length() > 100) {
             throw new IllegalArgumentException("invalid_name");
         }
-        if (fullName.contains("<") || fullName.contains(">")) {
-            throw new IllegalArgumentException("invalid_name");
-        }
 
-        String[] names = fullName.split(" ", 2);
+        String[] names = fullName.trim().split("\\s+", 2);
         if (names.length < 2 || names[1].trim().isEmpty()) {
             throw new IllegalArgumentException("last_name_required");
         }
 
         User user = userRepository.findByEmail(email).orElseThrow(() -> new IllegalArgumentException("User not found"));
-        user.setFirstName(names[0]);
-        user.setLastName(names[1].trim());
+
+        user.setFirstName(sanitize(names[0]));
+        user.setLastName(sanitize(names[1].trim()));
 
         userRepository.save(user);
         log.info("User '{}' updated their profile name.", user.getEmail());
@@ -139,8 +133,8 @@ public class UserService {
 
         User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("User not found"));
 
-        user.setFirstName(HtmlUtils.htmlEscape(firstName.trim()));
-        user.setLastName(HtmlUtils.htmlEscape(lastName.trim()));
+        user.setFirstName(sanitize(firstName.trim()));
+        user.setLastName(sanitize(lastName.trim()));
 
         userRepository.save(user);
         log.info("Admin updated profile for user ID: {}", id);
@@ -178,9 +172,9 @@ public class UserService {
         }
 
         User user = new User();
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
-        user.setEmail(email);
+        user.setFirstName(sanitize(firstName.trim()));
+        user.setLastName(sanitize(lastName.trim()));
+        user.setEmail(email.trim());
         user.setRoles(new ArrayList<>(List.of("USER")));
         user.setPassword(passwordEncoder.encode(password));
 
@@ -195,10 +189,6 @@ public class UserService {
             throw new IllegalArgumentException("invalid_name");
         }
 
-        if (fullName.contains("<") || fullName.contains(">")) {
-            throw new IllegalArgumentException("invalid_name");
-        }
-
         String[] names = fullName.trim().split("\\s+", 2);
 
         if (names.length < 2 || names[1].trim().isEmpty()) {
@@ -208,8 +198,8 @@ public class UserService {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new IllegalArgumentException("User not found"));
 
-        user.setFirstName(HtmlUtils.htmlEscape(names[0]));
-        user.setLastName(HtmlUtils.htmlEscape(names[1].trim()));
+        user.setFirstName(sanitize(names[0]));
+        user.setLastName(sanitize(names[1].trim()));
 
         User savedUser = userRepository.save(user);
 
@@ -237,6 +227,14 @@ public class UserService {
         } catch (IOException e) {
             throw new IOException("Failed to process profile photo", e);
         }
+    }
+
+    private String sanitize(String text) {
+        if (text == null) {
+            return null;
+        }
+
+        return Jsoup.clean(text, Safelist.none());
     }
 
 }
