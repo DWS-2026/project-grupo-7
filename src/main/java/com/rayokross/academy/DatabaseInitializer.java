@@ -2,8 +2,7 @@ package com.rayokross.academy;
 
 import java.io.InputStream;
 
-import javax.sql.rowset.serial.SerialBlob;
-
+import org.hibernate.engine.jdbc.BlobProxy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +46,7 @@ public class DatabaseInitializer {
                         Resource resource = new ClassPathResource("static/images/" + imageName);
                         if (resource.exists()) {
                                 InputStream is = resource.getInputStream();
-                                course.setImage(new SerialBlob(is.readAllBytes()));
+                                course.setImage(BlobProxy.generateProxy(is.readAllBytes()));
                         } else {
                                 log.warn("Could not find the image: " + imageName
                                                 + ". Checking in static/images/");
