@@ -2,9 +2,11 @@ package com.rayokross.academy.controllers.rest;
 
 import java.time.LocalDateTime;
 import java.util.NoSuchElementException; // Añadido el import
+import java.util.stream.Collectors;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
@@ -46,6 +48,17 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorMessageDTO> handleGlobalException(Exception ex, WebRequest request) {
         return buildErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR, "An unexpected server error has occurred.",
                 request);
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ErrorMessageDTO> handleValidationErrors(
+            MethodArgumentNotValidException ex, WebRequest request) {
+
+        String message = ex.getBindingResult().getFieldErrors().stream()
+                .map(e -> e.getField() + ": " + e.getDefaultMessage())
+                .collect(Collectors.joining(", "));
+
+        return buildErrorResponse(HttpStatus.BAD_REQUEST, message, request);
     }
 
     private ResponseEntity<ErrorMessageDTO> buildErrorResponse(HttpStatus status, String message, WebRequest request) {

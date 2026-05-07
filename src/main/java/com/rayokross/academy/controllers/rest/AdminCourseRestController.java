@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import jakarta.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -47,7 +49,7 @@ public class AdminCourseRestController {
     private UserMapper userMapper;
 
     @PostMapping
-    public ResponseEntity<CourseDetailDTO> createCourse(@RequestBody CourseBasicDTO courseDTO) throws IOException {
+    public ResponseEntity<CourseDetailDTO> createCourse(@Valid @RequestBody CourseBasicDTO courseDTO) throws IOException {
         Course course = courseMapper.toEntity(courseDTO);
         course = courseService.createCourse(course, null, null);
         URI location = fromCurrentRequest().path("/{id}")
