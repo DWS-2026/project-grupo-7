@@ -35,6 +35,8 @@ public class CourseService {
 
     private static final List<String> ALLOWED_IMAGE_TYPES = Arrays.asList("image/jpeg", "image/png", "image/gif");
 
+    private static final String ALLOWED_SYLLABUS_TYPE = "application/pdf";
+
     private final Path root = Paths.get("uploads");
 
     @Autowired
@@ -86,6 +88,7 @@ public class CourseService {
     public Course createCourse(Course course, MultipartFile imageFile, MultipartFile syllabusFile) throws IOException {
         validateCourse(course);
         validateImage(imageFile, false);
+        validateSyllabus(syllabusFile, false);
 
         course.setDescription(sanitize(course.getDescription()));
 
@@ -108,6 +111,7 @@ public class CourseService {
 
         validateCourse(updatedCourse);
         validateImage(imageFile, false);
+        validateSyllabus(syllabusFile, false);
 
         existingCourse.setTitle(updatedCourse.getTitle());
         existingCourse.setDescription(sanitize(updatedCourse.getDescription()));
@@ -158,6 +162,21 @@ public class CourseService {
         }
     }
 
+    private void validateSyllabus(MultipartFile syllabusFile, boolean isRequired) {
+        if (syllabusFile == null || syllabusFile.isEmpty()) {
+            if (isRequired) {
+                throw new IllegalArgumentException("Error: You have to upload a syllabus for the course.");
+            }
+            return;
+        }
+        if (!ALLOWED_SYLLABUS_TYPE.equals(syllabusFile.getContentType())) {
+            throw new IllegalArgumentException("Security error: Only PDF files are allowed for the syllabus.");
+        }
+        if (syllabusFile.getSize() > 5 * 1024 * 1024) { 
+            throw new IllegalArgumentException("Error: Syllabus file size can't exceed 5MB.");
+        }
+    }
+
     private Blob createBlobFromMultipartFile(MultipartFile file) throws IOException {
         try {
             return BlobProxy.generateProxy(file.getBytes());
@@ -198,8 +217,6 @@ public class CourseService {
         }
 
         try {
-            // Seguridad A05: Combinamos la raíz con el nombre seguro de la DB y
-            // normalizamos
             Path filePath = this.root.resolve(fileName).normalize();
             Resource resource = new UrlResource(filePath.toUri());
 
