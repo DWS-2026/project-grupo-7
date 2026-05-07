@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -49,12 +49,9 @@ public class AdminCourseRestController {
     @PostMapping
     public ResponseEntity<CourseDetailDTO> createCourse(@RequestBody CourseBasicDTO courseDTO) throws IOException {
         Course course = courseMapper.toEntity(courseDTO);
-
         course = courseService.createCourse(course, null, null);
-
         URI location = fromCurrentRequest().path("/{id}")
                 .buildAndExpand(course.getId()).toUri();
-
         return ResponseEntity.created(location).body(courseMapper.toDetailDTO(course));
     }
 
@@ -62,47 +59,41 @@ public class AdminCourseRestController {
     public ResponseEntity<CourseDetailDTO> updateCourse(
             @PathVariable Long id,
             @RequestBody CourseBasicDTO updatedDTO) {
+        
+        courseService.findById(id).orElseThrow();
 
-        return courseService.findById(id).map(existingCourse -> {
-            try {
-                Course updated = courseService.updateCourse(id, courseMapper.toEntity(updatedDTO), null, null);
-                return ResponseEntity.ok(courseMapper.toDetailDTO(updated));
-            } catch (IOException e) {
-                throw new RuntimeException("Error updating course", e);
-            }
-        }).orElse(ResponseEntity.notFound().build());
+        try {
+            Course updated = courseService.updateCourse(id, courseMapper.toEntity(updatedDTO), null, null);
+            return ResponseEntity.ok(courseMapper.toDetailDTO(updated));
+        } catch (IOException e) {
+            throw new RuntimeException("Error updating course", e);
+        }
     }
-
 
     @PostMapping("/{id}/media")
     public ResponseEntity<Void> uploadImage(@PathVariable Long id, @RequestParam MultipartFile imageFile)
             throws IOException, SQLException {
-
-        if (courseService.findById(id).isPresent()) {
-            courseService.updateCourseImage(id, imageFile);
-            return ResponseEntity.noContent().build();
-        }
-        return ResponseEntity.notFound().build();
+        
+        courseService.findById(id).orElseThrow();
+        
+        courseService.updateCourseImage(id, imageFile);
+        return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteCourse(@PathVariable Long id) {
-        if (courseService.findById(id).isPresent()) {
-            courseService.delete(id);
-            return ResponseEntity.noContent().build();
-        }
-        return ResponseEntity.notFound().build();
+        courseService.findById(id).orElseThrow();
+        
+        courseService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/{id}/users")
     public ResponseEntity<List<UserDTO>> getEnrolledUsers(@PathVariable Long id) {
-        Optional<Course> courseOpt = courseService.findById(id);
-
-        if (courseOpt.isPresent()) {
-            List<User> users = enrollmentService.getEnrolledUsers(courseOpt.get());
-            return ResponseEntity.ok(userMapper.toDTOs(users));
-        }
-        return ResponseEntity.notFound().build();
+        Course course = courseService.findById(id).orElseThrow();
+        
+        List<User> users = enrollmentService.getEnrolledUsers(course);
+        return ResponseEntity.ok(userMapper.toDTOs(users));
     }
 
     @DeleteMapping("/{courseId}/users/{userId}")
@@ -111,25 +102,19 @@ public class AdminCourseRestController {
             enrollmentService.removeEnrollmentByIds(userId, courseId);
             return ResponseEntity.noContent().build();
         } catch (Exception e) {
-            return ResponseEntity.notFound().build();
+            throw new NoSuchElementException();
         }
     }
-
 
     @PostMapping("/{id}/syllabus")
     public ResponseEntity<Void> uploadSyllabus(
             @PathVariable Long id,
             @RequestParam MultipartFile syllabusFile) throws IOException {
 
-        Optional<Course> courseOpt = courseService.findById(id);
-
-        if (courseOpt.isPresent()) {
-            Course course = courseOpt.get();
-            courseService.saveSyllabus(course, syllabusFile);
-            courseService.save(course);
-            return ResponseEntity.noContent().build();
-        }
-
-        return ResponseEntity.notFound().build();
+        Course course = courseService.findById(id).orElseThrow();
+        
+        courseService.saveSyllabus(course, syllabusFile);
+        courseService.save(course);
+        return ResponseEntity.noContent().build();
     }
 }

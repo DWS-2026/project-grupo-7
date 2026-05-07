@@ -1,7 +1,7 @@
 package com.rayokross.academy.controllers.rest;
 
 import java.sql.SQLException;
-import java.util.Optional;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
@@ -49,42 +49,37 @@ public class CourseRestController {
 
     @GetMapping("/{id}")
     public ResponseEntity<CourseDetailDTO> getCourse(@PathVariable Long id) {
-        return courseService.findById(id)
-                .map(course -> ResponseEntity.ok(courseMapper.toDetailDTO(course)))
-                .orElse(ResponseEntity.notFound().build());
+        Course course = courseService.findById(id).orElseThrow();
+        return ResponseEntity.ok(courseMapper.toDetailDTO(course));
     }
 
     @GetMapping("/{id}/media")
     public ResponseEntity<Resource> getCourseImage(@PathVariable Long id) throws SQLException {
-        Optional<Course> courseOpt = courseService.findById(id);
+        Course course = courseService.findById(id).orElseThrow();
 
-        if (courseOpt.isPresent() && courseOpt.get().getImage() != null) {
-            Resource file = new InputStreamResource(courseOpt.get().getImage().getBinaryStream());
-
-            return ResponseEntity.ok()
-                    .contentType(MediaType.IMAGE_JPEG)
-                    .body(file);
+        if (course.getImage() == null) {
+            throw new NoSuchElementException();
         }
 
-        return ResponseEntity.notFound().build();
+        Resource file = new InputStreamResource(course.getImage().getBinaryStream());
+        return ResponseEntity.ok()
+                .contentType(MediaType.IMAGE_JPEG)
+                .body(file);
     }
 
     @GetMapping("/{id}/syllabus")
-    public ResponseEntity<?> downloadSyllabus(@PathVariable Long id) {
-        return courseService.findById(id).map(course -> {
-            Resource resource = courseService.loadSyllabusAsResource(course);
+    public ResponseEntity<Resource> downloadSyllabus(@PathVariable Long id) {
+        Course course = courseService.findById(id).orElseThrow();
+        Resource resource = courseService.loadSyllabusAsResource(course);
 
-            if (resource == null) {
-                return ResponseEntity.notFound().<Resource>build();
-            }
+        if (resource == null) {
+            throw new NoSuchElementException();
+        }
 
-            return ResponseEntity.ok()
-                    .header(org.springframework.http.HttpHeaders.CONTENT_DISPOSITION,
-                            "attachment; filename=\"" + resource.getFilename() + "\"")
-                    .contentType(MediaType.APPLICATION_OCTET_STREAM)
-                    .body(resource);
-
-        }).orElse(ResponseEntity.notFound().build());
+        return ResponseEntity.ok()
+                .header(org.springframework.http.HttpHeaders.CONTENT_DISPOSITION,
+                        "attachment; filename=\"" + resource.getFilename() + "\"")
+                .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                .body(resource);
     }
-
 }

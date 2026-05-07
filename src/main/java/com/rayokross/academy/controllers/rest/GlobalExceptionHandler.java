@@ -1,6 +1,7 @@
 package com.rayokross.academy.controllers.rest;
 
 import java.time.LocalDateTime;
+import java.util.NoSuchElementException; // Añadido el import
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,12 @@ import com.rayokross.academy.dtos.ErrorMessageDTO;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
+    @ExceptionHandler(NoSuchElementException.class)
+    public ResponseEntity<ErrorMessageDTO> handleNoSuchElement(NoSuchElementException ex, WebRequest request) {
+        return buildErrorResponse(HttpStatus.NOT_FOUND, "El recurso solicitado no existe o no se ha encontrado.",
+                request);
+    }
+
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<ErrorMessageDTO> handleIllegalArgument(IllegalArgumentException ex, WebRequest request) {
         return buildErrorResponse(HttpStatus.BAD_REQUEST, ex.getMessage(), request);
@@ -25,7 +32,8 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(ResponseStatusException.class)
-    public ResponseEntity<ErrorMessageDTO> handleResponseStatusException(ResponseStatusException ex, WebRequest request) {
+    public ResponseEntity<ErrorMessageDTO> handleResponseStatusException(ResponseStatusException ex,
+            WebRequest request) {
         return buildErrorResponse((HttpStatus) ex.getStatusCode(), ex.getReason(), request);
     }
 

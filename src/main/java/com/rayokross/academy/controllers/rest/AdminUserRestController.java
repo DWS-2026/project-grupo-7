@@ -30,7 +30,6 @@ public class AdminUserRestController {
     @Autowired
     private UserMapper userMapper;
 
-    
     @GetMapping
     public ResponseEntity<Page<UserDTO>> getAllUsers(Pageable pageable) {
         Page<User> users = userService.findAll(pageable);
@@ -39,9 +38,8 @@ public class AdminUserRestController {
 
     @GetMapping("/{id}")
     public ResponseEntity<UserDTO> getUserProfile(@PathVariable Long id) {
-        return userService.findById(id)
-                .map(user -> ResponseEntity.ok(userMapper.toDTO(user)))
-                .orElse(ResponseEntity.notFound().build());
+        User user = userService.findById(id).orElseThrow();
+        return ResponseEntity.ok(userMapper.toDTO(user));
     }
 
     @PutMapping("/{id}")
@@ -51,7 +49,6 @@ public class AdminUserRestController {
 
         try {
             userService.adminUpdateUserProfile(id, userBasicDTO.fullname());
-
             User updatedUser = userService.findById(id).orElseThrow();
             return ResponseEntity.ok(userMapper.toDTO(updatedUser));
         } catch (IllegalArgumentException e) {
@@ -61,14 +58,13 @@ public class AdminUserRestController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
-        if (userService.findById(id).isPresent()) {
-            try {
-                userService.deleteUserSafe(id);
-                return ResponseEntity.noContent().build();
-            } catch (IllegalStateException e) {
-                throw new ResponseStatusException(HttpStatus.FORBIDDEN, e.getMessage());
-            }
+        userService.findById(id).orElseThrow();
+        
+        try {
+            userService.deleteUserSafe(id);
+            return ResponseEntity.noContent().build();
+        } catch (IllegalStateException e) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, e.getMessage());
         }
-        return ResponseEntity.notFound().build();
     }
 }
