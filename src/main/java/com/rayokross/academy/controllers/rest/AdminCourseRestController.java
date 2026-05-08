@@ -49,7 +49,7 @@ public class AdminCourseRestController {
     private UserMapper userMapper;
 
     @PostMapping
-    public ResponseEntity<CourseDetailDTO> createCourse(@Valid @RequestBody CourseBasicDTO courseDTO) throws IOException {
+    public ResponseEntity<CourseDetailDTO> createCourse(@Valid @RequestBody CourseDetailDTO courseDTO) throws IOException {
         Course course = courseMapper.toEntity(courseDTO);
         course = courseService.createCourse(course, null, null);
         URI location = fromCurrentRequest().path("/{id}")
