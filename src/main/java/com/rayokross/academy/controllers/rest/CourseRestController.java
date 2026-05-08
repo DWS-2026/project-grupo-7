@@ -71,10 +71,9 @@ public class CourseRestController {
             enrollmentService.enrollUser(principal.getName(), id);
             return ResponseEntity.status(org.springframework.http.HttpStatus.CREATED).build();
         } catch (IllegalArgumentException e) {
-            // El curso o el usuario no existe
+
             return ResponseEntity.status(org.springframework.http.HttpStatus.NOT_FOUND).build();
         } catch (IllegalStateException e) {
-            // El usuario ya está matriculado (Conflict)
             return ResponseEntity.status(org.springframework.http.HttpStatus.CONFLICT).build();
         }
     }
