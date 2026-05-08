@@ -467,6 +467,38 @@
             }
           },
           "response": []
+        },
+        {
+          "name": "GET Lessons",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/courses/1/lessons",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "courses",
+                "1",
+                "lessons"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET Lesson",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": ""
+            }
+          },
+          "response": []
         }
       ]
     },
@@ -706,6 +738,27 @@
     {
       "name": "Enrollments",
       "item": [
+        {
+          "name": "GET Enrollments",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/users/me/enrollments",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "users",
+                "me",
+                "enrollments"
+              ]
+            }
+          },
+          "response": []
+        },
         {
           "name": "POST Enrollment",
           "request": {
