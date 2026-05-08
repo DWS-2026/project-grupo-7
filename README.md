@@ -391,10 +391,10 @@ Validación de campos en login, register y en el panel de administrador.
 ### **Documentación de la API REST**
 
 #### **Especificación OpenAPI**
-📄 **[Especificación OpenAPI (YAML)](api-docs\api-docs.yaml)**
+📄 **[Especificación OpenAPI (YAML)](api-docs/api-docs.yaml)**
 
 #### **Documentación HTML**
-📖 **[Documentación API REST (HTML)](api-docs\api-docs.html)**
+📖 **[Documentación API REST (HTML)](api-docs/api-docs.html)**
 
 > La documentación de la API REST se encuentra en la carpeta `/api-docs` del repositorio. Se ha generado automáticamente con SpringDoc a partir de las anotaciones en el código Java.
 
@@ -402,7 +402,7 @@ Validación de campos en login, register y en el panel de administrador.
 
 Diagrama actualizado incluyendo los @RestController y su relación con los @Service compartidos:
 
-![Diagrama de Clases Actualizado](images\DiagramaClases3.png)
+![Diagrama de Clases Actualizado](images/DiagramaClases3.png)
 
 #### **Credenciales de Usuarios de Ejemplo**
 
@@ -459,7 +459,7 @@ En el ámbito de la ciberseguridad, me he centrado en blindar la aplicación con
 
 #### **Alumno 4 - Gonzalo Roig López**
 
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
+Especializado en la modernización de arquitecturas hacia APIs REST seguras. Responsable de implementar la autenticación JWT, el filtrado de seguridad OWASP (XSS, Fuerza Bruta) y el cifrado de credenciales. He optimizado la robustez del sistema mediante la centralización del Manejo Global de Excepciones y la estructuración de capas de servicio y Mappers para garantizar un código escalable y desacoplado.
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
