@@ -461,8 +461,8 @@ Diagrama actualizado incluyendo los @RestController y su relación con los @Serv
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
+|1| [Creación de User Mapper](https://github.com/DWS-2026/project-grupo-7/commit/f01dd320d94875cc25401c95614fe375302a1b51)  | [UserMapper.java](UserMapper.java)   |
+|2| [Creación de User Login Service](https://github.com/DWS-2026/project-grupo-7/commit/12466173eb5dd23caed45aab3254716b1d125c15)  | [UserLoginService](UserLoginService.java)   |
+|3| [Creación RestErrorController](https://github.com/DWS-2026/project-grupo-7/commit/277bb77551d4671f1aa8b34b38d6f844e80b70a9)  | [RestErrorController](RestErrorController.java)   |
+|4| [Añadir UserRegistrationDTO](https://github.com/DWS-2026/project-grupo-7/commit/a7ef2c8000be9d00fe5990e1d099ed19a8a7f3bc)  | [UserRegistrationDTO](UserRegistrationDTO.java)   |
+|5| [Crear MainRestController](https://github.com/DWS-2026/project-grupo-7/commit/6ee05316eea1fa0f3599d5caf0886ca79da1fbc9)  | [MainRestController](MainRestController.java)   |
