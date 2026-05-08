@@ -39,9 +39,6 @@ public class CoursePlayerRestController {
     private EnrollmentService enrollmentService;
 
     @Autowired
-    private CourseMapper courseMapper;
-
-    @Autowired
     private LessonMapper lessonMapper;
 
     @GetMapping("/{courseId}/lessons")
