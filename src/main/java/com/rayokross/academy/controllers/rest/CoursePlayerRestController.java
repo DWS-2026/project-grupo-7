@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.rayokross.academy.dtos.LessonDTO;
-import com.rayokross.academy.mappers.CourseMapper;
 import com.rayokross.academy.mappers.LessonMapper;
 import com.rayokross.academy.models.Course;
 import com.rayokross.academy.models.Lesson;
