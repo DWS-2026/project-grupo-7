@@ -790,3 +790,6 @@
 2026-05-08 05:42:28 [https-jsse-nio-8443-exec-1] INFO  c.r.a.security.LoginEventListener - Login successful for user admin@rayokross.com
 2026-05-08 05:42:28 [https-jsse-nio-8443-exec-1] INFO  c.r.a.security.jwt.UserLoginService - A09 EVENT: Login exitoso para el usuario 'admin@rayokross.com'
 2026-05-08 05:43:12 [https-jsse-nio-8443-exec-3] INFO  c.r.academy.services.LessonService - Lesson with ID 1 deleted.
+2026-05-08 05:43:34 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-05-08 05:43:34 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-05-08 05:43:34 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
