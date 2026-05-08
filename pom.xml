@@ -96,9 +96,6 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- ========================================== -->
-        <!-- DEPENDENCIAS JWT ACTUALIZADAS A LA 0.12.5  -->
-        <!-- ========================================== -->
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-api</artifactId>
@@ -117,7 +114,6 @@
             <scope>runtime</scope>
         </dependency>
 
-        <!-- Librería para sanitizar HTML y prevenir ataques XSS -->
         <dependency>
             <groupId>org.jsoup</groupId>
             <artifactId>jsoup</artifactId>
@@ -143,7 +139,6 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         
-            <!-- AÑADE ESTE PLUGIN PARA MAPSTRUCT -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>

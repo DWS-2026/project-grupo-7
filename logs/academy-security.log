@@ -351,3 +351,43 @@
 2026-05-08 03:00:30 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
 2026-05-08 03:00:30 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-6 - Shutdown initiated...
 2026-05-08 03:00:30 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-6 - Shutdown completed.
+2026-05-08 03:02:53 [restartedMain] INFO  c.r.academy.AcademyApplication - Starting AcademyApplication using Java 21.0.11 with PID 5520 (C:\Users\danie\OneDrive\Escritorio\project-grupo-7\target\classes started by danie in C:\Users\danie\OneDrive\Escritorio\project-grupo-7)
+2026-05-08 03:02:53 [restartedMain] INFO  c.r.academy.AcademyApplication - No active profile set, falling back to 1 default profile: "default"
+2026-05-08 03:02:53 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-05-08 03:02:55 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-08 03:02:55 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 115 ms. Found 4 JPA repository interfaces.
+2026-05-08 03:02:56 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8443 (https)
+2026-05-08 03:02:56 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-05-08 03:02:56 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.17]
+2026-05-08 03:02:56 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-05-08 03:02:56 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2909 ms
+2026-05-08 03:02:56 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-05-08 03:02:57 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@27934121
+2026-05-08 03:02:57 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-05-08 03:02:57 [restartedMain] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:mysql://localhost:3306/rayokrossAcademy'
+2026-05-08 03:02:57 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-05-08 03:02:57 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.1.Final
+2026-05-08 03:02:57 [restartedMain] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-05-08 03:02:58 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-08 03:02:59 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-05-08 03:02:59 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-05-08 03:03:01 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-05-08 03:03:01 [restartedMain] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page template: index
+2026-05-08 03:03:01 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure Or [Mvc [pattern='/api/**']] with [org.springframework.security.web.session.DisableEncodeUrlFilter@66f7623a, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@2190a872, org.springframework.security.web.context.SecurityContextHolderFilter@6aa0b544, org.springframework.security.web.header.HeaderWriterFilter@663f5305, org.springframework.web.filter.CorsFilter@18c67f91, org.springframework.security.web.authentication.logout.LogoutFilter@3caec45d, com.rayokross.academy.security.jwt.JwtRequestFilter@5f1bb674, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7bef5cdd, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@5ec6b36c, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@7c7b0a0a, org.springframework.security.web.session.SessionManagementFilter@4b87bb61, org.springframework.security.web.access.ExceptionTranslationFilter@41945e33, org.springframework.security.web.access.intercept.AuthorizationFilter@5c136670]
+2026-05-08 03:03:01 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@6c77f6ed, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@67abd7c7, org.springframework.security.web.context.SecurityContextHolderFilter@3ab8ee5f, org.springframework.security.web.header.HeaderWriterFilter@eed1496, org.springframework.web.filter.CorsFilter@22643f3a, org.springframework.security.web.csrf.CsrfFilter@c11ff20, org.springframework.security.web.authentication.logout.LogoutFilter@614a6c67, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@5e6c8013, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@3953fed7, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7ad241c9, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@18324f7d, org.springframework.security.web.access.ExceptionTranslationFilter@43900a4e, org.springframework.security.web.access.intercept.AuthorizationFilter@2f7d4ef6]
+2026-05-08 03:03:02 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2026-05-08 03:03:02 [restartedMain] INFO  o.a.t.u.net.NioEndpoint.certificate - Connector [https-jsse-nio-8443], TLS virtual host [_default_], certificate type [UNDEFINED] configured from keystore [C:\Users\danie\.keystore] using alias [rayokross] with trust store [null]
+2026-05-08 03:03:02 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8443 (https) with context path ''
+2026-05-08 03:03:02 [restartedMain] INFO  c.r.academy.AcademyApplication - Started AcademyApplication in 9.093 seconds (process running for 10.205)
+2026-05-08 03:03:05 [https-jsse-nio-8443-exec-9] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-05-08 03:03:05 [https-jsse-nio-8443-exec-9] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-05-08 03:03:05 [https-jsse-nio-8443-exec-9] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2026-05-08 03:03:06 [https-jsse-nio-8443-exec-9] INFO  c.r.a.security.jwt.JwtRequestFilter - No access token cookie found in request
+2026-05-08 03:03:06 [https-jsse-nio-8443-exec-5] INFO  c.r.a.security.jwt.JwtRequestFilter - No access token cookie found in request
+2026-05-08 03:03:06 [https-jsse-nio-8443-exec-2] INFO  c.r.a.security.jwt.JwtRequestFilter - No access token cookie found in request
+2026-05-08 03:03:06 [https-jsse-nio-8443-exec-1] INFO  c.r.a.security.jwt.JwtRequestFilter - No access token cookie found in request
+2026-05-08 03:03:06 [https-jsse-nio-8443-exec-7] INFO  c.r.a.security.jwt.JwtRequestFilter - No access token cookie found in request
+2026-05-08 03:03:06 [https-jsse-nio-8443-exec-6] INFO  c.r.a.security.jwt.JwtRequestFilter - No access token cookie found in request
+2026-05-08 03:03:13 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-05-08 03:03:13 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-05-08 03:03:13 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
