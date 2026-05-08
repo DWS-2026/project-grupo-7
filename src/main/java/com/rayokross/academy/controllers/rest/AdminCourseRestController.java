@@ -111,12 +111,20 @@ public class AdminCourseRestController {
     @PostMapping("/{id}/syllabus")
     public ResponseEntity<Void> uploadSyllabus(
             @PathVariable Long id,
-            @RequestParam MultipartFile syllabusFile) throws IOException {
+            @RequestParam("syllabusFile") MultipartFile syllabusFile) { // Añadido el nombre explícito
 
-        Course course = courseService.findById(id).orElseThrow();
+        Course course = courseService.findById(id)
+                .orElseThrow(() -> new org.springframework.web.server.ResponseStatusException(
+                        org.springframework.http.HttpStatus.NOT_FOUND, "Course not found"));
 
-        courseService.saveSyllabus(course, syllabusFile);
-        courseService.save(course);
-        return ResponseEntity.noContent().build();
+        try {
+            courseService.saveSyllabus(course, syllabusFile);
+            courseService.save(course);
+            return ResponseEntity.noContent().build();
+
+        } catch (IOException e) {
+            throw new org.springframework.web.server.ResponseStatusException(
+                    org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR, "Error writing file to disk");
+        }
     }
 }
