@@ -415,15 +415,15 @@ Diagrama actualizado incluyendo los @RestController y su relación con los @Serv
 
 #### **Alumno 1 - Omar Ba Diallo**
 
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
+Implementación de medidas de seguridad en la gestión de usuarios y contraseñas, la configuración de variables de entorno y credenciales de la aplicación, así como el desarrollo de mecanismos para el tratamiento de excepciones y control de errores. Además de la elaboración de herramientas de prueba de la API REST mediante colecciones de Postman.
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
+|1| [Cifrado de contraseñas](https://github.com/DWS-2026/dws-2026-project-base/commit/49aa411fb686ad67407348cb3b813ce6366504fc)  | [UserService.java](src\main\java\com\rayokross\academy\services\UserService.java)   |
+|2| [Creación de la colección Postman](https://github.com/DWS-2026/dws-2026-project-base/commit/4388b4a493519a55e1584a405e042b6bad8d0053)  | [RayokrossAcademy.postman_collection.json](RayokrossAcademy.postman_collection.json)   |
+|3| [Gestión de errores](https://github.com/DWS-2026/dws-2026-project-base/commit/8078eaaea6ccd4da7899c077377449364060e9d1)  | [GlobalExceptionHandler.java](src\main\java\com\rayokross\academy\controllers\rest\GlobalExceptionHandler.java)   |
+|4| [Configuración de variables de entorno](https://github.com/DWS-2026/dws-2026-project-base/commit/2984c4d5e8c1dcd84d0d1ccd971ca58b8b2a3991)  | [application.properties](src\main\resources\application.properties)   |
+|5| [Creación de LessonRestController](https://github.com/DWS-2026/dws-2026-project-base/commit/e57b6ef056c8864f8cf5c4cc49ca058ec942fa64)  | [LessonRestController.java](src/main/java/com/rayokross/academy/controllers/rest/LessonRestController.java)   |
 
 ---
 
