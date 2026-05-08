@@ -3,12 +3,14 @@ package com.rayokross.academy.controllers.rest;
 import java.io.IOException;
 import java.security.Principal;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -59,13 +61,18 @@ public class UserRestController {
     }
 
     @GetMapping("/enrollments")
-    public ResponseEntity<List<EnrollmentBasicDTO>> getMyEnrollments(Principal principal) {
+    public ResponseEntity<Page<EnrollmentBasicDTO>> getMyEnrollments(
+            @PageableDefault(size = 5, page = 0) Pageable pageable,
+            Principal principal) {
+
         if (principal == null)
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
 
-        List<Enrollment> enrollmentList = enrollmentService.getMyEnrollments(principal.getName());
+        Page<Enrollment> enrollmentPage = enrollmentService.getMyEnrollments(principal.getName(), pageable);
 
-        return ResponseEntity.ok(enrollmentMapper.toBasicDTOs(enrollmentList));
+        Page<EnrollmentBasicDTO> dtoPage = enrollmentPage.map(enrollmentMapper::toBasicDTO);
+
+        return ResponseEntity.ok(dtoPage);
     }
 
     @PutMapping

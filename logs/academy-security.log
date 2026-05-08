@@ -1,0 +1,353 @@
+2026-05-08 01:02:03 [restartedMain] INFO  c.r.academy.AcademyApplication - Starting AcademyApplication using Java 21.0.10 with PID 39663 (/Users/angelmenendezleyenda/Desktop/project-grupo-7/target/classes started by angelmenendezleyenda in /Users/angelmenendezleyenda/Desktop/project-grupo-7)
+2026-05-08 01:02:03 [restartedMain] INFO  c.r.academy.AcademyApplication - No active profile set, falling back to 1 default profile: "default"
+2026-05-08 01:02:03 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-05-08 01:02:04 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-08 01:02:04 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 36 ms. Found 4 JPA repository interfaces.
+2026-05-08 01:02:04 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8443 (https)
+2026-05-08 01:02:04 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-05-08 01:02:04 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.17]
+2026-05-08 01:02:04 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-05-08 01:02:04 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1088 ms
+2026-05-08 01:02:04 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-05-08 01:02:05 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@30617805
+2026-05-08 01:02:05 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-05-08 01:02:05 [restartedMain] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:mysql://localhost:3306/rayokrossAcademy'
+2026-05-08 01:02:05 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-05-08 01:02:05 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.1.Final
+2026-05-08 01:02:05 [restartedMain] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-05-08 01:02:05 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-08 01:02:06 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-05-08 01:02:06 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-05-08 01:02:07 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-05-08 01:02:07 [restartedMain] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page template: index
+2026-05-08 01:02:07 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure Or [Mvc [pattern='/api/**']] with [org.springframework.security.web.session.DisableEncodeUrlFilter@ad7575c, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6664840b, org.springframework.security.web.context.SecurityContextHolderFilter@58c9e9fb, org.springframework.security.web.header.HeaderWriterFilter@4c8143d4, org.springframework.web.filter.CorsFilter@4b105791, org.springframework.security.web.authentication.logout.LogoutFilter@66e75278, com.rayokross.academy.security.jwt.JwtRequestFilter@6e0be8be, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@382d819e, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@6b712123, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@7eeb09b9, org.springframework.security.web.session.SessionManagementFilter@5a4c96f3, org.springframework.security.web.access.ExceptionTranslationFilter@2610619a, org.springframework.security.web.access.intercept.AuthorizationFilter@50379d10]
+2026-05-08 01:02:07 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@63b52aff, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@2232c168, org.springframework.security.web.context.SecurityContextHolderFilter@537819a1, org.springframework.security.web.header.HeaderWriterFilter@76725d96, org.springframework.web.filter.CorsFilter@631a4974, org.springframework.security.web.csrf.CsrfFilter@3489a929, org.springframework.security.web.authentication.logout.LogoutFilter@3bef233, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@176e6d4b, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@2ac12206, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@74e22967, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@77a6469, org.springframework.security.web.access.ExceptionTranslationFilter@476333da, org.springframework.security.web.access.intercept.AuthorizationFilter@45009d3f]
+2026-05-08 01:02:07 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2026-05-08 01:02:07 [restartedMain] INFO  o.a.t.u.net.NioEndpoint.certificate - Connector [https-jsse-nio-8443], TLS virtual host [_default_], certificate type [UNDEFINED] configured from keystore [/Users/angelmenendezleyenda/.keystore] using alias [rayokross] with trust store [null]
+2026-05-08 01:02:07 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8443 (https) with context path ''
+2026-05-08 01:02:07 [restartedMain] INFO  c.r.academy.AcademyApplication - Started AcademyApplication in 3.986 seconds (process running for 4.629)
+2026-05-08 01:02:10 [https-jsse-nio-8443-exec-9] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-05-08 01:02:10 [https-jsse-nio-8443-exec-9] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-05-08 01:02:10 [https-jsse-nio-8443-exec-9] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2026-05-08 01:02:10 [https-jsse-nio-8443-exec-9] INFO  c.r.a.security.jwt.JwtRequestFilter - No access token cookie found in request
+2026-05-08 01:02:11 [https-jsse-nio-8443-exec-10] INFO  c.r.a.security.jwt.JwtRequestFilter - No access token cookie found in request
+2026-05-08 01:02:11 [https-jsse-nio-8443-exec-8] INFO  c.r.a.security.jwt.JwtRequestFilter - No access token cookie found in request
+2026-05-08 01:02:11 [https-jsse-nio-8443-exec-2] INFO  c.r.a.security.jwt.JwtRequestFilter - No access token cookie found in request
+2026-05-08 01:02:11 [https-jsse-nio-8443-exec-3] INFO  c.r.a.security.jwt.JwtRequestFilter - No access token cookie found in request
+2026-05-08 01:02:11 [https-jsse-nio-8443-exec-10] INFO  c.r.a.security.jwt.JwtRequestFilter - No access token cookie found in request
+2026-05-08 01:02:11 [https-jsse-nio-8443-exec-5] INFO  c.r.a.security.jwt.JwtRequestFilter - No access token cookie found in request
+2026-05-08 01:02:11 [https-jsse-nio-8443-exec-9] INFO  c.r.a.security.jwt.JwtRequestFilter - No access token cookie found in request
+2026-05-08 01:02:11 [https-jsse-nio-8443-exec-1] INFO  c.r.a.security.jwt.JwtRequestFilter - No access token cookie found in request
+2026-05-08 01:02:11 [https-jsse-nio-8443-exec-4] INFO  c.r.a.security.jwt.JwtRequestFilter - No access token cookie found in request
+2026-05-08 01:02:11 [https-jsse-nio-8443-exec-7] INFO  c.r.a.security.jwt.JwtRequestFilter - No access token cookie found in request
+2026-05-08 01:02:11 [https-jsse-nio-8443-exec-6] INFO  c.r.a.security.jwt.JwtRequestFilter - No access token cookie found in request
+2026-05-08 01:02:11 [https-jsse-nio-8443-exec-10] INFO  c.r.a.security.jwt.JwtRequestFilter - No access token cookie found in request
+2026-05-08 01:02:11 [https-jsse-nio-8443-exec-9] INFO  c.r.a.security.jwt.JwtRequestFilter - No access token cookie found in request
+2026-05-08 01:02:12 [https-jsse-nio-8443-exec-3] INFO  c.r.a.security.jwt.JwtRequestFilter - No access token cookie found in request
+2026-05-08 01:05:56 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-05-08 01:05:56 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-05-08 01:05:56 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-05-08 01:35:07 [restartedMain] INFO  c.r.academy.AcademyApplication - Starting AcademyApplication using Java 21.0.10 with PID 57199 (/Users/angelmenendezleyenda/Desktop/project-grupo-7/target/classes started by angelmenendezleyenda in /Users/angelmenendezleyenda/Desktop/project-grupo-7)
+2026-05-08 01:35:07 [restartedMain] INFO  c.r.academy.AcademyApplication - No active profile set, falling back to 1 default profile: "default"
+2026-05-08 01:35:07 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-05-08 01:35:07 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-08 01:35:07 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 40 ms. Found 4 JPA repository interfaces.
+2026-05-08 01:35:08 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8443 (https)
+2026-05-08 01:35:08 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-05-08 01:35:08 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.17]
+2026-05-08 01:35:08 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-05-08 01:35:08 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1052 ms
+2026-05-08 01:35:08 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-05-08 01:35:08 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@458ac542
+2026-05-08 01:35:08 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-05-08 01:35:08 [restartedMain] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:mysql://localhost:3306/rayokrossAcademy'
+2026-05-08 01:35:08 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-05-08 01:35:08 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.1.Final
+2026-05-08 01:35:08 [restartedMain] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-05-08 01:35:08 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-08 01:35:09 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-05-08 01:35:09 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-05-08 01:35:10 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-05-08 01:35:10 [restartedMain] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page template: index
+2026-05-08 01:35:10 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure Or [Mvc [pattern='/api/**']] with [org.springframework.security.web.session.DisableEncodeUrlFilter@82f2ba5, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@4943b0f2, org.springframework.security.web.context.SecurityContextHolderFilter@1b5e2eb2, org.springframework.security.web.header.HeaderWriterFilter@7d2ce9c4, org.springframework.web.filter.CorsFilter@1a26d19d, org.springframework.security.web.authentication.logout.LogoutFilter@18353313, com.rayokross.academy.security.jwt.JwtRequestFilter@1ab80b31, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@da66a18, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7f6d9ee1, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@e598129, org.springframework.security.web.session.SessionManagementFilter@3f6086ba, org.springframework.security.web.access.ExceptionTranslationFilter@6993fd0b, org.springframework.security.web.access.intercept.AuthorizationFilter@71561f65]
+2026-05-08 01:35:10 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@68a4fbe4, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@f628d20, org.springframework.security.web.context.SecurityContextHolderFilter@55f89dbd, org.springframework.security.web.header.HeaderWriterFilter@3cf43ef, org.springframework.web.filter.CorsFilter@a02523c, org.springframework.security.web.csrf.CsrfFilter@43c3d2a5, org.springframework.security.web.authentication.logout.LogoutFilter@7ec9ef4d, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@5926d40a, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@8f33b5d, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@16e46b64, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@656b51f2, org.springframework.security.web.access.ExceptionTranslationFilter@6f8e20ff, org.springframework.security.web.access.intercept.AuthorizationFilter@5a7bf3db]
+2026-05-08 01:35:10 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2026-05-08 01:35:10 [restartedMain] INFO  o.a.t.u.net.NioEndpoint.certificate - Connector [https-jsse-nio-8443], TLS virtual host [_default_], certificate type [UNDEFINED] configured from keystore [/Users/angelmenendezleyenda/.keystore] using alias [rayokross] with trust store [null]
+2026-05-08 01:35:10 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8443 (https) with context path ''
+2026-05-08 01:35:10 [restartedMain] INFO  c.r.academy.AcademyApplication - Started AcademyApplication in 3.57 seconds (process running for 4.057)
+2026-05-08 01:35:12 [https-jsse-nio-8443-exec-9] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-05-08 01:35:12 [https-jsse-nio-8443-exec-9] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-05-08 01:35:12 [https-jsse-nio-8443-exec-9] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2026-05-08 01:35:12 [https-jsse-nio-8443-exec-9] INFO  c.r.a.security.jwt.JwtRequestFilter - No access token cookie found in request
+2026-05-08 01:35:12 [https-jsse-nio-8443-exec-10] INFO  c.r.a.security.jwt.JwtRequestFilter - No access token cookie found in request
+2026-05-08 01:35:12 [https-jsse-nio-8443-exec-1] INFO  c.r.a.security.jwt.JwtRequestFilter - No access token cookie found in request
+2026-05-08 01:35:12 [https-jsse-nio-8443-exec-8] INFO  c.r.a.security.jwt.JwtRequestFilter - No access token cookie found in request
+2026-05-08 01:35:12 [https-jsse-nio-8443-exec-5] INFO  c.r.a.security.jwt.JwtRequestFilter - No access token cookie found in request
+2026-05-08 01:35:13 [https-jsse-nio-8443-exec-2] INFO  c.r.a.security.jwt.JwtRequestFilter - No access token cookie found in request
+2026-05-08 01:35:43 [https-jsse-nio-8443-exec-8] INFO  c.r.a.security.jwt.JwtRequestFilter - No access token cookie found in request
+2026-05-08 01:35:44 [https-jsse-nio-8443-exec-8] INFO  c.r.a.security.LoginEventListener - Login successful for user student@rayokross.com
+2026-05-08 01:35:44 [https-jsse-nio-8443-exec-8] INFO  c.r.a.security.jwt.UserLoginService - A09 EVENT: Login exitoso para el usuario 'student@rayokross.com'
+2026-05-08 01:36:01 [https-jsse-nio-8443-exec-1] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/v1/users/1/media.]
+2026-05-08 01:36:07 [https-jsse-nio-8443-exec-10] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/v1/users/2/media.]
+2026-05-08 01:36:57 [https-jsse-nio-8443-exec-4] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [java.util.NoSuchElementException]
+2026-05-08 01:37:51 [https-jsse-nio-8443-exec-10] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [java.util.NoSuchElementException]
+2026-05-08 01:44:00 [https-jsse-nio-8443-exec-10] INFO  c.r.a.security.jwt.JwtRequestFilter - No access token cookie found in request
+2026-05-08 01:44:00 [https-jsse-nio-8443-exec-9] INFO  c.r.a.security.jwt.JwtRequestFilter - No access token cookie found in request
+2026-05-08 01:44:00 [https-jsse-nio-8443-exec-2] INFO  c.r.a.security.jwt.JwtRequestFilter - No access token cookie found in request
+2026-05-08 01:44:00 [https-jsse-nio-8443-exec-7] INFO  c.r.a.security.jwt.JwtRequestFilter - No access token cookie found in request
+2026-05-08 01:44:00 [https-jsse-nio-8443-exec-4] INFO  c.r.a.security.jwt.JwtRequestFilter - No access token cookie found in request
+2026-05-08 01:44:00 [https-jsse-nio-8443-exec-8] INFO  c.r.a.security.jwt.JwtRequestFilter - No access token cookie found in request
+2026-05-08 02:10:00 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-05-08 02:10:00 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-05-08 02:10:01 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-05-08 02:43:16 [restartedMain] INFO  c.r.academy.AcademyApplication - Starting AcademyApplication using Java 21.0.10 with PID 93708 (/Users/angelmenendezleyenda/Desktop/project-grupo-7/target/classes started by angelmenendezleyenda in /Users/angelmenendezleyenda/Desktop/project-grupo-7)
+2026-05-08 02:43:16 [restartedMain] INFO  c.r.academy.AcademyApplication - No active profile set, falling back to 1 default profile: "default"
+2026-05-08 02:43:16 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-05-08 02:43:16 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-08 02:43:16 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 42 ms. Found 4 JPA repository interfaces.
+2026-05-08 02:43:17 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8443 (https)
+2026-05-08 02:43:17 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-05-08 02:43:17 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.17]
+2026-05-08 02:43:17 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-05-08 02:43:17 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1152 ms
+2026-05-08 02:43:17 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-05-08 02:43:17 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@70d1b81f
+2026-05-08 02:43:17 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-05-08 02:43:17 [restartedMain] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:mysql://localhost:3306/rayokrossAcademy'
+2026-05-08 02:43:17 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-05-08 02:43:17 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.1.Final
+2026-05-08 02:43:17 [restartedMain] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-05-08 02:43:17 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-08 02:43:18 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-05-08 02:43:18 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-05-08 02:43:19 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-05-08 02:43:19 [restartedMain] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page template: index
+2026-05-08 02:43:19 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure Or [Mvc [pattern='/api/**']] with [org.springframework.security.web.session.DisableEncodeUrlFilter@2f9ba949, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@4eb489b9, org.springframework.security.web.context.SecurityContextHolderFilter@35229b79, org.springframework.security.web.header.HeaderWriterFilter@3e2b5424, org.springframework.web.filter.CorsFilter@12a19128, org.springframework.security.web.authentication.logout.LogoutFilter@16c41062, com.rayokross.academy.security.jwt.JwtRequestFilter@759a42a5, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@b5c0544, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4099819c, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@73005c88, org.springframework.security.web.session.SessionManagementFilter@3acadf4, org.springframework.security.web.access.ExceptionTranslationFilter@69782233, org.springframework.security.web.access.intercept.AuthorizationFilter@6c91abe8]
+2026-05-08 02:43:19 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@6730766a, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@2e47614b, org.springframework.security.web.context.SecurityContextHolderFilter@4f9c775a, org.springframework.security.web.header.HeaderWriterFilter@13d71450, org.springframework.web.filter.CorsFilter@3fea917b, org.springframework.security.web.csrf.CsrfFilter@38d0ddd5, org.springframework.security.web.authentication.logout.LogoutFilter@50357690, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@1c4a1285, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@719c3509, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@576103d2, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@73f87239, org.springframework.security.web.access.ExceptionTranslationFilter@3b03bb0b, org.springframework.security.web.access.intercept.AuthorizationFilter@1fb1c1b1]
+2026-05-08 02:43:19 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2026-05-08 02:43:19 [restartedMain] INFO  o.a.t.u.net.NioEndpoint.certificate - Connector [https-jsse-nio-8443], TLS virtual host [_default_], certificate type [UNDEFINED] configured from keystore [/Users/angelmenendezleyenda/.keystore] using alias [rayokross] with trust store [null]
+2026-05-08 02:43:19 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8443 (https) with context path ''
+2026-05-08 02:43:19 [restartedMain] INFO  c.r.academy.AcademyApplication - Started AcademyApplication in 3.859 seconds (process running for 4.394)
+2026-05-08 02:43:48 [https-jsse-nio-8443-exec-6] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-05-08 02:43:48 [https-jsse-nio-8443-exec-6] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-05-08 02:43:48 [https-jsse-nio-8443-exec-6] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 3 ms
+2026-05-08 02:43:48 [https-jsse-nio-8443-exec-6] INFO  c.r.a.security.jwt.JwtRequestFilter - No access token cookie found in request
+2026-05-08 02:43:48 [https-jsse-nio-8443-exec-6] INFO  c.r.a.security.LoginEventListener - Login successful for user student@rayokross.com
+2026-05-08 02:43:48 [https-jsse-nio-8443-exec-6] INFO  c.r.a.security.jwt.UserLoginService - A09 EVENT: Login exitoso para el usuario 'student@rayokross.com'
+2026-05-08 02:44:29 [https-jsse-nio-8443-exec-7] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/courses.]
+2026-05-08 02:44:59 [https-jsse-nio-8443-exec-3] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/courses.]
+2026-05-08 02:45:44 [https-jsse-nio-8443-exec-10] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/courses/1/lessons.]
+2026-05-08 02:45:52 [https-jsse-nio-8443-exec-6] INFO  c.r.academy.services.LessonService - Fetching paginated lessons for course ID: 1
+2026-05-08 02:46:40 [https-jsse-nio-8443-exec-7] INFO  c.r.academy.services.LessonService - Fetching paginated lessons for course ID: 1
+2026-05-08 02:46:46 [https-jsse-nio-8443-exec-8] INFO  c.r.academy.services.LessonService - Fetching paginated lessons for course ID: 1
+2026-05-08 02:48:40 [https-jsse-nio-8443-exec-5] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [java.lang.NullPointerException: Cannot invoke "Object.hashCode()" because "<parameter1>" is null]
+2026-05-08 02:49:37 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2026-05-08 02:49:48 [Thread-5] WARN  org.apache.tomcat.util.net.Acceptor - The acceptor thread [https-jsse-nio-8443-Acceptor] did not stop cleanly
+2026-05-08 02:49:48 [Thread-5] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-05-08 02:49:48 [Thread-5] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-05-08 02:49:48 [Thread-5] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-05-08 02:49:48 [restartedMain] INFO  c.r.academy.AcademyApplication - Starting AcademyApplication using Java 21.0.10 with PID 93708 (/Users/angelmenendezleyenda/Desktop/project-grupo-7/target/classes started by angelmenendezleyenda in /Users/angelmenendezleyenda/Desktop/project-grupo-7)
+2026-05-08 02:49:48 [restartedMain] INFO  c.r.academy.AcademyApplication - No active profile set, falling back to 1 default profile: "default"
+2026-05-08 02:49:48 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-08 02:49:48 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 9 ms. Found 4 JPA repository interfaces.
+2026-05-08 02:49:48 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8443 (https)
+2026-05-08 02:49:48 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-05-08 02:49:48 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.17]
+2026-05-08 02:49:48 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-05-08 02:49:48 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 268 ms
+2026-05-08 02:49:48 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Starting...
+2026-05-08 02:49:48 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-2 - Added connection com.mysql.cj.jdbc.ConnectionImpl@753c9c54
+2026-05-08 02:49:48 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Start completed.
+2026-05-08 02:49:48 [restartedMain] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:mysql://localhost:3306/rayokrossAcademy'
+2026-05-08 02:49:48 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-05-08 02:49:48 [restartedMain] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-05-08 02:49:49 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-08 02:49:49 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-05-08 02:49:49 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-05-08 02:49:49 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-05-08 02:49:49 [restartedMain] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page template: index
+2026-05-08 02:49:49 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure Or [Mvc [pattern='/api/**']] with [org.springframework.security.web.session.DisableEncodeUrlFilter@797e3e0c, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@3db15720, org.springframework.security.web.context.SecurityContextHolderFilter@f3796ee, org.springframework.security.web.header.HeaderWriterFilter@14a13436, org.springframework.web.filter.CorsFilter@110073c4, org.springframework.security.web.authentication.logout.LogoutFilter@64e40dfe, com.rayokross.academy.security.jwt.JwtRequestFilter@547bd215, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@60abd3e5, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7d364b42, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@6ba60f6e, org.springframework.security.web.session.SessionManagementFilter@54bfde96, org.springframework.security.web.access.ExceptionTranslationFilter@2049f74a, org.springframework.security.web.access.intercept.AuthorizationFilter@15cde228]
+2026-05-08 02:49:49 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@3ddc1b01, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@91bb153, org.springframework.security.web.context.SecurityContextHolderFilter@5ae3a4e1, org.springframework.security.web.header.HeaderWriterFilter@107d247b, org.springframework.web.filter.CorsFilter@7707ac3c, org.springframework.security.web.csrf.CsrfFilter@607416de, org.springframework.security.web.authentication.logout.LogoutFilter@15edfa3c, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@471a25c4, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1a619b85, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2b492fc2, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@6125931d, org.springframework.security.web.access.ExceptionTranslationFilter@51ac16b5, org.springframework.security.web.access.intercept.AuthorizationFilter@6113ee32]
+2026-05-08 02:49:49 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2026-05-08 02:49:49 [restartedMain] INFO  o.a.t.u.net.NioEndpoint.certificate - Connector [https-jsse-nio-8443], TLS virtual host [_default_], certificate type [UNDEFINED] configured from keystore [/Users/angelmenendezleyenda/.keystore] using alias [rayokross] with trust store [null]
+2026-05-08 02:49:49 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8443 (https) with context path ''
+2026-05-08 02:49:49 [restartedMain] INFO  c.r.academy.AcademyApplication - Started AcademyApplication in 0.915 seconds (process running for 394.25)
+2026-05-08 02:49:49 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged
+2026-05-08 02:50:26 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - Restarting due to 2 class path changes (0 additions, 0 deletions, 2 modifications)
+2026-05-08 02:50:37 [Thread-7] WARN  org.apache.tomcat.util.net.Acceptor - The acceptor thread [https-jsse-nio-8443-Acceptor] did not stop cleanly
+2026-05-08 02:50:37 [Thread-7] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-05-08 02:50:37 [Thread-7] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Shutdown initiated...
+2026-05-08 02:50:37 [Thread-7] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Shutdown completed.
+2026-05-08 02:50:37 [restartedMain] INFO  c.r.academy.AcademyApplication - Starting AcademyApplication using Java 21.0.10 with PID 93708 (/Users/angelmenendezleyenda/Desktop/project-grupo-7/target/classes started by angelmenendezleyenda in /Users/angelmenendezleyenda/Desktop/project-grupo-7)
+2026-05-08 02:50:37 [restartedMain] INFO  c.r.academy.AcademyApplication - No active profile set, falling back to 1 default profile: "default"
+2026-05-08 02:50:37 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-08 02:50:37 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 9 ms. Found 4 JPA repository interfaces.
+2026-05-08 02:50:37 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8443 (https)
+2026-05-08 02:50:37 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-05-08 02:50:37 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.17]
+2026-05-08 02:50:37 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-05-08 02:50:37 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 201 ms
+2026-05-08 02:50:37 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Starting...
+2026-05-08 02:50:37 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-3 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5c89152a
+2026-05-08 02:50:37 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Start completed.
+2026-05-08 02:50:37 [restartedMain] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:mysql://localhost:3306/rayokrossAcademy'
+2026-05-08 02:50:37 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-05-08 02:50:37 [restartedMain] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-05-08 02:50:37 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-08 02:50:37 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-05-08 02:50:37 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-05-08 02:50:38 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-05-08 02:50:38 [restartedMain] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page template: index
+2026-05-08 02:50:38 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure Or [Mvc [pattern='/api/**']] with [org.springframework.security.web.session.DisableEncodeUrlFilter@745ace9, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@20121081, org.springframework.security.web.context.SecurityContextHolderFilter@61c33098, org.springframework.security.web.header.HeaderWriterFilter@13b6bec8, org.springframework.web.filter.CorsFilter@656827d8, org.springframework.security.web.authentication.logout.LogoutFilter@36923c5c, com.rayokross.academy.security.jwt.JwtRequestFilter@46dfdd9f, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4beeab72, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@6d080c39, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2839f71c, org.springframework.security.web.session.SessionManagementFilter@6ca9f5ec, org.springframework.security.web.access.ExceptionTranslationFilter@228100c2, org.springframework.security.web.access.intercept.AuthorizationFilter@25dd0829]
+2026-05-08 02:50:38 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@38238316, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6086fa00, org.springframework.security.web.context.SecurityContextHolderFilter@21b7bece, org.springframework.security.web.header.HeaderWriterFilter@6152291d, org.springframework.web.filter.CorsFilter@15da0a98, org.springframework.security.web.csrf.CsrfFilter@1b19818a, org.springframework.security.web.authentication.logout.LogoutFilter@2d78786b, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@56761293, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@76f57ea3, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@414f32aa, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@73de703a, org.springframework.security.web.access.ExceptionTranslationFilter@1ff50f18, org.springframework.security.web.access.intercept.AuthorizationFilter@4847bddd]
+2026-05-08 02:50:38 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2026-05-08 02:50:38 [restartedMain] INFO  o.a.t.u.net.NioEndpoint.certificate - Connector [https-jsse-nio-8443], TLS virtual host [_default_], certificate type [UNDEFINED] configured from keystore [/Users/angelmenendezleyenda/.keystore] using alias [rayokross] with trust store [null]
+2026-05-08 02:50:38 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8443 (https) with context path ''
+2026-05-08 02:50:38 [restartedMain] INFO  c.r.academy.AcademyApplication - Started AcademyApplication in 0.675 seconds (process running for 442.833)
+2026-05-08 02:50:38 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged
+2026-05-08 02:50:51 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2026-05-08 02:51:02 [Thread-11] WARN  org.apache.tomcat.util.net.Acceptor - The acceptor thread [https-jsse-nio-8443-Acceptor] did not stop cleanly
+2026-05-08 02:51:02 [Thread-11] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-05-08 02:51:02 [Thread-11] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Shutdown initiated...
+2026-05-08 02:51:02 [Thread-11] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Shutdown completed.
+2026-05-08 02:51:02 [restartedMain] INFO  c.r.academy.AcademyApplication - Starting AcademyApplication using Java 21.0.10 with PID 93708 (/Users/angelmenendezleyenda/Desktop/project-grupo-7/target/classes started by angelmenendezleyenda in /Users/angelmenendezleyenda/Desktop/project-grupo-7)
+2026-05-08 02:51:02 [restartedMain] INFO  c.r.academy.AcademyApplication - No active profile set, falling back to 1 default profile: "default"
+2026-05-08 02:51:02 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-08 02:51:02 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 9 ms. Found 4 JPA repository interfaces.
+2026-05-08 02:51:03 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8443 (https)
+2026-05-08 02:51:03 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-05-08 02:51:03 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.17]
+2026-05-08 02:51:03 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-05-08 02:51:03 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 199 ms
+2026-05-08 02:51:03 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-4 - Starting...
+2026-05-08 02:51:03 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-4 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5181d6a3
+2026-05-08 02:51:03 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-4 - Start completed.
+2026-05-08 02:51:03 [restartedMain] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:mysql://localhost:3306/rayokrossAcademy'
+2026-05-08 02:51:03 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-05-08 02:51:03 [restartedMain] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-05-08 02:51:03 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-08 02:51:03 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-05-08 02:51:03 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-05-08 02:51:03 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-05-08 02:51:03 [restartedMain] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page template: index
+2026-05-08 02:51:03 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure Or [Mvc [pattern='/api/**']] with [org.springframework.security.web.session.DisableEncodeUrlFilter@28d5a610, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@56bd7436, org.springframework.security.web.context.SecurityContextHolderFilter@6b7fecd1, org.springframework.security.web.header.HeaderWriterFilter@b505ff0, org.springframework.web.filter.CorsFilter@49d79edf, org.springframework.security.web.authentication.logout.LogoutFilter@13dda97d, com.rayokross.academy.security.jwt.JwtRequestFilter@3b85cb4f, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@65657dc0, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@6c431143, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4c450631, org.springframework.security.web.session.SessionManagementFilter@183e78c9, org.springframework.security.web.access.ExceptionTranslationFilter@1353a8e6, org.springframework.security.web.access.intercept.AuthorizationFilter@29258642]
+2026-05-08 02:51:03 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@1ce88e75, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@207be12e, org.springframework.security.web.context.SecurityContextHolderFilter@1b9aa6d9, org.springframework.security.web.header.HeaderWriterFilter@5adec310, org.springframework.web.filter.CorsFilter@5a805e56, org.springframework.security.web.csrf.CsrfFilter@30f9a3a, org.springframework.security.web.authentication.logout.LogoutFilter@1efb2c71, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@5bb7b9d6, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@64bb31da, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7c736e08, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3c1f35d9, org.springframework.security.web.access.ExceptionTranslationFilter@69ce23d6, org.springframework.security.web.access.intercept.AuthorizationFilter@4497d2cd]
+2026-05-08 02:51:03 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2026-05-08 02:51:03 [restartedMain] INFO  o.a.t.u.net.NioEndpoint.certificate - Connector [https-jsse-nio-8443], TLS virtual host [_default_], certificate type [UNDEFINED] configured from keystore [/Users/angelmenendezleyenda/.keystore] using alias [rayokross] with trust store [null]
+2026-05-08 02:51:03 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8443 (https) with context path ''
+2026-05-08 02:51:03 [restartedMain] INFO  c.r.academy.AcademyApplication - Started AcademyApplication in 0.696 seconds (process running for 468.179)
+2026-05-08 02:51:03 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged
+2026-05-08 02:51:40 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2026-05-08 02:51:51 [Thread-15] WARN  org.apache.tomcat.util.net.Acceptor - The acceptor thread [https-jsse-nio-8443-Acceptor] did not stop cleanly
+2026-05-08 02:51:51 [Thread-15] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-05-08 02:51:51 [Thread-15] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-4 - Shutdown initiated...
+2026-05-08 02:51:51 [Thread-15] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-4 - Shutdown completed.
+2026-05-08 02:51:51 [restartedMain] INFO  c.r.academy.AcademyApplication - Starting AcademyApplication using Java 21.0.10 with PID 93708 (/Users/angelmenendezleyenda/Desktop/project-grupo-7/target/classes started by angelmenendezleyenda in /Users/angelmenendezleyenda/Desktop/project-grupo-7)
+2026-05-08 02:51:51 [restartedMain] INFO  c.r.academy.AcademyApplication - No active profile set, falling back to 1 default profile: "default"
+2026-05-08 02:51:51 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-08 02:51:51 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 7 ms. Found 4 JPA repository interfaces.
+2026-05-08 02:51:51 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8443 (https)
+2026-05-08 02:51:51 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-05-08 02:51:51 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.17]
+2026-05-08 02:51:51 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-05-08 02:51:51 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 192 ms
+2026-05-08 02:51:51 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-5 - Starting...
+2026-05-08 02:51:51 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-5 - Added connection com.mysql.cj.jdbc.ConnectionImpl@428b94e0
+2026-05-08 02:51:51 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-5 - Start completed.
+2026-05-08 02:51:51 [restartedMain] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:mysql://localhost:3306/rayokrossAcademy'
+2026-05-08 02:51:51 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-05-08 02:51:51 [restartedMain] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-05-08 02:51:51 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-08 02:51:51 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-05-08 02:51:51 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-05-08 02:51:52 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-05-08 02:51:52 [restartedMain] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page template: index
+2026-05-08 02:51:52 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure Or [Mvc [pattern='/api/**']] with [org.springframework.security.web.session.DisableEncodeUrlFilter@45d0df85, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@32d4dbb3, org.springframework.security.web.context.SecurityContextHolderFilter@5956101, org.springframework.security.web.header.HeaderWriterFilter@24006628, org.springframework.web.filter.CorsFilter@1acf9e2a, org.springframework.security.web.authentication.logout.LogoutFilter@14cc77e3, com.rayokross.academy.security.jwt.JwtRequestFilter@33938e74, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@3a36b061, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@1d20a029, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@64ee102d, org.springframework.security.web.session.SessionManagementFilter@2080ff16, org.springframework.security.web.access.ExceptionTranslationFilter@3a30b59f, org.springframework.security.web.access.intercept.AuthorizationFilter@3cfa21c]
+2026-05-08 02:51:52 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@b2f0c79, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@71b4cddf, org.springframework.security.web.context.SecurityContextHolderFilter@520a6517, org.springframework.security.web.header.HeaderWriterFilter@2d38f390, org.springframework.web.filter.CorsFilter@7f7d0eec, org.springframework.security.web.csrf.CsrfFilter@66e72c28, org.springframework.security.web.authentication.logout.LogoutFilter@3e80c8b5, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@3352bfc6, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@d538512, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@556dedc5, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@59f7224a, org.springframework.security.web.access.ExceptionTranslationFilter@301d0f62, org.springframework.security.web.access.intercept.AuthorizationFilter@1553629f]
+2026-05-08 02:51:52 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2026-05-08 02:51:52 [restartedMain] INFO  o.a.t.u.net.NioEndpoint.certificate - Connector [https-jsse-nio-8443], TLS virtual host [_default_], certificate type [UNDEFINED] configured from keystore [/Users/angelmenendezleyenda/.keystore] using alias [rayokross] with trust store [null]
+2026-05-08 02:51:52 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8443 (https) with context path ''
+2026-05-08 02:51:52 [restartedMain] INFO  c.r.academy.AcademyApplication - Started AcademyApplication in 0.648 seconds (process running for 516.796)
+2026-05-08 02:51:52 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged
+2026-05-08 02:52:31 [https-jsse-nio-8443-exec-9] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-05-08 02:52:31 [https-jsse-nio-8443-exec-9] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-05-08 02:52:31 [https-jsse-nio-8443-exec-9] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2026-05-08 02:52:31 [https-jsse-nio-8443-exec-9] INFO  c.r.a.security.jwt.JwtRequestFilter - No access token cookie found in request
+2026-05-08 02:52:31 [https-jsse-nio-8443-exec-10] INFO  c.r.a.security.jwt.JwtRequestFilter - No access token cookie found in request
+2026-05-08 02:52:31 [https-jsse-nio-8443-exec-2] INFO  c.r.a.security.jwt.JwtRequestFilter - No access token cookie found in request
+2026-05-08 02:53:04 [https-jsse-nio-8443-exec-9] INFO  c.r.a.security.jwt.JwtRequestFilter - No access token cookie found in request
+2026-05-08 02:53:04 [https-jsse-nio-8443-exec-9] INFO  c.r.a.security.LoginEventListener - Login successful for user student@rayokross.com
+2026-05-08 02:53:04 [https-jsse-nio-8443-exec-9] INFO  c.r.a.security.jwt.UserLoginService - A09 EVENT: Login exitoso para el usuario 'student@rayokross.com'
+2026-05-08 02:53:53 [https-jsse-nio-8443-exec-2] INFO  c.r.a.services.EnrollmentService - Fetching paginated enrollments for user: student@rayokross.com
+2026-05-08 02:54:00 [https-jsse-nio-8443-exec-3] INFO  c.r.a.services.EnrollmentService - Fetching paginated enrollments for user: student@rayokross.com
+2026-05-08 02:54:02 [https-jsse-nio-8443-exec-4] INFO  c.r.a.services.EnrollmentService - Fetching paginated enrollments for user: student@rayokross.com
+2026-05-08 02:54:06 [https-jsse-nio-8443-exec-5] INFO  c.r.a.services.EnrollmentService - Fetching paginated enrollments for user: student@rayokross.com
+2026-05-08 02:55:45 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2026-05-08 02:55:56 [Thread-19] WARN  org.apache.tomcat.util.net.Acceptor - The acceptor thread [https-jsse-nio-8443-Acceptor] did not stop cleanly
+2026-05-08 02:55:56 [Thread-19] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-05-08 02:55:56 [Thread-19] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-5 - Shutdown initiated...
+2026-05-08 02:55:56 [Thread-19] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-5 - Shutdown completed.
+2026-05-08 02:55:56 [restartedMain] INFO  c.r.academy.AcademyApplication - Starting AcademyApplication using Java 21.0.10 with PID 93708 (/Users/angelmenendezleyenda/Desktop/project-grupo-7/target/classes started by angelmenendezleyenda in /Users/angelmenendezleyenda/Desktop/project-grupo-7)
+2026-05-08 02:55:56 [restartedMain] INFO  c.r.academy.AcademyApplication - No active profile set, falling back to 1 default profile: "default"
+2026-05-08 02:55:56 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-08 02:55:56 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 8 ms. Found 4 JPA repository interfaces.
+2026-05-08 02:55:56 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8443 (https)
+2026-05-08 02:55:56 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-05-08 02:55:56 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.17]
+2026-05-08 02:55:56 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-05-08 02:55:56 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 184 ms
+2026-05-08 02:55:56 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-6 - Starting...
+2026-05-08 02:55:56 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-6 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6933cf2
+2026-05-08 02:55:56 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-6 - Start completed.
+2026-05-08 02:55:56 [restartedMain] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:mysql://localhost:3306/rayokrossAcademy'
+2026-05-08 02:55:56 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-05-08 02:55:56 [restartedMain] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-05-08 02:55:56 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-08 02:55:56 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-05-08 02:55:57 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-05-08 02:55:57 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-05-08 02:55:57 [restartedMain] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page template: index
+2026-05-08 02:55:57 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure Or [Mvc [pattern='/api/**']] with [org.springframework.security.web.session.DisableEncodeUrlFilter@71ccc0fd, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@46e395ef, org.springframework.security.web.context.SecurityContextHolderFilter@549e47e6, org.springframework.security.web.header.HeaderWriterFilter@2e96d4ea, org.springframework.web.filter.CorsFilter@28770ad3, org.springframework.security.web.authentication.logout.LogoutFilter@b8783e8, com.rayokross.academy.security.jwt.JwtRequestFilter@2d868e0f, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@353c9782, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2d95344b, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@584d0078, org.springframework.security.web.session.SessionManagementFilter@3ab75444, org.springframework.security.web.access.ExceptionTranslationFilter@2608e96e, org.springframework.security.web.access.intercept.AuthorizationFilter@5ee5d5f0]
+2026-05-08 02:55:57 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@6e4c0538, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1a1654c0, org.springframework.security.web.context.SecurityContextHolderFilter@1a0d33fa, org.springframework.security.web.header.HeaderWriterFilter@48b5db77, org.springframework.web.filter.CorsFilter@f99cada, org.springframework.security.web.csrf.CsrfFilter@71e029ea, org.springframework.security.web.authentication.logout.LogoutFilter@4ee6b691, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@15e57b2b, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6ad2e628, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@5b8fd64d, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@311bc421, org.springframework.security.web.access.ExceptionTranslationFilter@867216e, org.springframework.security.web.access.intercept.AuthorizationFilter@16e06f4f]
+2026-05-08 02:55:57 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2026-05-08 02:55:57 [restartedMain] INFO  o.a.t.u.net.NioEndpoint.certificate - Connector [https-jsse-nio-8443], TLS virtual host [_default_], certificate type [UNDEFINED] configured from keystore [/Users/angelmenendezleyenda/.keystore] using alias [rayokross] with trust store [null]
+2026-05-08 02:55:57 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8443 (https) with context path ''
+2026-05-08 02:55:57 [restartedMain] INFO  c.r.academy.AcademyApplication - Started AcademyApplication in 0.625 seconds (process running for 761.984)
+2026-05-08 02:55:57 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged
+2026-05-08 02:56:22 [https-jsse-nio-8443-exec-4] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-05-08 02:56:22 [https-jsse-nio-8443-exec-4] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-05-08 02:56:22 [https-jsse-nio-8443-exec-4] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2026-05-08 02:56:22 [https-jsse-nio-8443-exec-4] INFO  c.r.a.security.jwt.JwtRequestFilter - JWT signature does not match locally computed signature. JWT validity cannot be asserted and should not be trusted.
+2026-05-08 02:56:22 [https-jsse-nio-8443-exec-4] INFO  c.r.a.s.jwt.UnauthorizedHandlerJwt - Unauthorized error: Full authentication is required to access this resource
+2026-05-08 02:56:49 [https-jsse-nio-8443-exec-7] INFO  c.r.a.security.jwt.JwtRequestFilter - JWT signature does not match locally computed signature. JWT validity cannot be asserted and should not be trusted.
+2026-05-08 02:56:49 [https-jsse-nio-8443-exec-7] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' is not supported]
+2026-05-08 02:56:51 [https-jsse-nio-8443-exec-3] INFO  c.r.a.security.jwt.JwtRequestFilter - JWT signature does not match locally computed signature. JWT validity cannot be asserted and should not be trusted.
+2026-05-08 02:56:52 [https-jsse-nio-8443-exec-3] INFO  c.r.a.security.LoginEventListener - Login successful for user admin@rayokross.com
+2026-05-08 02:56:52 [https-jsse-nio-8443-exec-3] INFO  c.r.a.security.jwt.UserLoginService - A09 EVENT: Login exitoso para el usuario 'admin@rayokross.com'
+2026-05-08 02:57:05 [https-jsse-nio-8443-exec-5] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2026-05-08 02:57:27 [https-jsse-nio-8443-exec-10] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2026-05-08 02:58:22 [https-jsse-nio-8443-exec-4] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2026-05-08 02:58:35 [https-jsse-nio-8443-exec-1] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2026-05-08 02:58:42 [https-jsse-nio-8443-exec-7] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2026-05-08 02:58:48 [https-jsse-nio-8443-exec-5] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2026-05-08 02:59:33 [https-jsse-nio-8443-exec-1] INFO  c.r.a.security.jwt.JwtRequestFilter - No access token cookie found in request
+2026-05-08 02:59:34 [https-jsse-nio-8443-exec-2] INFO  c.r.a.security.jwt.JwtRequestFilter - No access token cookie found in request
+2026-05-08 02:59:34 [https-jsse-nio-8443-exec-1] INFO  c.r.a.security.jwt.JwtRequestFilter - No access token cookie found in request
+2026-05-08 02:59:34 [https-jsse-nio-8443-exec-4] INFO  c.r.a.security.jwt.JwtRequestFilter - No access token cookie found in request
+2026-05-08 02:59:34 [https-jsse-nio-8443-exec-7] INFO  c.r.a.security.jwt.JwtRequestFilter - No access token cookie found in request
+2026-05-08 02:59:34 [https-jsse-nio-8443-exec-9] INFO  c.r.a.security.jwt.JwtRequestFilter - No access token cookie found in request
+2026-05-08 02:59:34 [https-jsse-nio-8443-exec-10] INFO  c.r.a.security.jwt.JwtRequestFilter - No access token cookie found in request
+2026-05-08 02:59:34 [https-jsse-nio-8443-exec-3] INFO  c.r.a.security.jwt.JwtRequestFilter - No access token cookie found in request
+2026-05-08 02:59:34 [https-jsse-nio-8443-exec-5] INFO  c.r.a.security.jwt.JwtRequestFilter - No access token cookie found in request
+2026-05-08 02:59:34 [https-jsse-nio-8443-exec-8] INFO  c.r.a.security.jwt.JwtRequestFilter - No access token cookie found in request
+2026-05-08 02:59:34 [https-jsse-nio-8443-exec-9] INFO  c.r.a.security.jwt.JwtRequestFilter - No access token cookie found in request
+2026-05-08 02:59:34 [https-jsse-nio-8443-exec-2] INFO  c.r.a.security.jwt.JwtRequestFilter - No access token cookie found in request
+2026-05-08 02:59:34 [https-jsse-nio-8443-exec-5] INFO  c.r.a.security.jwt.JwtRequestFilter - No access token cookie found in request
+2026-05-08 02:59:34 [https-jsse-nio-8443-exec-8] INFO  c.r.a.security.jwt.JwtRequestFilter - No access token cookie found in request
+2026-05-08 02:59:35 [https-jsse-nio-8443-exec-10] INFO  c.r.a.security.jwt.JwtRequestFilter - No access token cookie found in request
+2026-05-08 02:59:35 [https-jsse-nio-8443-exec-1] INFO  c.r.a.security.jwt.JwtRequestFilter - No access token cookie found in request
+2026-05-08 02:59:35 [https-jsse-nio-8443-exec-3] INFO  c.r.a.security.jwt.JwtRequestFilter - No access token cookie found in request
+2026-05-08 02:59:35 [https-jsse-nio-8443-exec-7] INFO  c.r.a.security.jwt.JwtRequestFilter - No access token cookie found in request
+2026-05-08 03:00:30 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-05-08 03:00:30 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-6 - Shutdown initiated...
+2026-05-08 03:00:30 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-6 - Shutdown completed.

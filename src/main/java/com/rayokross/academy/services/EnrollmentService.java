@@ -7,6 +7,8 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -58,14 +60,10 @@ public class EnrollmentService {
         return enrolledUsers;
     }
 
-    public List<Enrollment> getMyEnrollments(String username) {
+    public Page<Enrollment> getMyEnrollments(String email, Pageable pageable) {
 
-        User user = userService.findByEmail(username)
-                .orElseThrow(() -> new IllegalArgumentException("User not found"));
-
-        List<Enrollment> enrollments = enrollmentRepository.findByUser(user);
-
-        return enrollments;
+        log.info("Fetching paginated enrollments for user: {}", email);
+        return enrollmentRepository.findByUserEmail(email, pageable);
 
     }
 

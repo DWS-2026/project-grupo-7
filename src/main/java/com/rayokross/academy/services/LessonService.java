@@ -5,6 +5,8 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.rayokross.academy.models.Course;
@@ -42,6 +44,11 @@ public class LessonService {
 
         lesson.setCourse(course);
         return lessonRepository.save(lesson);
+    }
+
+    public Page<Lesson> findLessonsByCourseId(Long courseId, Pageable pageable) {
+        log.info("Fetching paginated lessons for course ID: {}", courseId);
+        return lessonRepository.findByCourseId(courseId, pageable);
     }
 
 }
