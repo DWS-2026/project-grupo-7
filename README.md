@@ -391,10 +391,10 @@ Validación de campos en login, register y en el panel de administrador.
 ### **Documentación de la API REST**
 
 #### **Especificación OpenAPI**
-📄 **[Especificación OpenAPI (YAML)](/api-docs/api-docs.yaml)**
+📄 **[Especificación OpenAPI (YAML)](api-docs\api-docs.yaml)**
 
 #### **Documentación HTML**
-📖 **[Documentación API REST (HTML)](https://raw.githack.com/[usuario]/[repositorio]/main/api-docs/api-docs.html)**
+📖 **[Documentación API REST (HTML)](api-docs\api-docs.html)**
 
 > La documentación de la API REST se encuentra en la carpeta `/api-docs` del repositorio. Se ha generado automáticamente con SpringDoc a partir de las anotaciones en el código Java.
 
@@ -402,19 +402,18 @@ Validación de campos en login, register y en el panel de administrador.
 
 Diagrama actualizado incluyendo los @RestController y su relación con los @Service compartidos:
 
-![Diagrama de Clases Actualizado](images/complete-classes-diagram.png)
+![Diagrama de Clases Actualizado](images\DiagramaClases3.png)
 
 #### **Credenciales de Usuarios de Ejemplo**
 
 | Rol | Usuario | Contraseña |
 |:---|:---|:---|
-| Administrador | admin | admin123 |
-| Usuario Registrado | user1 | user123 |
-| Usuario Registrado | user2 | user123 |
+| Administrador | admin@rayokross.com | adminpass1234 |
+| Usuario Registrado | student@rayokross.com | student1234 |
 
 ### **Participación de Miembros en la Práctica 3**
 
-#### **Alumno 1 - [Nombre Completo]**
+#### **Alumno 1 - Omar Ba Diallo**
 
 [Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
 
@@ -428,7 +427,7 @@ Diagrama actualizado incluyendo los @RestController y su relación con los @Serv
 
 ---
 
-#### **Alumno 2 - [Nombre Completo]**
+#### **Alumno 2 - Daniel Fernández Tomé**
 
 [Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
 
@@ -442,7 +441,7 @@ Diagrama actualizado incluyendo los @RestController y su relación con los @Serv
 
 ---
 
-#### **Alumno 3 - [Nombre Completo]**
+#### **Alumno 3 - Ángel Menéndez Leyenda**
 
 [Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
 
@@ -456,7 +455,7 @@ Diagrama actualizado incluyendo los @RestController y su relación con los @Serv
 
 ---
 
-#### **Alumno 4 - [Nombre Completo]**
+#### **Alumno 4 - Gonzalo Roig López**
 
 [Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
 
