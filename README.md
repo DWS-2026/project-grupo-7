@@ -429,15 +429,15 @@ Diagrama actualizado incluyendo los @RestController y su relación con los @Serv
 
 #### **Alumno 2 - Daniel Fernández Tomé**
 
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
+Desarrollo y mantenimiento de API REST, incluyendo la creación de controladores e implementación de la documentación mediante OpenAPI/Swagger. Responsable de  la seguridad del sistema mediante el control de intentos de acceso y la protección contra ataques de fuerza bruta. Corrección de lógica en los mappers y la optimización de la transferencia de objetos entre capas.
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
+|1| [API DOC implementada](https://github.com/DWS-2026/dws-2026-project-base/commit/7f29169fe87b4328155514040da22ff8d2a4385a)  | [api-docs](api-docs.yaml)   |
+|2| [Mapper arreglado](https://github.com/DWS-2026/dws-2026-project-base/commit/bac0c3fbf5182921c432648ebb999a2f5b56bf54)  | [CurseMapper](CourseMapper.java)   |
+|3| [Creacion de CartRestController](https://github.com/DWS-2026/dws-2026-project-base/commit/41cd1d91aa453410453c5ef49558b563a8bad9ec)  | [CartRestController](CartRestController.java)   |
+|4| [Creacion de CourseRestController](https://github.com/DWS-2026/dws-2026-project-base/commit/7c92795d1692609598985cf5dbc6210f3776c949)  | [CourseRestController](CourseRestController.java)   |
+|5| [Limite de tiempo en login](https://github.com/DWS-2026/dws-2026-project-base/commit/b01d484b0ba5d636909e28de5a7076e4bcb5f7f0)  | [loginAttemptService](LoginAttemptService.java)   |
 
 ---
 
