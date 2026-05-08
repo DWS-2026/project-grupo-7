@@ -441,17 +441,19 @@ Desarrollo y mantenimiento de API REST, incluyendo la creación de controladores
 
 ---
 
-#### **Alumno 3 - Ángel Menéndez Leyenda**
+#### **Alumno 3 - Angel Menendez Leyenda**
 
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
+Mi contribución al proyecto ha abarcado el ciclo de vida completo de la aplicación, desde el diseño de la lógica de negocio básica hasta la fortificación avanzada del sistema. He participado en el desarrollo de entidades clave y servicios para la gestión de cursos, carrito y matriculaciones, complementándolo con la creación de vistas dinámicas y plantillas reutilizables en el frontend. A nivel arquitectónico, he liderado el desarrollo del núcleo de la API REST, implementando controladores robustos y un sistema de manejo de excepciones global (`RestErrorController`) para estandarizar las respuestas JSON y evitar la exposición de información sensible. 
+
+En el ámbito de la ciberseguridad, me he centrado en blindar la aplicación contra las principales vulnerabilidades OWASP. Esto incluye la mitigación de ataques de fuerza bruta (A07) y la configuración de registros de trazabilidad (A09), la sanitización estricta de datos en el servidor mediante listas blancas para prevenir inyecciones XSS (A03), y la protección de la integridad de las entidades críticas (A08). Además, he ajustado la configuración de seguridad del servidor, asegurando el control de acceso por roles y la gestión de tokens CSRF tanto en el entorno web como en la API.
 
 | Nº    | Commits      | Files      |
-|:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
+|:------------: |:------------| :------------|
+|1| [A07 and A09 fixed in UserLoginServices](https://github.com/DWS-2026/project-grupo-7/commit/30b13cf9f510dd1f244acccb8ea2a9722a2b8df7) | `UserLoginService.java` |
+|2| [userService XSS protection](https://github.com/DWS-2026/project-grupo-7/commit/86d3d7bba2eb79219c339bb853a91db504b666fe) | `UserService.java` |
+|3| [A08 Vulnerability fixed](https://github.com/DWS-2026/project-grupo-7/commit/5c91d134866df7e92070e75f732c65ce2f49ca79) | `UserService.java` |
+|4| [preventive measures in RestErrorController, userRestController and SecurityConfig](https://github.com/DWS-2026/project-grupo-7/commit/40ac825762b981c714919cec92764dbc0606ddc2) | `RestErrorController.java` |
+|5| [AdminCourseRestController](https://github.com/DWS-2026/project-grupo-7/commit/5408779ccc7f4a01ce4c684dea1bd390abce6dff) | `AdminCourseRestController.java` |
 
 ---
 
