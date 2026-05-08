@@ -36,5 +36,6 @@ public interface CourseMapper {
     @Mapping(target = "updateDate", ignore = true)
     @Mapping(target = "learningObjectives", ignore = true)
     @Mapping(target = "syllabusFileName", ignore = true)
+    @Mapping(target = "creatorName", ignore = true)
     Course toEntity(CourseDetailDTO dto);
 }
