@@ -385,16 +385,16 @@ Validación de campos en login, register y en el panel de administrador.
 ## 🛠 **Práctica 3: Incorporación de una API REST a la aplicación web, análisis de vulnerabilidades y contramedidas**
 
 ### **Vídeo de Demostración**
-📹 **[Enlace al vídeo en YouTube](https://www.youtube.com/watch?v=x91MPoITQ3I)**
+📹 **[Enlace al vídeo en YouTube](https://youtu.be/BTkV3_PC0VY)**
 > Vídeo mostrando las principales funcionalidades de la aplicación web.
 
 ### **Documentación de la API REST**
 
 #### **Especificación OpenAPI**
-📄 **[Especificación OpenAPI (YAML)](/api-docs/api-docs.yaml)**
+📄 **[Especificación OpenAPI (YAML)](api-docs/api-docs.yaml)**
 
 #### **Documentación HTML**
-📖 **[Documentación API REST (HTML)](https://raw.githack.com/[usuario]/[repositorio]/main/api-docs/api-docs.html)**
+📖 **[Documentación API REST (HTML)](api-docs/api-docs.html)**
 
 > La documentación de la API REST se encuentra en la carpeta `/api-docs` del repositorio. Se ha generado automáticamente con SpringDoc a partir de las anotaciones en el código Java.
 
@@ -402,68 +402,69 @@ Validación de campos en login, register y en el panel de administrador.
 
 Diagrama actualizado incluyendo los @RestController y su relación con los @Service compartidos:
 
-![Diagrama de Clases Actualizado](images/complete-classes-diagram.png)
+![Diagrama de Clases Actualizado](images/DiagramaClases3.png)
 
 #### **Credenciales de Usuarios de Ejemplo**
 
 | Rol | Usuario | Contraseña |
 |:---|:---|:---|
-| Administrador | admin | admin123 |
-| Usuario Registrado | user1 | user123 |
-| Usuario Registrado | user2 | user123 |
+| Administrador | admin@rayokross.com | adminpass1234 |
+| Usuario Registrado | student@rayokross.com | student1234 |
 
 ### **Participación de Miembros en la Práctica 3**
 
-#### **Alumno 1 - [Nombre Completo]**
+#### **Alumno 1 - Omar Ba Diallo**
 
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
+Implementación de medidas de seguridad en la gestión de usuarios y contraseñas, la configuración de variables de entorno y credenciales de la aplicación, así como el desarrollo de mecanismos para el tratamiento de excepciones y control de errores. Además de la elaboración de herramientas de prueba de la API REST mediante colecciones de Postman.
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
+|1| [Cifrado de contraseñas](https://github.com/DWS-2026/dws-2026-project-base/commit/49aa411fb686ad67407348cb3b813ce6366504fc)  | [UserService.java](src\main\java\com\rayokross\academy\services\UserService.java)   |
+|2| [Creación de la colección Postman](https://github.com/DWS-2026/dws-2026-project-base/commit/4388b4a493519a55e1584a405e042b6bad8d0053)  | [RayokrossAcademy.postman_collection.json](RayokrossAcademy.postman_collection.json)   |
+|3| [Gestión de errores](https://github.com/DWS-2026/dws-2026-project-base/commit/8078eaaea6ccd4da7899c077377449364060e9d1)  | [GlobalExceptionHandler.java](src\main\java\com\rayokross\academy\controllers\rest\GlobalExceptionHandler.java)   |
+|4| [Configuración de variables de entorno](https://github.com/DWS-2026/dws-2026-project-base/commit/2984c4d5e8c1dcd84d0d1ccd971ca58b8b2a3991)  | [application.properties](src\main\resources\application.properties)   |
+|5| [Creación de LessonRestController](https://github.com/DWS-2026/dws-2026-project-base/commit/e57b6ef056c8864f8cf5c4cc49ca058ec942fa64)  | [LessonRestController.java](src/main/java/com/rayokross/academy/controllers/rest/LessonRestController.java)   |
 
 ---
 
-#### **Alumno 2 - [Nombre Completo]**
+#### **Alumno 2 - Daniel Fernández Tomé**
 
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
+Desarrollo y mantenimiento de API REST, incluyendo la creación de controladores e implementación de la documentación mediante OpenAPI/Swagger. Responsable de  la seguridad del sistema mediante el control de intentos de acceso y la protección contra ataques de fuerza bruta. Corrección de lógica en los mappers y la optimización de la transferencia de objetos entre capas.
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
+|1| [API DOC implementada](https://github.com/DWS-2026/dws-2026-project-base/commit/7f29169fe87b4328155514040da22ff8d2a4385a)  | [api-docs](api-docs.yaml)   |
+|2| [Mapper arreglado](https://github.com/DWS-2026/dws-2026-project-base/commit/bac0c3fbf5182921c432648ebb999a2f5b56bf54)  | [CurseMapper](CourseMapper.java)   |
+|3| [Creacion de CartRestController](https://github.com/DWS-2026/dws-2026-project-base/commit/41cd1d91aa453410453c5ef49558b563a8bad9ec)  | [CartRestController](CartRestController.java)   |
+|4| [Creacion de CourseRestController](https://github.com/DWS-2026/dws-2026-project-base/commit/7c92795d1692609598985cf5dbc6210f3776c949)  | [CourseRestController](CourseRestController.java)   |
+|5| [Limite de tiempo en login](https://github.com/DWS-2026/dws-2026-project-base/commit/b01d484b0ba5d636909e28de5a7076e4bcb5f7f0)  | [loginAttemptService](LoginAttemptService.java)   |
 
 ---
 
-#### **Alumno 3 - [Nombre Completo]**
+#### **Alumno 3 - Angel Menendez Leyenda**
 
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
+Mi contribución al proyecto ha abarcado el ciclo de vida completo de la aplicación, desde el diseño de la lógica de negocio básica hasta la fortificación avanzada del sistema. He participado en el desarrollo de entidades clave y servicios para la gestión de cursos, carrito y matriculaciones, complementándolo con la creación de vistas dinámicas y plantillas reutilizables en el frontend. A nivel arquitectónico, he liderado el desarrollo del núcleo de la API REST, implementando controladores robustos y un sistema de manejo de excepciones global (`RestErrorController`) para estandarizar las respuestas JSON y evitar la exposición de información sensible. 
+
+En el ámbito de la ciberseguridad, me he centrado en blindar la aplicación contra las principales vulnerabilidades OWASP. Esto incluye la mitigación de ataques de fuerza bruta (A07) y la configuración de registros de trazabilidad (A09), la sanitización estricta de datos en el servidor mediante listas blancas para prevenir inyecciones XSS (A03), y la protección de la integridad de las entidades críticas (A08). Además, he ajustado la configuración de seguridad del servidor, asegurando el control de acceso por roles y la gestión de tokens CSRF tanto en el entorno web como en la API.
 
 | Nº    | Commits      | Files      |
-|:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
+|:------------: |:------------| :------------|
+|1| [A07 and A09 fixed in UserLoginServices](https://github.com/DWS-2026/project-grupo-7/commit/30b13cf9f510dd1f244acccb8ea2a9722a2b8df7) | `UserLoginService.java` |
+|2| [userService XSS protection](https://github.com/DWS-2026/project-grupo-7/commit/86d3d7bba2eb79219c339bb853a91db504b666fe) | `UserService.java` |
+|3| [A08 Vulnerability fixed](https://github.com/DWS-2026/project-grupo-7/commit/5c91d134866df7e92070e75f732c65ce2f49ca79) | `UserService.java` |
+|4| [preventive measures in RestErrorController, userRestController and SecurityConfig](https://github.com/DWS-2026/project-grupo-7/commit/40ac825762b981c714919cec92764dbc0606ddc2) | `RestErrorController.java` |
+|5| [AdminCourseRestController](https://github.com/DWS-2026/project-grupo-7/commit/5408779ccc7f4a01ce4c684dea1bd390abce6dff) | `AdminCourseRestController.java` |
 
 ---
 
-#### **Alumno 4 - [Nombre Completo]**
+#### **Alumno 4 - Gonzalo Roig López**
 
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
+Especializado en la modernización de arquitecturas hacia APIs REST seguras. Responsable de implementar la autenticación JWT, el filtrado de seguridad OWASP (XSS, Fuerza Bruta) y el cifrado de credenciales. He optimizado la robustez del sistema mediante la centralización del Manejo Global de Excepciones y la estructuración de capas de servicio y Mappers para garantizar un código escalable y desacoplado.
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
+|1| [Creación de User Mapper](https://github.com/DWS-2026/project-grupo-7/commit/f01dd320d94875cc25401c95614fe375302a1b51)  | [UserMapper.java](UserMapper.java)   |
+|2| [Creación de User Login Service](https://github.com/DWS-2026/project-grupo-7/commit/12466173eb5dd23caed45aab3254716b1d125c15)  | [UserLoginService](UserLoginService.java)   |
+|3| [Creación RestErrorController](https://github.com/DWS-2026/project-grupo-7/commit/277bb77551d4671f1aa8b34b38d6f844e80b70a9)  | [RestErrorController](RestErrorController.java)   |
+|4| [Añadir UserRegistrationDTO](https://github.com/DWS-2026/project-grupo-7/commit/a7ef2c8000be9d00fe5990e1d099ed19a8a7f3bc)  | [UserRegistrationDTO](UserRegistrationDTO.java)   |
+|5| [Crear MainRestController](https://github.com/DWS-2026/project-grupo-7/commit/6ee05316eea1fa0f3599d5caf0886ca79da1fbc9)  | [MainRestController](MainRestController.java)   |

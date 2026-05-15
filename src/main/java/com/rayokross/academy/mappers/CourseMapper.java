@@ -28,4 +28,14 @@ public interface CourseMapper {
     @Mapping(target = "description", ignore = true)
     @Mapping(target = "syllabusFileName", ignore = true)
     Course toEntity(CourseBasicDTO dto);
+
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "image", ignore = true)
+    @Mapping(target = "lessons", ignore = true)
+    @Mapping(target = "enrollments", ignore = true)
+    @Mapping(target = "updateDate", ignore = true)
+    @Mapping(target = "learningObjectives", ignore = true)
+    @Mapping(target = "syllabusFileName", ignore = true)
+    @Mapping(target = "creatorName", ignore = true)
+    Course toEntity(CourseDetailDTO dto);
 }

@@ -3,6 +3,7 @@ package com.rayokross.academy.controllers.rest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -31,9 +32,14 @@ public class AdminUserRestController {
     private UserMapper userMapper;
 
     @GetMapping
-    public ResponseEntity<Page<UserDTO>> getAllUsers(Pageable pageable) {
-        Page<User> users = userService.findAll(pageable);
-        return ResponseEntity.ok(users.map(userMapper::toDTO));
+    public ResponseEntity<Page<UserDTO>> getAllUsers(
+            @PageableDefault(size = 10, page = 0) Pageable pageable) {
+
+        Page<User> usersPage = userService.findAll(pageable);
+
+        Page<UserDTO> dtoPage = usersPage.map(userMapper::toDTO);
+
+        return ResponseEntity.ok(dtoPage);
     }
 
     @GetMapping("/{id}")
@@ -59,7 +65,7 @@ public class AdminUserRestController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
         userService.findById(id).orElseThrow();
-        
+
         try {
             userService.deleteUserSafe(id);
             return ResponseEntity.noContent().build();

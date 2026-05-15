@@ -54,9 +54,15 @@ public class LessonRestController {
             @PathVariable Long courseId,
             @PathVariable Long id) {
 
-        return lessonService.findById(id).map(lesson -> {
-            lessonService.deleteById(id);
-            return ResponseEntity.noContent().<Void>build();
-        }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Lesson not found"));
+        Lesson lesson = lessonService.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Lesson not found"));
+
+        if (!lesson.getCourse().getId().equals(courseId)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Lesson does not belong to this course");
+        }
+
+        lessonService.deleteById(id);
+
+        return ResponseEntity.noContent().build();
     }
 }

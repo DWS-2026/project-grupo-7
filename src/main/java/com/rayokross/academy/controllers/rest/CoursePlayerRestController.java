@@ -3,6 +3,9 @@ package com.rayokross.academy.controllers.rest;
 import java.security.Principal;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,12 +16,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.rayokross.academy.dtos.CourseProgressDTO;
-import com.rayokross.academy.mappers.CourseMapper;
+import com.rayokross.academy.dtos.LessonDTO;
+import com.rayokross.academy.mappers.LessonMapper;
 import com.rayokross.academy.models.Course;
-import com.rayokross.academy.models.Enrollment;
+import com.rayokross.academy.models.Lesson;
 import com.rayokross.academy.services.CourseService;
 import com.rayokross.academy.services.EnrollmentService;
+import com.rayokross.academy.services.LessonService;
 
 @RestController
 @RequestMapping("/api/v1/courses")
@@ -28,14 +32,18 @@ public class CoursePlayerRestController {
     private CourseService courseService;
 
     @Autowired
+    private LessonService lessonService;
+
+    @Autowired
     private EnrollmentService enrollmentService;
 
     @Autowired
-    private CourseMapper courseMapper;
+    private LessonMapper lessonMapper;
 
     @GetMapping("/{courseId}/lessons")
-    public ResponseEntity<CourseProgressDTO> getCoursePlayer(
+    public ResponseEntity<Page<LessonDTO>> getCourseLessons(
             @PathVariable Long courseId,
+            @PageableDefault(size = 10, page = 0) Pageable pageable,
             Principal principal) {
 
         if (principal == null)
@@ -44,15 +52,14 @@ public class CoursePlayerRestController {
         Course course = courseService.findById(courseId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Course not found"));
 
-        Enrollment enrollment = enrollmentService.findByUserEmailAndCourse(principal.getName(), course)
+        enrollmentService.findByUserEmailAndCourse(principal.getName(), course)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.FORBIDDEN, "Not enrolled in this course"));
 
-        CourseProgressDTO progress = new CourseProgressDTO(
-                courseMapper.toDetailDTO(course),
-                enrollment.isCompleted(),
-                (course.getLessons().isEmpty()) ? null : course.getLessons().get(0).getId());
+        Page<Lesson> lessonPage = lessonService.findLessonsByCourseId(courseId, pageable);
 
-        return ResponseEntity.ok(progress);
+        Page<LessonDTO> lessonDTOPage = lessonPage.map(lessonMapper::toDTO);
+
+        return ResponseEntity.ok(lessonDTOPage);
     }
 
     @PatchMapping("/{courseId}/status")

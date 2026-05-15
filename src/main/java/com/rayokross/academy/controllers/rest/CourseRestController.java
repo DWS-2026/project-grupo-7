@@ -12,6 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,6 +22,7 @@ import com.rayokross.academy.dtos.CourseDetailDTO;
 import com.rayokross.academy.mappers.CourseMapper;
 import com.rayokross.academy.models.Course;
 import com.rayokross.academy.services.CourseService;
+import com.rayokross.academy.services.EnrollmentService;
 
 @RestController
 @RequestMapping("/api/v1/courses")
@@ -28,6 +30,9 @@ public class CourseRestController {
 
     @Autowired
     private CourseService courseService;
+
+    @Autowired
+    private EnrollmentService enrollmentService;
 
     @Autowired
     private CourseMapper courseMapper;
@@ -51,6 +56,26 @@ public class CourseRestController {
     public ResponseEntity<CourseDetailDTO> getCourse(@PathVariable Long id) {
         Course course = courseService.findById(id).orElseThrow();
         return ResponseEntity.ok(courseMapper.toDetailDTO(course));
+    }
+
+    @PostMapping("/{id}/enrollments")
+    public ResponseEntity<Void> enrollInCourse(
+            @PathVariable Long id,
+            java.security.Principal principal) {
+
+        if (principal == null) {
+            return ResponseEntity.status(org.springframework.http.HttpStatus.UNAUTHORIZED).build();
+        }
+
+        try {
+            enrollmentService.enrollUser(principal.getName(), id);
+            return ResponseEntity.status(org.springframework.http.HttpStatus.CREATED).build();
+        } catch (IllegalArgumentException e) {
+
+            return ResponseEntity.status(org.springframework.http.HttpStatus.NOT_FOUND).build();
+        } catch (IllegalStateException e) {
+            return ResponseEntity.status(org.springframework.http.HttpStatus.CONFLICT).build();
+        }
     }
 
     @GetMapping("/{id}/media")

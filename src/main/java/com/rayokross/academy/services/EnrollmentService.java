@@ -71,14 +71,10 @@ public class EnrollmentService {
         return enrolledUsers;
     }
 
-    public List<Enrollment> getMyEnrollments(String username) {
+    public Page<Enrollment> getMyEnrollments(String email, Pageable pageable) {
 
-        User user = userService.findByEmail(username)
-                .orElseThrow(() -> new IllegalArgumentException("User not found"));
-
-        List<Enrollment> enrollments = enrollmentRepository.findByUser(user);
-
-        return enrollments;
+        log.info("Fetching paginated enrollments for user: {}", email);
+        return enrollmentRepository.findByUserEmail(email, pageable);
 
     }
 

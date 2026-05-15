@@ -3,6 +3,8 @@ package com.rayokross.academy.repositories;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.rayokross.academy.models.Course;
@@ -12,6 +14,8 @@ import com.rayokross.academy.models.User;
 public interface EnrollmentRepository extends JpaRepository<Enrollment, Long> {
 
     List<Enrollment> findByUser(User user);
+
+    Page<Enrollment> findByUserEmail(String email, Pageable pageable);
 
     Optional<Enrollment> findByUserAndCourse(User currentUser, Course course);
 
