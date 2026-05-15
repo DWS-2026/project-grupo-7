@@ -7,6 +7,8 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -31,6 +33,17 @@ public class EnrollmentService {
 
     @Autowired
     private UserService userService;
+
+    public Page<Enrollment> findAll(Pageable pageable) {
+        return enrollmentRepository.findAll(pageable);
+    }
+
+    public void deleteById(Long id) {
+        Enrollment enrollment = enrollmentRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Enrollment not found"));
+        enrollmentRepository.delete(enrollment);
+        log.info("Enrollment with ID {} deleted by admin.", id);
+    }
 
     public Optional<Enrollment> findByUserAndCourse(User user, Course course) {
         return enrollmentRepository.findByUserAndCourse(user, course);
@@ -154,7 +167,7 @@ public class EnrollmentService {
     public void removeEnrollmentByIds(Long userId, Long courseId) {
         Enrollment enrollment = enrollmentRepository.findByUserIdAndCourseId(userId, courseId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
-                        "No se encontró la matrícula para este usuario y curso"));
+                        "Enrollment not found for this user and Id"));
 
         enrollmentRepository.delete(enrollment);
     }
