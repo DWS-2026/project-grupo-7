@@ -17,8 +17,11 @@ public interface CourseMapper {
     @Mapping(target = "syllabusFileName", ignore = true)
     CourseDetailDTO toDetailDTO(Course course);
 
-    List<CourseBasicDTO> toBasicDTOs(List<Course> courses);
-
+    default List<CourseBasicDTO> toBasicDTOs(List<Course> courses) {
+        if (courses == null) return java.util.Collections.emptyList();
+        return courses.stream().map(this::toBasicDTO).collect(java.util.stream.Collectors.toList());
+    }
+    
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "image", ignore = true)
     @Mapping(target = "lessons", ignore = true)
@@ -35,7 +38,8 @@ public interface CourseMapper {
     @Mapping(target = "enrollments", ignore = true)
     @Mapping(target = "updateDate", ignore = true)
     @Mapping(target = "learningObjectives", ignore = true)
+    @Mapping(target = "description", ignore = true)
     @Mapping(target = "syllabusFileName", ignore = true)
-    @Mapping(target = "creatorName", ignore = true)
+     @Mapping(target = "creatorName", ignore = true)
     Course toEntity(CourseDetailDTO dto);
 }
