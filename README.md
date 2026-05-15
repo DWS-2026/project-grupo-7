@@ -391,7 +391,7 @@ Validación de campos en login, register y en el panel de administrador.
 ### **Documentación de la API REST**
 
 #### **Especificación OpenAPI**
-📄 **[Especificación OpenAPI (YAML)](https://raw.githubusercontent.com/DWS-2026/project-grupo-7/api-docs/api-docs.yaml)**
+📄 **[Especificación OpenAPI (YAML)](https://raw.githubusercontent.com/DWS-2026/project-grupo-7/main/api-docs/api-docs.yaml)**
 
 #### **Documentación HTML**
 📖 **[Documentación API REST (HTML)](https://raw.githack.com/DWS-2026/project-grupo-7/main/api-docs/api-docs.html)**
