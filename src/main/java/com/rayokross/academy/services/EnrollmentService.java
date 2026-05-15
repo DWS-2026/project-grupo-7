@@ -71,11 +71,16 @@ public class EnrollmentService {
         return enrolledUsers;
     }
 
-    public Page<Enrollment> getMyEnrollments(String email, Pageable pageable) {
+    public List<Enrollment> getMyEnrollments(String username) {
+        User user = userService.findByEmail(username)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+        return enrollmentRepository.findByUser(user);
+    }
 
-        log.info("Fetching paginated enrollments for user: {}", email);
-        return enrollmentRepository.findByUserEmail(email, pageable);
-
+    public Page<Enrollment> getMyEnrollments(String username, Pageable pageable) {
+        User user = userService.findByEmail(username)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+        return enrollmentRepository.findByUser(user, pageable);
     }
 
     public Optional<Enrollment> findByUserEmailAndCourse(String email, Course course) {
@@ -163,7 +168,7 @@ public class EnrollmentService {
     public void removeEnrollmentByIds(Long userId, Long courseId) {
         Enrollment enrollment = enrollmentRepository.findByUserIdAndCourseId(userId, courseId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
-                        "Enrollment not found for this user and Id"));
+                        "No se encontró la matrícula para este usuario y curso"));
 
         enrollmentRepository.delete(enrollment);
     }

@@ -15,7 +15,7 @@ public interface EnrollmentRepository extends JpaRepository<Enrollment, Long> {
 
     List<Enrollment> findByUser(User user);
 
-    Page<Enrollment> findByUserEmail(String email, Pageable pageable);
+    Page<Enrollment> findByUser(User user, Pageable pageable);
 
     Optional<Enrollment> findByUserAndCourse(User currentUser, Course course);
 

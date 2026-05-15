@@ -64,17 +64,23 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/api/v1/users/*/media").authenticated()
 
                         .requestMatchers("/api/v1/users/me/**").hasAnyRole("USER", "ADMIN")
-                        .requestMatchers(HttpMethod.POST, "/api/v1/courses/*/enrollments").hasAnyRole("USER")
+
+                        .requestMatchers("/api/v1/users/**").hasRole("ADMIN")
+                        .requestMatchers("/api/v1/admin/**").hasRole("ADMIN")
+
 
                         .requestMatchers(HttpMethod.POST, "/api/v1/courses/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT, "/api/v1/courses/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/api/v1/courses/**").hasRole("ADMIN")
 
-                        .requestMatchers("/api/v1/users/**").hasRole("ADMIN")
-                        .requestMatchers("/api/v1/admin/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/api/v1/enrollments/course/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/v1/enrollments/{courseId}").hasAnyRole("USER","ADMIN")
+
+                        .requestMatchers("/api/v1/enrollments/me").hasAnyRole("USER", "ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/v1/enrollments/**").hasAnyRole("USER", "ADMIN")
+
 
                         .requestMatchers("/api/v1/cart/**").hasRole("USER")
-                        .requestMatchers("/api/v1/enrollments/**").hasRole("USER")
 
                         .anyRequest().authenticated())
                 .csrf(csrf -> csrf.disable())
